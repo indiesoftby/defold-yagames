@@ -1,0 +1,47 @@
+local druid = require("druid.druid")
+local druid_style = require("example.ysdkdebug.druid_style")
+
+local app_scenemanager = require("example.app.scenemanager")
+
+local function continue_handler(self)
+    app_scenemanager.load_scene("ysdkdebug")
+end
+
+function init(self)
+    self.druid = druid.new(self, druid_style)
+
+    self.button_continue = druid_style.button_with_text(self, "button_continue/body", "button_continue/text",
+                                                        continue_handler)
+    self.button_continue:set_enabled(false)
+
+    self.text_status = self.druid:new_text("text_status")
+    self.text_status:set_to("Initializing...")
+
+    self.text_version = self.druid:new_text("text_version")
+    self.text_version:set_to("Version: " .. sys.get_config("project.version", "0.0.0"))
+end
+
+function final(self)
+    self.druid:final()
+end
+
+function update(self, dt)
+    self.druid:update(dt)
+end
+
+function on_message(self, message_id, message, sender)
+    self.druid:on_message(message_id, message, sender)
+
+    if message_id == hash("init_done") then
+        if message.err then
+            self.text_status:set_to(message.err)
+        else
+            self.text_status:set_to("Ready!")
+            self.button_continue:set_enabled(true)
+        end
+    end
+end
+
+function on_input(self, action_id, action)
+    return self.druid:on_input(action_id, action)
+end

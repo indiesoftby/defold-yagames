@@ -1,0 +1,57 @@
+local druid = require("druid.druid")
+local druid_style = require("example.ysdkdebug.druid_style")
+local yagames = require("yagames.yagames")
+local pg_adv = require("example.ysdkdebug.pg_adv")
+local pg_auth = require("example.ysdkdebug.pg_auth")
+local pg_device_info = require("example.ysdkdebug.pg_device_info")
+local pg_payments = require("example.ysdkdebug.pg_payments")
+local pg_player = require("example.ysdkdebug.pg_player")
+
+local log_print = require("example.ysdkdebug.log_print")
+local print = log_print.print
+
+local function log_init(self)
+    self.text_log = self.druid:new_text("text_log")
+
+    log_print.clear_log()
+end
+
+local function log_update(self)
+    if log_print.log_dirty then
+        log_print.log_dirty = false
+        self.text_log:set_to(log_print.log)
+    end
+end
+
+function init(self)
+    self.druid = druid.new(self, druid_style)
+
+    log_init(self)
+    pg_adv.init(self)
+    pg_auth.init(self)
+    pg_device_info.init(self)
+    pg_payments.init(self)
+    pg_player.init(self)
+
+    self.button_debug_log_clear = druid_style.button_with_text(self, "button_debug_log_clear/body",
+                                                               "button_debug_log_clear/text", log_print.clear_log)
+
+end
+
+function final(self)
+    self.druid:final()
+end
+
+function update(self, dt)
+    self.druid:update(dt)
+
+    log_update(self)
+end
+
+function on_message(self, message_id, message, sender)
+    self.druid:on_message(message_id, message, sender)
+end
+
+function on_input(self, action_id, action)
+    return self.druid:on_input(action_id, action)
+end

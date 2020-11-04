@@ -1,0 +1,10 @@
+go.property("receiver", msg.url("FILL_IT"))
+go.property("message_id", hash("FILL_IT"))
+
+function init(self)
+	msg.post("#sprite", "disable")
+	
+	msg.post(self.receiver, self.message_id, {
+		pos = go.get_position()
+	})
+end

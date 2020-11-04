@@ -1,0 +1,51 @@
+[bootstrap]
+main_collection = /example/main.collectionc
+
+[script]
+shared_state = 1
+
+[display]
+width = 1000
+height = 1500
+high_dpi = 1
+vsync = 0
+
+[project]
+title = yagames
+version = 0.0.12
+dependencies = https://github.com/subsoap/defos/archive/v2.4.1.zip,https://github.com/Insality/druid/archive/0.5.0.zip,https://github.com/britzl/ludobits/archive/01c26073e0f7563b99b509e6850b664adeb843d3.zip,https://github.com/subsoap/defsave/archive/master.zip
+
+[library]
+include_dirs = yagames
+
+[render]
+clear_color_alpha = 1.0
+clear_color_red = 0.93
+clear_color_green = 0.93
+clear_color_blue = 0.93
+
+[physics]
+scale = 0.01
+gravity_y = 0.0
+trigger_overlap_capacity = 500
+
+[shader]
+output_spirv = 1
+
+[html5]
+show_fullscreen_button = 0
+show_made_with_defold = 0
+scale_mode = fit
+
+[graphics]
+texture_profiles = /example/render/custom.texture_profiles
+max_characters = 30000
+
+[input]
+game_binding = /example/input/game.input_bindingc
+
+[yagames]
+sdk_init_options = { orientation: { value: "portrait", lock: true } }
+service_worker_url = sw.js
+show_fullscreen_adv_onload = 1
+

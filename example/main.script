@@ -1,0 +1,54 @@
+local app_window = require("example.app.window")
+local app_consts = require("example.app.consts")
+local app_scenemanager = require("example.app.scenemanager")
+local druid = require("druid.druid")
+
+go.property("first_scene", hash("duckhit"))
+
+function init(self)
+    local dump = crash.load_previous()
+    if dump ~= nil then
+        -- pprint(table.concat(crash.get_backtrace(dump), ","))
+        -- pprint(crash.get_extra_data(dump))
+        crash.release(dump)
+        -- os.exit(1)
+    end
+
+    if html5 and not sys.get_engine_info().is_debug then
+        -- Just to be sure about version of the Defold
+        html5.run("console.log('Defold Engine " .. sys.get_engine_info().version .. "')")
+    end
+
+    msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 })
+    msg.post(".", "acquire_input_focus")
+
+    druid.set_default_style({})
+    -- druid.set_sound_function(callback)
+    -- druid.set_text_function(lang.get_text)
+    -- druid.on_language_change()
+
+    app_window.resize()
+    app_window.center()
+
+    app_scenemanager.receiver = msg.url("#")
+    app_scenemanager.transition = msg.url("#transition")
+end
+
+function update(self, dt)
+end
+
+function on_message(self, message_id, message, sender)
+    if message_id == hash("init_seq_complete") then
+        app_scenemanager.load_scene(self.first_scene)
+    elseif message_id == hash("proxy_loaded") then
+        app_scenemanager._proxy_loaded()
+    elseif message_id == hash("proxy_unloaded") then
+        app_scenemanager._proxy_unloaded()
+    elseif message_id == hash("_load_scene") then
+        app_scenemanager._load_scene()
+    elseif message_id == hash("transition_fade_in_complete") then
+        app_scenemanager._transition_fade_in_complete()
+    elseif message_id == hash("transition_fade_out_complete") then
+        app_scenemanager._transition_fade_out_complete()
+    end
+end

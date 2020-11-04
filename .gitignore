@@ -1,0 +1,14 @@
+/.internal
+/build
+.externalToolBuilders
+.DS_Store
+Thumbs.db
+.lock-wscript
+*.pyc
+.project
+.cproject
+builtins
+/.vscode
+/editor-script-lua-format
+/doc
+

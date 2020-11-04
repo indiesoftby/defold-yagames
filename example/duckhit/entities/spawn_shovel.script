@@ -1,0 +1,34 @@
+
+function init(self)
+	msg.post("#sprite", "disable")
+end
+
+function final(self)
+end
+
+function update(self, dt)
+end
+
+local function spawn_complete(self, url, property)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("shovel_start") then
+		self.start_pos = message.pos
+
+		msg.post("#", "spawn")
+
+	elseif message_id == hash("spawn") then
+		self.shovel = factory.create("#factory", self.start_pos)
+
+		go.set_scale(0.1, self.shovel)
+		go.set_position(go.get_position(), self.shovel)
+
+		go.animate(self.shovel, "position", go.PLAYBACK_ONCE_FORWARD, self.start_pos, go.EASING_OUTCUBIC, 0.35, 0)
+		go.animate(self.shovel, "scale", go.PLAYBACK_ONCE_FORWARD, go.get_scale("/level_world/shovel_start"), go.EASING_OUTCUBIC, 0.35, 0, spawn_complete)
+
+		msg.post("/level_world/control", "new_shovel", {
+			shovel_id = self.shovel
+		})
+	end
+end

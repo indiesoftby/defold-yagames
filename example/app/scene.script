@@ -1,0 +1,35 @@
+local flow = require("ludobits.m.flow")
+local app_scenemanager = require("example.app.scenemanager")
+
+go.property("name", hash(""))
+go.property("hidden", false)
+
+function init(self)
+    assert(self.name ~= hash(""), "Set the scene name in app_scene.script")
+    app_scenemanager._add_scene({
+        name = self.name,
+        hidden = self.hidden,
+        scene_obj = msg.url("."),
+        scene_proxy = msg.url("#collectionproxy"),
+        scene_args = nil
+    })
+
+    flow(function()
+        app_scenemanager._init_seq = app_scenemanager._init_seq + 1
+
+        flow.frames(1)
+
+        app_scenemanager._init_seq = app_scenemanager._init_seq - 1
+        if app_scenemanager._init_seq == 0 then
+            msg.post(app_scenemanager.receiver, "init_seq_complete")
+        end
+    end)
+end
+
+function final(self)
+    flow.stop()
+end
+
+function on_message(self, message_id, message, sender)
+    flow.on_message(message_id, message, sender)
+end

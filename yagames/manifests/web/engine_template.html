@@ -25,25 +25,6 @@
                     YaGames.init(options)
                         .then(function (ysdk) {
                             send(0, "init", ysdk);
-
-                            // {{#yagames.show_fullscreen_adv_onload}}
-                            ysdk.adv.showFullscreenAdv({
-                                callbacks: {
-                                    onClose: function (wasShown) {
-                                        send(0, "onload_adv_close", wasShown);
-                                    },
-                                    onOpen: function () {
-                                        send(0, "onload_adv_open");
-                                    },
-                                    onOffline: function () {
-                                        send(0, "onload_adv_offline");
-                                    },
-                                    onError: function (error) {
-                                        send(0, "onload_adv_error", error + "");
-                                    },
-                                },
-                            });
-                            // {{/yagames.show_fullscreen_adv_onload}}
                         })
                         .catch(function (err) {
                             send(0, "error", err + "");

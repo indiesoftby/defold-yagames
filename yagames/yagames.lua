@@ -76,11 +76,9 @@ local function global_listener(self, cb_id, message_id, message)
     elseif message_id == "error" then
         print("YaGames couldn't be initialized.")
         call_init_callback(self, message)
-    elseif message_id == "onload_adv_close" then
-    elseif message_id == "onload_adv_open" then
-    elseif message_id == "onload_adv_offline" then
-    elseif message_id == "onload_adv_error" then
     end
+
+    yagames_private.remove_listener(GLOBAL_CALLBACK_ID, global_listener)
 end
 
 --- Инициализация SDK.

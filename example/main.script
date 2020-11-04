@@ -1,19 +1,11 @@
-local app_window = require("example.app.window")
 local app_consts = require("example.app.consts")
 local app_scenemanager = require("example.app.scenemanager")
+local app_window = require("example.app.window")
 local druid = require("druid.druid")
 
-go.property("first_scene", hash("duckhit"))
+go.property("first_scene", hash("ysdkinit"))
 
 function init(self)
-    local dump = crash.load_previous()
-    if dump ~= nil then
-        -- pprint(table.concat(crash.get_backtrace(dump), ","))
-        -- pprint(crash.get_extra_data(dump))
-        crash.release(dump)
-        -- os.exit(1)
-    end
-
     if html5 and not sys.get_engine_info().is_debug then
         -- Just to be sure about version of the Defold
         html5.run("console.log('Defold Engine " .. sys.get_engine_info().version .. "')")
@@ -23,9 +15,6 @@ function init(self)
     msg.post(".", "acquire_input_focus")
 
     druid.set_default_style({})
-    -- druid.set_sound_function(callback)
-    -- druid.set_text_function(lang.get_text)
-    -- druid.on_language_change()
 
     app_window.resize()
     app_window.center()

@@ -63,6 +63,8 @@ YaGames - это реализация SDK Яндекс.Игр для движк�
 ### 1. Инициализация
 
 ```lua
+local yagames = require("yagames.yagames")
+
 local function init_handler(self, err)
     if err then
         print("Something bad happened :(", err)
@@ -82,6 +84,8 @@ end
 * `error` - вызывается при возникновении ошибки. Объект ошибки передается в callback-функцию.
 
 ```lua
+local yagames = require("yagames.yagames")
+
 local function adv_open(self)
     -- You should switch off all sounds!
 end
@@ -118,6 +122,8 @@ end
 * `error` - вызывается при возникновении ошибки. Объект ошибки передается в callback-функцию.
 
 ```lua
+local yagames = require("yagames.yagames")
+
 local function rewarded_open(self)
     -- You should switch off all sounds!
 end

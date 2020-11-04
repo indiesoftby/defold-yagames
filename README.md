@@ -152,12 +152,10 @@ end
 [yagames]
 sdk_init_options = { orientation: { value: "landscape", lock: true } }
 service_worker_url = sw.js
-show_fullscreen_adv_onload = 1
 ```
 
 * `sdk_init_options` - JavaScript код. Это дополнительные опции иницилизации Yandex Games SDK, передаются [в метод `YaGames.init`](https://yandex.ru/dev/games/doc/dg/sdk/sdk-about.html).
 * `service_worker_url` - Ссылка на файл Service Worker. В большинстве случаев это `sw.js`. Указание этой ссылки включает поддержку Service Worker. 
-* `show_fullscreen_adv_onload` - Включает запуск полноэкранной рекламы без ожидания загрузки игры.
 
 ## Lua API
 
@@ -167,12 +165,12 @@ show_fullscreen_adv_onload = 1
 
 | Yandex.Games SDK | Lua API |
 | ---------------- | ------- |
-| `YaGames.init(options)` | `yagames.init(init_callback, onload_callbacks)` - Опции указываются в настройках проекта в `yagames.sdk_init_options`. |
+| `YaGames.init(options)` | `yagames.init(callback)` - Опции указываются в настройках проекта в `yagames.sdk_init_options`. |
 | `ysdk.deviceInfo.isDesktop()` | `yagames.device_info_is_desktop()` |
 | `ysdk.deviceInfo.isMobile()` | `yagames.device_info_is_mobile()` |
 | `ysdk.deviceInfo.isTablet()` | `yagames.device_info_is_tablet()` |
-| `ysdk.adv.showFullscreenAdv({callbacks:{}})` | `yagames.adv_show_fullscreen_adv(callbacks)` |
-| `ysdk.adv.showRewardedVideo({callbacks:{}})` | `yagames.adv_show_rewarded_video(callbacks)` |
+| `ysdk.adv.showFullscreenAdv({callbacks:{}})` | `yagames.adv_show_fullscreen_adv(callbacks)` [<kbd>Пример</kbd>](#2-вызов-полноэкранной-рекламы) |
+| `ysdk.adv.showRewardedVideo({callbacks:{}})` | `yagames.adv_show_rewarded_video(callbacks)` [<kbd>Пример</kbd>](#3-вызов-rewarded-видео) |
 | `ysdk.auth.openAuthDialog()` | `yagames.auth_open_auth_dialog(callback)` |
 | `ysdk.getPlayer(options)` | `yagames.player_init(options, callback)` |
 | `player.setData(data, flush)` | `yagames.player_set_data(data, flush, callback)` |
@@ -180,7 +178,7 @@ show_fullscreen_adv_onload = 1
 | `player.setStats(stats)` | `yagames.player_set_stats(stats, callback)` |
 | `player.incrementStats(increments)` | `yagames.player_increment_stats(increments, callback)` |
 | `player.getStats(keys)` | `yagames.player_get_stats(keys, callback)` |
-| `player.getID()` ***DEPRECATED*** | `yagames.player_get_id()` ***DEPRECATED*** |
+| `player.getID()` <kbd>Deprecated</kbd> | `yagames.player_get_id()` <kbd>Deprecated</kbd> |
 | `player.getUniqueID()` | `yagames.player_get_unique_id()` |
 | `player.getIDsPerGame()` | `yagames.player_get_ids_per_game(callback)` |
 | `player.getName()` | `yagames.player_get_name()` |

@@ -158,11 +158,11 @@ end
 
 ```ini
 [yagames]
-sdk_init_options = { orientation: { value: "landscape", lock: true } }
+sdk_init_options = {}
 service_worker_url = sw.js
 ```
 
-* `sdk_init_options` - JavaScript код. Это дополнительные опции иницилизации Yandex Games SDK, передаются [в метод `YaGames.init`](https://yandex.ru/dev/games/doc/dg/sdk/sdk-about.html).
+* `sdk_init_options` - JavaScript код. Это дополнительные опции иницилизации Yandex Games SDK, передаются [в метод `YaGames.init`](https://yandex.ru/dev/games/doc/dg/sdk/sdk-about.html). Пример: `{ orientation: { value: "landscape", lock: true } }`.
 * `service_worker_url` - Ссылка на файл Service Worker. В большинстве случаев это `sw.js`. Указание этой ссылки включает поддержку Service Worker. 
 
 ## Lua API

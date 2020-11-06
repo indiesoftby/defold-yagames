@@ -24,6 +24,7 @@ var LibYaGamesPrivate = {
 
         send: function (cb_id, message_id, message) {
             if (YaGamesPrivate._callback_object) {
+                // 0 and 1 are reserved IDs
                 if (cb_id == 0 && message_id == "init") {
                     YaGamesPrivate._ysdk = message;
                     message = undefined;

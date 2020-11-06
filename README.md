@@ -160,10 +160,12 @@ end
 [yagames]
 sdk_init_options = {}
 service_worker_url = sw.js
+context_ad = yes
 ```
 
 * `sdk_init_options` - JavaScript код. Это дополнительные опции иницилизации Yandex Games SDK, передаются [в метод `YaGames.init`](https://yandex.ru/dev/games/doc/dg/sdk/sdk-about.html). Пример: `{ orientation: { value: "landscape", lock: true } }`.
-* `service_worker_url` - Ссылка на файл Service Worker. В большинстве случаев это `sw.js`. Указание этой ссылки включает поддержку Service Worker. 
+* `service_worker_url` - Ссылка на файл Service Worker. В большинстве случаев это `sw.js`. Указание этой ссылки включает поддержку Service Worker.
+* `context_ad` - Включает инициализацию SDK контекстной рекламы Яндекс.
 
 ## Lua API
 

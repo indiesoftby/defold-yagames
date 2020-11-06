@@ -35,7 +35,7 @@ local function init_listener(self, cb_id, message_id, message)
         call_init_callback(self, message)
     end
 
-    yagames_private.remove_listener(helper.YSDK_INIT_ID, init_listener)
+    yagames_private.remove_listener(init_listener)
 end
 
 --- Инициализация SDK.

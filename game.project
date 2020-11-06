@@ -39,4 +39,4 @@ game_binding = /example/input/game.input_bindingc
 [yagames]
 sdk_init_options = { orientation: { value: "portrait", lock: true } }
 service_worker_url = sw.js
-
+context_ad = yes

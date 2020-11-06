@@ -78,7 +78,7 @@ local function global_listener(self, cb_id, message_id, message)
         call_init_callback(self, message)
     end
 
-    yagames_private.remove_listener(GLOBAL_CALLBACK_ID, global_listener)
+    yagames_private.remove_listener(global_listener)
 end
 
 --- Инициализация SDK.

@@ -3,7 +3,7 @@
 
 local M = {}
 
-M.domains = {"yagames.net", "localhost"}
+M.domains = {"yandex.net", "localhost"}
 
 local function ends_with(s, substr)
     return s:sub(-#substr) == substr

@@ -2,6 +2,7 @@ local app_consts = require("example.app.consts")
 local app_scenemanager = require("example.app.scenemanager")
 local app_window = require("example.app.window")
 local druid = require("druid.druid")
+local sitelock = require("yagames.sitelock")
 
 go.property("first_scene", hash("ysdkinit"))
 
@@ -9,6 +10,7 @@ function init(self)
     if html5 and not sys.get_engine_info().is_debug then
         -- Just to be sure about version of the Defold
         html5.run("console.log('Defold Engine " .. sys.get_engine_info().version .. "')")
+        html5.run("console.log('Sitelock domain " .. sitelock.get_current_domain() .. ", is valid " .. (sitelock.verify_domain() and "YES" or "NO!") .. "')")
     end
 
     msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 })

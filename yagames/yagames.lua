@@ -47,14 +47,15 @@ function M.init(callback)
         mock.enable()
     end
 
+    assert(type(callback) == "function")
+
     if M.ysdk_ready then
         print("YaGames is already initialized.")
+        helper.async_call(callback)
         return
     end
 
-    assert(type(callback) == "function")
     init_callback = callback
-
     yagames_private.add_listener(helper.YSDK_INIT_ID, init_listener)
 end
 

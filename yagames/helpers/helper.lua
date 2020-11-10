@@ -45,4 +45,8 @@ function M.wrap_for_promise(then_callback)
     return cb_id
 end
 
+function M.async_call(cb)
+    timer.delay(0, false, cb)
+end
+
 return M

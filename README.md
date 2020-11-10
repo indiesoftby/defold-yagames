@@ -199,6 +199,18 @@ context_ad = yes
 | `payments.getCatalog()` | `yagames.payments_get_catalog(callback)` |
 | `payments.consumePurchase(purchaseToken)` | `yagames.payments_consume_purchase(purchase_token, callback)` |
 
+### Контекстная реклама
+
+```lua
+yagames.context_init(callback)
+yagames.context_create(rtb_id, size, position)
+yagames.context_set(rtb_id, property, value) -- "display"("block"/"none"), "size", "position"
+yagames.context_delete(rtb_id)
+-- yagames.context_show_banner(rtb_id)
+-- yagames.context_hide_banner(rtb_id)
+yagames.context_refresh_banner(rtb_id)
+```
+
 ## Дополнительные функции
 
 Защита игры от размещения на сторонних сайтах с помощью сайт-лока, то есть проверки доменного имени, где размещена игра. По умолчанию добавлены домены `yandex.net` (CDN Яндекс.Игр) и `localhost`:

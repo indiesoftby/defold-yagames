@@ -42,6 +42,7 @@ extern "C"
     void YaGamesPrivate_Player_SetStats(const int cb_id, const char* cstats);
     void YaGamesPrivate_Player_IncrementStats(const int cb_id, const char* cincrements);
     void YaGamesPrivate_Player_GetStats(const int cb_id, const char* ckeys);
+    void YaGamesPrivate_Context_Init(const int cb_id);
 }
 
 struct YaGamesPrivateListener
@@ -556,6 +557,16 @@ static int Player_GetStats(lua_State* L)
 //
 //
 
+static int Context_Init(lua_State* L)
+{
+    YaGamesPrivate_Context_Init(luaL_checkint(L, 1));
+    return 0;
+}
+
+//
+//
+//
+
 static const luaL_reg Module_methods[] = {
     { "add_listener", AddListener },
     { "remove_listener", RemoveListener },
@@ -587,6 +598,8 @@ static const luaL_reg Module_methods[] = {
     { "player_set_stats", Player_SetStats },
     { "player_increment_stats", Player_IncrementStats },
     { "player_get_stats", Player_GetStats },
+    // - Context
+    { "context_init", Context_Init },
     { 0, 0 }
 };
 

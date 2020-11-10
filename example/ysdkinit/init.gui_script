@@ -1,7 +1,8 @@
+local app_scenemanager = require("example.app.scenemanager")
 local druid = require("druid.druid")
 local druid_style = require("example.ysdkdebug.druid_style")
-
-local app_scenemanager = require("example.app.scenemanager")
+local sitelock = require("yagames.sitelock")
+local rxi_json = require("yagames.helpers.json")
 
 local function continue_handler(self)
     app_scenemanager.load_scene("ysdkdebug")
@@ -19,6 +20,10 @@ function init(self)
 
     self.text_version = self.druid:new_text("text_version")
     self.text_version:set_to("YaGames Version: " .. sys.get_config("project.version", "0.0.0"))
+
+    self.text_sitelock = self.druid:new_text("text_sitelock")
+    self.text_sitelock:set_to("Sitelock check:\ncurrent domain is " .. rxi_json.encode(sitelock.get_current_domain()) ..
+                                  ",\n" .. (sitelock.verify_domain() and "allowed to run." or "NOT ALLOWED to run."))
 end
 
 function final(self)
@@ -36,7 +41,7 @@ function on_message(self, message_id, message, sender)
         if message.err then
             self.text_status:set_to(message.err)
         else
-            self.text_status:set_to("Ready!")
+            self.text_status:set_to("READY!")
             self.button_continue:set_enabled(true)
         end
     end

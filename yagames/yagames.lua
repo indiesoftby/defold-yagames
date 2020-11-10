@@ -307,4 +307,11 @@ function M.player_get_stats(keys, callback)
     end), keys and rxi_json.encode(keys) or nil)
 end
 
+-- @tparam function callback
+function M.context_init(callback)
+    assert(type(callback) == "function")
+
+    yagames_private.context_init(helper.wrap_for_promise(callback))
+end
+
 return M

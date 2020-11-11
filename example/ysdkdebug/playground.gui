@@ -4149,8 +4149,8 @@ nodes {
 }
 nodes {
   position {
-    x: 160.0
-    y: -86.0
+    x: 75.0
+    y: -85.0
     z: 0.0
     w: 1.0
   }
@@ -4179,12 +4179,12 @@ nodes {
     w: 1.0
   }
   type: TYPE_TEMPLATE
-  id: "button_add_rtb_block"
+  id: "button_context_create"
   parent: "group_context"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
-  template: "/example/ysdkdebug/button.gui"
+  template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
 }
 nodes {
@@ -4207,7 +4207,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 320.0
+    x: 150.0
     y: 70.0
     z: 0.0
     w: 1.0
@@ -4221,12 +4221,12 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: "common/button"
-  id: "button_add_rtb_block/body"
+  id: "button_context_create/body"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  parent: "button_add_rtb_block"
+  parent: "button_context_create"
   layer: "common"
   inherit_alpha: true
   slice9 {
@@ -4262,7 +4262,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 300.0
+    x: 130.0
     y: 70.0
     z: 0.0
     w: 1.0
@@ -4275,9 +4275,9 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "Add RTB Block"
+  text: "Create"
   font: "font2"
-  id: "button_add_rtb_block/text"
+  id: "button_context_create/text"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -4295,7 +4295,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "button_add_rtb_block/body"
+  parent: "button_context_create/body"
   layer: "font2"
   inherit_alpha: true
   alpha: 1.0
@@ -4308,8 +4308,8 @@ nodes {
 }
 nodes {
   position {
-    x: 160.0
-    y: -176.0
+    x: 245.0
+    y: -85.0
     z: 0.0
     w: 1.0
   }
@@ -4338,12 +4338,12 @@ nodes {
     w: 1.0
   }
   type: TYPE_TEMPLATE
-  id: "button_render_rtb_block"
+  id: "button_context_refresh"
   parent: "group_context"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
-  template: "/example/ysdkdebug/button.gui"
+  template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
 }
 nodes {
@@ -4366,7 +4366,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 320.0
+    x: 150.0
     y: 70.0
     z: 0.0
     w: 1.0
@@ -4380,12 +4380,12 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: "common/button"
-  id: "button_render_rtb_block/body"
+  id: "button_context_refresh/body"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  parent: "button_render_rtb_block"
+  parent: "button_context_refresh"
   layer: "common"
   inherit_alpha: true
   slice9 {
@@ -4421,7 +4421,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 300.0
+    x: 130.0
     y: 70.0
     z: 0.0
     w: 1.0
@@ -4434,9 +4434,9 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "Render RTB Block"
+  text: "Refresh"
   font: "font2"
-  id: "button_render_rtb_block/text"
+  id: "button_context_refresh/text"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -4454,7 +4454,166 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "button_render_rtb_block/body"
+  parent: "button_context_refresh/body"
+  layer: "font2"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  overridden_fields: 8
+  template_node_child: true
+  text_leading: 1.0
+  text_tracking: 0.0
+}
+nodes {
+  position {
+    x: 75.0
+    y: -175.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_context_destroy"
+  parent: "group_context"
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  template: "/example/ysdkdebug/button_sm.gui"
+  template_node_child: false
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 150.0
+    y: 70.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "common/button"
+  id: "button_context_destroy/body"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "button_context_destroy"
+  layer: "common"
+  inherit_alpha: true
+  slice9 {
+    x: 24.0
+    y: 24.0
+    z: 24.0
+    w: 24.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: true
+  size_mode: SIZE_MODE_MANUAL
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 130.0
+    y: 70.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Destroy"
+  font: "font2"
+  id: "button_context_destroy/text"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  shadow {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "button_context_destroy/body"
   layer: "font2"
   inherit_alpha: true
   alpha: 1.0

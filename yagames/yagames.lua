@@ -1,6 +1,5 @@
 --- YaGames - Yandex Games for Defold.
 -- @module yagames
-
 local rxi_json = require("yagames.helpers.json")
 local mock = require("yagames.helpers.mock")
 local helper = require("yagames.helpers.helper")
@@ -8,7 +7,8 @@ local helper = require("yagames.helpers.helper")
 local M = {
     ysdk_ready = false,
     payments_ready = false,
-    player_ready = false
+    player_ready = false,
+    context_ready = false
 }
 
 local init_callback = nil
@@ -311,7 +311,47 @@ end
 function M.context_init(callback)
     assert(type(callback) == "function")
 
-    yagames_private.context_init(helper.wrap_for_promise(callback))
+    yagames_private.context_init(helper.wrap_for_promise(function(self, err)
+        if not err then
+            M.context_ready = true
+        end
+
+        callback(self, err)
+    end))
+end
+
+function M.context_create_banner(rtb_id, options, callback)
+    assert(M.context_ready, "Context ad is not initialized.")
+    assert(type(rtb_id) == "string")
+    assert(type(options) == "table")
+    assert(type(callback) == "function")
+
+    yagames_private.context_create_banner(rtb_id, rxi_json.encode(options),
+                                   callback and helper.wrap_for_promise(callback) or 0)
+end
+
+function M.context_destroy_banner(rtb_id)
+    assert(M.context_ready, "Context ad is not initialized.")
+    assert(type(rtb_id) == "string")
+
+    yagames_private.context_destroy_banner(rtb_id)
+end
+
+function M.context_refresh_banner(rtb_id, callback)
+    assert(M.context_ready, "Context ad is not initialized.")
+    assert(type(rtb_id) == "string")
+    assert(type(callback) == "function")
+
+    yagames_private.context_refresh_banner(rtb_id, callback and helper.wrap_for_promise(callback) or 0)
+end
+
+function M.context_set_banner_prop(rtb_id, property, value)
+    assert(M.context_ready, "Context ad is not initialized.")
+    assert(type(rtb_id) == "string")
+    assert(type(property) == "string")
+    assert(type(value) ~= "nil")
+
+    yagames_private.context_set_banner_prop(rtb_id, property, value)
 end
 
 return M

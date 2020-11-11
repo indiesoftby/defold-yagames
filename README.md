@@ -203,12 +203,12 @@ context_ad = yes
 
 ```lua
 yagames.context_init(callback)
-yagames.context_create(rtb_id, size, position)
-yagames.context_set(rtb_id, property, value) -- "display"("block"/"none"), "size", "position"
-yagames.context_delete(rtb_id)
--- yagames.context_show_banner(rtb_id)
--- yagames.context_hide_banner(rtb_id)
-yagames.context_refresh_banner(rtb_id)
+yagames.context_create_banner(rtb_id, { css_styles = "", display = "none", stat_id = 1 }, callback)
+-- direct — в блоке RTB были показаны объявления Директа;
+-- rtb — в блоке RTB было показано медийное рекламное объявление.
+yagames.context_set_banner_prop(rtb_id, property, value) -- "display"("block"/"none"), "size", "position"
+yagames.context_delete_banner(rtb_id)
+yagames.context_refresh_banner(rtb_id, callback)
 ```
 
 ## Дополнительные функции

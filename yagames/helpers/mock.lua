@@ -273,6 +273,10 @@ function M.player_get_stats(cb_id, keys)
     end
 end
 
+function M.context_init(cb_id)
+    M.send(cb_id, NO_ERR)
+end
+
 return {
     enable = function()
         if not yagames_private then

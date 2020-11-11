@@ -485,17 +485,20 @@ var LibYaGamesPrivate = {
 
         document.body.appendChild(banner.domElement);
 
-        var renderOptions = {
-            blockId: banner.rtbId,
-            renderTo: banner.domId,
-            async: true,
-            onRender: (result) => {
-                console.log("onRender", result);
-                if (cb_id) self.send(cb_id);
+        Ya.Context.AdvManager.render(
+            {
+                blockId: banner.rtbId,
+                renderTo: banner.domId,
+                statId: banner.statId,
+                async: true,
+                onRender: (data) => {
+                    if (cb_id) self.send(cb_id, null, JSON.stringify(data));
+                },
             },
-        };
-        if (banner.statId) renderOptions.statId = banner.statId;
-        Ya.Context.AdvManager.render(renderOptions);
+            () => {
+                if (cb_id) self.send(cb_id, "No ads available.");
+            }
+        );
     },
 
     YaGamesPrivate_Context_DestroyBanner: function (crtb_id) {
@@ -522,18 +525,20 @@ var LibYaGamesPrivate = {
         }
 
         var banner = self._context[rtbId];
-
-        var renderOptions = {
-            blockId: banner.rtbId,
-            renderTo: banner.domId,
-            async: true,
-            onRender: (result) => {
-                console.log("onRender", result);
-                if (cb_id) self.send(cb_id);
+        Ya.Context.AdvManager.render(
+            {
+                blockId: banner.rtbId,
+                renderTo: banner.domId,
+                statId: banner.statId,
+                async: true,
+                onRender: (data) => {
+                    if (cb_id) self.send(cb_id, null, JSON.stringify(data));
+                },
             },
-        };
-        if (banner.statId) renderOptions.statId = banner.statId;
-        Ya.Context.AdvManager.render(renderOptions);
+            () => {
+                if (cb_id) self.send(cb_id, "No ads available.");
+            }
+        );
     },
 
     YaGamesPrivate_Context_SetBannerPropVector3: function (crtb_id, cproperty, x, y, z) {

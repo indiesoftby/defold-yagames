@@ -327,7 +327,12 @@ function M.context_create_banner(rtb_id, options, callback)
     assert(type(callback) == "function")
 
     yagames_private.context_create_banner(rtb_id, rxi_json.encode(options),
-                                   callback and helper.wrap_for_promise(callback) or 0)
+        callback and helper.wrap_for_promise(function(self, err, data)
+            if not err then
+                data = rxi_json.decode(data)
+            end
+            callback(self, err, data)
+        end) or 0)
 end
 
 function M.context_destroy_banner(rtb_id)
@@ -342,7 +347,13 @@ function M.context_refresh_banner(rtb_id, callback)
     assert(type(rtb_id) == "string")
     assert(type(callback) == "function")
 
-    yagames_private.context_refresh_banner(rtb_id, callback and helper.wrap_for_promise(callback) or 0)
+    yagames_private.context_refresh_banner(rtb_id, 
+        callback and helper.wrap_for_promise(function(self, err, data)
+            if not err then
+                data = rxi_json.decode(data)
+            end
+            callback(self, err, data)
+        end) or 0)
 end
 
 function M.context_set_banner_prop(rtb_id, property, value)

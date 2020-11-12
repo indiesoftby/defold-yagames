@@ -203,7 +203,7 @@ context_ad = yes
 
 ### Настройка блоков RTB
 
-
+???
 
 ## Context Ads API
 
@@ -211,7 +211,7 @@ context_ad = yes
 Loads Yandex.Context SDK and calls the callback.
 
 _PARAMETERS_
-* __callback__ <kbd>function</kbd> - Function to call when the Yandex.Context SDK has initialized
+* __callback__ <kbd>function</kbd> - Function to call when the Yandex.Context SDK has initialized.
 
 The `callback` function is expected to accept the following values:
 
@@ -219,18 +219,46 @@ The `callback` function is expected to accept the following values:
 * __error__ <kbd>string</kbd> - Error code if something went wrong.
 
 ### yagames.context_create_banner(rtb_id, options, [callback])
-Creates `<div></div>`, applies CSS styles on it and renders advertisement into the div.
+Creates `<div></div>`, applies CSS styles on it and renders an advertisement into the div.
 
 _PARAMETERS_
 * __rtb_id__ <kbd>string</kbd> - ???.
 * __options__ <kbd>table</kbd> - ???.
-* __callback__ <kbd>function</kbd> - Function to call when the SDK has initialized.
+* __callback__ <kbd>function</kbd> - ???.
 
 The `callback` function is expected to accept the following values:
 
 * __self__ <kbd>userdata</kbd> - Script self reference.
 * __error__ <kbd>string</kbd> - Error code if something went wrong.
 * __data__ <kbd>table</kbd> - ???.
+
+### yagames.context_delete_banner(rtb_id)
+???.
+
+_PARAMETERS_
+* __rtb_id__ <kbd>string</kbd> - ???.
+
+### yagames.context_refresh_banner(rtb_id, [callback])
+???.
+
+_PARAMETERS_
+* __rtb_id__ <kbd>string</kbd> - ???.
+* __callback__ <kbd>function</kbd> - ???.
+
+The `callback` function is expected to accept the following values:
+
+* __self__ <kbd>userdata</kbd> - Script self reference.
+* __error__ <kbd>string</kbd> - Error code if something went wrong.
+* __data__ <kbd>table</kbd> - ???.
+
+### yagames.context_set_banner_prop(rtb_id, property, value)
+???.
+
+_PARAMETERS_
+* __rtb_id__ <kbd>string</kbd> - ???.
+* __property__ <kbd>string</kbd> - ???.
+* __value__ <kbd>string</kbd> - ???.
+
 
 ### TODO
 

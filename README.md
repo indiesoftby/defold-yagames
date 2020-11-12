@@ -199,13 +199,46 @@ context_ad = yes
 | `payments.getCatalog()` | `yagames.payments_get_catalog(callback)` |
 | `payments.consumePurchase(purchaseToken)` | `yagames.payments_consume_purchase(purchase_token, callback)` |
 
-### Контекстная реклама
+## Контекстная реклама
+
+### Настройка блоков RTB
+
+
+
+## Context Ad API
+
+### yagames.context_init(callback)
+
+Initialize Context Ad. It loads Yandex.Context SDK and calls the callback.
+
+**PARAMETERS**
+* ```callback``` (function) - Function to call when the Context Ad has initialized
+
+The ```callback``` function is expected to accept the following values:
+
+* ```self``` (userdata) - Script self reference
+* ```error``` (string) - Error code if something went wrong
+
+### yagames.context_create_banner(rtb_id, options, callback)
+
+Loads Yandex.Context SDK and calls the callback.
+
+**PARAMETERS**
+* ```rtb_id``` (string)
+* ```options``` (table)
+* ```callback``` (function) - Function to call when the Context Ad has initialized
+
+The ```callback``` function is expected to accept the following values:
+
+* ```self``` (userdata) - Script self reference
+* ```error``` (string) - Error code if something went wrong
+* ```data``` (table) - 
+
+### TODO
 
 ```lua
 yagames.context_init(callback)
 yagames.context_create_banner(rtb_id, { css_styles = "", display = "none", stat_id = 1 }, callback)
--- direct — в блоке RTB были показаны объявления Директа;
--- rtb — в блоке RTB было показано медийное рекламное объявление.
 yagames.context_set_banner_prop(rtb_id, property, value) -- "display"("block"/"none"), "size", "position"
 yagames.context_delete_banner(rtb_id)
 yagames.context_refresh_banner(rtb_id, callback)

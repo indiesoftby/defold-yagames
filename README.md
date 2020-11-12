@@ -205,34 +205,32 @@ context_ad = yes
 
 
 
-## Context Ad API
+## Context Ads API
 
 ### yagames.context_init(callback)
-
-Initialize Context Ad. It loads Yandex.Context SDK and calls the callback.
-
-**PARAMETERS**
-* ```callback``` (function) - Function to call when the Context Ad has initialized
-
-The ```callback``` function is expected to accept the following values:
-
-* ```self``` (userdata) - Script self reference
-* ```error``` (string) - Error code if something went wrong
-
-### yagames.context_create_banner(rtb_id, options, callback)
-
 Loads Yandex.Context SDK and calls the callback.
 
-**PARAMETERS**
-* ```rtb_id``` (string)
-* ```options``` (table)
-* ```callback``` (function) - Function to call when the Context Ad has initialized
+_PARAMETERS_
+* __callback__ <kbd>function</kbd> - Function to call when the Yandex.Context SDK has initialized
 
-The ```callback``` function is expected to accept the following values:
+The `callback` function is expected to accept the following values:
 
-* ```self``` (userdata) - Script self reference
-* ```error``` (string) - Error code if something went wrong
-* ```data``` (table) - 
+* __self__ <kbd>userdata</kbd> - Script self reference.
+* __error__ <kbd>string</kbd> - Error code if something went wrong.
+
+### yagames.context_create_banner(rtb_id, options, [callback])
+Creates `<div></div>`, applies CSS styles on it and renders advertisement into the div.
+
+_PARAMETERS_
+* __rtb_id__ <kbd>string</kbd> - ???.
+* __options__ <kbd>table</kbd> - ???.
+* __callback__ <kbd>function</kbd> - Function to call when the SDK has initialized.
+
+The `callback` function is expected to accept the following values:
+
+* __self__ <kbd>userdata</kbd> - Script self reference.
+* __error__ <kbd>string</kbd> - Error code if something went wrong.
+* __data__ <kbd>table</kbd> - ???.
 
 ### TODO
 

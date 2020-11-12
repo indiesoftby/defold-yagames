@@ -169,7 +169,11 @@ context_ad = yes
 
 ## Lua API
 
-В Yandex.Games SDK используются ES6 Promise (промис) для отложенных и асинхронных вычислений. В Lua API они заменены на callback-функции с аргументами `(self, err, result)`, где `self` - это контекст скрипта, `err` - это ошибка (равная `nil`, если ошибки нет), `result` - результат.
+Yandex.Games SDK uses ES6 Promise for asynchronous operations. For Lua API promises replaced with callback functions with arguments `(self, err, result)`, where
+
+- `self` <kbd>userdata</kbd> - Script self reference.
+- `err` <kbd>string</kbd> - Error code if something went wrong.
+- `result` - Data if operation should return something.
 
 ### Таблица соответствия с официальным SDK
 

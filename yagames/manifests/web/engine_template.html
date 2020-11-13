@@ -30,6 +30,9 @@
                             send(0, "error", err + "");
                         });
                 };
+                s.onerror = function () {
+                    send(0, "error", "Error loading SDK. Reload the page.");
+                };
             })(document);
         </script>
     </head>

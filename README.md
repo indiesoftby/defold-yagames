@@ -39,9 +39,9 @@ Or point to the ZIP file of a [specific release](https://github.com/indiesoftby/
     4. In-game purchases - earn revenue by providing paid services to your users.
 6. Enable Service Worker support - browser games should run both offline and online, however unstable or slow the web connection might be. To meet these criteria, integrate Service Worker into your game.
     1. Set the path to the file `sw.js` in the `game.project` settings.
-    2. Copy the `yagames/manifests/web/sw.js` file to root directory of your release build.
+    2. Copy the `yagames/manifests/web/sw.js` file to the root directory of your release build.
     2. Edit the list of all game files inside your `sw.js`. Omit `sw.js` itself.
-    3. You should increment the game version inside `sw.js` on every update of your game on Yandex.Games.
+    3. You should increment the version inside `sw.js` on every update of your game on Yandex.Games.
 7. Publish your game [on the Yandex.Games catalogue](https://games.yandex.ru/console/).
 
 ### Best Practices
@@ -209,7 +209,7 @@ Yandex.Games JavaScript SDK uses ES6 Promise for asynchronous operations. For Lu
 
 You can additionally monetize your game using Yandex Advertising Network *Real-Time Bidding* ad blocks. RTB block is rendered into HTML div block and placed over your game canvas.
 
-The official documentation is here - [https://yandex.ru/support/partner2/web/products-rtb/about.html](https://yandex.ru/support/partner2/web/products-rtb/about.html)
+The official documentation is here - [https://yandex.ru/support/partner2/web/products-rtb/about.html](https://yandex.ru/support/partner2/web/products-rtb/about.html?lang=en)
 
 ### Creating RTB blocks
 
@@ -306,4 +306,4 @@ end
 
 ## License
 
-Лицензия проекта - **MIT**. Разработан и поддерживается [@aglitchman](https://github.com/aglitchman). Основан на исходном коде [JsToDef](https://github.com/AGulev/jstodef).
+This project is licensed under the terms of the MIT license. Developed and supported by [@aglitchman](https://github.com/aglitchman). Uses the source code of [JsToDef](https://github.com/AGulev/jstodef).

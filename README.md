@@ -46,13 +46,12 @@ Or point to the ZIP file of a [specific release](https://github.com/indiesoftby/
 
 ### Best Practices
 
-1. Яндекс.Игры доступны только для HTML5, поэтому на остальных платформах это расширение имитирует работу SDK и предупреждает об этом на старте. Поэтому можно быстро внедрить и проверить работу SDK в основной среде разработки (Windows, macOS, Linux), затем загрузить полностью готовый к работе HTML5 билд вашей игры в каталог Яндекс.Игр.
-2. Код из `yagames/manifests/web/engine_template.html` всегда внедряется в ваш HTML5 билд, соответственно SDK Яндекс.Игр подключается всегда. Это поведение не отключить, не удалив расширение.
-3. Для каждой платформы и соответственно отдельно для Яндекс.Игр ведите отдельную ветку в вашем Git и не смешивайте в один файл код для каждой платформы, чтобы избежать больших ненужных ветвлений.
+1. The YaGames extension imitates a real API on *non-HTML5* platforms. The idea is to allow to you quickly implement API on your favourite platform (macOS, Windows, Linux) and don't spend time on slowly rebuilding/uploading the game to the Yandex.
+2. The code from `yagames/manifests/web/engine_template.html` is always added to your HTML5 template. This behaviour can't be disabled. Tip: make supporting branches for every platform and do not mix specific code between them.
 
 ## Code Examples
 
-Расширение содержит демо-проект (директория `example`), с которым можно поиграться или использовать как внутренний отладочный экран в вашей игре.
+Take a look at the demo project inside `example` directory. It has quite a few buttons to test all APIs. You can use it in your game as a debug screen.
 
 ![YaGames Demo](screenshot.png)
 
@@ -74,7 +73,7 @@ function init(self)
 end
 ```
 
-### 2. Interstitial ad
+### 2. Interstitial Ad
 
 Interstitial ads are ad blocks that completely cover the app background and show up before a user gets the data requested (for example, accessing the next game level).
 
@@ -116,7 +115,7 @@ function on_message(self, message_id, message)
 end
 ```
 
-### 3. Rewarded videos
+### 3. Rewarded Videos
 
 Rewarded videos are video ad blocks used to monetize games and earn a reward or in-game currency.
 
@@ -158,7 +157,7 @@ function on_message(self, message_id, message)
 end
 ```
 
-## Настройки расширения в `game.project`
+## The `game.project` Settings
 
 ```ini
 [yagames]
@@ -166,10 +165,10 @@ sdk_init_options = {}
 service_worker_url = sw.js
 ```
 
-* `sdk_init_options` - JavaScript код. Это дополнительные опции инициализации Yandex Games SDK, передаются [в метод `YaGames.init`](https://yandex.ru/dev/games/doc/dg/sdk/sdk-about.html). Пример: `{ orientation: { value: "landscape", lock: true } }`.
-* `service_worker_url` - Ссылка на файл Service Worker. В большинстве случаев это `sw.js`. Указание этой ссылки включает поддержку Service Worker.
+* `sdk_init_options` - The JavaScript code. The Yandex Games SDK initialization options for [the `YaGames.init`](https://yandex.ru/dev/games/doc/dg/sdk/sdk-about.html). Example: `{ orientation: { value: "landscape", lock: true } }`.
+* `service_worker_url` - Relative URL to the Service Worker file. Usually it's `sw.js`. Set the URL to enable Service Worker.
 
-## YaGames Lua API
+## Lua API
 
 Yandex.Games JavaScript SDK uses ES6 Promise for asynchronous operations. For Lua API promises were replaced with callback functions with arguments `(self, err, result)`, where
 
@@ -177,7 +176,9 @@ Yandex.Games JavaScript SDK uses ES6 Promise for asynchronous operations. For Lu
 - `err` <kbd>string</kbd> - Error code if something went wrong.
 - `result` - Data if the operation should return something.
 
-### Таблица соответствия с официальным SDK
+### Matching with the JS SDK
+
+The best way to integrate SDK into your game is to read [the official documentation](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en) and to use corresponding Lua API functions. The table below helps to do that:
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |

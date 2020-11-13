@@ -19,11 +19,11 @@ function init(self)
     self.text_status:set_to("Initializing...")
 
     self.text_version = self.druid:new_text("text_version")
-    self.text_version:set_to("YaGames Version: " .. sys.get_config("project.version", "0.0.0"))
+    self.text_version:set_to("YAGAMES VERSION " .. sys.get_config("project.version", "0.0.0"))
 
     self.text_sitelock = self.druid:new_text("text_sitelock")
-    self.text_sitelock:set_to("Sitelock check:\ncurrent domain is " .. rxi_json.encode(sitelock.get_current_domain()) ..
-                                  ",\n" .. (sitelock.verify_domain() and "allowed to run." or "NOT ALLOWED to run."))
+    self.text_sitelock:set_to("Current domain is " .. rxi_json.encode(sitelock.get_current_domain()) ..
+                                  ".\n" .. (sitelock.verify_domain() and "Allowed to run." or "NOT ALLOWED to run."))
 end
 
 function final(self)

@@ -205,17 +205,19 @@ Yandex.Games SDK uses ES6 Promise for asynchronous operations. For Lua API promi
 
 ## Контекстная реклама
 
+https://yandex.ru/support/partner2/web/products-rtb/about.html
+
 ### Настройка блоков RTB
 
-???
+The ad block will be displayed within 30 minutes after saving the code and placing it on the game page. 
 
 ## Context Ads API
 
 ### yagames.context_init(callback)
-Loads Yandex.Context SDK and calls the callback.
+Loads Yandex Advertising Network SDK and calls the callback.
 
 _PARAMETERS_
-* __callback__ <kbd>function</kbd> - Function to call when the Yandex.Context SDK has initialized.
+* __callback__ <kbd>function</kbd> - Function to call when the Yandex Advertising Network SDK has initialized.
 
 The `callback` function is expected to accept the following values:
 
@@ -226,55 +228,48 @@ The `callback` function is expected to accept the following values:
 Creates `<div></div>`, applies CSS styles on it and renders an advertisement into the div.
 
 _PARAMETERS_
-* __rtb_id__ <kbd>string</kbd> - ???.
+* __rtb_id__ <kbd>string</kbd> - A unique RTB block ID. A block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
 * __options__ <kbd>table</kbd> - ???.
-* __callback__ <kbd>function</kbd> - ???.
+* __callback__ <kbd>function</kbd> - The callback function that is invoked after ad rendering.
 
-The `callback` function is expected to accept the following values:
+The `options` table can have these key-value pairs:
+* __stat_id__ <kbd>integer</kbd> - The sample ID. A number between 1 and 1000000000. This will allow you to view group statistics for that block.
+* __css_styles__ <kbd>string</kbd> - Inline CSS styles for `<div></div>` tag.
+* __css_class__ <kbd>string</kbd> - CSS class name for `<div></div>` tag.
+* __display__ <kbd>string</kbd> - ???.
+
+The `callback` function allows you to obtain information about whether the ad has been rendered (whether the ad was successfully selected when requested from the RTB system) and which particular ad was shown. The `callback` function is expected to accept the following values:
 
 * __self__ <kbd>userdata</kbd> - Script self reference.
 * __error__ <kbd>string</kbd> - Error code if something went wrong.
-* __data__ <kbd>table</kbd> - ???.
+* __data__ <kbd>table</kbd> - The function obtains the `data.product` parameter with one of two values: `direct` — Yandex.Direct ads were shown in an RTB ad block, `rtb` — A media ad was shown in an RTB ad block.
+
+If there were no suitable product listings at the auction to show your ad next to, then you can show your ad in the block. In this situation the `callback` function returns the error `No ads available.`.
 
 ### yagames.context_delete_banner(rtb_id)
 ???.
 
 _PARAMETERS_
-* __rtb_id__ <kbd>string</kbd> - ???.
+* __rtb_id__ <kbd>string</kbd> - A unique RTB block ID. A block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
 
 ### yagames.context_refresh_banner(rtb_id, [callback])
 ???.
 
 _PARAMETERS_
-* __rtb_id__ <kbd>string</kbd> - ???.
-* __callback__ <kbd>function</kbd> - ???.
+* __rtb_id__ <kbd>string</kbd> - A unique RTB block ID. A block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
+* __callback__ <kbd>function</kbd> - The callback function that is invoked after ad rendering.
 
-The `callback` function is expected to accept the following values:
-
-* __self__ <kbd>userdata</kbd> - Script self reference.
-* __error__ <kbd>string</kbd> - Error code if something went wrong.
-* __data__ <kbd>table</kbd> - ???.
+The `callback` function is described in the `yagames.context_create_banner` section above.
 
 ### yagames.context_set_banner_prop(rtb_id, property, value)
 ???.
 
 _PARAMETERS_
-* __rtb_id__ <kbd>string</kbd> - ???.
+* __rtb_id__ <kbd>string</kbd> - A unique RTB block ID. A block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
 * __property__ <kbd>string</kbd> - ???.
 * __value__ <kbd>string</kbd> - ???.
 
-
-### TODO
-
-```lua
-yagames.context_init(callback)
-yagames.context_create_banner(rtb_id, { css_styles = "", display = "none", stat_id = 1 }, callback)
-yagames.context_set_banner_prop(rtb_id, property, value) -- "display"("block"/"none"), "size", "position"
-yagames.context_delete_banner(rtb_id)
-yagames.context_refresh_banner(rtb_id, callback)
-```
-
-## Дополнительные функции
+## Sitelock
 
 Защита игры от размещения на сторонних сайтах с помощью сайт-лока, то есть проверки доменного имени, где размещена игра. По умолчанию добавлены домены `yandex.net` (CDN Яндекс.Игр) и `localhost`:
 
@@ -293,6 +288,6 @@ function init(self)
 end
 ```
 
-## Лицензия
+## License
 
 Лицензия проекта - **MIT**. Разработан и поддерживается [@aglitchman](https://github.com/aglitchman). Основан на исходном коде [JsToDef](https://github.com/AGulev/jstodef).

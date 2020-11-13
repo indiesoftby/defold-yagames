@@ -20,37 +20,37 @@ Or point to the ZIP file of a [specific release](https://github.com/indiesoftby/
 
 ## Getting Started
 
-* [The official documentation](https://yandex.ru/dev/games/doc/dg/concepts/about.html).
-* [Telegram-чат Яндекс.Игр](https://t.me/yagamedev), где присутствуют официальные представители и модераторы.
-* [Telegram-чат Defold Engine](https://t.me/DefoldEngine), где можно задать вопросы об этом расширении.
+* [The official documentation](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en).
+* [The official Telegram chat](https://t.me/yagamedev) where you can talk with representatives from Yandex.
 
-### Чек-лист для релиза Defold-игры на Яндекс.Играх
+### Checklist For Releasing Game
 
-1. [Зарегистрируйтесь как разработчик в Яндекс.Играх](https://yandex.ru/dev/games/).
-2. Подготовьте ассеты для каталога:
-    1. Иконка 512x512 пикселей.
-    2. Обложка 800x470 пикселей.
-    3. Скриншоты по 2 шт. отдельно для мобильной и десктоп версии игр.
-3. Переведите название игры на русский язык, подготовьте описание игры на русском.
-4. Добавьте [ссылку на это расширение](https://github.com/indiesoftby/defold-yagames/archive/master.zip) в Dependencies вашего проекта. **С этого момента вы уже можете публиковать игру на Яндекс.Играх, она будет соответствовать требованиям.**
-5. Подключите монетизацию в игре:
-    1. С помощью полноэкранной рекламы в процессе загрузки игры, между уровнями игры, после поражения игрока. *Важно:* Во время показа такой рекламы звуки в игре должны выключаться.
-    2. С помощью Rewarded рекламы. *Важно:* Во время показа такой рекламы звуки в игре должны выключаться.
-    3. С помощью баннерной рекламы (RTB-блоки).
-    4. С помощью внутриигровых покупок.
-6. Включите Service Worker, скопировав файл `yagames/manifests/web/sw.js` в корневую директорию релизного билда игры:
-    1. *Важно:* Укажите относительный путь к файлу `sw.js` в `game.project` настройках.
-    2. *Важно:* В файле `sw.js` отредактируйте список файлов вашей игры. Сам `sw.js` включать в него не нужно.
-    3. *Важно:* При каждом обновлении файлов игры на Яндексе вам нужно инкрементировать версию в файле `sw.js`.
-7. Опубликуйте игру [в каталоге Яндекс.Игр](https://yandex.ru/dev/games/).
+1. [Register as a developer](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en).
+2. Translate your game to the Russian language.
+3. Prepare assets for the catalogue:
+    1. Icon 512 x 512 px.
+    2. Cover 800 x 470 px.
+    3. Screenshots.
+4. Add [the extension](https://github.com/indiesoftby/defold-yagames/archive/master.zip) as a Defold library dependency to your project. **You can publish your game on Yandex.Games from this moment. It fully meets [the requirements](https://yandex.ru/dev/games/doc/dg/concepts/requirements.html?lang=en).**
+5. Enable monetization and earn revenue from placing ad blocks in your game. Ad blocks are available in the following formats:
+    1. Interstitial blocks - ad blocks that completely cover the app background and show up at certain points (for example, when accessing the next game level). *Important: Mute sounds before showing the ad.*
+    2. Rewarded videos - blocks with video ads that the user can choose to view and earn a reward or in-game currency. *Important: Mute sounds before showing the ad.*
+    3. RTB ad blocks (banners) - display both contextual (content-based) ads and media ads.
+    4. In-game purchases - earn revenue by providing paid services to your users.
+6. Enable Service Worker support - browser games should run both offline and online, however unstable or slow the web connection might be. To meet these criteria, integrate Service Worker into your game.
+    1. Set the path to the file `sw.js` in the `game.project` settings.
+    2. Copy the `yagames/manifests/web/sw.js` file to root directory of your release build.
+    2. Edit the list of all game files inside your `sw.js`. Omit `sw.js` itself.
+    3. You should increment the game version inside `sw.js` on every update of your game on Yandex.Games.
+7. Publish your game [on the Yandex.Games catalogue](https://games.yandex.ru/console/).
 
-### Лучшие практики
+### Best Practices
 
 1. Яндекс.Игры доступны только для HTML5, поэтому на остальных платформах это расширение имитирует работу SDK и предупреждает об этом на старте. Поэтому можно быстро внедрить и проверить работу SDK в основной среде разработки (Windows, macOS, Linux), затем загрузить полностью готовый к работе HTML5 билд вашей игры в каталог Яндекс.Игр.
 2. Код из `yagames/manifests/web/engine_template.html` всегда внедряется в ваш HTML5 билд, соответственно SDK Яндекс.Игр подключается всегда. Это поведение не отключить, не удалив расширение.
 3. Для каждой платформы и соответственно отдельно для Яндекс.Игр ведите отдельную ветку в вашем Git и не смешивайте в один файл код для каждой платформы, чтобы избежать больших ненужных ветвлений.
 
-## Примеры кода
+## Code Examples
 
 Расширение содержит демо-проект (директория `example`), с которым можно поиграться или использовать как внутренний отладочный экран в вашей игре.
 
@@ -250,7 +250,7 @@ The `callback` function allows you to obtain information about whether the ad ha
 
 * __self__ <kbd>userdata</kbd> - Script self reference.
 * __error__ <kbd>string</kbd> - Error code if something went wrong.
-* __data__ <kbd>table</kbd> - The function obtains the `data.product` parameter with one of two values: `direct` — Yandex.Direct ads were shown in an RTB ad block, `rtb` — A media ad was shown in an RTB ad block.
+* __data__ <kbd>table</kbd> - The function obtains the `data.product` parameter with one of two values: `direct` - Yandex.Direct ads were shown in an RTB ad block, `rtb` - A media ad was shown in an RTB ad block.
 
 If there were no suitable product listings at the auction to show your ad next to, then you can show your ad in the block. In this situation the `callback` function returns the error `No ads available.`.
 

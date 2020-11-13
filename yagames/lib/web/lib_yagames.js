@@ -492,10 +492,12 @@ var LibYaGamesPrivate = {
                 async: true,
                 onRender: (data) => {
                     if (cb_id) self.send(cb_id, null, JSON.stringify(data));
+                    cb_id = 0;
                 },
             },
             () => {
                 if (cb_id) self.send(cb_id, "No ads available.");
+                cb_id = 0;
             }
         );
     },
@@ -532,10 +534,12 @@ var LibYaGamesPrivate = {
                 async: true,
                 onRender: (data) => {
                     if (cb_id) self.send(cb_id, null, JSON.stringify(data));
+                    cb_id = 0;
                 },
             },
             () => {
                 if (cb_id) self.send(cb_id, "No ads available.");
+                cb_id = 0;
             }
         );
     },

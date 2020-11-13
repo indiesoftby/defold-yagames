@@ -491,12 +491,10 @@ var LibYaGamesPrivate = {
                 statId: banner.statId,
                 async: true,
                 onRender: (data) => {
-                    console.log("on render", rtbId);
                     if (cb_id) self.send(cb_id, null, JSON.stringify(data));
                 },
             },
             () => {
-                console.log("on fallback", rtbId);
                 if (cb_id) self.send(cb_id, "No ads available.");
             }
         );
@@ -533,12 +531,10 @@ var LibYaGamesPrivate = {
                 statId: banner.statId,
                 async: true,
                 onRender: (data) => {
-                    console.log("(refresh) on render", rtbId);
                     if (cb_id) self.send(cb_id, null, JSON.stringify(data));
                 },
             },
             () => {
-                console.log("(refresh) on fallback", rtbId);
                 if (cb_id) self.send(cb_id, "No ads available.");
             }
         );

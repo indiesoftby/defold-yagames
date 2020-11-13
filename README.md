@@ -62,7 +62,9 @@ YaGames - это реализация SDK Яндекс.Игр для движк�
 
 ![YaGames Demo](screenshot.png)
 
-### 1. Инициализация
+### 1. Initialization
+
+To get started, you need to initialize the SDK using the `init` method.
 
 ```lua
 local yagames = require("yagames.yagames")
@@ -78,12 +80,16 @@ function init(self)
 end
 ```
 
-### 2. Вызов полноэкранной рекламы
+### 2. Interstitial ad
 
-* `open` - вызывается при успешном открытии рекламы.
-* `close` - вызывается при закрытии рекламы, после ошибки, а также, если реклама не открылась по причине слишком частого вызова. Используется с аргументом `was_shown` (тип boolean), по значению которого можно узнать была ли показана реклама.
-* `offline` - вызывается при потере сетевого соединения (переходе в офлайн-режим).
-* `error` - вызывается при возникновении ошибки. Объект ошибки передается в callback-функцию.
+Interstitial ads are ad blocks that completely cover the app background and show up before a user gets the data requested (for example, accessing the next game level).
+
+*Don't call interstitial ads more often than once **every three minutes**. The ad window may fail to open if the calls are too frequent.*
+
+* `open` - Called when an ad is opened successfully.
+* `close` - Called when an ad is closed, an error occurred, or on ad failed to open due to too frequent calls. Used with the `was_shown` argument (type `boolean`), the value of which indicates whether an ad was shown.
+* `offline` - Called when the network connection is lost (when offline mode is enabled).
+* `error` - Called when an error occurrs. The error object is passed to the callback function.
 
 ```lua
 local yagames = require("yagames.yagames")
@@ -116,12 +122,16 @@ function on_message(self, message_id, message)
 end
 ```
 
-### 3. Вызов Rewarded видео
+### 3. Rewarded videos
 
-* `open` - вызывается при отображении видеорекламы на экране.
-* `rewarded` - вызывается, когда засчитывается просмотр видеорекламы. Укажите в данной функции, какую награду пользователь получит после просмотра.
-* `close` - вызывается при закрытии видеорекламы.
-* `error` - вызывается при возникновении ошибки. Объект ошибки передается в callback-функцию.
+Rewarded videos are video ad blocks used to monetize games and earn a reward or in-game currency.
+
+* `open` - Called when a video ad is displayed on the screen.
+* `rewarded` - Called when a video ad impression is counted. Use this function to specify a reward for viewing the video ad.
+* `close` - Called when a user closes a video ad or an error happens.
+* `error` - Called when an error occurrs. The error object is passed to the callback function.
+
+The `close` callback is called in any situations, even if there was an error.
 
 ```lua
 local yagames = require("yagames.yagames")
@@ -162,23 +172,27 @@ sdk_init_options = {}
 service_worker_url = sw.js
 ```
 
-* `sdk_init_options` - JavaScript код. Это дополнительные опции иницилизации Yandex Games SDK, передаются [в метод `YaGames.init`](https://yandex.ru/dev/games/doc/dg/sdk/sdk-about.html). Пример: `{ orientation: { value: "landscape", lock: true } }`.
-* `service_worker_url` - Ссылка на файл Service Worker. В большинстве случаев это `sw.js`. Указание этой ссылки включает поддержку Service Worker. 
+* `sdk_init_options` - JavaScript код. Это дополнительные опции инициализации Yandex Games SDK, передаются [в метод `YaGames.init`](https://yandex.ru/dev/games/doc/dg/sdk/sdk-about.html). Пример: `{ orientation: { value: "landscape", lock: true } }`.
+* `service_worker_url` - Ссылка на файл Service Worker. В большинстве случаев это `sw.js`. Указание этой ссылки включает поддержку Service Worker.
 
-## Lua API
+## YaGames Lua API
 
-В Yandex.Games SDK используются ES6 Promise (промис) для отложенных и асинхронных вычислений. В Lua API они заменены на callback-функции с аргументами `(self, err, result)`, где `self` - это контекст скрипта, `err` - это ошибка (равная `nil`, если ошибки нет), `result` - результат.
+Yandex.Games JavaScript SDK uses ES6 Promise for asynchronous operations. For Lua API promises were replaced with callback functions with arguments `(self, err, result)`, where
+
+- `self` <kbd>userdata</kbd> - Script self reference.
+- `err` <kbd>string</kbd> - Error code if something went wrong.
+- `result` - Data if the operation should return something.
 
 ### Таблица соответствия с официальным SDK
 
-| Yandex.Games SDK | Lua API |
-| ---------------- | ------- |
-| `YaGames.init(options)` | `yagames.init(callback)` - Опции указываются в настройках проекта в `yagames.sdk_init_options`. |
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
+| `YaGames.init(options)` | `yagames.init(callback)` - The `options` can be set in the `yagames.sdk_init_options` setting. |
 | `ysdk.deviceInfo.isDesktop()` | `yagames.device_info_is_desktop()` |
 | `ysdk.deviceInfo.isMobile()` | `yagames.device_info_is_mobile()` |
 | `ysdk.deviceInfo.isTablet()` | `yagames.device_info_is_tablet()` |
-| `ysdk.adv.showFullscreenAdv({callbacks:{}})` | `yagames.adv_show_fullscreen_adv(callbacks)` [<kbd>Пример</kbd>](#2-вызов-полноэкранной-рекламы) |
-| `ysdk.adv.showRewardedVideo({callbacks:{}})` | `yagames.adv_show_rewarded_video(callbacks)` [<kbd>Пример</kbd>](#3-вызов-rewarded-видео) |
+| `ysdk.adv.showFullscreenAdv({callbacks:{}})` | `yagames.adv_show_fullscreen_adv(callbacks)` [<kbd>Example</kbd>](#2-interstitial-ad) |
+| `ysdk.adv.showRewardedVideo({callbacks:{}})` | `yagames.adv_show_rewarded_video(callbacks)` [<kbd>Example</kbd>](#3-rewarded-videos) |
 | `ysdk.auth.openAuthDialog()` | `yagames.auth_open_auth_dialog(callback)` |
 | `ysdk.getPlayer(options)` | `yagames.player_init(options, callback)` |
 | `player.setData(data, flush)` | `yagames.player_set_data(data, flush, callback)` |
@@ -193,13 +207,93 @@ service_worker_url = sw.js
 | `player.getPhoto(size)` | `yagames.player_get_photo(size)` |
 | `ysdk.getPayments(options)` | `yagames.payments_init(options, callback)` |
 | `payments.purchase(options)` | `yagames.payments_purchase(options, callback)` |
-| `payments.getPurchases()` | `yagames.payments_get_purchases(callback)` - результат имеет формат `{ purchases = { ... }, signature = "..." }` |
+| `payments.getPurchases()` | `yagames.payments_get_purchases(callback)` - The result has the format `{ purchases = { ... }, signature = "..." }` |
 | `payments.getCatalog()` | `yagames.payments_get_catalog(callback)` |
 | `payments.consumePurchase(purchaseToken)` | `yagames.payments_consume_purchase(purchase_token, callback)` |
 
-## Дополнительные функции
+## Banner Ads
 
-Защита игры от размещения на сторонних сайтах с помощью сайт-лока, то есть проверки доменного имени, где размещена игра. По умолчанию добавлены домены `yandex.net` (CDN Яндекс.Игр) и `localhost`:
+You can additionally monetize your game using Yandex Advertising Network *Real-Time Bidding* ad blocks. RTB block is rendered into HTML div block and placed over your game canvas.
+
+The official documentation is here - [https://yandex.ru/support/partner2/web/products-rtb/about.html](https://yandex.ru/support/partner2/web/products-rtb/about.html)
+
+### Creating RTB blocks
+
+Create an RTB block in [the Yandex Advertising Network interface](https://partner2.yandex.ru/v2/context/rtb/) and copy **RTB id** of the block:
+
+![RTB id](rtb_copy_id.png)
+
+The ad block will be displayed within 30 minutes after saving the code and placing it on the game page. 
+
+## Banner Ads Lua API
+
+### yagames.banner_init(callback)
+Loads Yandex Advertising Network SDK and calls the callback.
+
+_PARAMETERS_
+* __callback__ <kbd>function</kbd> - Function to call when the Yandex Advertising Network SDK has initialized.
+
+The `callback` function is expected to accept the following values:
+
+* __self__ <kbd>userdata</kbd> - Script self reference.
+* __error__ <kbd>string</kbd> - Error code if something went wrong.
+
+### yagames.banner_create(rtb_id, options, [callback])
+Creates a DOM element (`<div></div>`) with `style="position: absolute"`, applies your CSS styles on it and renders an advertisement into the element.
+
+_PARAMETERS_
+* __rtb_id__ <kbd>string</kbd> - The unique RTB block ID. The block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
+* __options__ <kbd>table</kbd> - The table with key-value pairs.
+* __callback__ <kbd>function</kbd> - The callback function that is invoked after ad rendering.
+
+The `options` table can have these key-value pairs:
+* __stat_id__ <kbd>integer</kbd> - The sample ID. A number between 1 and 1000000000. This will allow you to view group statistics for that block.
+* __css_styles__ <kbd>string</kbd> - Sets inline CSS styles of the `<div></div>` element.
+* __css_class__ <kbd>string</kbd> - Sets the value of the `class` attribute of the `<div></div>` element.
+* __display__ <kbd>string</kbd> - The `display` property allows to show or hide the element. If you set `display` = `none`, it hides the entire element. Use `block` to show it back.
+
+The `callback` function allows you to obtain information about whether the ad has been rendered (whether the ad was successfully selected when requested from the RTB system) and which particular ad was shown. The `callback` function is expected to accept the following values:
+
+* __self__ <kbd>userdata</kbd> - Script self reference.
+* __error__ <kbd>string</kbd> - Error code if something went wrong.
+* __data__ <kbd>table</kbd> - The function obtains the `data.product` parameter with one of two values: `direct` — Yandex.Direct ads were shown in an RTB ad block, `rtb` — A media ad was shown in an RTB ad block.
+
+If there were no suitable product listings at the auction to show your ad next to, then you can show your ad in the block. In this situation the `callback` function returns the error `No ads available.`.
+
+### yagames.banner_delete(rtb_id)
+Removes the DOM element.
+
+_PARAMETERS_
+* __rtb_id__ <kbd>string</kbd> - The unique RTB block ID. The block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
+
+### yagames.banner_refresh(rtb_id, [callback])
+Requests SDK to render new advertisement.
+
+_PARAMETERS_
+* __rtb_id__ <kbd>string</kbd> - The unique RTB block ID. The block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
+* __callback__ <kbd>function</kbd> - The callback function that is invoked after ad rendering.
+
+The `callback` function is described in the `yagames.banner_create` section above.
+
+### yagames.banner_set(rtb_id, property, value)
+Sets a named property of the specified banner.
+
+_PARAMETERS_
+* __rtb_id__ <kbd>string</kbd> - The unique RTB block ID. The block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
+* __property__ <kbd>string</kbd> - Name of the property to set.
+* __value__ <kbd>string</kbd> - The value to set.
+
+_PROPERTIES_:
+* __stat_id__ <kbd>integer</kbd> - The sample ID. A number between 1 and 1000000000. This will allow you to view group statistics for that block.
+* __css_styles__ <kbd>string</kbd> - Sets inline CSS styles of the `<div></div>` element.
+* __css_class__ <kbd>string</kbd> - Sets the value of the `class` attribute of the `<div></div>` element.
+* __display__ <kbd>string</kbd> - The `display` property allows to show or hide the element. If you set `display` = `none`, it hides the entire element. Use `block` to show it back.
+
+## Sitelock
+
+It's a good idea to protect your HTML5 game from simple copy-pasting to another website. YaGames has Sitelock API for that purpose. It's simple, but it's better than nothing.
+
+By default, it checks hostnames `yandex.net` (CDN of the Yandex.Games) and `localhost` (for local debugging).
 
 ```lua
 local sitelock = require("yagames.sitelock")
@@ -216,6 +310,6 @@ function init(self)
 end
 ```
 
-## Лицензия
+## License
 
 Лицензия проекта - **MIT**. Разработан и поддерживается [@aglitchman](https://github.com/aglitchman). Основан на исходном коде [JsToDef](https://github.com/AGulev/jstodef).

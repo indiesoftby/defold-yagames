@@ -273,6 +273,22 @@ function M.player_get_stats(cb_id, keys)
     end
 end
 
+function M.banner_init(cb_id)
+    M.send(cb_id, "Error loading SDK.")
+end
+
+function M.banner_create(rtb_id, options, cb_id)
+end
+
+function M.banner_refresh(rtb_id, cb_id)
+end
+
+function M.banner_destroy(rtb_id)
+end
+
+function M.banner_set(rtb_id, property, value)
+end
+
 return {
     enable = function()
         if not yagames_private then

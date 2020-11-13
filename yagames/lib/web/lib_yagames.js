@@ -3,6 +3,7 @@ var LibYaGamesPrivate = {
         _ysdk: null,
         _player: null,
         _payments: null,
+        _context: null,
 
         _callback_object: null,
         _callback_string: null,
@@ -24,6 +25,7 @@ var LibYaGamesPrivate = {
 
         send: function (cb_id, message_id, message) {
             if (YaGamesPrivate._callback_object) {
+                // 0 and 1 are reserved IDs
                 if (cb_id == 0 && message_id == "init") {
                     YaGamesPrivate._ysdk = message;
                     message = undefined;
@@ -235,7 +237,7 @@ var LibYaGamesPrivate = {
                 .then((purchases) => {
                     var tmp = {
                         purchases: [],
-                        signature: purchases.signature
+                        signature: purchases.signature,
                     };
                     for (var i = 0; i < purchases.length; i++) {
                         var p = purchases[i];
@@ -432,6 +434,131 @@ var LibYaGamesPrivate = {
         } catch (err) {
             self.delaySend(cb_id, self.toErrStr(err));
         }
+    },
+
+    YaGamesPrivate_Banner_Init: function (cb_id) {
+        var self = YaGamesPrivate;
+
+        (function (w, d, n, s, t) {
+            w[n] = w[n] || [];
+            w[n].push(function () {
+                self._context = {};
+                self.send(cb_id);
+            });
+            t = d.getElementsByTagName("script")[0];
+            s = d.createElement("script");
+            s.type = "text/javascript";
+            s.src = "//an.yandex.ru/system/context.js";
+            s.async = true;
+            s.onerror = () => {
+                self.send(cb_id, "Error loading SDK.");
+            };
+            t.parentNode.insertBefore(s, t);
+        })(window, window.document, "yandexContextAsyncCallbacks");
+    },
+
+    YaGamesPrivate_Banner_Create: function (crtb_id, coptions, cb_id) {
+        var self = YaGamesPrivate;
+        var rtbId = UTF8ToString(crtb_id);
+        var options = coptions === 0 ? {} : self.parseJson(UTF8ToString(coptions));
+
+        if (self._context[rtbId]) {
+            if (cb_id) self.send(cb_id, "Banner " + rtbId + " already exists");
+            return;
+        }
+
+        var banner = {
+            rtbId: rtbId,
+            domElement: document.createElement("div"),
+            domId: "yandex_rtb_" + rtbId,
+            statId: options.stat_id,
+        };
+        self._context[rtbId] = banner;
+
+        banner.domElement.id = banner.domId;
+        banner.domElement.style.position = "absolute";
+
+        if (options.css_styles) banner.domElement.style.cssText = options.css_styles;
+        if (options.css_class) banner.domElement.className = options.css_class;
+        if (options.display) banner.domElement.style.display = options.display;
+
+        document.body.appendChild(banner.domElement);
+
+        Ya.Context.AdvManager.render(
+            {
+                blockId: banner.rtbId,
+                renderTo: banner.domId,
+                statId: banner.statId,
+                async: true,
+                onRender: (data) => {
+                    if (cb_id) self.send(cb_id, null, JSON.stringify(data));
+                    cb_id = 0;
+                },
+            },
+            () => {
+                if (cb_id) self.send(cb_id, "No ads available.");
+                cb_id = 0;
+            }
+        );
+    },
+
+    YaGamesPrivate_Banner_Destroy: function (crtb_id) {
+        var self = YaGamesPrivate;
+        var rtbId = UTF8ToString(crtb_id);
+
+        if (!self._context[rtbId]) {
+            return;
+        }
+
+        var banner = self._context[rtbId];
+        delete self._context[rtbId];
+
+        banner.domElement.remove();
+    },
+
+    YaGamesPrivate_Banner_Refresh: function (crtb_id, cb_id) {
+        var self = YaGamesPrivate;
+        var rtbId = UTF8ToString(crtb_id);
+
+        if (!self._context[rtbId]) {
+            if (cb_id) self.send(cb_id, "Banner " + rtbId + " doesn't exist.");
+            return;
+        }
+
+        var banner = self._context[rtbId];
+        Ya.Context.AdvManager.render(
+            {
+                blockId: banner.rtbId,
+                renderTo: banner.domId,
+                statId: banner.statId,
+                async: true,
+                onRender: (data) => {
+                    if (cb_id) self.send(cb_id, null, JSON.stringify(data));
+                    cb_id = 0;
+                },
+            },
+            () => {
+                if (cb_id) self.send(cb_id, "No ads available.");
+                cb_id = 0;
+            }
+        );
+    },
+
+    YaGamesPrivate_Banner_Set: function (crtb_id, cproperty, cvalue) {
+        var self = YaGamesPrivate;
+        var rtbId = UTF8ToString(crtb_id);
+        if (!self._context[rtbId]) {
+            return;
+        }
+        var banner = self._context[rtbId];
+
+        var property = UTF8ToString(cproperty);
+        var value = UTF8ToString(cvalue);
+
+        if (property == "css_styles") banner.domElement.style.cssText = value;
+        else if (property == "css_class") banner.domElement.className = value;
+        else if (property == "display") banner.domElement.style.display = value;
+        else if (property == "stat_id") banner.statId = value;
     },
 };
 

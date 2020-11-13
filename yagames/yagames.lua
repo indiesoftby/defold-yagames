@@ -1,60 +1,17 @@
 --- YaGames - Yandex Games for Defold.
 -- @module yagames
-
 local rxi_json = require("yagames.helpers.json")
 local mock = require("yagames.helpers.mock")
+local helper = require("yagames.helpers.helper")
 
 local M = {
     ysdk_ready = false,
     payments_ready = false,
-    player_ready = false
+    player_ready = false,
+    banner_ready = false
 }
 
--- constants
-local GLOBAL_CALLBACK_ID = 0
-
---
 local init_callback = nil
-local cb_id_counter = 1
-
-local function next_cb_id()
-    local id = cb_id_counter
-    cb_id_counter = (cb_id_counter + 1) % 2147483647
-    if cb_id_counter == 0 then
-        cb_id_counter = cb_id_counter + 1
-    end
-    return id
-end
-
-local function wrap_for_callbacks(callbacks)
-    local cb_id = next_cb_id()
-    local listener
-    listener = function(self, _cb_id, message_id, message)
-        -- print("*** _CB_ID", _cb_id, " = CB_ID", cb_id, "MESSAGE_ID", message_id, "MESSAGE", message)
-        if message_id == "close" then
-            yagames_private.remove_listener(listener)
-        end
-
-        if callbacks[message_id] ~= nil then
-            callbacks[message_id](self, message)
-        end
-    end
-
-    yagames_private.add_listener(cb_id, listener)
-    return cb_id
-end
-
-local function wrap_for_promise(then_and_catch)
-    local cb_id = next_cb_id()
-    local listener
-    listener = function(self, _cb_id, message_id, message)
-        yagames_private.remove_listener(listener)
-        then_and_catch(self, message_id, message)
-    end
-
-    yagames_private.add_listener(cb_id, listener)
-    return cb_id
-end
 
 local function call_init_callback(self, err)
     if init_callback then
@@ -68,8 +25,8 @@ local function call_init_callback(self, err)
     end
 end
 
-local function global_listener(self, cb_id, message_id, message)
-    -- print("YaGames *** global_listener", cb_id, message_id, message)
+local function init_listener(self, cb_id, message_id, message)
+    -- print("YaGames *** init_listener", cb_id, message_id, message)
     if message_id == "init" then
         M.ysdk_ready = true
         call_init_callback(self)
@@ -78,7 +35,7 @@ local function global_listener(self, cb_id, message_id, message)
         call_init_callback(self, message)
     end
 
-    yagames_private.remove_listener(global_listener)
+    yagames_private.remove_listener(init_listener)
 end
 
 --- Инициализация SDK.
@@ -90,15 +47,16 @@ function M.init(callback)
         mock.enable()
     end
 
+    assert(type(callback) == "function")
+
     if M.ysdk_ready then
         print("YaGames is already initialized.")
+        helper.async_call(callback)
         return
     end
 
-    assert(type(callback) == "function")
     init_callback = callback
-
-    yagames_private.add_listener(GLOBAL_CALLBACK_ID, global_listener)
+    yagames_private.add_listener(helper.YSDK_INIT_ID, init_listener)
 end
 
 --- Вызывает полноэкранный блок рекламы.
@@ -107,7 +65,7 @@ function M.adv_show_fullscreen_adv(callbacks)
     assert(M.ysdk_ready, "YaGames is not initialized.")
     assert(type(callbacks) == "table", "'callbacks' should be a table")
 
-    yagames_private.show_fullscreen_adv(wrap_for_callbacks(callbacks))
+    yagames_private.show_fullscreen_adv(helper.wrap_for_callbacks(callbacks))
 end
 
 --- Вызывает видео с вознаграждением — блоки с видеорекламой, которые используются для монетизации игр.
@@ -117,7 +75,7 @@ function M.adv_show_rewarded_video(callbacks)
     assert(M.ysdk_ready, "YaGames is not initialized.")
     assert(type(callbacks) == "table", "'callbacks' should be a table")
 
-    yagames_private.show_rewarded_video(wrap_for_callbacks(callbacks))
+    yagames_private.show_rewarded_video(helper.wrap_for_callbacks(callbacks))
 end
 
 --- Вызывает окно авторизации.
@@ -125,7 +83,7 @@ end
 function M.auth_open_auth_dialog(callback)
     assert(type(callback) == "function")
 
-    yagames_private.open_auth_dialog(wrap_for_promise(callback))
+    yagames_private.open_auth_dialog(helper.wrap_for_promise(callback))
 end
 
 --- 
@@ -158,7 +116,7 @@ end
 function M.payments_init(options, callback)
     assert(type(callback) == "function")
 
-    yagames_private.get_payments(wrap_for_promise(function(self, err)
+    yagames_private.get_payments(helper.wrap_for_promise(function(self, err)
         M.payments_ready = not err
 
         callback(self, err)
@@ -174,7 +132,7 @@ function M.payments_purchase(options, callback)
     assert(type(callback) == "function")
     assert(type(options.id) == "string")
 
-    yagames_private.payments_purchase(wrap_for_promise(function(self, err, purchase)
+    yagames_private.payments_purchase(helper.wrap_for_promise(function(self, err, purchase)
         if purchase then
             purchase = rxi_json.decode(purchase)
         end
@@ -188,7 +146,7 @@ function M.payments_get_purchases(callback)
     assert(M.payments_ready, "Payments module is not initialized.")
     assert(type(callback) == "function")
 
-    yagames_private.payments_get_purchases(wrap_for_promise(function(self, err, purchases)
+    yagames_private.payments_get_purchases(helper.wrap_for_promise(function(self, err, purchases)
         if purchases then
             purchases = rxi_json.decode(purchases)
         end
@@ -202,7 +160,7 @@ function M.payments_get_catalog(callback)
     assert(M.payments_ready, "Payments module is not initialized.")
     assert(type(callback) == "function")
 
-    yagames_private.payments_get_catalog(wrap_for_promise(function(self, err, catalog)
+    yagames_private.payments_get_catalog(helper.wrap_for_promise(function(self, err, catalog)
         if catalog then
             catalog = rxi_json.decode(catalog)
         end
@@ -218,7 +176,7 @@ function M.payments_consume_purchase(purchase_token, callback)
     assert(type(purchase_token) == "string")
     assert(type(callback) == "function")
 
-    yagames_private.payments_consume_purchase(wrap_for_promise(callback), purchase_token)
+    yagames_private.payments_consume_purchase(helper.wrap_for_promise(callback), purchase_token)
 end
 
 --- При инициализации объекта игрока. Будет показано диалоговое окно с запросом на предоставление доступа к персональным данным.
@@ -229,7 +187,7 @@ end
 function M.player_init(options, callback)
     assert(type(callback) == "function")
 
-    yagames_private.get_player(wrap_for_promise(function(self, err)
+    yagames_private.get_player(helper.wrap_for_promise(function(self, err)
         -- Possible errors: "FetchError: Unauthorized"
         -- Possible errors: "TypeError: Failed to fetch"
         M.player_ready = not err
@@ -251,7 +209,7 @@ end
 function M.player_get_ids_per_game(callback)
     assert(type(callback) == "function")
 
-    yagames_private.player_get_ids_per_game(wrap_for_promise(
+    yagames_private.player_get_ids_per_game(helper.wrap_for_promise(
                                                 function(self, err, arr)
             if arr then
                 arr = rxi_json.decode(arr)
@@ -297,7 +255,7 @@ function M.player_set_data(data, flush, callback)
     assert(type(flush) == "boolean")
     assert(type(callback) == "function")
 
-    yagames_private.player_set_data(wrap_for_promise(callback), rxi_json.encode(data), flush)
+    yagames_private.player_set_data(helper.wrap_for_promise(callback), rxi_json.encode(data), flush)
 end
 
 --- Асинхронно возвращает внутриигровые данные пользователя, сохраненные в базе данных Яндекса.
@@ -305,7 +263,7 @@ function M.player_get_data(keys, callback)
     assert(M.player_ready, "Player is not initialized.")
     assert(type(callback) == "function")
 
-    yagames_private.player_get_data(wrap_for_promise(function(self, err, result)
+    yagames_private.player_get_data(helper.wrap_for_promise(function(self, err, result)
         if result then
             result = rxi_json.decode(result)
         end
@@ -319,7 +277,7 @@ function M.player_set_stats(stats, callback)
     assert(type(stats) == "table")
     assert(type(callback) == "function")
 
-    yagames_private.player_set_stats(wrap_for_promise(callback), rxi_json.encode(stats))
+    yagames_private.player_set_stats(helper.wrap_for_promise(callback), rxi_json.encode(stats))
 end
 
 --- Изменяет внутриигровые данные пользователя. Максимальный размер данных не должен превышать 10 КБ.
@@ -328,7 +286,7 @@ function M.player_increment_stats(increments, callback)
     assert(type(increments) == "table")
     assert(type(callback) == "function")
 
-    yagames_private.player_increment_stats(wrap_for_promise(function(self, err, result)
+    yagames_private.player_increment_stats(helper.wrap_for_promise(function(self, err, result)
         if result then
             result = rxi_json.decode(result)
         end
@@ -341,12 +299,70 @@ function M.player_get_stats(keys, callback)
     assert(M.player_ready, "Player is not initialized.")
     assert(type(callback) == "function")
 
-    yagames_private.player_get_stats(wrap_for_promise(function(self, err, result)
+    yagames_private.player_get_stats(helper.wrap_for_promise(function(self, err, result)
         if result then
             result = rxi_json.decode(result)
         end
         callback(self, err, result)
     end), keys and rxi_json.encode(keys) or nil)
+end
+
+-- @tparam function callback
+function M.banner_init(callback)
+    assert(type(callback) == "function")
+
+    yagames_private.banner_init(helper.wrap_for_promise(function(self, err)
+        if not err then
+            M.banner_ready = true
+        end
+
+        callback(self, err)
+    end))
+end
+
+function M.banner_create(rtb_id, options, callback)
+    assert(M.banner_ready, "Yandex Advertising Network SDK is not initialized.")
+    assert(type(rtb_id) == "string")
+    assert(type(options) == "table")
+    assert(type(callback) == "function")
+
+    yagames_private.banner_create(rtb_id, rxi_json.encode(options),
+        callback and helper.wrap_for_promise(function(self, err, data)
+            if not err then
+                data = rxi_json.decode(data)
+            end
+            callback(self, err, data)
+        end) or 0)
+end
+
+function M.banner_destroy(rtb_id)
+    assert(M.banner_ready, "Yandex Advertising Network SDK is not initialized.")
+    assert(type(rtb_id) == "string")
+
+    yagames_private.banner_destroy(rtb_id)
+end
+
+function M.banner_refresh(rtb_id, callback)
+    assert(M.banner_ready, "Yandex Advertising Network SDK is not initialized.")
+    assert(type(rtb_id) == "string")
+    assert(type(callback) == "function")
+
+    yagames_private.banner_refresh(rtb_id, 
+        callback and helper.wrap_for_promise(function(self, err, data)
+            if not err then
+                data = rxi_json.decode(data)
+            end
+            callback(self, err, data)
+        end) or 0)
+end
+
+function M.banner_set(rtb_id, property, value)
+    assert(M.banner_ready, "Yandex Advertising Network SDK is not initialized.")
+    assert(type(rtb_id) == "string")
+    assert(type(property) == "string")
+    assert(type(value) == "string")
+
+    yagames_private.banner_set(rtb_id, property, value)
 end
 
 return M

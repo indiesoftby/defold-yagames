@@ -2,21 +2,21 @@
     <head>
         <script type="text/javascript">
             (function (d) {
+                window.YaGamesPrivate_MsgQueue = [];
+                var send = function (cb_id, message_id, message) {
+                    if (typeof YaGamesPrivate !== "undefined") {
+                        YaGamesPrivate.send(cb_id, message_id, message);
+                    } else {
+                        YaGamesPrivate_MsgQueue.push([cb_id, message_id, message]);
+                    }
+                };
+
                 var t = d.getElementsByTagName("script")[0];
                 var s = d.createElement("script");
                 s.src = "https://yandex.ru/games/sdk/v2";
                 s.async = true;
                 t.parentNode.insertBefore(s, t);
                 s.onload = function () {
-                    window.YaGamesPrivate_MsgQueue = [];
-                    var send = function (cb_id, message_id, message) {
-                        if (typeof YaGamesPrivate !== "undefined") {
-                            YaGamesPrivate.send(cb_id, message_id, message);
-                        } else {
-                            YaGamesPrivate_MsgQueue.push([cb_id, message_id, message]);
-                        }
-                    };
-
                     var options;
                     // {{#yagames.sdk_init_options}}
                     options = {{{yagames.sdk_init_options}}};
@@ -29,6 +29,9 @@
                         .catch(function (err) {
                             send(0, "error", err + "");
                         });
+                };
+                s.onerror = function () {
+                    send(0, "error", "Error loading SDK. Reload the page.");
                 };
             })(document);
         </script>

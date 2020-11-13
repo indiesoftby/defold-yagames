@@ -19,9 +19,9 @@ images {
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/builtins/assets/images/logo/logo_256.png"
+  image: "/cover.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 margin: 0
-extrude_borders: 2
+extrude_borders: 0
 inner_padding: 2

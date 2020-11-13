@@ -239,11 +239,11 @@ The `callback` function is expected to accept the following values:
 * __error__ <kbd>string</kbd> - Error code if something went wrong.
 
 ### yagames.banner_create(rtb_id, options, [callback])
-Creates `<div></div>` with `style="position: absolute"`, applies your CSS styles on it and renders an advertisement into the div.
+Creates a DOM element (`<div></div>`) with `style="position: absolute"`, applies your CSS styles on it and renders an advertisement into the element.
 
 _PARAMETERS_
-* __rtb_id__ <kbd>string</kbd> - A unique RTB block ID. A block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
-* __options__ <kbd>table</kbd> - ???.
+* __rtb_id__ <kbd>string</kbd> - The unique RTB block ID. The block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
+* __options__ <kbd>table</kbd> - The table with key-value pairs.
 * __callback__ <kbd>function</kbd> - The callback function that is invoked after ad rendering.
 
 The `options` table can have these key-value pairs:
@@ -261,16 +261,16 @@ The `callback` function allows you to obtain information about whether the ad ha
 If there were no suitable product listings at the auction to show your ad next to, then you can show your ad in the block. In this situation the `callback` function returns the error `No ads available.`.
 
 ### yagames.banner_delete(rtb_id)
-???.
+Removes the DOM element.
 
 _PARAMETERS_
-* __rtb_id__ <kbd>string</kbd> - A unique RTB block ID. A block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
+* __rtb_id__ <kbd>string</kbd> - The unique RTB block ID. The block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
 
 ### yagames.banner_refresh(rtb_id, [callback])
-???.
+Requests SDK to render new advertisement.
 
 _PARAMETERS_
-* __rtb_id__ <kbd>string</kbd> - A unique RTB block ID. A block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
+* __rtb_id__ <kbd>string</kbd> - The unique RTB block ID. The block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
 * __callback__ <kbd>function</kbd> - The callback function that is invoked after ad rendering.
 
 The `callback` function is described in the `yagames.banner_create` section above.
@@ -279,7 +279,7 @@ The `callback` function is described in the `yagames.banner_create` section abov
 Sets a named property of the specified banner.
 
 _PARAMETERS_
-* __rtb_id__ <kbd>string</kbd> - A unique RTB block ID. A block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
+* __rtb_id__ <kbd>string</kbd> - The unique RTB block ID. The block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
 * __property__ <kbd>string</kbd> - Name of the property to set.
 * __value__ <kbd>string</kbd> - The value to set.
 

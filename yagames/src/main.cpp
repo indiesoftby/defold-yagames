@@ -46,7 +46,7 @@ extern "C"
     void YaGamesPrivate_Banner_Create(const char* crtb_id, const char* coptions, const int cb_id);
     void YaGamesPrivate_Banner_Destroy(const char* crtb_id);
     void YaGamesPrivate_Banner_Refresh(const char* crtb_id, const int cb_id);
-    void YaGamesPrivate_Banner_SetBannerProp(const char* crtb_id, const char* cproperty, const char* cvalue);
+    void YaGamesPrivate_Banner_Set(const char* crtb_id, const char* cproperty, const char* cvalue);
 }
 
 struct YaGamesPrivateListener
@@ -628,10 +628,10 @@ static const luaL_reg Module_methods[] = {
     { "player_get_stats", Player_GetStats },
     // - Banner Ads
     { "banner_init", Banner_Init },
-    { "banner_create", Banner_CreateBanner },
-    { "banner_destroy", Banner_DestroyBanner },
-    { "banner_refresh", Banner_RefreshBanner },
-    { "banner_set", Banner_SetBannerProp },
+    { "banner_create", Banner_Create },
+    { "banner_destroy", Banner_Destroy },
+    { "banner_refresh", Banner_Refresh },
+    { "banner_set", Banner_Set },
     { 0, 0 }
 };
 

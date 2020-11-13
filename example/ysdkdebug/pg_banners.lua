@@ -1,5 +1,7 @@
 local druid = require("druid.druid")
 local druid_style = require("example.ysdkdebug.druid_style")
+local rxi_json = require("yagames.helpers.json")
+
 local yagames = require("yagames.yagames")
 
 local log_print = require("example.ysdkdebug.log_print")
@@ -23,13 +25,13 @@ function M.create_handler(self)
     yagames.banner_create(rtb_id, {
         css_styles = "position: absolute; width: 336px; height: 280px; position: absolute; top: 100vh; margin-top: -350px; background: #d2d2d2; left: 50vw; margin-left: -168px;"
     }, function(self, err, data)
-        print("yagames.banner_create:", err or data)
+        print("yagames.banner_create:", err or rxi_json.encode(data))
     end)
 end
 
 function M.refresh_handler(self)
     yagames.banner_refresh(rtb_id, function(self, err, data)
-        print("yagames.banner_refresh:", err or data)
+        print("yagames.banner_refresh:", err or rxi_json.encode(data))
     end)
 end
 

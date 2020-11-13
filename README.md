@@ -1,8 +1,10 @@
 [![YaGames Logo](cover.png)](https://github.com/indiesoftby/defold-yagames)
 
-# YaGames - Yandex.Games for Defold (WORK IN PROGRESS)
+# YaGames - Yandex.Games for Defold
 
 *This is an open-source project. It is not affiliated with Yandex LLC.*
+
+**English edition of the documentation is not ready yet!**
 
 YaGames is the Yandex.Games extension for the [Defold](https://www.defold.com/) game engine. [Yandex.Games](https://yandex.com/games/) is a collection of browser games for smartphones and computers. The games are available in Yandex Browser and the Yandex app. Games from the catalog are displayed in Yandex recommendation systems, which have a total audience of more than 50 million users per month.
 
@@ -16,17 +18,9 @@ https://github.com/indiesoftby/defold-yagames/archive/master.zip
 
 Or point to the ZIP file of a [specific release](https://github.com/indiesoftby/defold-yagames/releases).
 
-**English edition of the documentation is not ready yet!**
+## Getting Started
 
-# *На русском*
-
-*Это проект с открытым исходным кодом. Он никак не аффилирован с компанией Яндекс.*
-
-YaGames - это реализация SDK Яндекс.Игр для движка [Defold](https://www.defold.com/). [Яндекс.Игры](https://yandex.com/games/) - коллекция браузерных игр для смартфонов и компьютеров. Игры доступны через Яндекс.Браузер и приложение Яндекс на смартфонах.
-
-## Быстрый старт
-
-* [Официальная документация](https://yandex.ru/dev/games/doc/dg/concepts/about.html).
+* [The official documentation](https://yandex.ru/dev/games/doc/dg/concepts/about.html).
 * [Telegram-чат Яндекс.Игр](https://t.me/yagamedev), где присутствуют официальные представители и модераторы.
 * [Telegram-чат Defold Engine](https://t.me/DefoldEngine), где можно задать вопросы об этом расширении.
 

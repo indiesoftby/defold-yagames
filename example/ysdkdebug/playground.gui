@@ -4064,7 +4064,7 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: "common/empty"
-  id: "group_context"
+  id: "group_banner"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
@@ -4117,9 +4117,9 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "Context Ad:"
+  text: "Banner Ads:"
   font: "font2"
-  id: "title_group_context"
+  id: "title_group_banners"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
@@ -4137,7 +4137,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "group_context"
+  parent: "group_banner"
   layer: "font2"
   inherit_alpha: true
   alpha: 1.0
@@ -4179,8 +4179,8 @@ nodes {
     w: 1.0
   }
   type: TYPE_TEMPLATE
-  id: "button_context_create"
-  parent: "group_context"
+  id: "button_banner_create"
+  parent: "group_banner"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
@@ -4221,12 +4221,12 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: "common/button"
-  id: "button_context_create/body"
+  id: "button_banner_create/body"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  parent: "button_context_create"
+  parent: "button_banner_create"
   layer: "common"
   inherit_alpha: true
   slice9 {
@@ -4277,7 +4277,7 @@ nodes {
   blend_mode: BLEND_MODE_ALPHA
   text: "Create"
   font: "font2"
-  id: "button_context_create/text"
+  id: "button_banner_create/text"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -4295,7 +4295,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "button_context_create/body"
+  parent: "button_banner_create/body"
   layer: "font2"
   inherit_alpha: true
   alpha: 1.0
@@ -4338,8 +4338,8 @@ nodes {
     w: 1.0
   }
   type: TYPE_TEMPLATE
-  id: "button_context_refresh"
-  parent: "group_context"
+  id: "button_banner_refresh"
+  parent: "group_banner"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
@@ -4380,12 +4380,12 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: "common/button"
-  id: "button_context_refresh/body"
+  id: "button_banner_refresh/body"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  parent: "button_context_refresh"
+  parent: "button_banner_refresh"
   layer: "common"
   inherit_alpha: true
   slice9 {
@@ -4436,7 +4436,7 @@ nodes {
   blend_mode: BLEND_MODE_ALPHA
   text: "Refresh"
   font: "font2"
-  id: "button_context_refresh/text"
+  id: "button_banner_refresh/text"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -4454,7 +4454,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "button_context_refresh/body"
+  parent: "button_banner_refresh/body"
   layer: "font2"
   inherit_alpha: true
   alpha: 1.0
@@ -4497,8 +4497,8 @@ nodes {
     w: 1.0
   }
   type: TYPE_TEMPLATE
-  id: "button_context_destroy"
-  parent: "group_context"
+  id: "button_banner_destroy"
+  parent: "group_banner"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
@@ -4539,12 +4539,12 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: "common/button"
-  id: "button_context_destroy/body"
+  id: "button_banner_destroy/body"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  parent: "button_context_destroy"
+  parent: "button_banner_destroy"
   layer: "common"
   inherit_alpha: true
   slice9 {
@@ -4595,7 +4595,7 @@ nodes {
   blend_mode: BLEND_MODE_ALPHA
   text: "Destroy"
   font: "font2"
-  id: "button_context_destroy/text"
+  id: "button_banner_destroy/text"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -4613,7 +4613,166 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "button_context_destroy/body"
+  parent: "button_banner_destroy/body"
+  layer: "font2"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  overridden_fields: 8
+  template_node_child: true
+  text_leading: 1.0
+  text_tracking: 0.0
+}
+nodes {
+  position {
+    x: 245.0
+    y: -175.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_banner_toggle"
+  parent: "group_banner"
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  template: "/example/ysdkdebug/button_sm.gui"
+  template_node_child: false
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 150.0
+    y: 70.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "common/button"
+  id: "button_banner_toggle/body"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "button_banner_toggle"
+  layer: "common"
+  inherit_alpha: true
+  slice9 {
+    x: 24.0
+    y: 24.0
+    z: 24.0
+    w: 24.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: true
+  size_mode: SIZE_MODE_MANUAL
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 130.0
+    y: 70.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Hide / Show"
+  font: "font2"
+  id: "button_banner_toggle/text"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  shadow {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "button_banner_toggle/body"
   layer: "font2"
   inherit_alpha: true
   alpha: 1.0

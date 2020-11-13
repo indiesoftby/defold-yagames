@@ -436,7 +436,7 @@ var LibYaGamesPrivate = {
         }
     },
 
-    YaGamesPrivate_Context_Init: function (cb_id) {
+    YaGamesPrivate_Banner_Init: function (cb_id) {
         var self = YaGamesPrivate;
 
         (function (w, d, n, s, t) {
@@ -450,11 +450,14 @@ var LibYaGamesPrivate = {
             s.type = "text/javascript";
             s.src = "//an.yandex.ru/system/context.js";
             s.async = true;
+            s.onerror = () => {
+                self.send(cb_id, "Error loading SDK.");
+            };
             t.parentNode.insertBefore(s, t);
         })(window, window.document, "yandexContextAsyncCallbacks");
     },
 
-    YaGamesPrivate_Context_CreateBanner: function (crtb_id, coptions, cb_id) {
+    YaGamesPrivate_Banner_Create: function (crtb_id, coptions, cb_id) {
         var self = YaGamesPrivate;
         var rtbId = UTF8ToString(crtb_id);
         var options = coptions === 0 ? {} : self.parseJson(UTF8ToString(coptions));
@@ -476,12 +479,8 @@ var LibYaGamesPrivate = {
         banner.domElement.style.position = "absolute";
 
         if (options.css_styles) banner.domElement.style.cssText = options.css_styles;
+        if (options.css_class) banner.domElement.className = options.css_class;
         if (options.display) banner.domElement.style.display = options.display;
-        // if (options.width) banner.domElement.style.width = options.width;
-        // if (options.height) banner.domElement.style.height = options.height;
-        // if (options.position) {
-        //     banner.domElement
-        // }
 
         document.body.appendChild(banner.domElement);
 
@@ -492,16 +491,18 @@ var LibYaGamesPrivate = {
                 statId: banner.statId,
                 async: true,
                 onRender: (data) => {
+                    console.log("on render", rtbId);
                     if (cb_id) self.send(cb_id, null, JSON.stringify(data));
                 },
             },
             () => {
+                console.log("on fallback", rtbId);
                 if (cb_id) self.send(cb_id, "No ads available.");
             }
         );
     },
 
-    YaGamesPrivate_Context_DestroyBanner: function (crtb_id) {
+    YaGamesPrivate_Banner_Destroy: function (crtb_id) {
         var self = YaGamesPrivate;
         var rtbId = UTF8ToString(crtb_id);
 
@@ -515,7 +516,7 @@ var LibYaGamesPrivate = {
         banner.domElement.remove();
     },
 
-    YaGamesPrivate_Context_RefreshBanner: function (crtb_id, cb_id) {
+    YaGamesPrivate_Banner_Refresh: function (crtb_id, cb_id) {
         var self = YaGamesPrivate;
         var rtbId = UTF8ToString(crtb_id);
 
@@ -532,26 +533,32 @@ var LibYaGamesPrivate = {
                 statId: banner.statId,
                 async: true,
                 onRender: (data) => {
+                    console.log("(refresh) on render", rtbId);
                     if (cb_id) self.send(cb_id, null, JSON.stringify(data));
                 },
             },
             () => {
+                console.log("(refresh) on fallback", rtbId);
                 if (cb_id) self.send(cb_id, "No ads available.");
             }
         );
     },
 
-    YaGamesPrivate_Context_SetBannerPropVector3: function (crtb_id, cproperty, x, y, z) {
+    YaGamesPrivate_Banner_Set: function (crtb_id, cproperty, cvalue) {
         var self = YaGamesPrivate;
         var rtbId = UTF8ToString(crtb_id);
-        var property = UTF8ToString(cproperty);
-    },
+        if (!self._context[rtbId]) {
+            return;
+        }
+        var banner = self._context[rtbId];
 
-    YaGamesPrivate_Context_SetBannerPropString: function (crtb_id, cproperty, cvalue) {
-        var self = YaGamesPrivate;
-        var rtbId = UTF8ToString(crtb_id);
         var property = UTF8ToString(cproperty);
         var value = UTF8ToString(cvalue);
+
+        if (property == "css_styles") banner.domElement.style.cssText = value;
+        else if (property == "css_class") banner.domElement.className = value;
+        else if (property == "display") banner.domElement.style.display = value;
+        else if (property == "stat_id") banner.statId = value;
     },
 };
 

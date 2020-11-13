@@ -42,12 +42,11 @@ extern "C"
     void YaGamesPrivate_Player_SetStats(const int cb_id, const char* cstats);
     void YaGamesPrivate_Player_IncrementStats(const int cb_id, const char* cincrements);
     void YaGamesPrivate_Player_GetStats(const int cb_id, const char* ckeys);
-    void YaGamesPrivate_Context_Init(const int cb_id);
-    void YaGamesPrivate_Context_CreateBanner(const char* crtb_id, const char* coptions, const int cb_id);
-    void YaGamesPrivate_Context_DestroyBanner(const char* crtb_id);
-    void YaGamesPrivate_Context_RefreshBanner(const char* crtb_id, const int cb_id);
-    void YaGamesPrivate_Context_SetBannerPropVector3(const char* crtb_id, const char* cproperty, const float x, const float y, const float z);
-    void YaGamesPrivate_Context_SetBannerPropString(const char* crtb_id, const char* cproperty, const char* cvalue);
+    void YaGamesPrivate_Banner_Init(const int cb_id);
+    void YaGamesPrivate_Banner_Create(const char* crtb_id, const char* coptions, const int cb_id);
+    void YaGamesPrivate_Banner_Destroy(const char* crtb_id);
+    void YaGamesPrivate_Banner_Refresh(const char* crtb_id, const int cb_id);
+    void YaGamesPrivate_Banner_SetBannerProp(const char* crtb_id, const char* cproperty, const char* cvalue);
 }
 
 struct YaGamesPrivateListener
@@ -559,43 +558,36 @@ static int Player_GetStats(lua_State* L)
 }
 
 //
+// Banner Ads API
 //
-//
 
-static int Context_Init(lua_State* L)
+static int Banner_Init(lua_State* L)
 {
-    YaGamesPrivate_Context_Init(luaL_checkint(L, 1));
+    YaGamesPrivate_Banner_Init(luaL_checkint(L, 1));
     return 0;
 }
 
-static int Context_CreateBanner(lua_State* L)
+static int Banner_Create(lua_State* L)
 {
-    YaGamesPrivate_Context_CreateBanner(luaL_checkstring(L, 1), luaL_checkstring(L, 2), luaL_checkint(L, 3));
+    YaGamesPrivate_Banner_Create(luaL_checkstring(L, 1), luaL_checkstring(L, 2), luaL_checkint(L, 3));
     return 0;
 }
 
-static int Context_DestroyBanner(lua_State* L)
+static int Banner_Destroy(lua_State* L)
 {
-    YaGamesPrivate_Context_DestroyBanner(luaL_checkstring(L, 1));
+    YaGamesPrivate_Banner_Destroy(luaL_checkstring(L, 1));
     return 0;
 }
 
-static int Context_RefreshBanner(lua_State* L)
+static int Banner_Refresh(lua_State* L)
 {
-    YaGamesPrivate_Context_RefreshBanner(luaL_checkstring(L, 1), luaL_checkint(L, 2));
+    YaGamesPrivate_Banner_Refresh(luaL_checkstring(L, 1), luaL_checkint(L, 2));
     return 0;
 }
 
-static int Context_SetBannerProp(lua_State* L)
+static int Banner_Set(lua_State* L)
 {
-    if (dmScript::IsVector3(L, 3))
-    {
-        Vectormath::Aos::Vector3* v = dmScript::ToVector3(L, 3);
-        YaGamesPrivate_Context_SetBannerPropVector3(luaL_checkstring(L, 1), luaL_checkstring(L, 2), v->getX(), v->getY(), v->getZ());
-        return 0;
-    }
-
-    YaGamesPrivate_Context_SetBannerPropString(luaL_checkstring(L, 1), luaL_checkstring(L, 2), luaL_checkstring(L, 3));
+    YaGamesPrivate_Banner_Set(luaL_checkstring(L, 1), luaL_checkstring(L, 2), luaL_checkstring(L, 3));
     return 0;
 }
 
@@ -634,12 +626,12 @@ static const luaL_reg Module_methods[] = {
     { "player_set_stats", Player_SetStats },
     { "player_increment_stats", Player_IncrementStats },
     { "player_get_stats", Player_GetStats },
-    // - Context
-    { "context_init", Context_Init },
-    { "context_create_banner", Context_CreateBanner },
-    { "context_destroy_banner", Context_DestroyBanner },
-    { "context_refresh_banner", Context_RefreshBanner },
-    { "context_set_banner_prop", Context_SetBannerProp },
+    // - Banner Ads
+    { "banner_init", Banner_Init },
+    { "banner_create", Banner_CreateBanner },
+    { "banner_destroy", Banner_DestroyBanner },
+    { "banner_refresh", Banner_RefreshBanner },
+    { "banner_set", Banner_SetBannerProp },
     { 0, 0 }
 };
 

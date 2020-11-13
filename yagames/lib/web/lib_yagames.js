@@ -519,7 +519,7 @@ var LibYaGamesPrivate = {
         var rtbId = UTF8ToString(crtb_id);
 
         if (!self._context[rtbId]) {
-            if (cb_id) self.send(cb_id, "Banner " + rtbId + " doesn't exist");
+            if (cb_id) self.send(cb_id, "Banner " + rtbId + " doesn't exist.");
             return;
         }
 

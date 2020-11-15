@@ -45,7 +45,7 @@ Or point to the ZIP file of a [specific release](https://github.com/indiesoftby/
 ### Best Practices
 
 1. The YaGames extension imitates a real API on *non-HTML5* platforms. The idea is to allow to you quickly implement API on your favourite platform (macOS, Windows, Linux) and don't spend time on slowly rebuilding/uploading the game to the Yandex.
-2. The code from `yagames/manifests/web/engine_template.html` is always added to your HTML5 template. This behaviour can't be disabled. Tip: make supporting branches for every platform and do not mix specific code between them.
+2. The code from `yagames/manifests/web/engine_template.html` is always added to your HTML5 template. This behaviour can't be disabled. Tip: make supporting Git branches for every platform and do not mix specific code between them.
 
 ## Code Examples
 
@@ -81,6 +81,8 @@ Interstitial ads are ad blocks that completely cover the app background and show
 * `close` - Called when an ad is closed, an error occurred, or on ad failed to open due to too frequent calls. Used with the `was_shown` argument (type `boolean`), the value of which indicates whether an ad was shown.
 * `offline` - Called when the network connection is lost (when offline mode is enabled).
 * `error` - Called when an error occurrs. The error object is passed to the callback function.
+
+The `close` callback is called in any situations, even if there was an error.
 
 ```lua
 local yagames = require("yagames.yagames")

@@ -23,7 +23,7 @@ Or point to the ZIP file of a [specific release](https://github.com/indiesoftby/
 
 ### Checklist For Releasing Game
 
-1. [Register as a developer](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en).
+1. [Sign up as a developer](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en).
 2. Translate your game to the Russian language.
 3. Prepare assets for the catalogue:
     1. Icon 512 x 512 px.

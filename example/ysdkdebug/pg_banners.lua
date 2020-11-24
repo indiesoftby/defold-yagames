@@ -13,6 +13,8 @@ local rtb_id = "R-A-663806-4"
 local display_status = "block"
 
 function M.init_handler(self, err)
+    print("yagames.banner_init:", err or "OK")
+
     if not err then
         self.button_banner_create:set_enabled(true)
         self.button_banner_refresh:set_enabled(true)

@@ -37,25 +37,25 @@ var LibYaGamesPrivate = {
                 }
                 switch (typeof message) {
                     case "undefined":
-                        dynCall("vii", YaGamesPrivate._callback_empty, [cb_id, cmsg_id]);
+                        {{{ makeDynCall("vii", "YaGamesPrivate._callback_empty") }}}(cb_id, cmsg_id);
                         break;
                     case "number":
-                        dynCall("viif", YaGamesPrivate._callback_number, [cb_id, cmsg_id, message]);
+                        {{{ makeDynCall("viif", "YaGamesPrivate._callback_number") }}}(cb_id, cmsg_id, message);
                         break;
                     case "string":
                         var msg = allocate(intArrayFromString(message), "i8", ALLOC_NORMAL);
-                        dynCall("viii", YaGamesPrivate._callback_string, [cb_id, cmsg_id, msg]);
+                        {{{ makeDynCall("viii", "YaGamesPrivate._callback_string") }}}(cb_id, cmsg_id, msg);
                         Module._free(msg);
                         break;
                     case "object":
                         var msg = JSON.stringify(message);
                         msg = allocate(intArrayFromString(msg), "i8", ALLOC_NORMAL);
-                        dynCall("viii", YaGamesPrivate._callback_object, [cb_id, cmsg_id, msg]);
+                        {{{ makeDynCall("viii", "YaGamesPrivate._callback_object") }}}(cb_id, cmsg_id, msg);
                         Module._free(msg);
                         break;
                     case "boolean":
                         var msg = message ? 1 : 0;
-                        dynCall("viii", YaGamesPrivate._callback_bool, [cb_id, cmsg_id, msg]);
+                        {{{ makeDynCall("viii", "YaGamesPrivate._callback_bool") }}}(cb_id, cmsg_id, msg);
                         break;
                     default:
                         console.warn("Unsupported message format: " + typeof message);

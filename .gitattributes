@@ -32,14 +32,22 @@
 *.buffer linguist-language=JSON gitlab-language=json
 
 # Defold GLSL Shaders
-*.fp linguist-language=GLSL gitlab-language=glsl
-*.vp linguist-language=GLSL gitlab-language=glsl
+*.fp text eol=lf linguist-language=GLSL gitlab-language=glsl
+*.vp text eol=lf linguist-language=GLSL gitlab-language=glsl
 
 # Defold Lua Files
-*.editor_script linguist-language=Lua gitlab-language=lua
-*.render_script linguist-language=Lua gitlab-language=lua
-*.script linguist-language=Lua gitlab-language=lua
-*.gui_script linguist-language=Lua gitlab-language=lua
+*.editor_script text eol=lf linguist-language=Lua gitlab-language=lua
+*.render_script text eol=lf linguist-language=Lua gitlab-language=lua
+*.script text eol=lf linguist-language=Lua gitlab-language=lua
+*.gui_script text eol=lf linguist-language=Lua gitlab-language=lua
 
 # Defold Project Settings
 *.project linguist-language=INI gitlab-language=ini
+
+# EOL Settings
+*.cpp text eol=lf
+*.html text eol=lf
+*.json text eol=lf
+*.lua text eol=lf
+*.md text eol=lf
+*.yml text eol=lf

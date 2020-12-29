@@ -16,6 +16,8 @@ https://github.com/indiesoftby/defold-yagames/archive/master.zip
 
 Or point to the ZIP file of a [specific release](https://github.com/indiesoftby/defold-yagames/releases).
 
+**Note:** Use [version 0.2.0](https://github.com/indiesoftby/defold-yagames/archive/0.2.0.zip) for the old Defold 1.2.177 or lower.
+
 ## Getting Started
 
 * [The official documentation](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en).

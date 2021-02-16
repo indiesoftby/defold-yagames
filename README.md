@@ -37,12 +37,16 @@ Or point to the ZIP file of a [specific release](https://github.com/indiesoftby/
     2. Rewarded videos - blocks with video ads that the user can choose to view and earn a reward or in-game currency. *Important: Mute sounds before showing the ad.*
     3. RTB ad blocks (banners) - display both contextual (content-based) ads and media ads.
     4. In-game purchases - earn revenue by providing paid services to your users.
-6. Enable Service Worker support - browser games should run both offline and online, however unstable or slow the web connection might be. To meet these criteria, integrate Service Worker into your game.
+6. *(Optional)* Enable [Native Cache](https://yandex.ru/dev/games/doc/dg/concepts/native-cache-settings.html?lang=en) support.
+    1. Set the path to the file `yandex-manifest.json` in the `game.project` settings.
+    2. Copy the `yagames/manifests/web/yandex-manifest.json` file to the root directory of your release build.
+    3. Edit the list of all game files inside your `yandex-manifest.json`, and update the path to the icon. Omit `sw.js` and `yandex-manifest.json`.
+7. *(Optional)* Enable Service Worker support - browser games should run both offline and online, however unstable or slow the web connection might be. To meet these criteria, integrate Service Worker into your game.
     1. Set the path to the file `sw.js` in the `game.project` settings.
     2. Copy the `yagames/manifests/web/sw.js` file to the root directory of your release build.
-    2. Edit the list of all game files inside your `sw.js`. Omit `sw.js` itself.
-    3. You should increment the version inside `sw.js` on every update of your game on Yandex.Games.
-7. Publish your game [on the Yandex.Games catalogue](https://games.yandex.ru/console/).
+    3. Edit the list of all game files inside your `sw.js`. Omit `sw.js` and `yandex-manifest.json`.
+    4. You should increment the version inside `sw.js` on every update of your game on Yandex.Games.
+8. Publish your game [in the Yandex.Games catalogue](https://games.yandex.ru/console/).
 
 ### Best Practices
 
@@ -165,10 +169,12 @@ end
 [yagames]
 sdk_init_options = {}
 service_worker_url = sw.js
+manifest_url = yandex-manifest.json
 ```
 
 * `sdk_init_options` - The JavaScript code. The Yandex Games SDK initialization options for [the `YaGames.init`](https://yandex.ru/dev/games/doc/dg/sdk/sdk-about.html). Example: `{ orientation: { value: "landscape", lock: true } }`.
 * `service_worker_url` - Relative URL to the Service Worker file. Usually it's `sw.js`. Set the URL to enable Service Worker.
+* `manifest_url` - URL to the Web App Manifest file. Set the URL to enable support of Yandex Native Cache.
 
 ## Lua API
 

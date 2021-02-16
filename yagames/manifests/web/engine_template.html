@@ -1,5 +1,8 @@
 <html>
     <head>
+        <!-- {{#yagames.manifest_url}} -->
+        <link rel="manifest" href="{{yagames.manifest_url}}" />
+        <!-- {{/yagames.manifest_url}} -->
         <script type="text/javascript">
             (function (d) {
                 window.YaGamesPrivate_MsgQueue = [];
@@ -24,6 +27,23 @@
 
                     YaGames.init(options)
                         .then(function (ysdk) {
+                            // {{#yagames.service_worker_url}}
+                            var isNativeCache = false;
+                            // {{#yagames.manifest_url}}
+                            isNativeCache = ysdk.yandexApp && ysdk.yandexApp.enabled;
+                            // {{/yagames.manifest_url}}
+                            if ("serviceWorker" in navigator && !isNativeCache) {
+                                navigator.serviceWorker.register("{{yagames.service_worker_url}}").then(
+                                    function (registration) {
+                                        console.log("YaGames: Service Worker registration successful with scope", registration.scope);
+                                    },
+                                    function (err) {
+                                        console.log("YaGames: Service Worker registration failed", err);
+                                    }
+                                );
+                            }
+                            // {{/yagames.service_worker_url}}
+
                             send(0, "init", ysdk);
                         })
                         .catch(function (err) {
@@ -36,20 +56,4 @@
             })(document);
         </script>
     </head>
-    <body>
-        <script type="text/javascript">
-            // {{#yagames.service_worker_url}}
-            if ("serviceWorker" in navigator) {
-                navigator.serviceWorker.register("{{yagames.service_worker_url}}").then(
-                    function (registration) {
-                        console.log("YaGames: Service Worker registration successful with scope", registration.scope);
-                    },
-                    function (err) {
-                        console.log("YaGames: Service Worker registration failed", err);
-                    }
-                );
-            }
-            // {{/yagames.service_worker_url}}
-        </script>
-    </body>
 </html>

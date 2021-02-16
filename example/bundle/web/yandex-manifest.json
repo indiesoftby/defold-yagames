@@ -1,0 +1,27 @@
+{
+    "icons": [
+        {
+            "src": "icon/splash.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ],
+    "yandex": {
+        "splash_screen_color": "#FFFFFF",
+        "cache": {
+            "resources": [
+                "index.html",
+                "dmloader.js",
+                "yagames.wasm",
+                "yagames_wasm.js",
+                "yagames_asmjs.js",
+                "archive/archive_files.json",
+                "archive/game.arcd0",
+                "archive/game.arci0",
+                "archive/game.dmanifest0",
+                "archive/game.projectc0",
+                "archive/game.public.der0"
+            ]
+        }
+    }
+}

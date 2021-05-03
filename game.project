@@ -5,17 +5,19 @@ main_collection = /example/main.collectionc
 shared_state = 1
 
 [display]
-width = 1000
+width = 1100
 height = 1500
 high_dpi = 1
 vsync = 0
 
 [project]
 title = yagames
-version = 0.3.0
-dependencies = https://github.com/subsoap/defos/archive/v2.4.2.zip,https://github.com/Insality/druid/archive/0.5.0.zip,https://github.com/britzl/ludobits/archive/6.9.0.zip
+version = 0.4.0
 publisher = Indiesoft LLC
 bundle_resources = example/bundle/
+dependencies#0 = https://github.com/subsoap/defos/archive/v2.4.2.zip
+dependencies#1 = https://github.com/Insality/druid/archive/0.5.0.zip
+dependencies#2 = https://github.com/britzl/ludobits/archive/6.9.0.zip
 
 [library]
 include_dirs = yagames

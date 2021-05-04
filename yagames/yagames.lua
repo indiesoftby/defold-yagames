@@ -6,6 +6,7 @@ local helper = require("yagames.helpers.helper")
 
 local M = {
     ysdk_ready = false,
+    leaderboards_ready = false,
     payments_ready = false,
     player_ready = false,
     banner_ready = false
@@ -110,6 +111,83 @@ function M.device_info_is_tablet()
     return yagames_private.device_info_is_tablet()
 end
 
+--- Initialize the leaderboards subsystem
+-- @tparam {signed=boolean} options
+-- @tparam function callback
+function M.leaderboards_init(callback)
+    assert(type(callback) == "function", "Callback function is required")
+
+    yagames_private.get_leaderboards(helper.wrap_for_promise(function(self, err)
+        M.leaderboards_ready = not err
+
+        callback(self, err)
+    end))
+end
+
+---
+-- @tparam string leaderboard_name
+-- @tparam function callback
+function M.leaderboards_get_description(leaderboard_name, callback)
+    assert(M.leaderboards_ready, "Leaderboards subsystem is not initialized.")
+    assert(type(leaderboard_name) == "string", "Leaderboard name should be 'string'")
+    assert(type(callback) == "function", "Callback function is required")
+
+    yagames_private.leaderboards_get_description(helper.wrap_for_promise(function(self, err, result)
+        if result then
+            result = rxi_json.decode(result)
+        end
+        callback(self, err, result)
+    end), leaderboard_name)
+end
+
+---
+-- @tparam string leaderboard_name
+-- @tparam function callback
+function M.leaderboards_get_player_entry(leaderboard_name, callback)
+    assert(M.leaderboards_ready, "Leaderboards subsystem is not initialized.")
+    assert(type(leaderboard_name) == "string", "Leaderboard name should be 'string'")
+    assert(type(callback) == "function", "Callback function is required")
+
+    yagames_private.leaderboards_get_player_entry(helper.wrap_for_promise(function(self, err, result)
+        if result then
+            result = rxi_json.decode(result)
+        end
+        callback(self, err, result)
+    end), leaderboard_name)
+end
+
+---
+-- @tparam string leaderboard_name
+-- @tparam {includeUser=boolean,quantityAround=integer,quantityTop=integer} options
+-- @tparam function callback
+function M.leaderboards_get_entries(leaderboard_name, options, callback)
+    assert(M.leaderboards_ready, "Leaderboards subsystem is not initialized.")
+    assert(type(leaderboard_name) == "string", "Leaderboard name should be 'string'")
+    assert(type(options) == "nil" or type(options) == "table", "Options should be 'table'")
+    assert(type(callback) == "function", "Callback function is required")
+
+    yagames_private.leaderboards_get_entries(helper.wrap_for_promise(function(self, err, result)
+        if result then
+            result = rxi_json.decode(result)
+        end
+        callback(self, err, result)
+    end), leaderboard_name, rxi_json.encode(options or {}))
+end
+
+---
+-- @tparam string leaderboard_name
+-- @tparam number score
+-- @tparam string extra_data
+-- @tparam function callback
+function M.leaderboards_set_score(leaderboard_name, score, extra_data, callback)
+    assert(M.leaderboards_ready, "Leaderboards subsystem is not initialized.")
+    assert(type(leaderboard_name) == "string", "Leaderboard name should be 'string'")
+    assert(type(score) == "number", "Score should be 'number'")
+    assert(type(extra_data) == "nil" or type(extra_data) == "string", "Extra data should be 'string'")
+
+    yagames_private.leaderboards_set_score(callback and helper.wrap_for_promise(callback) or 0, leaderboard_name, score, extra_data)
+end
+
 --- Инициализирует подсистему покупок.
 -- @tparam {signed=boolean} options
 -- @tparam function callback
@@ -127,7 +205,7 @@ end
 -- @tparam {id=string,developerPayload=string} options
 -- @tparam function callback
 function M.payments_purchase(options, callback)
-    assert(M.payments_ready, "Payments module is not initialized.")
+    assert(M.payments_ready, "Payments subsystem is not initialized.")
     assert(type(options) == "table")
     assert(type(callback) == "function")
     assert(type(options.id) == "string")
@@ -143,7 +221,7 @@ end
 --- Асинхронно возвращает список купленных товаров.
 -- @tparam function callback
 function M.payments_get_purchases(callback)
-    assert(M.payments_ready, "Payments module is not initialized.")
+    assert(M.payments_ready, "Payments subsystem is not initialized.")
     assert(type(callback) == "function")
 
     yagames_private.payments_get_purchases(helper.wrap_for_promise(function(self, err, purchases)
@@ -157,7 +235,7 @@ end
 --- Асинхронно возвращает список товаров разработчика.
 -- @tparam function callback
 function M.payments_get_catalog(callback)
-    assert(M.payments_ready, "Payments module is not initialized.")
+    assert(M.payments_ready, "Payments subsystem is not initialized.")
     assert(type(callback) == "function")
 
     yagames_private.payments_get_catalog(helper.wrap_for_promise(function(self, err, catalog)
@@ -172,7 +250,7 @@ end
 -- @tparam string purchase_token
 -- @tparam function callback
 function M.payments_consume_purchase(purchase_token, callback)
-    assert(M.payments_ready, "Payments module is not initialized.")
+    assert(M.payments_ready, "Payments subsystem is not initialized.")
     assert(type(purchase_token) == "string")
     assert(type(callback) == "function")
 
@@ -324,7 +402,6 @@ function M.banner_create(rtb_id, options, callback)
     assert(M.banner_ready, "Yandex Advertising Network SDK is not initialized.")
     assert(type(rtb_id) == "string")
     assert(type(options) == "table")
-    assert(type(callback) == "function")
 
     yagames_private.banner_create(rtb_id, rxi_json.encode(options),
         callback and helper.wrap_for_promise(function(self, err, data)
@@ -345,7 +422,6 @@ end
 function M.banner_refresh(rtb_id, callback)
     assert(M.banner_ready, "Yandex Advertising Network SDK is not initialized.")
     assert(type(rtb_id) == "string")
-    assert(type(callback) == "function")
 
     yagames_private.banner_refresh(rtb_id, 
         callback and helper.wrap_for_promise(function(self, err, data)

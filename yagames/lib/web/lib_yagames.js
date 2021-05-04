@@ -1,8 +1,9 @@
 var LibYaGamesPrivate = {
     $YaGamesPrivate: {
         _ysdk: null,
-        _player: null,
+        _lb: null,
         _payments: null,
+        _player: null,
         _context: null,
 
         _callback_object: null,
@@ -185,6 +186,99 @@ var LibYaGamesPrivate = {
 
     YaGamesPrivate_DeviceInfo_IsTablet: function () {
         return YaGamesPrivate._ysdk.deviceInfo.isTablet();
+    },
+
+    YaGamesPrivate_GetLeaderboards: function (cb_id) {
+        var self = YaGamesPrivate;
+        try {
+            self._ysdk
+                .getLeaderboards()
+                .then((lb) => {
+                    self._lb = lb;
+                    self.send(cb_id);
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
+    YaGamesPrivate_Leaderboards_GetDescription: function (cb_id, cleaderboard_name) {
+        var self = YaGamesPrivate;
+        try {
+            var leaderboard_name = UTF8ToString(cleaderboard_name);
+            self._lb
+                .getLeaderboardDescription(leaderboard_name)
+                .then((result) => {
+                    self.send(cb_id, null, JSON.stringify(result));
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
+    YaGamesPrivate_Leaderboards_GetPlayerEntry: function (cb_id, cleaderboard_name) {
+        var self = YaGamesPrivate;
+        try {
+            var leaderboard_name = UTF8ToString(cleaderboard_name);
+            self._lb
+                .getLeaderboardPlayerEntry(leaderboard_name)
+                .then((result) => {
+                    self.send(cb_id, null, JSON.stringify(result));
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
+    YaGamesPrivate_Leaderboards_GetEntries: function (cb_id, cleaderboard_name, coptions) {
+        var self = YaGamesPrivate;
+        try {
+            var leaderboard_name = UTF8ToString(cleaderboard_name);
+            var options = self.parseJson(UTF8ToString(coptions));
+            self._lb
+                .getLeaderboardEntries(leaderboard_name, options)
+                .then((result) => {
+                    self.send(cb_id, null, JSON.stringify(result));
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
+    YaGamesPrivate_Leaderboards_SetScore: function (cb_id, cleaderboard_name, score, cextra_data) {
+        var self = YaGamesPrivate;
+        try {
+            var leaderboard_name = UTF8ToString(cleaderboard_name);
+            var promise;
+            if (cextra_data === 0) {
+                promise = self._lb.setLeaderboardScore(leaderboard_name, score);
+            } else {
+                var extra_data = UTF8ToString(cextra_data);
+                promise = self._lb.setLeaderboardScore(leaderboard_name, score, extra_data);
+            }
+
+            promise
+                .then((result) => {
+                    self.send(cb_id, null, JSON.stringify(result));
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
     },
 
     YaGamesPrivate_GetPayments: function (cb_id, coptions) {

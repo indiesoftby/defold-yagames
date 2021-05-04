@@ -65,6 +65,11 @@ function M.device_info_is_tablet()
     return false
 end
 
+-- { "get_leaderboards", GetLeaderboards },
+-- { "leaderboards_get_description", Leaderboards_GetDescription },
+-- { "leaderboards_set_score", Leaderboards_SetScore },
+-- { "leaderboards_get_entries", Leaderboards_GetEntries },
+
 function M.get_payments(cb_id, options)
     assert(type(options) == "string")
 

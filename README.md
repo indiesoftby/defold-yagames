@@ -184,7 +184,7 @@ Yandex.Games JavaScript SDK uses ES6 Promise for asynchronous operations. For Lu
 - `err` <kbd>string</kbd> - Error code if something went wrong.
 - `result` - Data if the operation should return something.
 
-### Matching with the JS SDK
+### Lua <-> JS
 
 The best way to integrate SDK into your game is to read [the official documentation](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en) and to use corresponding Lua API functions. The table below helps to do that:
 
@@ -213,6 +213,11 @@ The best way to integrate SDK into your game is to read [the official documentat
 | `payments.getPurchases()` | `yagames.payments_get_purchases(callback)` - The result has the format `{ purchases = { ... }, signature = "..." }` |
 | `payments.getCatalog()` | `yagames.payments_get_catalog(callback)` |
 | `payments.consumePurchase(purchaseToken)` | `yagames.payments_consume_purchase(purchase_token, callback)` |
+| `ysdk.getLeaderboards()` | `yagames.leaderboards_init(callback)` |
+| `lb.getLeaderboardDescription(leaderboardName)` | `yagames.leaderboards_get_description(leaderboard_name, callback)` |
+| `lb.getLeaderboardPlayerEntry(leaderboardName)` | `yagames.leaderboards_get_player_entry(leaderboard_name, callback)` |
+| `lb.getLeaderboardEntries(leaderboardName, options)` | `yagames.leaderboards_get_entries(leaderboard_name, options, callback)` |
+| `lb.setLeaderboardScore(leaderboardName, score, extraData)` | `yagames.leaderboards_set_score(leaderboard_name, score, [extra_data], [callback])` |
 
 ## Banner Ads
 

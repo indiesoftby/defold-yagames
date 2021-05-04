@@ -4,7 +4,7 @@
 
 set -e
 
-BOB_SHA1=$(curl -s 'https://d.defold.com/stable/info.json' | jq -r .sha1)
+BOB_SHA1=$(curl -s 'https://d.defold.com/beta/info.json' | jq -r .sha1)
 BOB_LOCAL_SHA1=$((java -jar build/bob.jar --version | cut -d' ' -f6) || true)
 if [ "${BOB_LOCAL_SHA1}" != "${BOB_SHA1}" ]; then wget --progress=dot:mega -O build/bob.jar "https://d.defold.com/archive/${BOB_SHA1}/bob/bob.jar"; fi
 TITLE=$(awk -F "=" '/^title/ {gsub(/[ \r\n\t]/, "", $2); print $2}' game.project)

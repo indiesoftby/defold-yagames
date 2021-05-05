@@ -27,10 +27,10 @@ extern "C"
     const bool YaGamesPrivate_DeviceInfo_IsMobile();
     const bool YaGamesPrivate_DeviceInfo_IsTablet();
     void YaGamesPrivate_GetLeaderboards(const int cb_id);
-    void YaGamesPrivate_Leaderboards_GetDescription(const id cb_id, const char* leaderboard_name);
-    void YaGamesPrivate_Leaderboards_GetPlayerEntry(const id cb_id, const char* leaderboard_name);
-    void YaGamesPrivate_Leaderboards_GetEntries(const id cb_id, const char* leaderboard_name, const char* options);
-    void YaGamesPrivate_Leaderboards_SetScore(const id cb_id, const char* leaderboard_name, const double score, const char* extra_data);
+    void YaGamesPrivate_Leaderboards_GetDescription(const int cb_id, const char* leaderboard_name);
+    void YaGamesPrivate_Leaderboards_GetPlayerEntry(const int cb_id, const char* leaderboard_name);
+    void YaGamesPrivate_Leaderboards_GetEntries(const int cb_id, const char* leaderboard_name, const char* options);
+    void YaGamesPrivate_Leaderboards_SetScore(const int cb_id, const char* leaderboard_name, const double score, const char* extra_data);
     void YaGamesPrivate_GetPayments(const int cb_id, const char* options);
     void YaGamesPrivate_Payments_Purchase(const int cb_id, const char* options);
     void YaGamesPrivate_Payments_GetPurchases(const int cb_id);
@@ -470,7 +470,7 @@ static int Leaderboards_GetEntries(lua_State* L)
 
 static int Leaderboards_SetScore(lua_State* L)
 {
-    char* extra_data = 0;
+    const char* extra_data = 0;
     if (lua_isstring(L, 4))
     {
         extra_data = luaL_checkstring(L, 4);

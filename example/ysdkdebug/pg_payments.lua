@@ -1,6 +1,6 @@
 local druid = require("druid.druid")
 local druid_style = require("example.ysdkdebug.druid_style")
-local rxi_json = require("yagames.helpers.json")
+local table_util = require("example.ysdkdebug.table_util")
 
 local yagames = require("yagames.yagames")
 
@@ -26,7 +26,7 @@ end
 
 function M.get_catalog_handler(self)
     yagames.payments_get_catalog(function(self, err, catalog)
-        print("yagames.payments_get_catalog:", err or rxi_json.encode(catalog))
+        print("yagames.payments_get_catalog:", err or table_util.tostring(catalog))
     end)
 end
 
@@ -39,13 +39,13 @@ function M.get_purchases_handler(self)
             end
         end
         
-        print("yagames.payments_get_purchases:", err or rxi_json.encode(response))
+        print("yagames.payments_get_purchases:", err or table_util.tostring(response))
     end)
 end
 
 function M.purchase1_handler(self)
     yagames.payments_purchase({id = "item1_example"}, function(self, err, purchase)
-        print("yagames.payments_purchase:", err or rxi_json.encode(purchase))
+        print("yagames.payments_purchase:", err or table_util.tostring(purchase))
 
         if not err then
             self.last_purchase_token = purchase.purchaseToken
@@ -57,7 +57,7 @@ end
 
 function M.purchase2_handler(self)
     yagames.payments_purchase({id = "item2_example"}, function(self, err, purchase)
-        print("yagames.payments_purchase:", err or rxi_json.encode(purchase))
+        print("yagames.payments_purchase:", err or table_util.tostring(purchase))
     end)
 end
 

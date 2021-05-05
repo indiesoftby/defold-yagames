@@ -1,6 +1,6 @@
 local druid = require("druid.druid")
 local druid_style = require("example.ysdkdebug.druid_style")
-local rxi_json = require("yagames.helpers.json")
+local table_util = require("example.ysdkdebug.table_util")
 
 local yagames = require("yagames.yagames")
 
@@ -43,13 +43,13 @@ end
 
 function M.get_ids_per_game_handler(self)
     yagames.player_get_ids_per_game(function(self, err, ids)
-        print("yagames.player_get_ids_per_game:", err or rxi_json.encode(ids))
+        print("yagames.player_get_ids_per_game:", err or table_util.tostring(ids))
     end)
 end
 
 function M.get_data_handler(self)
     yagames.player_get_data(nil, function(self, err, data)
-        print("yagames.player_get_data:", err or rxi_json.encode(data))
+        print("yagames.player_get_data:", err or table_util.tostring(data))
     end)
 end
 
@@ -61,13 +61,13 @@ end
 
 function M.get_stats_handler(self)
     yagames.player_get_stats(nil, function(self, err, stats)
-        print("yagames.player_get_stats:", err or rxi_json.encode(stats))
+        print("yagames.player_get_stats:", err or table_util.tostring(stats))
     end)
 end
 
 function M.increment_stats_handler(self)
     yagames.player_increment_stats({v3 = 2, v1 = -1}, function(self, err, result)
-        print("yagames.player_increment_stats:", err or rxi_json.encode(result))
+        print("yagames.player_increment_stats:", err or table_util.tostring(result))
     end)
 end
 

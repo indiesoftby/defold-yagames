@@ -5,11 +5,32 @@ local druid = require("druid.druid")
 
 go.property("first_scene", hash("ysdkinit"))
 
-function init(self)
-    if html5 and not sys.get_engine_info().is_debug then
-        -- Just to be sure about version of the Defold
+local function error_catching_init()
+    local is_release_build = not sys.get_engine_info().is_debug
+    if html5 and is_release_build then
+        sys.set_error_handler(function(source, message, traceback)
+            source = source:gsub("'", "\\'"):gsub("\n", "\\n"):gsub("\r", "\\r")
+            message = message:gsub("'", "\\'"):gsub("\n", "\\n"):gsub("\r", "\\r")
+            traceback = traceback:gsub("'", "\\'"):gsub("\n", "\\n"):gsub("\r", "\\r")
+
+            local pstatus, perr = pcall(html5.run, "console.warn('ERROR: (" .. source .. ")\\n" .. message .. "\\n" .. traceback .. "')")
+            if not pstatus then
+                print("FATAL: html5.run(..) failed: " .. perr)
+            end
+        end)
+    end
+end
+
+local function print_engine_info()
+    local is_release_build = not sys.get_engine_info().is_debug
+    if html5 and is_release_build then
         html5.run("console.log('Defold Engine " .. sys.get_engine_info().version .. "')")
     end
+end
+
+function init(self)
+    error_catching_init()
+    print_engine_info()
 
     msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 })
     msg.post(".", "acquire_input_focus")

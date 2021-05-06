@@ -142,10 +142,12 @@ end
 
 ---
 -- @tparam string leaderboard_name
+-- @tparam {getAvatarSrc=string,getAvatarSrcSet=string} options
 -- @tparam function callback
-function M.leaderboards_get_player_entry(leaderboard_name, callback)
+function M.leaderboards_get_player_entry(leaderboard_name, options, callback)
     assert(M.leaderboards_ready, "Leaderboards subsystem is not initialized.")
     assert(type(leaderboard_name) == "string", "Leaderboard name should be 'string'")
+    assert(type(options) == "nil" or type(options) == "table", "Options should be 'table'")
     assert(type(callback) == "function", "Callback function is required")
 
     yagames_private.leaderboards_get_player_entry(helper.wrap_for_promise(function(self, err, result)
@@ -153,12 +155,12 @@ function M.leaderboards_get_player_entry(leaderboard_name, callback)
             result = rxi_json.decode(result)
         end
         callback(self, err, result)
-    end), leaderboard_name)
+    end), leaderboard_name, rxi_json.encode(options or {}))
 end
 
 ---
 -- @tparam string leaderboard_name
--- @tparam {includeUser=boolean,quantityAround=integer,quantityTop=integer} options
+-- @tparam {includeUser=boolean,quantityAround=integer,quantityTop=integer,getAvatarSrc=string,getAvatarSrcSet=string} options
 -- @tparam function callback
 function M.leaderboards_get_entries(leaderboard_name, options, callback)
     assert(M.leaderboards_ready, "Leaderboards subsystem is not initialized.")

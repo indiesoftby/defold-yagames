@@ -222,13 +222,20 @@ var LibYaGamesPrivate = {
         }
     },
 
-    YaGamesPrivate_Leaderboards_GetPlayerEntry: function (cb_id, cleaderboard_name) {
+    YaGamesPrivate_Leaderboards_GetPlayerEntry: function (cb_id, cleaderboard_name, coptions) {
         var self = YaGamesPrivate;
         try {
             var leaderboard_name = UTF8ToString(cleaderboard_name);
+            var options = self.parseJson(UTF8ToString(coptions));
             self._lb
                 .getLeaderboardPlayerEntry(leaderboard_name)
                 .then((result) => {
+                    if (options.getAvatarSrc && result.player) {
+                        result.player.getAvatarSrc = result.player.getAvatarSrc(options.getAvatarSrc);
+                    }
+                    if (options.getAvatarSrcSet && result.player) {
+                        result.player.getAvatarSrcSet = result.player.getAvatarSrcSet(options.getAvatarSrcSet);
+                    }
                     self.send(cb_id, null, JSON.stringify(result));
                 })
                 .catch((err) => {
@@ -247,6 +254,17 @@ var LibYaGamesPrivate = {
             self._lb
                 .getLeaderboardEntries(leaderboard_name, options)
                 .then((result) => {
+                    if (result.entries) {
+                        for (var i = 0; i < result.entries.length; i++) {
+                            var entry = result.entries[i];
+                            if (options.getAvatarSrc) {
+                                entry.player.getAvatarSrc = entry.player.getAvatarSrc(options.getAvatarSrc);
+                            }
+                            if (options.getAvatarSrcSet) {
+                                entry.player.getAvatarSrcSet = entry.player.getAvatarSrcSet(options.getAvatarSrcSet);
+                            }
+                        }
+                    }
                     self.send(cb_id, null, JSON.stringify(result));
                 })
                 .catch((err) => {

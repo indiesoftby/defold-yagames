@@ -71,7 +71,7 @@ end
 -- "leaderboards_set_score"
 -- "leaderboards_get_entries"
 function M.get_leaderboards(cb_id)
-    M.send(cb_id, "Leaderboards is not available.")
+    M.send(cb_id, "Leaderboards is not available yet.")
 end
 
 function M.get_payments(cb_id, options)

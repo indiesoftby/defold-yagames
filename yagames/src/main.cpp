@@ -28,7 +28,7 @@ extern "C"
     const bool YaGamesPrivate_DeviceInfo_IsTablet();
     void YaGamesPrivate_GetLeaderboards(const int cb_id);
     void YaGamesPrivate_Leaderboards_GetDescription(const int cb_id, const char* leaderboard_name);
-    void YaGamesPrivate_Leaderboards_GetPlayerEntry(const int cb_id, const char* leaderboard_name);
+    void YaGamesPrivate_Leaderboards_GetPlayerEntry(const int cb_id, const char* leaderboard_name, const char* options);
     void YaGamesPrivate_Leaderboards_GetEntries(const int cb_id, const char* leaderboard_name, const char* options);
     void YaGamesPrivate_Leaderboards_SetScore(const int cb_id, const char* leaderboard_name, const double score, const char* extra_data);
     void YaGamesPrivate_GetPayments(const int cb_id, const char* options);
@@ -458,7 +458,7 @@ static int Leaderboards_GetDescription(lua_State* L)
 
 static int Leaderboards_GetPlayerEntry(lua_State* L)
 {
-    YaGamesPrivate_Leaderboards_GetPlayerEntry(luaL_checkint(L, 1), luaL_checkstring(L, 2));
+    YaGamesPrivate_Leaderboards_GetPlayerEntry(luaL_checkint(L, 1), luaL_checkstring(L, 2), luaL_checkstring(L, 3));
     return 0;
 }
 

@@ -31,6 +31,7 @@ jobs:
           # This demo doesn't implement Service Worker and Native Cache, so remove them from the settings:
           sed -i 's/service_worker_url = .*//' game.project
           sed -i 's/manifest_url = .*//' game.project
+          rm -rf example/bundle/web
 
           BOB_SHA1=${DEFOLD_BOB_SHA1:-$(curl -s 'https://d.defold.com/stable/info.json' | jq -r .sha1)}
           BOB_LOCAL_SHA1=$((java -jar build/bundle/bob.jar --version | cut -d' ' -f6) || true)
@@ -38,7 +39,7 @@ jobs:
           java -jar build/bundle/bob.jar --version
 
           java -jar build/bundle/bob.jar --email foo@bar.com --auth 12345 --texture-compression true --bundle-output build/bundle/js-web --platform js-web --archive --variant release resolve build bundle
-          (cd build/bundle/js-web/* && zip -r ../../public/demo.zip .)
+          (cd build/bundle/js-web/* && zip -r ../../public/demo_no-sw_no-native-cache.zip .)
 
       - name: Deploy to Pages 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4

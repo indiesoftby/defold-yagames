@@ -21,6 +21,7 @@ Or point to the ZIP file of a [specific release](https://github.com/indiesoftby/
 ## Getting Started
 
 * [The official documentation](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en).
+* **[Releasing HTML5 games on Yandex.Games](https://defold.com/2021/04/21/Releasing-games-on-Yandex/) - How to add the Yandex.Games SDK to a Defold game and how to submit your game to the Yandex.Games catalog.**
 * [The official Telegram chat](https://t.me/yagamedev) where you can talk with representatives from Yandex. Feel free to ask questions in English!
 * [Telegram chat about Defold for russian-speaking users](https://t.me/DefoldEngine).
 

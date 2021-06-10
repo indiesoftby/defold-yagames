@@ -21,7 +21,8 @@ Or point to the ZIP file of a [specific release](https://github.com/indiesoftby/
 ## Getting Started
 
 * [The official documentation](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en).
-* [The official Telegram chat](https://t.me/yagamedev) where you can talk with representatives from Yandex.
+* [The official Telegram chat](https://t.me/yagamedev) where you can talk with representatives from Yandex. Feel free to ask questions in English!
+* [Telegram chat about Defold for russian-speaking users](https://t.me/DefoldEngine).
 
 ### Checklist For Releasing Game
 

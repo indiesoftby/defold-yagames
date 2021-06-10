@@ -20,25 +20,26 @@ Or point to the ZIP file of a [specific release](https://github.com/indiesoftby/
 
 ## Getting Started
 
-* [The official documentation](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en).
-* **[Releasing HTML5 games on Yandex.Games](https://defold.com/2021/04/21/Releasing-games-on-Yandex/) - How to add the Yandex.Games SDK to a Defold game and how to submit your game to the Yandex.Games catalog.**
-* [The official Telegram chat](https://t.me/yagamedev) where you can talk with representatives from Yandex. Feel free to ask questions in English!
-* [Telegram chat about Defold for russian-speaking users](https://t.me/DefoldEngine).
+* **[🎓 Tutorial: "Releasing HTML5 games on Yandex.Games"](https://defold.com/2021/04/21/Releasing-games-on-Yandex/) - How to add the Yandex.Games SDK to a Defold game and how to submit your game to the Yandex.Games catalog.**
+* [📚 The official documentation](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en).
+* [💬 The official Telegram chat](https://t.me/yagamedev) where you can talk with representatives from Yandex. Feel free to ask questions in English!
+* [💬 The Telegram chat about Defold](https://t.me/DefoldEngine) for Russian-speaking users.
+* [💬 The Defold forum topic](https://forum.defold.com/t/yagames-yandex-games-sdk-for-defold/66810) about the YaGames extension.
 
 ### Checklist For Releasing Game
 
 1. [Sign up as a developer](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en).
 2. Translate your game to the Russian language.
 3. Prepare assets for the catalogue:
-    1. Icon 512 x 512 px.
-    2. Cover 800 x 470 px.
-    3. Screenshots.
+    - Icon 512 x 512 px.
+    - Cover 800 x 470 px.
+    - Screenshots.
 4. Add [the extension](https://github.com/indiesoftby/defold-yagames/archive/master.zip) as a Defold library dependency to your project. **You can publish your game on Yandex.Games from this moment. It fully meets [the requirements](https://yandex.ru/dev/games/doc/dg/concepts/requirements.html?lang=en).**
 5. Enable monetization and earn revenue from placing ad blocks in your game. Ad blocks are available in the following formats:
-    1. **Interstitial blocks** - ad blocks that completely cover the app background and show up at certain points (for example, when accessing the next game level). *Important: Mute sounds before showing the ad.*
-    2. **Rewarded videos** - blocks with video ads that the user can choose to view and earn a reward or in-game currency. *Important: Mute sounds before showing the ad.*
-    3. **RTB ad blocks (banners)** - display both contextual (content-based) ads and media ads.
-    4. **In-game purchases** - earn revenue by providing paid services to your users.
+    - **Interstitial blocks** - ad blocks that completely cover the app background and show up at certain points (for example, when accessing the next game level). *Important: Mute sounds before showing the ad.*
+    - **Rewarded videos** - blocks with video ads that the user can choose to view and earn a reward or in-game currency. *Important: Mute sounds before showing the ad.*
+    - **RTB ad blocks (banners)** - display both contextual (content-based) ads and media ads.
+    - **In-game purchases** - earn revenue by providing paid services to your users.
 6. *(Optional)* Enable [Native Cache](https://yandex.ru/dev/games/doc/dg/concepts/native-cache-settings.html?lang=en) support.
     1. Set the path to the file `yandex-manifest.json` in the `game.project` settings.
     2. Copy the `yagames/manifests/web/yandex-manifest.json` file to the root directory of your release build.

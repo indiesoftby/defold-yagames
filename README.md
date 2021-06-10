@@ -35,10 +35,10 @@ Or point to the ZIP file of a [specific release](https://github.com/indiesoftby/
     3. Screenshots.
 4. Add [the extension](https://github.com/indiesoftby/defold-yagames/archive/master.zip) as a Defold library dependency to your project. **You can publish your game on Yandex.Games from this moment. It fully meets [the requirements](https://yandex.ru/dev/games/doc/dg/concepts/requirements.html?lang=en).**
 5. Enable monetization and earn revenue from placing ad blocks in your game. Ad blocks are available in the following formats:
-    1. Interstitial blocks - ad blocks that completely cover the app background and show up at certain points (for example, when accessing the next game level). *Important: Mute sounds before showing the ad.*
-    2. Rewarded videos - blocks with video ads that the user can choose to view and earn a reward or in-game currency. *Important: Mute sounds before showing the ad.*
-    3. RTB ad blocks (banners) - display both contextual (content-based) ads and media ads.
-    4. In-game purchases - earn revenue by providing paid services to your users.
+    1. **Interstitial blocks** - ad blocks that completely cover the app background and show up at certain points (for example, when accessing the next game level). *Important: Mute sounds before showing the ad.*
+    2. **Rewarded videos** - blocks with video ads that the user can choose to view and earn a reward or in-game currency. *Important: Mute sounds before showing the ad.*
+    3. **RTB ad blocks (banners)** - display both contextual (content-based) ads and media ads.
+    4. **In-game purchases** - earn revenue by providing paid services to your users.
 6. *(Optional)* Enable [Native Cache](https://yandex.ru/dev/games/doc/dg/concepts/native-cache-settings.html?lang=en) support.
     1. Set the path to the file `yandex-manifest.json` in the `game.project` settings.
     2. Copy the `yagames/manifests/web/yandex-manifest.json` file to the root directory of your release build.

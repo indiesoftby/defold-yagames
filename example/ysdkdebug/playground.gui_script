@@ -8,6 +8,7 @@ local pg_device_info = require("example.ysdkdebug.pg_device_info")
 local pg_leaderboards = require("example.ysdkdebug.pg_leaderboards")
 local pg_payments = require("example.ysdkdebug.pg_payments")
 local pg_player = require("example.ysdkdebug.pg_player")
+local table_util = require("example.ysdkdebug.table_util")
 
 local log_print = require("example.ysdkdebug.log_print")
 local print = log_print.print
@@ -25,6 +26,10 @@ local function log_update(self)
     end
 end
 
+local function environment_handler(self)
+    print("yagames.environment():", table_util.tostring(yagames.environment()))
+end
+
 function init(self)
     self.druid = druid.new(self, druid_style)
 
@@ -36,6 +41,9 @@ function init(self)
     pg_payments.init(self)
     pg_player.init(self)
     pg_leaderboards.init(self)
+
+    self.button_environment_clear = druid_style.button_with_text(self, "button_environment/body",
+                                                                 "button_environment/text", environment_handler)
 
     self.button_debug_log_clear = druid_style.button_with_text(self, "button_debug_log_clear/body",
                                                                "button_debug_log_clear/text", log_print.clear_log)

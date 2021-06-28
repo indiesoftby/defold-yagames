@@ -188,6 +188,13 @@ var LibYaGamesPrivate = {
         return YaGamesPrivate._ysdk.deviceInfo.isTablet();
     },
 
+    YaGamesPrivate_Environment: function () {
+        var self = YaGamesPrivate;
+        var str = JSON.stringify(self._ysdk.environment);
+        var cstr = allocate(intArrayFromString(str), "i8", ALLOC_NORMAL);
+        return cstr;
+    },
+
     YaGamesPrivate_GetLeaderboards: function (cb_id) {
         var self = YaGamesPrivate;
         try {

@@ -26,6 +26,7 @@ extern "C"
     const bool YaGamesPrivate_DeviceInfo_IsDesktop();
     const bool YaGamesPrivate_DeviceInfo_IsMobile();
     const bool YaGamesPrivate_DeviceInfo_IsTablet();
+    const char *YaGamesPrivate_Environment();
     void YaGamesPrivate_GetLeaderboards(const int cb_id);
     void YaGamesPrivate_Leaderboards_GetDescription(const int cb_id, const char* leaderboard_name);
     void YaGamesPrivate_Leaderboards_GetPlayerEntry(const int cb_id, const char* leaderboard_name, const char* options);
@@ -444,6 +445,14 @@ static int DeviceInfo_IsTablet(lua_State* L)
     return 1;
 }
 
+static int Environment(lua_State* L)
+{
+    const char* json = YaGamesPrivate_Environment();
+    lua_pushstring(L, json);
+    free((void*)json);
+    return 1;
+}
+
 static int GetLeaderboards(lua_State* L)
 {
     YaGamesPrivate_GetLeaderboards(luaL_checkint(L, 1));
@@ -648,6 +657,8 @@ static const luaL_reg Module_methods[] = {
     { "device_info_is_desktop", DeviceInfo_IsDesktop },
     { "device_info_is_mobile", DeviceInfo_IsMobile },
     { "device_info_is_tablet", DeviceInfo_IsTablet },
+    // - Environment
+    { "environment", Environment },
     // - Leaderboards
     { "get_leaderboards", GetLeaderboards },
     { "leaderboards_get_description", Leaderboards_GetDescription },

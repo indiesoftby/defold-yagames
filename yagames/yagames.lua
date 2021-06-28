@@ -111,6 +111,14 @@ function M.device_info_is_tablet()
     return yagames_private.device_info_is_tablet()
 end
 
+--- 
+-- @treturn table
+function M.environment()
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+
+    return rxi_json.decode(yagames_private.environment())
+end
+
 --- Initialize the leaderboards subsystem
 -- @tparam {signed=boolean} options
 -- @tparam function callback

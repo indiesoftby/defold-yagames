@@ -119,7 +119,7 @@ function M.device_info_is_tablet()
     return yagames_private.device_info_is_tablet()
 end
 
---- 
+--- Return a table with game environment variables.
 -- @treturn table
 function M.environment()
     assert(M.ysdk_ready, "YaGames is not initialized.")
@@ -140,7 +140,7 @@ function M.leaderboards_init(callback)
     end))
 end
 
----
+--- Get a description of a competition table by name.
 -- @tparam string leaderboard_name
 -- @tparam function callback
 function M.leaderboards_get_description(leaderboard_name, callback)
@@ -156,7 +156,7 @@ function M.leaderboards_get_description(leaderboard_name, callback)
     end), leaderboard_name)
 end
 
----
+--- Get a user's ranking.
 -- @tparam string leaderboard_name
 -- @tparam {getAvatarSrc=string,getAvatarSrcSet=string} options
 -- @tparam function callback
@@ -174,7 +174,7 @@ function M.leaderboards_get_player_entry(leaderboard_name, options, callback)
     end), leaderboard_name, rxi_json.encode(options or {}))
 end
 
----
+--- Get user rankings.
 -- @tparam string leaderboard_name
 -- @tparam {includeUser=boolean,quantityAround=integer,quantityTop=integer,getAvatarSrc=string,getAvatarSrcSet=string} options
 -- @tparam function callback
@@ -192,7 +192,7 @@ function M.leaderboards_get_entries(leaderboard_name, options, callback)
     end), leaderboard_name, rxi_json.encode(options or {}))
 end
 
----
+--- Set a new score for a player.
 -- @tparam string leaderboard_name
 -- @tparam number score
 -- @tparam string extra_data

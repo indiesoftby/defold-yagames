@@ -127,6 +127,34 @@ function M.environment()
     return rxi_json.decode(yagames_private.environment())
 end
 
+--- Find out if it is possible to request a feedback window for the game.
+-- @tparam function callback
+function M.feedback_can_review(callback)
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(type(callback) == "function", "Callback function is required")
+
+    yagames_private.feedback_can_review(helper.wrap_for_promise(function(self, err, result)
+        if result then
+            result = rxi_json.decode(result)
+        end
+        callback(self, err, result)
+    end))
+end
+
+--- Find out if it is possible to request a feedback window for the game.
+-- @tparam function callback
+function M.feedback_request_review(callback)
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(type(callback) == "function", "Callback function is required")
+
+    yagames_private.feedback_request_review(helper.wrap_for_promise(function(self, err, result)
+        if result then
+            result = rxi_json.decode(result)
+        end
+        callback(self, err, result)
+    end))
+end
+
 --- Initialize the leaderboards subsystem
 -- @tparam {signed=boolean} options
 -- @tparam function callback

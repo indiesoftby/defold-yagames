@@ -27,6 +27,8 @@ extern "C"
     const bool YaGamesPrivate_DeviceInfo_IsMobile();
     const bool YaGamesPrivate_DeviceInfo_IsTablet();
     const char *YaGamesPrivate_Environment();
+    void YaGamesPrivate_Feedback_CanReview(const int cb_id);
+    void YaGamesPrivate_Feedback_RequestReview(const int cb_id);
     void YaGamesPrivate_GetLeaderboards(const int cb_id);
     void YaGamesPrivate_Leaderboards_GetDescription(const int cb_id, const char* leaderboard_name);
     void YaGamesPrivate_Leaderboards_GetPlayerEntry(const int cb_id, const char* leaderboard_name, const char* options);
@@ -453,6 +455,18 @@ static int Environment(lua_State* L)
     return 1;
 }
 
+static int Feedback_CanReview(lua_State* L)
+{
+    YaGamesPrivate_Feedback_CanReview(luaL_checkint(L, 1));
+    return 0;
+}
+
+static int Feedback_RequestReview(lua_State* L)
+{
+    YaGamesPrivate_Feedback_RequestReview(luaL_checkint(L, 1));
+    return 0;
+}
+
 static int GetLeaderboards(lua_State* L)
 {
     YaGamesPrivate_GetLeaderboards(luaL_checkint(L, 1));
@@ -659,6 +673,9 @@ static const luaL_reg Module_methods[] = {
     { "device_info_is_tablet", DeviceInfo_IsTablet },
     // - Environment
     { "environment", Environment },
+    // - Feedback
+    { "feedback_can_review", Feedback_CanReview },
+    { "feedback_request_review", Feedback_RequestReview },
     // - Leaderboards
     { "get_leaderboards", GetLeaderboards },
     { "leaderboards_get_description", Leaderboards_GetDescription },

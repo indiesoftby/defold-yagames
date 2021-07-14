@@ -229,8 +229,8 @@ The best way to integrate SDK into your game is to read [the official documentat
 | `lb.getLeaderboardEntries(leaderboardName, options)` | `yagames.leaderboards_get_entries(leaderboard_name, [options], callback)`<br>The argument `options` is an optional Lua table `{ includeUser = boolean, quantityAround = number, quantityTop = number, getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` can be `small`, `medium`, `large`. |
 | `lb.setLeaderboardScore(leaderboardName, score, extraData)` | `yagames.leaderboards_set_score(leaderboard_name, score, [extra_data], [callback])` |
 | **Feedback** [(docs ![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==))](https://yandex.ru/dev/games/doc/dg/sdk/sdk-review.html) |  |
-| `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)` |
-| `ysdk.feedback.requestReview()` | `yagames.feedback_request_review(callback)` |
+| `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)`<br>The result is a table `{ value = true/false, reason = "string" }` |
+| `ysdk.feedback.requestReview()` | `yagames.feedback_request_review(callback)`<br>The result is a table `{ feedbackSent = true/false }` |
 | **Banner Ads** [(docs)](#banner-ads) |  |
 | `-` | `yagames.banner_init(callback)` |
 | `-` | `yagames.banner_create(rtb_id, options, [callback])` |

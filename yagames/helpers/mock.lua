@@ -69,6 +69,20 @@ function M.environment()
     return '{"app":{"id":"1"},"payload":"test","i18n":{"tld":"en","lang":"en"},"browser":{"lang":"en"}}'
 end
 
+function M.feedback_can_review(cb_id)
+    M.send(cb_id, NO_ERR, rxi_json.encode({
+        value = false,
+        reason = "UNKNOWN"
+    }))
+end
+
+function M.feedback_request_review(cb_id)
+    M.send(cb_id, NO_ERR, rxi_json.encode({
+        feedbackSent = false
+    }))
+end
+
+-- TODO:
 -- "get_leaderboards"
 -- "leaderboards_get_description"
 -- "leaderboards_get_player_entry"

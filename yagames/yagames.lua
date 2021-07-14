@@ -4,6 +4,10 @@ local rxi_json = require("yagames.helpers.json")
 local mock = require("yagames.helpers.mock")
 local helper = require("yagames.helpers.helper")
 
+--
+-- HELPERS
+--
+
 local M = {
     ysdk_ready = false,
     leaderboards_ready = false,
@@ -39,7 +43,11 @@ local function init_listener(self, cb_id, message_id, message)
     yagames_private.remove_listener(init_listener)
 end
 
---- Инициализация SDK.
+--
+-- PUBLIC API
+--
+
+--- Initialize the Yandex.Games SDK
 -- @tparam function callback
 function M.init(callback)
     if not yagames_private then
@@ -60,8 +68,8 @@ function M.init(callback)
     yagames_private.add_listener(helper.YSDK_INIT_ID, init_listener)
 end
 
---- Вызывает полноэкранный блок рекламы.
--- @tparam {open=function,close=function,error=function,offline=function} callbacks Опциональные callback-функции.
+--- Call the fullscreen ad
+-- @tparam {open=function,close=function,error=function,offline=function} callbacks Optional callback-functions.
 function M.adv_show_fullscreen_adv(callbacks)
     assert(M.ysdk_ready, "YaGames is not initialized.")
     assert(type(callbacks) == "table", "'callbacks' should be a table")
@@ -69,9 +77,9 @@ function M.adv_show_fullscreen_adv(callbacks)
     yagames_private.show_fullscreen_adv(helper.wrap_for_callbacks(callbacks))
 end
 
---- Вызывает видео с вознаграждением — блоки с видеорекламой, которые используются для монетизации игр.
--- За просмотр видеоролика пользователь получает награду или внутриигровую валюту.
--- @tparam {open=function,rewarded=function,close=function,error=function} callbacks Опциональные callback-функции.
+--- Call the rewarded ad.
+-- Rewarded videos are video ad blocks used to monetize games. and earn a reward or in-game currency.
+-- @tparam {open=function,rewarded=function,close=function,error=function} callbacks Optional callback-functions.
 function M.adv_show_rewarded_video(callbacks)
     assert(M.ysdk_ready, "YaGames is not initialized.")
     assert(type(callbacks) == "table", "'callbacks' should be a table")
@@ -79,7 +87,7 @@ function M.adv_show_rewarded_video(callbacks)
     yagames_private.show_rewarded_video(helper.wrap_for_callbacks(callbacks))
 end
 
---- Вызывает окно авторизации.
+--- Open the login dialog box.
 -- @tparam function callback
 function M.auth_open_auth_dialog(callback)
     assert(type(callback) == "function")
@@ -198,7 +206,7 @@ function M.leaderboards_set_score(leaderboard_name, score, extra_data, callback)
     yagames_private.leaderboards_set_score(callback and helper.wrap_for_promise(callback) or 0, leaderboard_name, score, extra_data)
 end
 
---- Инициализирует подсистему покупок.
+--- Initialize the in-game purchases system.
 -- @tparam {signed=boolean} options
 -- @tparam function callback
 function M.payments_init(options, callback)
@@ -211,7 +219,7 @@ function M.payments_init(options, callback)
     end), rxi_json.encode(options or {}))
 end
 
---- Активирует внутриигровую покупку.
+--- Activate an in-game purchase.
 -- @tparam {id=string,developerPayload=string} options
 -- @tparam function callback
 function M.payments_purchase(options, callback)
@@ -228,7 +236,7 @@ function M.payments_purchase(options, callback)
     end), rxi_json.encode(options))
 end
 
---- Асинхронно возвращает список купленных товаров.
+--- Find out what purchases a player already made.
 -- @tparam function callback
 function M.payments_get_purchases(callback)
     assert(M.payments_ready, "Payments subsystem is not initialized.")
@@ -242,7 +250,7 @@ function M.payments_get_purchases(callback)
     end))
 end
 
---- Асинхронно возвращает список товаров разработчика.
+--- Get a list of available purchases and their cost.
 -- @tparam function callback
 function M.payments_get_catalog(callback)
     assert(M.payments_ready, "Payments subsystem is not initialized.")
@@ -256,7 +264,9 @@ function M.payments_get_catalog(callback)
     end))
 end
 
---- Зачислить покупку (используемых покупок).
+--- Consume an in-game purchase.
+-- There are two types of purchases: permanent (such as for disabling ads) and consumable (such as in-game currency).
+-- To process consumable purchases, use this function.
 -- @tparam string purchase_token
 -- @tparam function callback
 function M.payments_consume_purchase(purchase_token, callback)
@@ -267,9 +277,7 @@ function M.payments_consume_purchase(purchase_token, callback)
     yagames_private.payments_consume_purchase(helper.wrap_for_promise(callback), purchase_token)
 end
 
---- При инициализации объекта игрока. Будет показано диалоговое окно с запросом на предоставление доступа к персональным данным.
--- Запрашивается доступ только к аватару и имени, идентификатор пользователя всегда передается автоматически.
--- Примерное содержание: «Игра запрашивает доступ к вашему аватару и имени пользователя на сервисах Яндексах».
+--- Initialize the "player" system.
 -- @tparam {scopes=boolean,signed=boolean} options
 -- @tparam function callback
 function M.player_init(options, callback)
@@ -284,15 +292,15 @@ function M.player_init(options, callback)
     end), rxi_json.encode(options or {}))
 end
 
---- DEPRECATED: Используйте функцию player_get_unique_id()
+--- DEPRECATED: Use player_get_unique_id()
 -- @treturn string
 function M.player_get_id()
     assert(M.player_ready, "Player is not initialized.")
     return yagames_private.player_get_id()
 end
 
---- Асинхронно возвращает массив, где указаны идентификаторы пользователя во всех играх разработчика, 
--- в которых от пользователя было получено явное согласие на передачу персональных данных.
+--- Return table (=array), where the user IDs are specified in all developer games in which 
+-- the user has explicitly consented to the transfer of their personal data.
 -- @tparam function callback
 function M.player_get_ids_per_game(callback)
     assert(type(callback) == "function")
@@ -306,7 +314,7 @@ function M.player_get_ids_per_game(callback)
         end))
 end
 
---- Возвращает имя пользователя.
+--- Return the user's name.
 -- @treturn string
 function M.player_get_name()
     assert(M.player_ready, "Player is not initialized.")
@@ -314,7 +322,7 @@ function M.player_get_name()
     return yagames_private.player_get_name()
 end
 
---- Возвращает URL аватара пользователя.
+--- Return the URL of the user's avatar.
 -- @tparam string size
 -- @treturn string
 function M.player_get_photo(size)
@@ -324,18 +332,19 @@ function M.player_get_photo(size)
     return yagames_private.player_get_photo(size)
 end
 
---- Возвращает постоянный уникальный идентификатор пользователя.
+--- Return the user's unique permanent ID.
 -- @treturn string
 function M.player_get_unique_id()
     assert(M.player_ready, "Player is not initialized.")
     return yagames_private.player_get_unique_id()
 end
 
---- Сохраняет данные пользователя. Максимальный размер данных не должен превышать 1 МБ.
--- @tparam table data Таблица, содержащая пары ключ-значение.
--- @tparam boolean flush Определяет очередность отправки данных. 
---                       При значении «true» данные будут отправлены на сервер немедленно; 
---                       «false» — запрос на отправку данных будет поставлен в очередь.
+--- Save user data. The maximum data size should not exceed 200 KB.
+-- @tparam table data A table containing key-value pairs.
+-- @tparam boolean flush Specifies the order data is sent. 
+--                       If the value is “true”, the data is immediately
+--                       sent to the server. If it's “false” (default),
+--                       the request to send data is queued.
 -- @tparam function callback
 function M.player_set_data(data, flush, callback)
     assert(M.player_ready, "Player is not initialized.")
@@ -346,7 +355,7 @@ function M.player_set_data(data, flush, callback)
     yagames_private.player_set_data(helper.wrap_for_promise(callback), rxi_json.encode(data), flush)
 end
 
---- Асинхронно возвращает внутриигровые данные пользователя, сохраненные в базе данных Яндекса.
+--- Asynchronously return the in-game user data stored in the Yandex database.
 function M.player_get_data(keys, callback)
     assert(M.player_ready, "Player is not initialized.")
     assert(type(callback) == "function")
@@ -359,7 +368,7 @@ function M.player_get_data(keys, callback)
     end), keys and rxi_json.encode(keys) or nil)
 end
 
---- Сохраняет численные данные пользователя. Максимальный размер данных не должен превышать 10 КБ.
+--- Save the user's numeric data. The maximum data size must not exceed 10 KB.
 function M.player_set_stats(stats, callback)
     assert(M.player_ready, "Player is not initialized.")
     assert(type(stats) == "table")
@@ -368,7 +377,7 @@ function M.player_set_stats(stats, callback)
     yagames_private.player_set_stats(helper.wrap_for_promise(callback), rxi_json.encode(stats))
 end
 
---- Изменяет внутриигровые данные пользователя. Максимальный размер данных не должен превышать 10 КБ.
+--- Change in-game user data. The maximum data size must not exceed 10 KB.
 function M.player_increment_stats(increments, callback)
     assert(M.player_ready, "Player is not initialized.")
     assert(type(increments) == "table")
@@ -382,7 +391,7 @@ function M.player_increment_stats(increments, callback)
     end), rxi_json.encode(increments))
 end
 
---- Асинхронно возвращает численные данные пользователя.
+--- Asynchronously return the user's numeric data.
 function M.player_get_stats(keys, callback)
     assert(M.player_ready, "Player is not initialized.")
     assert(type(callback) == "function")

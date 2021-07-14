@@ -34,7 +34,7 @@ nodes {
   }
   size {
     x: 490.0
-    y: 250.0
+    y: 225.0
     z: 0.0
     w: 1.0
   }
@@ -451,7 +451,7 @@ nodes {
 nodes {
   position {
     x: 20.0
-    y: 1220.0
+    y: 1242.0
     z: 0.0
     w: 1.0
   }
@@ -774,7 +774,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 1060.0
+    x: 1210.0
     y: 600.0
     z: 0.0
     w: 1.0
@@ -891,7 +891,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 1515.0
+    x: 1728.57
     y: 785.71
     z: 0.0
     w: 1.0
@@ -1096,7 +1096,7 @@ nodes {
 nodes {
   position {
     x: 20.0
-    y: 1030.0
+    y: 1042.0
     z: 0.0
     w: 1.0
   }
@@ -2979,8 +2979,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 530.0
-    y: 300.0
+    x: 680.0
+    y: 225.0
     z: 0.0
     w: 1.0
   }
@@ -3396,7 +3396,7 @@ nodes {
 }
 nodes {
   position {
-    x: 415.0
+    x: 500.0
     y: -85.0
     z: 0.0
     w: 1.0
@@ -3431,7 +3431,7 @@ nodes {
   layer: ""
   inherit_alpha: true
   alpha: 1.0
-  template: "/example/ysdkdebug/button_sm.gui"
+  template: "/example/ysdkdebug/button.gui"
   template_node_child: false
 }
 nodes {
@@ -3454,7 +3454,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 150.0
+    x: 320.0
     y: 70.0
     z: 0.0
     w: 1.0
@@ -3505,11 +3505,11 @@ nodes {
   scale {
     x: 0.8
     y: 0.8
-    z: 0.7
+    z: 1.0
     w: 1.0
   }
   size {
-    x: 162.5
+    x: 375.0
     y: 87.5
     z: 0.0
     w: 1.0
@@ -3873,8 +3873,8 @@ nodes {
 }
 nodes {
   position {
-    x: 160.0
-    y: -255.0
+    x: 500.0
+    y: -170.0
     z: 0.0
     w: 1.0
   }
@@ -4033,7 +4033,7 @@ nodes {
 nodes {
   position {
     x: 550.0
-    y: 1157.0
+    y: 1243.0
     z: 0.0
     w: 1.0
   }
@@ -4050,8 +4050,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 530.0
-    y: 250.0
+    x: 680.0
+    y: 140.0
     z: 0.0
     w: 1.0
   }
@@ -4626,8 +4626,8 @@ nodes {
 }
 nodes {
   position {
-    x: 75.0
-    y: -175.0
+    x: 585.0
+    y: -85.0
     z: 0.0
     w: 1.0
   }
@@ -4786,7 +4786,7 @@ nodes {
 nodes {
   position {
     x: 550.0
-    y: 906.0
+    y: 938.0
     z: 0.0
     w: 1.0
   }
@@ -4803,7 +4803,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 530.0
+    x: 680.0
     y: 250.0
     z: 0.0
     w: 1.0
@@ -6175,7 +6175,7 @@ nodes {
 nodes {
   position {
     x: 180.0
-    y: 1085.0
+    y: 1102.0
     z: 0.0
     w: 1.0
   }
@@ -6320,6 +6320,441 @@ nodes {
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
   parent: "button_environment/body"
+  layer: "font2"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  overridden_fields: 8
+  template_node_child: true
+  text_leading: 1.0
+  text_tracking: 0.0
+}
+nodes {
+  position {
+    x: 550.0
+    y: 1093.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 680.0
+    y: 140.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "common/empty"
+  id: "group_feedback"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_NW
+  adjust_mode: ADJUST_MODE_FIT
+  layer: ""
+  inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: false
+  size_mode: SIZE_MODE_MANUAL
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 480.0
+    y: 50.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 0.4
+    y: 0.6
+    z: 0.4
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Feedback:"
+  font: "font2"
+  id: "title_group_banners1"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_NW
+  outline {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  shadow {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "group_feedback"
+  layer: "font2"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
+}
+nodes {
+  position {
+    x: 160.0
+    y: -85.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_feedback_can_review"
+  parent: "group_feedback"
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  template: "/example/ysdkdebug/button.gui"
+  template_node_child: false
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 320.0
+    y: 70.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "common/button"
+  id: "button_feedback_can_review/body"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "button_feedback_can_review"
+  layer: "common"
+  inherit_alpha: true
+  slice9 {
+    x: 24.0
+    y: 24.0
+    z: 24.0
+    w: 24.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: true
+  size_mode: SIZE_MODE_MANUAL
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.8
+    y: 0.8
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 375.0
+    y: 87.5
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Can Review"
+  font: "font2"
+  id: "button_feedback_can_review/text"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  shadow {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "button_feedback_can_review/body"
+  layer: "font2"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  overridden_fields: 8
+  template_node_child: true
+  text_leading: 1.0
+  text_tracking: 0.0
+}
+nodes {
+  position {
+    x: 500.0
+    y: -85.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_feedback_request_review"
+  parent: "group_feedback"
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  template: "/example/ysdkdebug/button.gui"
+  template_node_child: false
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 320.0
+    y: 70.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "common/button"
+  id: "button_feedback_request_review/body"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "button_feedback_request_review"
+  layer: "common"
+  inherit_alpha: true
+  slice9 {
+    x: 24.0
+    y: 24.0
+    z: 24.0
+    w: 24.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: true
+  size_mode: SIZE_MODE_MANUAL
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.8
+    y: 0.8
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 375.0
+    y: 87.5
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Request Review"
+  font: "font2"
+  id: "button_feedback_request_review/text"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  shadow {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "button_feedback_request_review/body"
   layer: "font2"
   inherit_alpha: true
   alpha: 1.0

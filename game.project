@@ -5,14 +5,14 @@ main_collection = /example/main.collectionc
 shared_state = 1
 
 [display]
-width = 1100
+width = 1250
 height = 1500
 high_dpi = 1
 vsync = 0
 
 [project]
 title = yagames
-version = 0.4.2
+version = 0.5.0
 publisher = Indiesoft LLC
 bundle_resources = example/bundle/
 dependencies#0 = https://github.com/subsoap/defos/archive/v2.5.0.zip

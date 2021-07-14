@@ -15,9 +15,9 @@ title = yagames
 version = 0.4.2
 publisher = Indiesoft LLC
 bundle_resources = example/bundle/
-dependencies#0 = https://github.com/subsoap/defos/archive/v2.4.2.zip
-dependencies#1 = https://github.com/Insality/druid/archive/0.5.0.zip
-dependencies#2 = https://github.com/britzl/ludobits/archive/6.9.0.zip
+dependencies#0 = https://github.com/subsoap/defos/archive/v2.5.0.zip
+dependencies#1 = https://github.com/Insality/druid/archive/0.6.0.zip
+dependencies#2 = https://github.com/britzl/ludobits/archive/7.1.0.zip
 
 [library]
 include_dirs = yagames

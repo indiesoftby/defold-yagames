@@ -254,6 +254,42 @@ Create an RTB block in [the Yandex Advertising Network interface](https://partne
 
 The ad block will be displayed within 30 minutes after saving the code and placing it on the game page. 
 
+### Styling RTB blocks
+
+Usually, developers put banners to the sides of a page. You can apply any CSS styles to the `div` block that will contain RTB ad via the `yagames.banner_create`'s `options` argument.
+
+The following examples require to set `width` and `height` to `100%` for the `<body>`. You should append these CSS styles to your Defold's HTML template or CSS file:
+```html
+<style>
+body {
+    height: 100%;
+    width: 100%;
+}
+</style>
+```
+
+Left vertical banner. Width is 350px:
+```css
+background: #d2d2d2; width: 350px; left: 0; align-items: center; display: flex; height: 100%; justify-content: center; position: absolute;
+```
+
+Right vertical banner ([screenshot](https://gist.github.com/aglitchman/a006968b838766279834ab65c049cfe4/raw/11b08fdbc392d4013bb6756ee57de382aa5a5b08/Screenshot%2520RIGHT.png)). Width is 350px:
+```css
+background: #d2d2d2; width: 350px; right: 0; align-items: center; display: flex; height: 100%; justify-content: center; position: absolute;
+```
+
+Horizontal banner at the top. Height is 250px:
+```css
+background: #d2d2d2; height: 250px; top: 0; align-items: center; display: flex; justify-content: center; position: absolute; width: 100%;
+```
+
+Horizontal banner at the bottom ([screenshot](https://gist.github.com/aglitchman/a006968b838766279834ab65c049cfe4/raw/11b08fdbc392d4013bb6756ee57de382aa5a5b08/Screenshot%2520BOTTOM.png)). Height is 250px:
+```css
+background: #d2d2d2; height: 250px; bottom: 0; align-items: center; display: flex; justify-content: center; position: absolute; width: 100%;
+```
+
+Note: `background: #d2d2d2;` - it's the background color for visual debugging. For production, you should remove it.
+
 ## Banner Ads Lua API
 
 ### yagames.banner_init(callback)

@@ -15,7 +15,7 @@ background_color {
 }
 nodes {
   position {
-    x: 500.0
+    x: 550.0
     y: 1213.0
     z: 0.0
     w: 1.0
@@ -69,7 +69,7 @@ nodes {
 }
 nodes {
   position {
-    x: 500.0
+    x: 550.0
     y: 703.0
     z: 0.0
     w: 1.0
@@ -227,7 +227,7 @@ nodes {
 }
 nodes {
   position {
-    x: 500.0
+    x: 550.0
     y: 802.0
     z: 0.0
     w: 1.0
@@ -289,7 +289,7 @@ nodes {
 }
 nodes {
   position {
-    x: 500.0
+    x: 550.0
     y: 899.0
     z: 0.0
     w: 1.0
@@ -351,7 +351,7 @@ nodes {
 }
 nodes {
   position {
-    x: 500.0
+    x: 550.0
     y: 206.0
     z: 0.0
     w: 1.0
@@ -414,7 +414,7 @@ nodes {
 }
 nodes {
   position {
-    x: 500.0
+    x: 550.0
     y: 296.0
     z: 0.0
     w: 1.0

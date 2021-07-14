@@ -232,16 +232,16 @@ The best way to integrate SDK into your game is to read [the official documentat
 | `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)`<br>The result is a table `{ value = true/false, reason = "string" }` |
 | `ysdk.feedback.requestReview()` | `yagames.feedback_request_review(callback)`<br>The result is a table `{ feedbackSent = true/false }` |
 | **Banner Ads** [(docs)](#banner-ads) |  |
-| `-` | `yagames.banner_init(callback)` |
-| `-` | `yagames.banner_create(rtb_id, options, [callback])` |
-| `-` | `yagames.banner_delete(rtb_id)` |
-| `-` | `yagames.banner_refresh(rtb_id, [callback])` |
-| `-` | `yagames.banner_set(rtb_id, property, value)` |
+|  | `yagames.banner_init(callback)` |
+|  | `yagames.banner_create(rtb_id, options, [callback])` |
+|  | `yagames.banner_delete(rtb_id)` |
+|  | `yagames.banner_refresh(rtb_id, [callback])` |
+|  | `yagames.banner_set(rtb_id, property, value)` |
 | **Sitelock** [(docs)](#sitelock) |  |
-| `-` | `sitelock.add_domain(domain)` |
-| `-` | `sitelock.verify_domain()` |
-| `-` | `sitelock.get_current_domain()` |
-| `-` | `sitelock.is_release_build()` |
+|  | `sitelock.add_domain(domain)` |
+|  | `sitelock.verify_domain()` |
+|  | `sitelock.get_current_domain()` |
+|  | `sitelock.is_release_build()` |
 
 ## Banner Ads
 

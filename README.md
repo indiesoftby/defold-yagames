@@ -198,12 +198,12 @@ The best way to integrate SDK into your game is to read [the official documentat
 | `ysdk.deviceInfo.isDesktop()` | `yagames.device_info_is_desktop()` |
 | `ysdk.deviceInfo.isMobile()` | `yagames.device_info_is_mobile()` |
 | `ysdk.deviceInfo.isTablet()` | `yagames.device_info_is_tablet()` |
-| **Environment** [(docs ![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==))](https://yandex.ru/dev/games/doc/dg/sdk/sdk-environment.html) |  |
+| **Environment** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-environment.html) |  |
 | `ysdk.environment` | `yagames.environment()`<br>Returns Lua table `{ app = { id = ... }, ... }` |
-| **Advertisement** [(docs ![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==))](https://yandex.ru/dev/games/doc/dg/sdk/sdk-adv.html) |  |
+| **Advertisement** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-adv.html) |  |
 | `ysdk.adv.showFullscreenAdv({callbacks:{}})` | `yagames.adv_show_fullscreen_adv(callbacks)` [<kbd>Example</kbd>](#2-interstitial-ad) |
 | `ysdk.adv.showRewardedVideo({callbacks:{}})` | `yagames.adv_show_rewarded_video(callbacks)` [<kbd>Example</kbd>](#3-rewarded-videos) |
-| **Authentication + Player** [(docs ![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==))](https://yandex.ru/dev/games/doc/dg/sdk/sdk-player.html) |  |
+| **Authentication + Player** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-player.html) |  |
 | `ysdk.auth.openAuthDialog()` | `yagames.auth_open_auth_dialog(callback)` |
 | `ysdk.getPlayer(options)` | `yagames.player_init(options, callback)`<br>The argument `options` is a Lua table `{ signed = boolean, scopes = boolean }`. |
 | `player.setData(data, flush)` | `yagames.player_set_data(data, flush, callback)` |
@@ -216,19 +216,19 @@ The best way to integrate SDK into your game is to read [the official documentat
 | `player.getIDsPerGame()` | `yagames.player_get_ids_per_game(callback)` |
 | `player.getName()` | `yagames.player_get_name()` |
 | `player.getPhoto(size)` | `yagames.player_get_photo(size)` |
-| **In-Game Purchases** [(docs ![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==))](https://yandex.ru/dev/games/doc/dg/sdk/sdk-purchases.html) |  |
+| **In-Game Purchases** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-purchases.html) |  |
 | `ysdk.getPayments(options)` | `yagames.payments_init(options, callback)` |
 | `payments.purchase(options)` | `yagames.payments_purchase(options, callback)` |
 | `payments.getPurchases()` | `yagames.payments_get_purchases(callback)`<br>The result has the format `{ purchases = { ... }, signature = "..." }` |
 | `payments.getCatalog()` | `yagames.payments_get_catalog(callback)` |
 | `payments.consumePurchase(purchaseToken)` | `yagames.payments_consume_purchase(purchase_token, callback)` |
-| **Leaderboards** [(docs ![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==))](https://yandex.ru/dev/games/doc/dg/sdk/sdk-leaderboard.html) |  |
+| **Leaderboards** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-leaderboard.html) |  |
 | `ysdk.getLeaderboards()` | `yagames.leaderboards_init(callback)` |
 | `lb.getLeaderboardDescription(leaderboardName)` | `yagames.leaderboards_get_description(leaderboard_name, callback)` |
 | `lb.getLeaderboardPlayerEntry(leaderboardName)` | `yagames.leaderboards_get_player_entry(leaderboard_name, [options], callback)`<br>If the player doesn't have any score, you get the error `FetchError: Player is not present in leaderboard`.<br>The argument `options` is an optional Lua table `{ getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` can be `small`, `medium`, `large`. |
 | `lb.getLeaderboardEntries(leaderboardName, options)` | `yagames.leaderboards_get_entries(leaderboard_name, [options], callback)`<br>The argument `options` is an optional Lua table `{ includeUser = boolean, quantityAround = number, quantityTop = number, getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` can be `small`, `medium`, `large`. |
 | `lb.setLeaderboardScore(leaderboardName, score, extraData)` | `yagames.leaderboards_set_score(leaderboard_name, score, [extra_data], [callback])` |
-| **Feedback** [(docs ![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==))](https://yandex.ru/dev/games/doc/dg/sdk/sdk-review.html) |  |
+| **Feedback** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-review.html) |  |
 | `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)`<br>The result is a table `{ value = true/false, reason = "string" }` |
 | `ysdk.feedback.requestReview()` | `yagames.feedback_request_review(callback)`<br>The result is a table `{ feedbackSent = true/false }` |
 | **Banner Ads** [(docs)](#banner-ads) |  |

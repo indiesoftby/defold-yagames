@@ -14,8 +14,7 @@ function M.handler(self)
 end
 
 function M.init(self)
-    self.button_auth_open = druid_style.button_with_text(self, "button_auth_open/body", "button_auth_open/text",
-                                                         M.handler)
+    druid_style.make_button(self, "button_auth_open", M.handler)
 end
 
 return M

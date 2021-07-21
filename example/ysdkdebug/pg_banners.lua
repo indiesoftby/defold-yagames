@@ -54,14 +54,10 @@ function M.toggle_handler(self)
 end
 
 function M.init(self)
-    self.button_banner_create = druid_style.button_with_text(self, "button_banner_create/body",
-                                                             "button_banner_create/text", M.create_handler, true)
-    self.button_banner_refresh = druid_style.button_with_text(self, "button_banner_refresh/body",
-                                                              "button_banner_refresh/text", M.refresh_handler, true)
-    self.button_banner_destroy = druid_style.button_with_text(self, "button_banner_destroy/body",
-                                                              "button_banner_destroy/text", M.destroy_handler, true)
-    self.button_banner_toggle = druid_style.button_with_text(self, "button_banner_toggle/body",
-                                                             "button_banner_toggle/text", M.toggle_handler, true)
+    druid_style.make_button(self, "button_banner_create", M.create_handler, true)
+    druid_style.make_button(self, "button_banner_refresh", M.refresh_handler, true)
+    druid_style.make_button(self, "button_banner_destroy", M.destroy_handler, true)
+    druid_style.make_button(self, "button_banner_toggle", M.toggle_handler, true)
 
     yagames.banner_init(M.init_handler)
 end

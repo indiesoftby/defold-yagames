@@ -42,12 +42,8 @@ function M.show_rewarded_video(self)
 end
 
 function M.init(self)
-    self.button_show_fullscreen_adv = druid_style.button_with_text(self, "button_show_fullscreen_adv/body",
-                                                                   "button_show_fullscreen_adv/text",
-                                                                   M.show_fullscreen_adv)
-    self.button_show_rewarded_video = druid_style.button_with_text(self, "button_show_rewarded_video/body",
-                                                                   "button_show_rewarded_video/text",
-                                                                   M.show_rewarded_video)
+    druid_style.make_button(self, "button_show_fullscreen_adv", M.show_fullscreen_adv)
+    druid_style.make_button(self, "button_show_rewarded_video", M.show_rewarded_video)
 end
 
 return M

@@ -9,6 +9,7 @@ local pg_feedback = require("example.ysdkdebug.pg_feedback")
 local pg_leaderboards = require("example.ysdkdebug.pg_leaderboards")
 local pg_payments = require("example.ysdkdebug.pg_payments")
 local pg_player = require("example.ysdkdebug.pg_player")
+local pg_screen = require("example.ysdkdebug.pg_screen")
 local table_util = require("example.ysdkdebug.table_util")
 
 local log_print = require("example.ysdkdebug.log_print")
@@ -31,6 +32,12 @@ local function environment_handler(self)
     print("yagames.environment():", table_util.tostring(yagames.environment()))
 end
 
+local function clipboard_write_text_handler(self)
+    yagames.clipboard_write_text("HELLO FROM DEFOLD!", function (self, err)
+        print("yagames.clipboard_write_text:", err or "OK")
+    end)
+end
+
 function init(self)
     self.druid = druid.new(self, druid_style)
 
@@ -43,13 +50,11 @@ function init(self)
     pg_player.init(self)
     pg_leaderboards.init(self)
     pg_feedback.init(self)
+    pg_screen.init(self)
 
-    self.button_environment_clear = druid_style.button_with_text(self, "button_environment/body",
-                                                                 "button_environment/text", environment_handler)
-
-    self.button_debug_log_clear = druid_style.button_with_text(self, "button_debug_log_clear/body",
-                                                               "button_debug_log_clear/text", log_print.clear_log)
-
+    druid_style.make_button(self, "button_environment", environment_handler)
+    druid_style.make_button(self, "button_clipboard_write_text", clipboard_write_text_handler)
+    druid_style.make_button(self, "button_debug_log_clear", log_print.clear_log)
 end
 
 function final(self)

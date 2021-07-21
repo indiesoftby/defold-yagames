@@ -40,4 +40,11 @@ function M.button_with_text(self, node, text_node, callback, disabled)
     return btn
 end
 
+function M.make_button(self, base_name, callback, disabled)
+    local node = base_name .. "/body"
+    local text_node = base_name .. "/text"
+
+    self["button_" .. base_name] = M.button_with_text(self, node, text_node, callback, disabled)
+end
+
 return M

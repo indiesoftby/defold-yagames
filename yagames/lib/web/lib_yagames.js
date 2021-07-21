@@ -181,8 +181,7 @@ var LibYaGamesPrivate = {
         try {
             var text = UTF8ToString(ctext);
             self._ysdk
-                .clipboard
-                .writeText(text)
+                .clipboard.writeText(text)
                 .then(() => {
                     self.send(cb_id, null);
                 })
@@ -596,6 +595,44 @@ var LibYaGamesPrivate = {
                 .getStats(keys)
                 .then((result) => {
                     self.send(cb_id, null, JSON.stringify(result));
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
+    YaGamesPrivate_Screen_Fullscreen_Status: function () {
+        var status = YaGamesPrivate._ysdk.screen.fullscreen.status;
+        var cstatus = allocate(intArrayFromString(status), "i8", ALLOC_NORMAL);
+        return cstatus;
+    },
+
+    YaGamesPrivate_Screen_Fullscreen_Request: function (cb_id) {
+        var self = YaGamesPrivate;
+        try {
+            self._ysdk
+                .screen.fullscreen.request()
+                .then(() => {
+                    self.send(cb_id, null);
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
+    YaGamesPrivate_Screen_Fullscreen_Exit: function (cb_id) {
+        var self = YaGamesPrivate;
+        try {
+            self._ysdk
+                .screen.fullscreen.exit()
+                .then(() => {
+                    self.send(cb_id, null);
                 })
                 .catch((err) => {
                     self.send(cb_id, self.toErrStr(err));

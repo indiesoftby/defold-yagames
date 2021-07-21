@@ -51,6 +51,9 @@ extern "C"
     void YaGamesPrivate_Player_SetStats(const int cb_id, const char* cstats);
     void YaGamesPrivate_Player_IncrementStats(const int cb_id, const char* cincrements);
     void YaGamesPrivate_Player_GetStats(const int cb_id, const char* ckeys);
+    const char *YaGamesPrivate_Screen_Fullscreen_Status();
+    void YaGamesPrivate_Screen_Fullscreen_Request(const int cb_id);
+    void YaGamesPrivate_Screen_Fullscreen_Exit(const int cb_id);
     void YaGamesPrivate_Banner_Init(const int cb_id);
     void YaGamesPrivate_Banner_Create(const char* crtb_id, const char* coptions, const int cb_id);
     void YaGamesPrivate_Banner_Destroy(const char* crtb_id);
@@ -627,6 +630,26 @@ static int Player_GetStats(lua_State* L)
     return 0;
 }
 
+static int Screen_Fullscreen_Status(lua_State* L)
+{
+    const char* status = YaGamesPrivate_Screen_Fullscreen_Status();
+    lua_pushstring(L, status);
+    free((void*)status);
+    return 1;
+}
+
+static int Screen_Fullscreen_Request(lua_State* L)
+{
+    YaGamesPrivate_Screen_Fullscreen_Request(luaL_checkint(L, 1));
+    return 0;
+}
+
+static int Screen_Fullscreen_Exit(lua_State* L)
+{
+    YaGamesPrivate_Screen_Fullscreen_Exit(luaL_checkint(L, 1));
+    return 0;
+}
+
 //
 // Banner Ads API
 //
@@ -709,6 +732,10 @@ static const luaL_reg Module_methods[] = {
     { "player_set_stats", Player_SetStats },
     { "player_increment_stats", Player_IncrementStats },
     { "player_get_stats", Player_GetStats },
+    // - Screen
+    { "screen_fullscreen_status", Screen_Fullscreen_Status },
+    { "screen_fullscreen_request", Screen_Fullscreen_Request },
+    { "screen_fullscreen_exit", Screen_Fullscreen_Exit },
     // - Banner Ads
     { "banner_init", Banner_Init },
     { "banner_create", Banner_Create },

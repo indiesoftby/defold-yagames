@@ -194,14 +194,6 @@ The best way to integrate SDK into your game is to read [the official documentat
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `YaGames.init(options)` | `yagames.init(callback)`<br>The `options` is a JavaScript object `{}`, and it can be set in the `yagames.sdk_init_options` setting. |
-| **Clipboard** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html) |  |
-| `ysdk.clipboard.writeText(text)` | `yagames.clipboard_write_text(text, [callback])` |
-| **Device Info** |  |
-| `ysdk.deviceInfo.isDesktop()` | `yagames.device_info_is_desktop()` |
-| `ysdk.deviceInfo.isMobile()` | `yagames.device_info_is_mobile()` |
-| `ysdk.deviceInfo.isTablet()` | `yagames.device_info_is_tablet()` |
-| **Environment** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-environment.html) |  |
-| `ysdk.environment` | `yagames.environment()`<br>Returns Lua table `{ app = { id = ... }, ... }` |
 | **Advertisement** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-adv.html) |  |
 | `ysdk.adv.showFullscreenAdv({callbacks:{}})` | `yagames.adv_show_fullscreen_adv(callbacks)` [<kbd>Example</kbd>](#2-interstitial-ad) |
 | `ysdk.adv.showRewardedVideo({callbacks:{}})` | `yagames.adv_show_rewarded_video(callbacks)` [<kbd>Example</kbd>](#3-rewarded-videos) |
@@ -233,6 +225,18 @@ The best way to integrate SDK into your game is to read [the official documentat
 | **Feedback** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-review.html) |  |
 | `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)`<br>The result is a table `{ value = true/false, reason = "string" }` |
 | `ysdk.feedback.requestReview()` | `yagames.feedback_request_review(callback)`<br>The result is a table `{ feedbackSent = true/false }` |
+| **Clipboard** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html) |  |
+| `ysdk.clipboard.writeText(text)` | `yagames.clipboard_write_text(text, [callback])` |
+| **Device Info** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html) |  |
+| `ysdk.deviceInfo.isDesktop()` | `yagames.device_info_is_desktop()` |
+| `ysdk.deviceInfo.isMobile()` | `yagames.device_info_is_mobile()` |
+| `ysdk.deviceInfo.isTablet()` | `yagames.device_info_is_tablet()` |
+| **Environment** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-environment.html) |  |
+| `ysdk.environment` | `yagames.environment()`<br>Returns Lua table `{ app = { id = ... }, ... }` |
+| **Screen** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html) |  |
+| `ysdk.screen.fullscreen.status` | `yagames.screen_fullscreen_status()`<br>Returns `"on"` or `"off"` |
+| `ysdk.screen.fullscreen.request()` | `yagames.screen_fullscreen_request([callback])` |
+| `ysdk.screen.fullscreen.exit()` | `yagames.screen_fullscreen_exit([callback])` |
 | **Banner Ads** [(docs)](#banner-ads) |  |
 |  | `yagames.banner_init(callback)` |
 |  | `yagames.banner_create(rtb_id, options, [callback])` |

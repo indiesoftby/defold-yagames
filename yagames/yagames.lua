@@ -446,6 +446,38 @@ function M.player_get_stats(keys, callback)
     end), keys and rxi_json.encode(keys) or nil)
 end
 
+---
+-- @treturn string
+function M.screen_fullscreen_status()
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+
+    return yagames_private.screen_fullscreen_status()
+end
+
+---
+-- @tparam function callback
+function M.screen_fullscreen_request(callback)
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+
+    yagames_private.screen_fullscreen_request(helper.wrap_for_promise(function(self, err)
+        if type(callback) == "function" then
+            callback(self, err)
+        end
+    end))
+end
+
+---
+-- @tparam function callback
+function M.screen_fullscreen_exit(callback)
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+
+    yagames_private.screen_fullscreen_exit(helper.wrap_for_promise(function(self, err)
+        if type(callback) == "function" then
+            callback(self, err)
+        end
+    end))
+end
+
 -- @tparam function callback
 function M.banner_init(callback)
     assert(type(callback) == "function")

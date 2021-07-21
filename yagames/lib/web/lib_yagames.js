@@ -176,6 +176,24 @@ var LibYaGamesPrivate = {
         }
     },
 
+    YaGamesPrivate_Clipboard_WriteText: function (cb_id, ctext) {
+        var self = YaGamesPrivate;
+        try {
+            var text = UTF8ToString(ctext);
+            self._ysdk
+                .clipboard
+                .writeText(text)
+                .then(() => {
+                    self.send(cb_id, null);
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
     YaGamesPrivate_DeviceInfo_IsDesktop: function () {
         return YaGamesPrivate._ysdk.deviceInfo.isDesktop();
     },

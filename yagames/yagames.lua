@@ -95,6 +95,20 @@ function M.auth_open_auth_dialog(callback)
     yagames_private.open_auth_dialog(helper.wrap_for_promise(callback))
 end
 
+---
+-- @tparam string text
+-- @tparam function callback
+function M.clipboard_write_text(text, callback)
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(type(text) == "string", "Text should be 'string'")
+
+    yagames_private.clipboard_write_text(helper.wrap_for_promise(function(self, err)
+        if type(callback) == "function" then
+            callback(self, err)
+        end
+    end), text)
+end
+
 --- 
 -- @treturn boolean
 function M.device_info_is_desktop()

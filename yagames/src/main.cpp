@@ -23,6 +23,7 @@ extern "C"
     void YaGamesPrivate_ShowFullscreenAdv(const int cb_id);
     void YaGamesPrivate_ShowRewardedVideo(const int cb_id);
     void YaGamesPrivate_OpenAuthDialog(const int cb_id);
+    void YaGamesPrivate_Clipboard_WriteText(const int cb_id, const char* text);
     const bool YaGamesPrivate_DeviceInfo_IsDesktop();
     const bool YaGamesPrivate_DeviceInfo_IsMobile();
     const bool YaGamesPrivate_DeviceInfo_IsTablet();
@@ -429,6 +430,12 @@ static int OpenAuthDialog(lua_State* L)
     return 0;
 }
 
+static int Clipboard_WriteText(lua_State* L)
+{
+    YaGamesPrivate_Clipboard_WriteText(luaL_checkint(L, 1), luaL_checkstring(L, 2));
+    return 0;
+}
+
 static int DeviceInfo_IsDesktop(lua_State* L)
 {
     lua_pushboolean(L, YaGamesPrivate_DeviceInfo_IsDesktop());
@@ -667,6 +674,8 @@ static const luaL_reg Module_methods[] = {
     { "show_rewarded_video", ShowRewardedVideo },
     // - Auth
     { "open_auth_dialog", OpenAuthDialog },
+    // - Clipboard
+    { "clipboard_write_text", Clipboard_WriteText },
     // - Device Info
     { "device_info_is_desktop", DeviceInfo_IsDesktop },
     { "device_info_is_mobile", DeviceInfo_IsMobile },

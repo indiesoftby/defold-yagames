@@ -194,6 +194,8 @@ The best way to integrate SDK into your game is to read [the official documentat
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `YaGames.init(options)` | `yagames.init(callback)`<br>The `options` is a JavaScript object `{}`, and it can be set in the `yagames.sdk_init_options` setting. |
+| **Clipboard** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html) |  |
+| `ysdk.clipboard.writeText(text)` | `yagames.clipboard_write_text(text, [callback])` |
 | **Device Info** |  |
 | `ysdk.deviceInfo.isDesktop()` | `yagames.device_info_is_desktop()` |
 | `ysdk.deviceInfo.isMobile()` | `yagames.device_info_is_mobile()` |

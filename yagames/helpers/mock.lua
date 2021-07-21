@@ -53,6 +53,10 @@ function M.open_auth_dialog(cb_id)
     M.send(cb_id, NO_ERR)
 end
 
+function M.clipboard_write_text(cb_id)
+    M.send(cb_id, "Not supported.")
+end
+
 function M.device_info_is_desktop()
     return true
 end
@@ -298,6 +302,18 @@ function M.player_get_stats(cb_id, keys)
     else
         M.send(cb_id, NO_ERR, rxi_json.encode(M._player.stats))
     end
+end
+
+function M.screen_fullscreen_status()
+    return "off"
+end
+
+function M.screen_fullscreen_request(cb_id)
+    M.send(cb_id, "Not supported.")
+end
+
+function M.screen_fullscreen_exit(cb_id)
+    M.send(cb_id, "Not supported.")
 end
 
 function M.banner_init(cb_id)

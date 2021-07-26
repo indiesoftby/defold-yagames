@@ -110,6 +110,14 @@ function M.clipboard_write_text(text, callback)
 end
 
 --- 
+-- @treturn string
+function M.device_info_type()
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+
+    return yagames_private.device_info_type()
+end
+
+--- 
 -- @treturn boolean
 function M.device_info_is_desktop()
     assert(M.ysdk_ready, "YaGames is not initialized.")

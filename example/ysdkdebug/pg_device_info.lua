@@ -18,6 +18,8 @@ function M.init(self)
     gui.set_color(is_desktop, yagames.device_info_is_desktop() and alpha1 or alpha2)
     gui.set_color(is_mobile, yagames.device_info_is_mobile() and alpha1 or alpha2)
     gui.set_color(is_tablet, yagames.device_info_is_tablet() and alpha1 or alpha2)
+
+    print("yagames.device_info_type:", yagames.device_info_type())
 end
 
 return M

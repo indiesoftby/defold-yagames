@@ -57,6 +57,10 @@ function M.clipboard_write_text(cb_id)
     M.send(cb_id, "Not supported.")
 end
 
+function M.device_info_type()
+    return "desktop"
+end
+
 function M.device_info_is_desktop()
     return true
 end

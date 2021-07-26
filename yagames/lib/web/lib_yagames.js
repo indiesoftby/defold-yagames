@@ -193,6 +193,12 @@ var LibYaGamesPrivate = {
         }
     },
 
+    YaGamesPrivate_DeviceInfo_Type: function () {
+        var self = YaGamesPrivate;
+        var ctype = allocate(intArrayFromString(self._ysdk.deviceInfo.type), "i8", ALLOC_NORMAL);
+        return ctype;
+    },
+
     YaGamesPrivate_DeviceInfo_IsDesktop: function () {
         return YaGamesPrivate._ysdk.deviceInfo.isDesktop();
     },

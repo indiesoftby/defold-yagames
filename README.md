@@ -229,6 +229,7 @@ The best way to integrate SDK into your game is to read [the official documentat
 | **Clipboard** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html) |  |
 | `ysdk.clipboard.writeText(text)` | `yagames.clipboard_write_text(text, [callback])` |
 | **Device Info** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html) |  |
+| `ysdk.deviceInfo.type` | `yagames.device_info_type()`<br>Returns `"desktop"`, `"mobile"` or `"tablet"` |
 | `ysdk.deviceInfo.isDesktop()` | `yagames.device_info_is_desktop()` |
 | `ysdk.deviceInfo.isMobile()` | `yagames.device_info_is_mobile()` |
 | `ysdk.deviceInfo.isTablet()` | `yagames.device_info_is_tablet()` |

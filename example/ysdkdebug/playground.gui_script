@@ -33,7 +33,7 @@ local function environment_handler(self)
 end
 
 local function clipboard_write_text_handler(self)
-    yagames.clipboard_write_text("HELLO FROM DEFOLD!", function (self, err)
+    yagames.clipboard_write_text(log_print.log, function (self, err)
         print("yagames.clipboard_write_text:", err or "OK")
     end)
 end

@@ -320,6 +320,43 @@ function M.screen_fullscreen_exit(cb_id)
     M.send(cb_id, "Not supported.")
 end
 
+function M.get_storage(cb_id)
+    M._storage = {}
+    M.send(cb_id, NO_ERR)
+end
+
+function M.storage_get_item(key, value)
+    return M._storage[key]
+end
+
+function M.storage_set_item(key, value)
+    M._storage[key] = value
+end
+
+function M.storage_remove_item(key)
+    M._storage[key] = nil
+end
+
+function M.storage_clear()
+    M._storage = {}
+end
+
+function M.storage_key(n)
+    local keys = {}
+    for k, _ in pairs(M._storage) do
+        table.insert(keys, k)
+    end
+    return keys[n + 1]
+end
+
+function M.storage_length()
+    local c = 0
+    for _ in pairs(M._storage) do
+        c = c + 1
+    end
+    return c
+end
+
 function M.banner_init(cb_id)
     M.send(cb_id, "Error loading SDK.")
 end

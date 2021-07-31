@@ -38,6 +38,35 @@ local function clipboard_write_text_handler(self)
     end)
 end
 
+local function test_storage(self, err)
+    if err then
+        print("yagames.storage_init:", err)
+        return
+    end
+
+    yagames.storage_clear()
+    yagames.storage_set_item("storage_test_key", "value")
+    assert(yagames.storage_length() == 1, "invalid storage length")
+    assert(yagames.storage_get_item("storage_test_key") == "value", "invalid value from storage")
+    assert(yagames.storage_get_item("non_exist_key") == nil, "invalid value from storage")
+    yagames.storage_remove_item("non_exist_key")
+    assert(yagames.storage_length() == 1, "invalid storage length")
+    yagames.storage_remove_item("storage_test_key")
+    assert(yagames.storage_length() == 0, "invalid storage length #2")
+    yagames.storage_set_item("key_1", "value_1")
+    yagames.storage_set_item("key_2", "value_2")
+    assert(yagames.storage_length() == 2, "invalid storage length #3")
+    local key0 = yagames.storage_key(0)
+    assert(key0 == "key_1" or key0 == "key_2", "invalid key")
+    assert(yagames.storage_key(2) == nil, "invalid key #2")
+
+    print("safe storage test result:", "OK")
+end
+
+local function storage_test_handler(self)
+    yagames.storage_init(test_storage)
+end
+
 function init(self)
     self.druid = druid.new(self, druid_style)
 
@@ -53,6 +82,7 @@ function init(self)
     pg_screen.init(self)
 
     druid_style.make_button(self, "button_environment", environment_handler)
+    druid_style.make_button(self, "button_storage_test", storage_test_handler)
     druid_style.make_button(self, "button_clipboard_write_text", clipboard_write_text_handler)
     druid_style.make_button(self, "button_debug_log_clear", log_print.clear_log)
 end

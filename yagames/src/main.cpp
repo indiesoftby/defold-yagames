@@ -24,11 +24,11 @@ extern "C"
     void YaGamesPrivate_ShowRewardedVideo(const int cb_id);
     void YaGamesPrivate_OpenAuthDialog(const int cb_id);
     void YaGamesPrivate_Clipboard_WriteText(const int cb_id, const char* text);
-    const char *YaGamesPrivate_DeviceInfo_Type();
+    const char* YaGamesPrivate_DeviceInfo_Type();
     const bool YaGamesPrivate_DeviceInfo_IsDesktop();
     const bool YaGamesPrivate_DeviceInfo_IsMobile();
     const bool YaGamesPrivate_DeviceInfo_IsTablet();
-    const char *YaGamesPrivate_Environment();
+    const char* YaGamesPrivate_Environment();
     void YaGamesPrivate_Feedback_CanReview(const int cb_id);
     void YaGamesPrivate_Feedback_RequestReview(const int cb_id);
     void YaGamesPrivate_GetLeaderboards(const int cb_id);
@@ -52,9 +52,16 @@ extern "C"
     void YaGamesPrivate_Player_SetStats(const int cb_id, const char* cstats);
     void YaGamesPrivate_Player_IncrementStats(const int cb_id, const char* cincrements);
     void YaGamesPrivate_Player_GetStats(const int cb_id, const char* ckeys);
-    const char *YaGamesPrivate_Screen_Fullscreen_Status();
+    const char* YaGamesPrivate_Screen_Fullscreen_Status();
     void YaGamesPrivate_Screen_Fullscreen_Request(const int cb_id);
     void YaGamesPrivate_Screen_Fullscreen_Exit(const int cb_id);
+    void YaGamesPrivate_GetStorage(const int cb_id);
+    const char* YaGamesPrivate_Storage_GetItem(const char* key);
+    void YaGamesPrivate_Storage_SetItem(const char* key, const char* value);
+    void YaGamesPrivate_Storage_RemoveItem(const char* key);
+    void YaGamesPrivate_Storage_Clear();
+    const char* YaGamesPrivate_Storage_Key(const int n);
+    const int YaGamesPrivate_Storage_Length();
     void YaGamesPrivate_Banner_Init(const int cb_id);
     void YaGamesPrivate_Banner_Create(const char* crtb_id, const char* coptions, const int cb_id);
     void YaGamesPrivate_Banner_Destroy(const char* crtb_id);
@@ -659,6 +666,72 @@ static int Screen_Fullscreen_Exit(lua_State* L)
     return 0;
 }
 
+static int GetStorage(lua_State* L)
+{
+    YaGamesPrivate_GetStorage(luaL_checkint(L, 1));
+    return 0;
+}
+
+static int Storage_GetItem(lua_State* L)
+{
+    const char* key   = luaL_checkstring(L, 1);
+    const char* value = YaGamesPrivate_Storage_GetItem(key);
+    if (!value)
+    {
+        lua_pushnil(L);
+    }
+    else
+    {
+        lua_pushstring(L, value);
+        free((void*)value);
+    }
+    return 1;
+}
+
+static int Storage_SetItem(lua_State* L)
+{
+    const char* key   = luaL_checkstring(L, 1);
+    const char* value = luaL_checkstring(L, 2);
+    YaGamesPrivate_Storage_SetItem(key, value);
+    return 0;
+}
+
+static int Storage_RemoveItem(lua_State* L)
+{
+    const char* key = luaL_checkstring(L, 1);
+    YaGamesPrivate_Storage_RemoveItem(key);
+    return 0;
+}
+
+static int Storage_Clear(lua_State* L)
+{
+    YaGamesPrivate_Storage_Clear();
+    return 0;
+}
+
+static int Storage_Key(lua_State* L)
+{
+    const int n     = luaL_checkint(L, 1);
+    const char* key = YaGamesPrivate_Storage_Key(n);
+    if (!key)
+    {
+        lua_pushnil(L);
+    }
+    else
+    {
+        lua_pushstring(L, key);
+        free((void*)key);
+    }
+    return 1;
+}
+
+static int Storage_Length(lua_State* L)
+{
+    const int len = YaGamesPrivate_Storage_Length();
+    lua_pushinteger(L, len);
+    return 1;
+}
+
 //
 // Banner Ads API
 //
@@ -746,6 +819,14 @@ static const luaL_reg Module_methods[] = {
     { "screen_fullscreen_status", Screen_Fullscreen_Status },
     { "screen_fullscreen_request", Screen_Fullscreen_Request },
     { "screen_fullscreen_exit", Screen_Fullscreen_Exit },
+    // - Safe Storage
+    { "get_storage", GetStorage },
+    { "storage_get_item", Storage_GetItem },
+    { "storage_set_item", Storage_SetItem },
+    { "storage_remove_item", Storage_RemoveItem },
+    { "storage_clear", Storage_Clear },
+    { "storage_key", Storage_Key },
+    { "storage_length", Storage_Length },
     // - Banner Ads
     { "banner_init", Banner_Init },
     { "banner_create", Banner_Create },

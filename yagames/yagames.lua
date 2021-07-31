@@ -178,7 +178,6 @@ function M.feedback_request_review(callback)
 end
 
 --- Initialize the leaderboards subsystem
--- @tparam {signed=boolean} options
 -- @tparam function callback
 function M.leaderboards_init(callback)
     assert(type(callback) == "function", "Callback function is required")
@@ -484,6 +483,68 @@ function M.screen_fullscreen_exit(callback)
             callback(self, err)
         end
     end))
+end
+
+--- Initialize the Safe Storage
+-- @tparam function callback
+function M.storage_init(callback)
+    assert(type(callback) == "function", "Callback function is required")
+
+    yagames_private.get_storage(helper.wrap_for_promise(function(self, err)
+        M.storage_ready = not err
+
+        callback(self, err)
+    end))
+end
+
+--- Returns that key's value or nil.
+-- @tparam string key
+-- @treturn ?string
+function M.storage_get_item(key)
+    assert(M.storage_ready, "Safe Storage is not initialized.")
+
+    return yagames_private.storage_get_item(key)
+end
+
+--- Adds that key to the storage, or update that key's value if it already exists.
+-- @tparam string key
+-- @tparam string value
+function M.storage_set_item(key, value)
+    assert(M.storage_ready, "Safe Storage is not initialized.")
+
+    yagames_private.storage_set_item(key, value)
+end
+
+--- Removes that key from the storage.
+-- @tparam string key
+function M.storage_remove_item(key)
+    assert(M.storage_ready, "Safe Storage is not initialized.")
+
+    yagames_private.storage_remove_item(key)
+end
+
+--- Empties all keys out of the storage.
+function M.storage_clear()
+    assert(M.storage_ready, "Safe Storage is not initialized.")
+
+    yagames_private.storage_clear()
+end
+
+--- Returns the name of the nth key in the storage.
+-- @tparam number n
+-- @treturn string
+function M.storage_key(n)
+    assert(M.storage_ready, "Safe Storage is not initialized.")
+
+    return yagames_private.storage_key(n)
+end
+
+--- Returns the number of data items stored in the storage.
+-- @treturn number
+function M.storage_length()
+    assert(M.storage_ready, "Safe Storage is not initialized.")
+
+    return yagames_private.storage_length()
 end
 
 -- @tparam function callback

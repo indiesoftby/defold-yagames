@@ -239,6 +239,14 @@ The best way to integrate SDK into your game is to read [the official documentat
 | `ysdk.screen.fullscreen.status` | `yagames.screen_fullscreen_status()`<br>Returns `"on"` or `"off"` |
 | `ysdk.screen.fullscreen.request()` | `yagames.screen_fullscreen_request([callback])` |
 | `ysdk.screen.fullscreen.exit()` | `yagames.screen_fullscreen_exit([callback])` |
+| **Safe Storage** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-player.html) | *Note: `key` and `value` should be valid UTF-8 strings. Storing strings with zero bytes aren't supported.* |
+| `ysdk.getStorage()` | `yagames.storage_init(callback)` |
+| `safeStorage.getItem(key)` | `yagames.storage_get_item(key)`<br>Returns that key's value or `nil`. |
+| `safeStorage.setItem(key, value)` | `yagames.storage_set_item(key, value)`<br>Adds that key to the storage, or update that key's value if it already exists. |
+| `safeStorage.removeItem(key)` | `yagames.storage_remove_item(key)`<br>Removes that key from the storage. |
+| `safeStorage.clear()` | `yagames.storage_clear()`<br>Empties all keys out of the storage. |
+| `safeStorage.key(n)` | `yagames.storage_key(n)`<br>Returns the name of the nth key in the storage or `nil`. *Note: the n index is zero-based.* |
+| `safeStorage.length` | `yagames.storage_length()`<br>Returns the number of data items stored in the storage. |
 | **Banner Ads** [(docs)](#banner-ads) |  |
 |  | `yagames.banner_init(callback)` |
 |  | `yagames.banner_create(rtb_id, options, [callback])` |

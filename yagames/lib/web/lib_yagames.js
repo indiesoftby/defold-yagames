@@ -648,6 +648,78 @@ var LibYaGamesPrivate = {
         }
     },
 
+    YaGamesPrivate_GetStorage: function (cb_id) {
+        var self = YaGamesPrivate;
+        try {
+            self._ysdk
+                .getStorage()
+                .then((storage) => {
+                    self._storage = storage;
+                    self.send(cb_id);
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
+    YaGamesPrivate_Storage_GetItem: function (ckey) {
+        var self = YaGamesPrivate;
+        var key = UTF8ToString(ckey);
+        var value = self._storage.getItem(key);
+        if (typeof value === "string") {
+            var cvalue = allocate(intArrayFromString(value), "i8", ALLOC_NORMAL);
+            return cvalue;
+        } else {
+            return 0;
+        }
+    },
+
+    YaGamesPrivate_Storage_SetItem: function (ckey, cvalue) {
+        // https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem
+        // setItem() may throw an exception if the storage is full. Particularly, in Mobile Safari (since iOS 5)
+        // it always throws when the user enters private mode. (Safari sets the quota to 0 bytes in private mode,
+        // unlike other browsers, which allow storage in private mode using separate data containers.) Hence
+        // developers should make sure to always catch possible exceptions from setItem().
+        var self = YaGamesPrivate;
+        var key = UTF8ToString(ckey);
+        var value = UTF8ToString(cvalue);
+        try {
+            self._storage.setItem(key, value);
+        } catch (e) {
+            console.warn("yagames.storage_set_item:", e);
+        }
+    },
+
+    YaGamesPrivate_Storage_RemoveItem: function (ckey) {
+        var self = YaGamesPrivate;
+        var key = UTF8ToString(ckey);
+        self._storage.removeItem(key);
+    },
+
+    YaGamesPrivate_Storage_Clear: function () {
+        var self = YaGamesPrivate;
+        self._storage.clear();
+    },
+
+    YaGamesPrivate_Storage_Key: function (n) {
+        var self = YaGamesPrivate;
+        var key = self._storage.key(n);
+        if (typeof key === "string") {
+            var ckey = allocate(intArrayFromString(key), "i8", ALLOC_NORMAL);
+            return ckey;
+        } else {
+            return 0;
+        }
+    },
+
+    YaGamesPrivate_Storage_Length: function () {
+        var self = YaGamesPrivate;
+        return self._storage.length;
+    },
+
     YaGamesPrivate_Banner_Init: function (cb_id) {
         var self = YaGamesPrivate;
 

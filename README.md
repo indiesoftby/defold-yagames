@@ -130,11 +130,11 @@ end
 Rewarded videos are video ad blocks used to monetize games and earn a reward or in-game currency.
 
 * `open` - Called when a video ad is displayed on the screen.
-* `rewarded` - Called when a video ad impression is counted. Use this function to specify a reward for viewing the video ad.
+* `rewarded` - Called when a video ad impression is counted. Use this function to specify a reward for viewing the video ad. 
 * `close` - Called when a user closes a video ad or an error happens.
 * `error` - Called when an error occurrs. The error object is passed to the callback function.
 
-The `close` callback is called in any situations, even if there was an error.
+The `close` callback is called in any situation, even if there was an error. The `rewarded` callback is called before `close`, and you should update your in-game UI only after `close`.
 
 ```lua
 local yagames = require("yagames.yagames")

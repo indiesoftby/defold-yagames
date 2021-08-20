@@ -92,7 +92,7 @@ Interstitial ads are ad blocks that completely cover the app background and show
 * `offline` - Called when the network connection is lost (when offline mode is enabled).
 * `error` - Called when an error occurrs. The error object is passed to the callback function.
 
-The `close` callback is called in any situations, even if there was an error.
+**The `close` callback is called in any situation, even if there was an error.**
 
 ```lua
 local yagames = require("yagames.yagames")
@@ -134,7 +134,7 @@ Rewarded videos are video ad blocks used to monetize games and earn a reward or 
 * `close` - Called when a user closes a video ad or an error happens.
 * `error` - Called when an error occurrs. The error object is passed to the callback function.
 
-The `close` callback is called in any situation, even if there was an error. The `rewarded` callback is called before `close`, and you should update your in-game UI only after `close`.
+**The `close` callback is called in any situation, even if there was an error.** The `rewarded` callback is called before `close`, and you should update your in-game UI only after `close`.
 
 ```lua
 local yagames = require("yagames.yagames")

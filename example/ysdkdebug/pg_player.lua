@@ -13,7 +13,7 @@ function M.init_handler(self)
     local options = {scopes = true, signed = true}
 
     yagames.player_init(options, function(self, err)
-        print("yagames.player_init:", err or "OK!")
+        print("yagames.player_init(" .. table_util.tostring(options) .. "):", err or "OK!")
 
         if not err then
             self.button_player_get_name:set_enabled(true)

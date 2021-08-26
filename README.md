@@ -390,6 +390,13 @@ function init(self)
 end
 ```
 
-## License
 
-This project is licensed under the terms of the MIT license. Developed and supported by [@aglitchman](https://github.com/aglitchman). Uses the source code of [JsToDef](https://github.com/AGulev/jstodef).
+## Credits
+
+Artsiom Trubchyk ([@aglitchman](https://github.com/aglitchman)) is the current YaGames owner within Indiesoft and is responsible for the open source repository.
+
+This project uses the source code of [JsToDef](https://github.com/AGulev/jstodef).
+
+### License
+
+MIT license.

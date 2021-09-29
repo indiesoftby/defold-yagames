@@ -41,6 +41,7 @@ game_binding = /example/input/game.input_bindingc
 
 [yagames]
 sdk_init_options = { orientation: { value: "portrait", lock: true } }
+sdk_init_snippet = console.log("Yandex Games SDK is ready!");
 service_worker_url = sw.js
 manifest_url = yandex-manifest.json
 

@@ -44,6 +44,8 @@
                             }
                             // {{/yagames.service_worker_url}}
 
+                            {{{yagames.sdk_init_snippet}}}
+
                             send(0, "init", ysdk);
                         })
                         .catch(function (err) {

@@ -10,7 +10,7 @@ You can check [here](https://radar.yandex.ru/yandex) the size of Yandex.Games au
 
 ## Installation
 
-You can use it in your own project by adding this project as a [Defold library dependency](http://www.defold.com/manuals/libraries/). Open your `game.project` file and in the dependencies field add **a link to the ZIP file of a [specific release](https://github.com/indiesoftby/defold-yagames/releases).**
+You can use it in your own project by adding this project as a [Defold library dependency](http://www.defold.com/manuals/libraries/). Open your `game.project` file and in the dependencies field add **a link to the ZIP file of a [specific release](https://github.com/indiesoftby/defold-yagames/tags).**
 
 **Note:** Use [version 0.2.0](https://github.com/indiesoftby/defold-yagames/archive/0.2.0.zip) for the old Defold 1.2.177 or lower.
 

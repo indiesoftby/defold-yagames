@@ -22,12 +22,8 @@ function M.request_review_handler(self)
 end
 
 function M.init(self)
-    self.button_feedback_can_review = druid_style.button_with_text(self, "button_feedback_can_review/body",
-                                                                       "button_feedback_can_review/text",
-                                                                       M.can_review_handler)
-    self.button_feedback_request_review = druid_style.button_with_text(self, "button_feedback_request_review/body",
-                                                                       "button_feedback_request_review/text",
-                                                                       M.request_review_handler)
+    druid_style.make_button(self, "button_feedback_can_review", M.can_review_handler)
+    druid_style.make_button(self, "button_feedback_request_review", M.request_review_handler)
 end
 
 return M

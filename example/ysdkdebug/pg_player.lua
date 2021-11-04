@@ -9,9 +9,7 @@ local print = log_print.print
 
 local M = {}
 
-function M.init_handler(self)
-    local options = {scopes = true, signed = true}
-
+local function init_handler(self, options)
     yagames.player_init(options, function(self, err)
         print("yagames.player_init(" .. table_util.tostring(options) .. "):", err or "OK!")
 
@@ -27,6 +25,14 @@ function M.init_handler(self)
             self.button_player_set_stats:set_enabled(true)
         end
     end)
+end
+
+function M.init_handler(self)
+    init_handler(self, {scopes = true, signed = true})
+end
+
+function M.init2_handler(self)
+    init_handler(self, {scopes = false, signed = true})
 end
 
 function M.get_name_handler(self)
@@ -78,42 +84,17 @@ function M.set_stats_handler(self)
 end
 
 function M.init(self)
-    self.button_player_init = druid_style.button_with_text(self, "button_player_init/body", "button_player_init/text",
-                                                           M.init_handler)
-
-    self.button_player_get_name = druid_style.button_with_text(self, "button_player_get_name/body",
-                                                               "button_player_get_name/text", M.get_name_handler, true)
-
-    self.button_player_get_photo = druid_style.button_with_text(self, "button_player_get_photo/body",
-                                                                "button_player_get_photo/text", M.get_photo_handler,
-                                                                true)
-
-    self.button_player_get_unique_id = druid_style.button_with_text(self, "button_player_get_unique_id/body",
-                                                                    "button_player_get_unique_id/text",
-                                                                    M.get_unique_id_handler, true)
-
-    self.button_player_get_data = druid_style.button_with_text(self, "button_player_get_data/body",
-                                                               "button_player_get_data/text", M.get_data_handler, true)
-
-    self.button_player_set_data = druid_style.button_with_text(self, "button_player_set_data/body",
-                                                               "button_player_set_data/text", M.set_data_handler, true)
-
-    self.button_player_get_ids_per_game = druid_style.button_with_text(self, "button_player_get_ids_per_game/body",
-                                                                       "button_player_get_ids_per_game/text",
-                                                                       M.get_ids_per_game_handler, true)
-
-    self.button_player_get_stats = druid_style.button_with_text(self, "button_player_get_stats/body",
-                                                                "button_player_get_stats/text", M.get_stats_handler,
-                                                                true)
-
-    self.button_player_increment_stats = druid_style.button_with_text(self, "button_player_increment_stats/body",
-                                                                      "button_player_increment_stats/text",
-                                                                      M.increment_stats_handler, true)
-
-    self.button_player_set_stats = druid_style.button_with_text(self, "button_player_set_stats/body",
-                                                                "button_player_set_stats/text", M.set_stats_handler,
-                                                                true)
-
+    druid_style.make_button(self, "button_player_init", M.init_handler)
+    druid_style.make_button(self, "button_player_init2", M.init2_handler)
+    druid_style.make_button(self, "button_player_get_name", M.get_name_handler, true)
+    druid_style.make_button(self, "button_player_get_photo", M.get_photo_handler, true)
+    druid_style.make_button(self, "button_player_get_unique_id", M.get_unique_id_handler, true)
+    druid_style.make_button(self, "button_player_get_data", M.get_data_handler, true)
+    druid_style.make_button(self, "button_player_set_data", M.set_data_handler, true)
+    druid_style.make_button(self, "button_player_get_ids_per_game", M.get_ids_per_game_handler, true)
+    druid_style.make_button(self, "button_player_get_stats", M.get_stats_handler, true)
+    druid_style.make_button(self, "button_player_increment_stats", M.increment_stats_handler, true)
+    druid_style.make_button(self, "button_player_set_stats", M.set_stats_handler, true)
 end
 
 return M

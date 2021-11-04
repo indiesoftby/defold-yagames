@@ -69,24 +69,12 @@ function M.consume_purchase_handler(self)
 end
 
 function M.init(self)
-    self.button_payments_init = druid_style.button_with_text(self, "button_payments_init/body",
-                                                             "button_payments_init/text", M.init_handler)
-
-    self.button_payments_get_catalog = druid_style.button_with_text(self, "button_payments_get_catalog/body",
-                                                                    "button_payments_get_catalog/text",
-                                                                    M.get_catalog_handler, true)
-    self.button_payments_get_purchases = druid_style.button_with_text(self, "button_payments_get_purchases/body",
-                                                                      "button_payments_get_purchases/text",
-                                                                      M.get_purchases_handler, true)
-    self.button_payments_purchase1 = druid_style.button_with_text(self, "button_payments_purchase1/body",
-                                                                  "button_payments_purchase1/text", M.purchase1_handler,
-                                                                  true)
-    self.button_payments_purchase2 = druid_style.button_with_text(self, "button_payments_purchase2/body",
-                                                                  "button_payments_purchase2/text", M.purchase2_handler,
-                                                                  true)
-    self.button_payments_consume_purchase = druid_style.button_with_text(self, "button_payments_consume_purchase/body",
-                                                                         "button_payments_consume_purchase/text",
-                                                                         M.consume_purchase_handler, true)
+    druid_style.make_button(self, "button_payments_init", M.init_handler)
+    druid_style.make_button(self, "button_payments_get_catalog", M.get_catalog_handler, true)
+    druid_style.make_button(self, "button_payments_get_purchases", M.get_purchases_handler, true)
+    druid_style.make_button(self, "button_payments_purchase1", M.purchase1_handler, true)
+    druid_style.make_button(self, "button_payments_purchase2", M.purchase2_handler, true)
+    druid_style.make_button(self, "button_payments_consume_purchase", M.consume_purchase_handler, true)
 end
 
 return M

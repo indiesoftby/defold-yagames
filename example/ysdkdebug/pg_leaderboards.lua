@@ -78,33 +78,14 @@ function M.set_score3_handler(self)
 end
 
 function M.init(self)
-    self.button_leaderboards_init = druid_style.button_with_text(self, "button_leaderboards_init/body",
-                                                                 "button_leaderboards_init/text", M.init_handler)
-    self.button_leaderboards_get_description = druid_style.button_with_text(self,
-                                                                            "button_leaderboards_get_description/body",
-                                                                            "button_leaderboards_get_description/text",
-                                                                            M.get_description_handler, true)
-    self.button_leaderboards_get_entries = druid_style.button_with_text(self, "button_leaderboards_get_entries/body",
-                                                                        "button_leaderboards_get_entries/text",
-                                                                        M.get_entries_handler, true)
-    self.button_leaderboards_get_player_entry = druid_style.button_with_text(self,
-                                                                             "button_leaderboards_get_player_entry/body",
-                                                                             "button_leaderboards_get_player_entry/text",
-                                                                             M.get_player_entry_handler, true)
-    self.button_leaderboards_get_player_entry_with_avatar = druid_style.button_with_text(self,
-                                                                                         "button_leaderboards_get_player_entry_with_avatar/body",
-                                                                                         "button_leaderboards_get_player_entry_with_avatar/text",
-                                                                                         M.get_player_entry_with_avatar_handler,
-                                                                                         true)
-    self.button_leaderboards_set_score1 = druid_style.button_with_text(self, "button_leaderboards_set_score1/body",
-                                                                       "button_leaderboards_set_score1/text",
-                                                                       M.set_score1_handler, true)
-    self.button_leaderboards_set_score2 = druid_style.button_with_text(self, "button_leaderboards_set_score2/body",
-                                                                       "button_leaderboards_set_score2/text",
-                                                                       M.set_score2_handler, true)
-    self.button_leaderboards_set_score3 = druid_style.button_with_text(self, "button_leaderboards_set_score3/body",
-                                                                       "button_leaderboards_set_score3/text",
-                                                                       M.set_score3_handler, true)
+    druid_style.make_button(self, "button_leaderboards_init", M.init_handler)
+    druid_style.make_button(self, "button_leaderboards_get_description", M.get_description_handler, true)
+    druid_style.make_button(self, "button_leaderboards_get_entries", M.get_entries_handler, true)
+    druid_style.make_button(self, "button_leaderboards_get_player_entry", M.get_player_entry_handler, true)
+    druid_style.make_button(self, "button_leaderboards_get_player_entry_with_avatar", M.get_player_entry_with_avatar_handler, true)
+    druid_style.make_button(self, "button_leaderboards_set_score1", M.set_score1_handler, true)
+    druid_style.make_button(self, "button_leaderboards_set_score2", M.set_score2_handler, true)
+    druid_style.make_button(self, "button_leaderboards_set_score3", M.set_score3_handler, true)
 end
 
 return M

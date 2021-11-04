@@ -1,90 +1,69 @@
 local app_consts = require("example.app.consts")
 
-local SCALE_MIN = 0.00001
-local SCALE_MAX = 1
+local ALPHA_MIN = 0
+local ALPHA_MAX = 1
+
+local function set_alpha(node, alpha)
+    local color = gui.get_color(node)
+    color.w = alpha
+    gui.set_color(node, color)
+end
 
 function init(self)
-	gui.set_render_order(app_consts.gui_order.TRANSITION)
+    gui.set_render_order(app_consts.gui_order.TRANSITION)
 
-	self.tiles = {}
+    self.cover_node = gui.get_node("cover")
+    set_alpha(self.cover_node, ALPHA_MAX)
 
-	local wh = 100
-
-	self.root_tile = gui.get_node("tile")
-	for y = -2, math.floor(app_consts.game_height / wh) + 2 do
-		for x = -2, math.floor(app_consts.game_width / wh) + 2 do
-			local node = gui.clone(self.root_tile)
-			gui.set_position(node, vmath.vector3(x * wh, y * wh, 0))
-			table.insert(self.tiles, node)
-		end
-	end
-	gui.set_size_mode(self.root_tile, gui.SIZE_MODE_MANUAL)
-	gui.set_size(self.root_tile, vmath.vector3(0.00001))
-
-	self.cur_scale = SCALE_MAX
-
-	self.state = hash("fade_in")
-	self.reply_to = nil
-	self.anim_value = SCALE_MAX
+    self.state = hash("fade_in")
+    self.reply_to = nil
 end
 
 function update(self, dt)
-	self.anim_value = gui.get_scale(self.root_tile).x
-
-	if self.cur_scale ~= self.anim_value then
-		local len = #self.tiles
-		local scale = vmath.vector3(self.anim_value)
-		local enabled = true
-		if self.anim_value <= SCALE_MIN then
-			enabled = false
-		end
-		for i = 1, len do
-			gui.set_scale(self.tiles[i], scale)
-			gui.set_enabled(self.tiles[i], enabled)
-		end
-		self.cur_scale = self.anim_value
-	end
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("fade_in") then
-		assert(self.reply_to == nil)
-		self.reply_to = sender
-		if self.state == message_id then
-			gui.cancel_animation(self.root_tile, gui.PROP_SCALE)
-			self.anim_value = SCALE_MAX
+    if message_id == hash("fade_in") then
+        assert(self.reply_to == nil)
+        self.reply_to = sender
+        gui.set_enabled(self.cover_node, true)
+        if self.state == message_id then
+            gui.cancel_animation(self.cover_node, "color.w")
+            on_fade_in_complete(self, nil, nil)
+        else
+            self.state = message_id
 
-			on_fade_in_complete(self, nil, nil)
-		else
-			self.state = message_id
+            gui.animate(self.cover_node, "color.w", ALPHA_MAX, gui.EASING_OUTQUAD, 0.25, 0,
+                        on_fade_in_complete, gui.PLAYBACK_ONCE_FORWARD)
+        end
+    elseif message_id == hash("fade_out") then
+        assert(self.reply_to == nil)
+        self.reply_to = sender
+        if self.state == message_id then
+            gui.cancel_animation(self.cover_node, "color.w")
+            on_fade_out_complete(self, nil, nil)
+        else
+            self.state = message_id
 
-			gui.animate(self.root_tile, gui.PROP_SCALE, vmath.vector3(SCALE_MAX), gui.EASING_OUTQUAD, 0.3, 0,
-			on_fade_in_complete, gui.PLAYBACK_ONCE_FORWARD)
-		end
-	elseif message_id == hash("fade_out") then
-		assert(self.reply_to == nil)
-		self.reply_to = sender
-		if self.state == message_id then
-			gui.cancel_animation(self.root_tile, gui.PROP_SCALE)
-			self.anim_value = SCALE_MIN
-
-			on_fade_out_complete(self, nil, nil)
-		else
-			self.state = message_id
-
-			local pause = 0
-			gui.animate(self.root_tile, gui.PROP_SCALE, vmath.vector3(SCALE_MIN), gui.EASING_OUTQUAD, 0.4, pause,
-			on_fade_out_complete, gui.PLAYBACK_ONCE_FORWARD)
-		end
-	end
+            local pause = 0.1
+            gui.set_enabled(self.cover_node, true)
+            gui.animate(self.cover_node, "color.w", ALPHA_MIN, gui.EASING_OUTQUAD, 0.35, pause,
+                        on_fade_out_complete, gui.PLAYBACK_ONCE_FORWARD)
+        end
+    end
 end
 
 function on_fade_in_complete(self, url, property)
-	msg.post(self.reply_to, "transition_fade_in_complete")
-	self.reply_to = nil
+    msg.post(self.reply_to, "transition_fade_in_complete")
+    self.reply_to = nil
+
+    set_alpha(self.cover_node, ALPHA_MAX)
 end
 
 function on_fade_out_complete(self, url, property)
-	msg.post(self.reply_to, "transition_fade_out_complete")
-	self.reply_to = nil
+    msg.post(self.reply_to, "transition_fade_out_complete")
+    self.reply_to = nil
+
+    set_alpha(self.cover_node, ALPHA_MIN)
+    gui.set_enabled(self.cover_node, false)
 end

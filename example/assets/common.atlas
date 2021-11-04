@@ -1,8 +1,4 @@
 images {
-  image: "/example/assets/common/transition_tile.png"
-  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-}
-images {
   image: "/example/assets/common/empty.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
@@ -20,6 +16,10 @@ images {
 }
 images {
   image: "/cover.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/example/assets/common/white.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 margin: 0

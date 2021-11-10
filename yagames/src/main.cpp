@@ -163,12 +163,7 @@ static void SendObjectMessage(const int cb_id, const char* message_id, const cha
                 assert(top == lua_gettop(L));
                 return;
             }
-            int ret = lua_pcall(L, 4, 0, 0);
-            if (ret != 0)
-            {
-                dmLogError("Error running callback: %s", lua_tostring(L, -1));
-                lua_pop(L, 1);
-            }
+            dmScript::PCall(L, 4, 0);
         }
         assert(top == lua_gettop(L));
     }
@@ -198,12 +193,7 @@ static void SendStringMessage(const int cb_id, const char* message_id, const cha
             }
             lua_pushstring(L, message);
 
-            int ret = lua_pcall(L, 4, 0, 0);
-            if (ret != 0)
-            {
-                dmLogError("Error running callback: %s", lua_tostring(L, -1));
-                lua_pop(L, 1);
-            }
+            dmScript::PCall(L, 4, 0);
         }
         assert(top == lua_gettop(L));
     }
@@ -232,12 +222,7 @@ static void SendEmptyMessage(const int cb_id, const char* message_id)
                 lua_pushnil(L);
             }
 
-            int ret = lua_pcall(L, 3, 0, 0);
-            if (ret != 0)
-            {
-                dmLogError("Error running callback: %s", lua_tostring(L, -1));
-                lua_pop(L, 1);
-            }
+            dmScript::PCall(L, 3, 0);
         }
         assert(top == lua_gettop(L));
     }
@@ -267,12 +252,7 @@ static void SendNumMessage(const int cb_id, const char* message_id, float messag
             }
             lua_pushnumber(L, message);
 
-            int ret = lua_pcall(L, 4, 0, 0);
-            if (ret != 0)
-            {
-                dmLogError("Error running callback: %s", lua_tostring(L, -1));
-                lua_pop(L, 1);
-            }
+            dmScript::PCall(L, 4, 0);
         }
         assert(top == lua_gettop(L));
     }
@@ -298,12 +278,7 @@ static void SendBoolMessage(const int cb_id, const char* message_id, int message
             }
             lua_pushboolean(L, message);
 
-            int ret = lua_pcall(L, 4, 0, 0);
-            if (ret != 0)
-            {
-                dmLogError("Error running callback: %s", lua_tostring(L, -1));
-                lua_pop(L, 1);
-            }
+            dmScript::PCall(L, 4, 0);
         }
         assert(top == lua_gettop(L));
     }

@@ -38,6 +38,13 @@ local function clipboard_write_text_handler(self)
     end)
 end
 
+local function test_error_handling_handler(self)
+    print("(open the developer console to check)")
+    yagames.clipboard_write_text("", function (self, err)
+        error("This error is intended to test `dmScript::PCall()` and `sys.set_error_handler`.")
+    end)
+end
+
 local function test_storage(self, err)
     if err then
         print("yagames.storage_init:", err)
@@ -84,6 +91,7 @@ function init(self)
     druid_style.make_button(self, "button_environment", environment_handler)
     druid_style.make_button(self, "button_storage_test", storage_test_handler)
     druid_style.make_button(self, "button_clipboard_write_text", clipboard_write_text_handler)
+    druid_style.make_button(self, "button_test_error_handling", test_error_handling_handler)
     druid_style.make_button(self, "button_debug_log_clear", log_print.clear_log)
 end
 

@@ -484,6 +484,17 @@ var LibYaGamesPrivate = {
         }
     },
 
+    YaGamesPrivate_Player_GetSignature: function () {
+        var self = YaGamesPrivate;
+        var signature = self._player.signature;
+        if (typeof signature === "string") {
+            var csignature = allocate(intArrayFromString(signature), "i8", ALLOC_NORMAL);
+            return csignature;
+        } else {
+            return 0;
+        }
+    },
+
     YaGamesPrivate_Player_GetID: function () {
         var self = YaGamesPrivate;
         var cid = allocate(intArrayFromString("" + self._player.getID()), "i8", ALLOC_NORMAL);

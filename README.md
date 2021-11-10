@@ -199,6 +199,7 @@ The best way to integrate SDK into your game is to read [the official documentat
 | **Authentication + Player** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-player.html?lang=en) |  |
 | `ysdk.auth.openAuthDialog()` | `yagames.auth_open_auth_dialog(callback)` |
 | `ysdk.getPlayer(options)` | `yagames.player_init(options, callback)`<br>The argument `options` is a Lua table `{ signed = boolean, scopes = boolean }`. |
+| `player.signature` | `yagames.player_get_signature()`<br>The result is string if player's object is initialized with `options.signed = true`. Otherwise, `nil`. |
 | `player.setData(data, flush)` | `yagames.player_set_data(data, flush, callback)` |
 | `player.getData(keys)` | `yagames.player_get_data(keys, callback)` |
 | `player.setStats(stats)` | `yagames.player_set_stats(stats, callback)` |
@@ -218,8 +219,8 @@ The best way to integrate SDK into your game is to read [the official documentat
 | **Leaderboards** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-leaderboard.html?lang=en) |  |
 | `ysdk.getLeaderboards()` | `yagames.leaderboards_init(callback)` |
 | `lb.getLeaderboardDescription(leaderboardName)` | `yagames.leaderboards_get_description(leaderboard_name, callback)` |
-| `lb.getLeaderboardPlayerEntry(leaderboardName)` | `yagames.leaderboards_get_player_entry(leaderboard_name, [options], callback)`<br>If the player doesn't have any score, you get the error `FetchError: Player is not present in leaderboard`.<br>The argument `options` is an optional Lua table `{ getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` can be `small`, `medium`, `large`. |
-| `lb.getLeaderboardEntries(leaderboardName, options)` | `yagames.leaderboards_get_entries(leaderboard_name, [options], callback)`<br>The argument `options` is an optional Lua table `{ includeUser = boolean, quantityAround = number, quantityTop = number, getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` can be `small`, `medium`, `large`. |
+| `lb.getLeaderboardPlayerEntry(leaderboardName)` | `yagames.leaderboards_get_player_entry(leaderboard_name, [options], callback)`<br>If the player doesn't have any score, you get the error `FetchError: Player is not present in leaderboard`.<br>The argument `options` is an optional Lua table `{ getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` (string) can be `small`, `medium`, `large`. |
+| `lb.getLeaderboardEntries(leaderboardName, options)` | `yagames.leaderboards_get_entries(leaderboard_name, [options], callback)`<br>The argument `options` is an optional Lua table `{ includeUser = boolean, quantityAround = number, quantityTop = number, getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` (string) can be `small`, `medium`, `large`. |
 | `lb.setLeaderboardScore(leaderboardName, score, extraData)` | `yagames.leaderboards_set_score(leaderboard_name, score, [extra_data], [callback])` |
 | **Feedback** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-review.html?lang=en) |  |
 | `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)`<br>The result is a table `{ value = true/false, reason = "string" }` |

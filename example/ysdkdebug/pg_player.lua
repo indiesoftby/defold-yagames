@@ -23,6 +23,8 @@ local function init_handler(self, options)
             self.button_player_get_stats:set_enabled(true)
             self.button_player_increment_stats:set_enabled(true)
             self.button_player_set_stats:set_enabled(true)
+
+            print("yagames.player_get_signature:", yagames.player_get_signature() or "nil")
         end
     end)
 end

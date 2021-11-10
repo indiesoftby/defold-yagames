@@ -12,8 +12,8 @@ vsync = 0
 
 [project]
 title = yagames
-version = 0.6.6
-publisher = Indiesoft LLC
+version = 0.6.7
+developer = Indiesoft LLC
 bundle_resources = example/bundle/
 dependencies#0 = https://github.com/subsoap/defos/archive/v2.5.0.zip
 dependencies#1 = https://github.com/Insality/druid/archive/0.6.0.zip

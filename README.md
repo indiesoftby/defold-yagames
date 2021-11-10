@@ -261,7 +261,9 @@ The best way to integrate SDK into your game is to read [the official documentat
 
 You can additionally monetize your game using Yandex Advertising Network *Real-Time Bidding* ad blocks. RTB block is rendered into HTML div block and placed over your game canvas.
 
-The official documentation is here - [https://yandex.ru/support/partner2/web/products-rtb/about.html](https://yandex.ru/support/partner2/web/products-rtb/about.html?lang=en)
+The official documentation:
+* [📚 Add a configurable RTB block to a game](https://yandex.ru/dev/games/doc/dg/console/add-custom-rtb-block.html).
+* [📚 Real-Time Bidding blocks](https://yandex.ru/support/partner2/web/products-rtb/about.html?lang=en).
 
 ### Creating RTB blocks
 

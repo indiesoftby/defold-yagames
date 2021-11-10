@@ -173,7 +173,7 @@ service_worker_url = sw.js
 manifest_url = yandex-manifest.json
 ```
 
-* `sdk_init_options` - JavaScript Object that is passed as-is into the Yandex Games SDK initialization options for [the JS `YaGames.init` function](https://yandex.ru/dev/games/doc/dg/sdk/sdk-about.html). Example: `{ orientation: { value: "landscape", lock: true } }`.
+* `sdk_init_options` - JavaScript Object that is passed as-is into the Yandex Games SDK initialization options for [the JS `YaGames.init` function](https://yandex.ru/dev/games/doc/dg/sdk/sdk-about.html?lang=en). Example: `{ orientation: { value: "landscape", lock: true } }`.
 * `sdk_init_snippet` - JavaScript code that is passed as-is and called when the `ysdk` variable becomes available. Example: `console.log(ysdk);`. **Use with care, and don't forget to put a semicolon `;` at the end.**
 * `service_worker_url` - Relative URL to the Service Worker file. Usually it's `sw.js`. Set the URL to enable Service Worker.
 * `manifest_url` - URL to the Web App Manifest file. Set the URL to enable support of Yandex Native Cache.
@@ -193,10 +193,10 @@ The best way to integrate SDK into your game is to read [the official documentat
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `YaGames.init(options)` | `yagames.init(callback)`<br>The `options` is a JavaScript object `{}`, and it can be set in the `yagames.sdk_init_options` setting. |
-| **Advertisement** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-adv.html) |  |
+| **Advertisement** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-adv.html?lang=en) |  |
 | `ysdk.adv.showFullscreenAdv({callbacks:{}})` | `yagames.adv_show_fullscreen_adv(callbacks)` [<kbd>Example</kbd>](#2-interstitial-ad) |
 | `ysdk.adv.showRewardedVideo({callbacks:{}})` | `yagames.adv_show_rewarded_video(callbacks)` [<kbd>Example</kbd>](#3-rewarded-videos) |
-| **Authentication + Player** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-player.html) |  |
+| **Authentication + Player** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-player.html?lang=en) |  |
 | `ysdk.auth.openAuthDialog()` | `yagames.auth_open_auth_dialog(callback)` |
 | `ysdk.getPlayer(options)` | `yagames.player_init(options, callback)`<br>The argument `options` is a Lua table `{ signed = boolean, scopes = boolean }`. |
 | `player.setData(data, flush)` | `yagames.player_set_data(data, flush, callback)` |
@@ -209,35 +209,35 @@ The best way to integrate SDK into your game is to read [the official documentat
 | `player.getIDsPerGame()` | `yagames.player_get_ids_per_game(callback)` |
 | `player.getName()` | `yagames.player_get_name()` |
 | `player.getPhoto(size)` | `yagames.player_get_photo(size)` |
-| **In-Game Purchases** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-purchases.html) |  |
+| **In-Game Purchases** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-purchases.html?lang=en) |  |
 | `ysdk.getPayments(options)` | `yagames.payments_init(options, callback)` |
 | `payments.purchase(options)` | `yagames.payments_purchase(options, callback)` |
 | `payments.getPurchases()` | `yagames.payments_get_purchases(callback)`<br>The result has the format `{ purchases = { ... }, signature = "..." }` |
 | `payments.getCatalog()` | `yagames.payments_get_catalog(callback)` |
 | `payments.consumePurchase(purchaseToken)` | `yagames.payments_consume_purchase(purchase_token, callback)` |
-| **Leaderboards** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-leaderboard.html) |  |
+| **Leaderboards** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-leaderboard.html?lang=en) |  |
 | `ysdk.getLeaderboards()` | `yagames.leaderboards_init(callback)` |
 | `lb.getLeaderboardDescription(leaderboardName)` | `yagames.leaderboards_get_description(leaderboard_name, callback)` |
 | `lb.getLeaderboardPlayerEntry(leaderboardName)` | `yagames.leaderboards_get_player_entry(leaderboard_name, [options], callback)`<br>If the player doesn't have any score, you get the error `FetchError: Player is not present in leaderboard`.<br>The argument `options` is an optional Lua table `{ getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` can be `small`, `medium`, `large`. |
 | `lb.getLeaderboardEntries(leaderboardName, options)` | `yagames.leaderboards_get_entries(leaderboard_name, [options], callback)`<br>The argument `options` is an optional Lua table `{ includeUser = boolean, quantityAround = number, quantityTop = number, getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` can be `small`, `medium`, `large`. |
 | `lb.setLeaderboardScore(leaderboardName, score, extraData)` | `yagames.leaderboards_set_score(leaderboard_name, score, [extra_data], [callback])` |
-| **Feedback** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-review.html) |  |
+| **Feedback** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-review.html?lang=en) |  |
 | `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)`<br>The result is a table `{ value = true/false, reason = "string" }` |
 | `ysdk.feedback.requestReview()` | `yagames.feedback_request_review(callback)`<br>The result is a table `{ feedbackSent = true/false }` |
-| **Clipboard** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html) |  |
+| **Clipboard** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html?lang=en) |  |
 | `ysdk.clipboard.writeText(text)` | `yagames.clipboard_write_text(text, [callback])` |
-| **Device Info** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html) |  |
+| **Device Info** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html?lang=en) |  |
 | `ysdk.deviceInfo.type` | `yagames.device_info_type()`<br>Returns `"desktop"`, `"mobile"` or `"tablet"` |
 | `ysdk.deviceInfo.isDesktop()` | `yagames.device_info_is_desktop()` |
 | `ysdk.deviceInfo.isMobile()` | `yagames.device_info_is_mobile()` |
 | `ysdk.deviceInfo.isTablet()` | `yagames.device_info_is_tablet()` |
-| **Environment** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-environment.html) |  |
+| **Environment** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-environment.html?lang=en) |  |
 | `ysdk.environment` | `yagames.environment()`<br>Returns Lua table `{ app = { id = ... }, ... }` |
-| **Screen** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html) |  |
+| **Screen** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html?lang=en) |  |
 | `ysdk.screen.fullscreen.status` | `yagames.screen_fullscreen_status()`<br>Returns `"on"` or `"off"` |
 | `ysdk.screen.fullscreen.request()` | `yagames.screen_fullscreen_request([callback])` |
 | `ysdk.screen.fullscreen.exit()` | `yagames.screen_fullscreen_exit([callback])` |
-| **Safe Storage** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-player.html) | *Note: `key` and `value` should be valid UTF-8 strings. Storing strings with zero bytes aren't supported.* |
+| **Safe Storage** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-player.html?lang=en) | *Note: `key` and `value` should be valid UTF-8 strings. Storing strings with zero bytes aren't supported.* |
 | `ysdk.getStorage()` | `yagames.storage_init(callback)` |
 | `safeStorage.getItem(key)` | `yagames.storage_get_item(key)`<br>Returns that key's value or `nil`. |
 | `safeStorage.setItem(key, value)` | `yagames.storage_set_item(key, value)`<br>Adds that key to the storage, or update that key's value if it already exists. |
@@ -262,7 +262,7 @@ The best way to integrate SDK into your game is to read [the official documentat
 You can additionally monetize your game using Yandex Advertising Network *Real-Time Bidding* ad blocks. RTB block is rendered into HTML div block and placed over your game canvas.
 
 The official documentation:
-* [📚 Add a configurable RTB block to a game](https://yandex.ru/dev/games/doc/dg/console/add-custom-rtb-block.html).
+* [📚 Add a configurable RTB block to a game](https://yandex.ru/dev/games/doc/dg/console/add-custom-rtb-block.html?lang=en).
 * [📚 Real-Time Bidding blocks](https://yandex.ru/support/partner2/web/products-rtb/about.html?lang=en).
 
 ### Creating RTB blocks

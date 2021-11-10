@@ -249,7 +249,7 @@ The best way to integrate SDK into your game is to read [the official documentat
 | **Banner Ads** [(docs)](#banner-ads) |  |
 |  | `yagames.banner_init(callback)` |
 |  | `yagames.banner_create(rtb_id, options, [callback])` |
-|  | `yagames.banner_delete(rtb_id)` |
+|  | `yagames.banner_destroy(rtb_id)` |
 |  | `yagames.banner_refresh(rtb_id, [callback])` |
 |  | `yagames.banner_set(rtb_id, property, value)` |
 | **Sitelock** [(docs)](#sitelock) |  |
@@ -345,7 +345,7 @@ The `callback` function allows you to obtain information about whether the ad ha
 
 If there were no suitable product listings at the auction to show your ad next to, then you can show your ad in the block. In this situation the `callback` function returns the error `No ads available.`.
 
-### yagames.banner_delete(rtb_id)
+### yagames.banner_destroy(rtb_id)
 Removes the DOM element.
 
 _PARAMETERS_

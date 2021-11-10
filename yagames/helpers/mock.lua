@@ -205,8 +205,18 @@ function M.get_player(cb_id, options)
             stats = {}
         }
 
+        if options.signed then
+            M._player.signature = "MOCK"
+        end
+
         M.send(cb_id, NO_ERR)
     end
+end
+
+function M.player_get_signature()
+    assert(M._player)
+
+    return M._player.signature
 end
 
 function M.player_get_id()

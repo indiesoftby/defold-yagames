@@ -28,6 +28,7 @@ extern "C"
     const bool YaGamesPrivate_DeviceInfo_IsDesktop();
     const bool YaGamesPrivate_DeviceInfo_IsMobile();
     const bool YaGamesPrivate_DeviceInfo_IsTablet();
+    const bool YaGamesPrivate_DeviceInfo_IsTV();
     const char* YaGamesPrivate_Environment();
     void YaGamesPrivate_Feedback_CanReview(const int cb_id);
     void YaGamesPrivate_Feedback_RequestReview(const int cb_id);
@@ -449,6 +450,12 @@ static int DeviceInfo_IsTablet(lua_State* L)
     return 1;
 }
 
+static int DeviceInfo_IsTV(lua_State* L)
+{
+    lua_pushboolean(L, YaGamesPrivate_DeviceInfo_IsTV());
+    return 1;
+}
+
 static int Environment(lua_State* L)
 {
     const char* json = YaGamesPrivate_Environment();
@@ -774,6 +781,7 @@ static const luaL_reg Module_methods[] = {
     { "device_info_is_desktop", DeviceInfo_IsDesktop },
     { "device_info_is_mobile", DeviceInfo_IsMobile },
     { "device_info_is_tablet", DeviceInfo_IsTablet },
+    { "device_info_is_tv", DeviceInfo_IsTV },
     // - Environment
     { "environment", Environment },
     // - Feedback

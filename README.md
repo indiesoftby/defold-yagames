@@ -205,7 +205,7 @@ The best way to integrate SDK into your game is to read [the official documentat
 | `player.setStats(stats)` | `yagames.player_set_stats(stats, callback)` |
 | `player.incrementStats(increments)` | `yagames.player_increment_stats(increments, callback)` |
 | `player.getStats(keys)` | `yagames.player_get_stats(keys, callback)` |
-| `player.getID()` <kbd>Deprecated</kbd> | `yagames.player_get_id()` <kbd>Deprecated</kbd> |
+| ~~`player.getID()`~~ <kbd>Deprecated</kbd> | ~~`yagames.player_get_id()`~~ <kbd>Deprecated</kbd> |
 | `player.getUniqueID()` | `yagames.player_get_unique_id()` |
 | `player.getIDsPerGame()` | `yagames.player_get_ids_per_game(callback)` |
 | `player.getName()` | `yagames.player_get_name()` |
@@ -228,10 +228,11 @@ The best way to integrate SDK into your game is to read [the official documentat
 | **Clipboard** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html?lang=en) |  |
 | `ysdk.clipboard.writeText(text)` | `yagames.clipboard_write_text(text, [callback])` |
 | **Device Info** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html?lang=en) |  |
-| `ysdk.deviceInfo.type` | `yagames.device_info_type()`<br>Returns `"desktop"`, `"mobile"` or `"tablet"` |
+| `ysdk.deviceInfo.type` | `yagames.device_info_type()`<br>Returns `"desktop"`, `"mobile"`, `"tablet"` or `"tv"` |
 | `ysdk.deviceInfo.isDesktop()` | `yagames.device_info_is_desktop()` |
 | `ysdk.deviceInfo.isMobile()` | `yagames.device_info_is_mobile()` |
 | `ysdk.deviceInfo.isTablet()` | `yagames.device_info_is_tablet()` |
+| `ysdk.deviceInfo.isTV()` | `yagames.device_info_is_tv()` |
 | **Environment** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-environment.html?lang=en) |  |
 | `ysdk.environment` | `yagames.environment()`<br>Returns Lua table `{ app = { id = ... }, ... }` |
 | **Screen** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html?lang=en) |  |

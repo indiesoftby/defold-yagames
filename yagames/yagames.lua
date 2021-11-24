@@ -117,7 +117,7 @@ function M.device_info_type()
     return yagames_private.device_info_type()
 end
 
---- 
+--- Checks the user's device and returns "true" if it's a desktop.
 -- @treturn boolean
 function M.device_info_is_desktop()
     assert(M.ysdk_ready, "YaGames is not initialized.")
@@ -125,7 +125,7 @@ function M.device_info_is_desktop()
     return yagames_private.device_info_is_desktop()
 end
 
---- 
+--- Checks the user's device and returns "true" if it's a mobile.
 -- @treturn boolean
 function M.device_info_is_mobile()
     assert(M.ysdk_ready, "YaGames is not initialized.")
@@ -133,12 +133,20 @@ function M.device_info_is_mobile()
     return yagames_private.device_info_is_mobile()
 end
 
---- 
+--- Checks the user's device and returns "true" if it's a tablet.
 -- @treturn boolean
 function M.device_info_is_tablet()
     assert(M.ysdk_ready, "YaGames is not initialized.")
 
     return yagames_private.device_info_is_tablet()
+end
+
+--- Checks the user's device and returns "true" if it's a TV.
+-- @treturn boolean
+function M.device_info_is_tv()
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+
+    return yagames_private.device_info_is_tv()
 end
 
 --- Return a table with game environment variables.

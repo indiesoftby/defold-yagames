@@ -133,7 +133,7 @@ nodes {
 nodes {
   position {
     x: 160.0
-    y: -86.0
+    y: -85.0
     z: 0.0
     w: 1.0
   }
@@ -292,7 +292,7 @@ nodes {
 nodes {
   position {
     x: 160.0
-    y: -176.0
+    y: -170.0
     z: 0.0
     w: 1.0
   }
@@ -579,8 +579,8 @@ nodes {
     w: 1.0
   }
   scale {
-    x: 1.0
-    y: 1.0
+    x: 0.7
+    y: 0.7
     z: 1.0
     w: 1.0
   }
@@ -630,7 +630,7 @@ nodes {
 }
 nodes {
   position {
-    x: 165.0
+    x: 115.0
     y: -50.0
     z: 0.0
     w: 1.0
@@ -642,8 +642,8 @@ nodes {
     w: 1.0
   }
   scale {
-    x: 1.0
-    y: 1.0
+    x: 0.7
+    y: 0.7
     z: 1.0
     w: 1.0
   }
@@ -693,7 +693,7 @@ nodes {
 }
 nodes {
   position {
-    x: 330.0
+    x: 231.0
     y: -50.0
     z: 0.0
     w: 1.0
@@ -705,8 +705,8 @@ nodes {
     w: 1.0
   }
   scale {
-    x: 1.0
-    y: 1.0
+    x: 0.7
+    y: 0.7
     z: 1.0
     w: 1.0
   }
@@ -727,6 +727,69 @@ nodes {
   text: "Tablet"
   font: "font2"
   id: "text_is_tablet"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_NW
+  outline {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  shadow {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "group_device_info"
+  layer: "font2"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
+}
+nodes {
+  position {
+    x: 346.0
+    y: -50.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.7
+    y: 0.7
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 165.0
+    y: 50.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "TV"
+  font: "font2"
+  id: "text_is_tv"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_NW

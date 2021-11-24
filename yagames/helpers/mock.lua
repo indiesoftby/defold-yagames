@@ -73,6 +73,10 @@ function M.device_info_is_tablet()
     return false
 end
 
+function M.device_info_is_tv()
+    return false
+end
+
 function M.environment()
     return '{"app":{"id":"1"},"payload":"test","i18n":{"tld":"en","lang":"en"},"browser":{"lang":"en"}}'
 end

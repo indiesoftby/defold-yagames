@@ -211,6 +211,10 @@ var LibYaGamesPrivate = {
         return YaGamesPrivate._ysdk.deviceInfo.isTablet();
     },
 
+    YaGamesPrivate_DeviceInfo_IsTV: function () {
+        return YaGamesPrivate._ysdk.deviceInfo.isTV();
+    },
+
     YaGamesPrivate_Environment: function () {
         var self = YaGamesPrivate;
         var str = JSON.stringify(self._ysdk.environment);

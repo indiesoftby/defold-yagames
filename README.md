@@ -69,6 +69,11 @@ local yagames = require("yagames.yagames")
 local function init_handler(self, err)
     if err then
         print("Something bad happened :(", err)
+    else
+        --
+        -- SDK is ready!
+        -- From this moment, you can use all available functions, i.e. invoke ads, get player data, etc.
+        --
     end
 end
 

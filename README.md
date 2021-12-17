@@ -330,7 +330,7 @@ The `callback` function is expected to accept the following values:
 * __error__ <kbd>string</kbd> - Error code if something went wrong.
 
 ### yagames.banner_create(rtb_id, options, [callback])
-Creates a DOM element (`<div></div>`) with `style="position: absolute"`, applies your CSS styles on it and renders an advertisement into the element.
+Creates a DOM element (`<div></div>`) with `style="position: absolute"`, adds it to the end of the `<body>` (or to the end of the element specified by `append_to_id`), applies your CSS styles on it and renders an advertisement into the element.
 
 _PARAMETERS_
 * __rtb_id__ <kbd>string</kbd> - The unique RTB block ID. The block ID consists of a product ID (`R-A`), platform ID and the block's serial number.
@@ -342,6 +342,7 @@ The `options` table can have these key-value pairs:
 * __css_styles__ <kbd>string</kbd> - Sets inline CSS styles of the `<div></div>` element.
 * __css_class__ <kbd>string</kbd> - Sets the value of the `class` attribute of the `<div></div>` element.
 * __display__ <kbd>string</kbd> - The `display` property allows to show or hide the element. If you set `display` = `none`, it hides the entire element. Use `block` to show it back.
+* __append_to_id__ <kbd>string</kbd> - The parent element ID if you want to add the `div` to the list of children of a specific parent node.
 
 The `callback` function allows you to obtain information about whether the ad has been rendered (whether the ad was successfully selected when requested from the RTB system) and which particular ad was shown. The `callback` function is expected to accept the following values:
 

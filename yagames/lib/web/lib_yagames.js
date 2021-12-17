@@ -781,7 +781,17 @@ var LibYaGamesPrivate = {
         if (options.css_class) banner.domElement.className = options.css_class;
         if (options.display) banner.domElement.style.display = options.display;
 
-        document.body.appendChild(banner.domElement);
+        if (options.append_to_id) {
+            var appendToElement = document.getElementById(options.append_to_id);
+            if (appendToElement) {
+                appendToElement.appendChild(banner.domElement);
+            } else {
+                console.warn("DOM Element", options.append_to_id, "is not found.");
+                document.body.appendChild(banner.domElement);
+            }
+        } else {
+            document.body.appendChild(banner.domElement);
+        }
 
         Ya.Context.AdvManager.render(
             {

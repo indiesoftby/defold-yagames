@@ -488,6 +488,18 @@ var LibYaGamesPrivate = {
         }
     },
 
+    YaGamesPrivate_Player_GetPersonalInfo: function () {
+        var self = YaGamesPrivate;
+        var personalInfo = self._player._personalInfo;
+        if (typeof personalInfo !== "undefined") {
+            var str = JSON.stringify(personalInfo);
+            var cstr = allocate(intArrayFromString(str), "i8", ALLOC_NORMAL);
+            return cstr;
+        } else {
+            return 0;
+        }
+    },
+
     YaGamesPrivate_Player_GetSignature: function () {
         var self = YaGamesPrivate;
         var signature = self._player.signature;

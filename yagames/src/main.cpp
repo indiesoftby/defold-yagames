@@ -43,6 +43,7 @@ extern "C"
     void YaGamesPrivate_Payments_GetCatalog(const int cb_id);
     void YaGamesPrivate_Payments_ConsumePurchase(const int cb_id, const char* purchase_token);
     void YaGamesPrivate_GetPlayer(const int cb_id, const char* options);
+    const char* YaGamesPrivate_Player_GetPersonalInfo();
     const char* YaGamesPrivate_Player_GetSignature();
     void YaGamesPrivate_Player_GetIDsPerGame(const int cb_id);
     const char* YaGamesPrivate_Player_GetID();
@@ -547,6 +548,18 @@ static int GetPlayer(lua_State* L)
     return 0;
 }
 
+static int Player_GetPersonalInfo(lua_State* L)
+{
+    const char* str = YaGamesPrivate_Player_GetPersonalInfo();
+    if (str) {
+        lua_pushstring(L, str);
+        free((void*)str);
+    } else {
+        lua_pushnil(L);
+    }
+    return 1;
+}
+
 static int Player_GetSignature(lua_State* L)
 {
     const char* signature = YaGamesPrivate_Player_GetSignature();
@@ -801,6 +814,7 @@ static const luaL_reg Module_methods[] = {
     { "payments_consume_purchase", Payments_ConsumePurchase },
     // - Player
     { "get_player", GetPlayer },
+    { "player_get_personal_info", Player_GetPersonalInfo },
     { "player_get_signature", Player_GetSignature },
     { "player_get_id", Player_GetID },
     { "player_get_ids_per_game", Player_GetIDsPerGame },

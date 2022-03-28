@@ -349,6 +349,15 @@ function M.player_init(options, callback)
     end), rxi_json.encode(options or {}))
 end
 
+--- 
+-- @treturn table or nil
+function M.player_get_personal_info()
+    assert(M.player_ready, "Player is not initialized.")
+
+    local json_info = yagames_private.player_get_personal_info()
+    return json_info and rxi_json.decode(json_info) or nil
+end
+
 --- Returns string with the user's data from player's Yandex profile and the signature.
 -- It consists of two Base64-encoded strings.
 -- @treturn ?string

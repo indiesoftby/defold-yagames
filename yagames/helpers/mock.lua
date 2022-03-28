@@ -206,7 +206,19 @@ function M.get_player(cb_id, options)
             },
             unique_id = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
             data = {},
-            stats = {}
+            stats = {},
+            _personalInfo = {
+                ["id"] = "retGif5e9hoo9zQzBUOALHQjaXJzCrjq8XEFuzmm8Z8=",
+                ["uniqueID"] = "retGif5e9hoo9zQzBUOALHQjaXJzCrjq8XEFuzmm8Z8=",
+                ["lang"] = "ru",
+                ["mode"] = "lite",
+                ["publicName"] = "Mock",
+                ["avatarIdHash"] = "BNVUVO6QNZDSUNUQJWUSFY6Z3QARAVTSZD7A5NZMA6TEXLO7DGY4B47DAZN3V35S3XYPK5L3UKCNWXSIGM4ZZAEXS4M3ZEWDQSGJ5CSE7RGUERO66XJ3RQVZ5F3ROICGEW4POAXQQ7MXL5BD2IELIYY=",
+                ["scopePermissions"] = {
+                    ["avatar"] = "allow",
+                    ["public_name"] = "allow"
+                }
+            }
         }
 
         if options.signed then
@@ -215,6 +227,12 @@ function M.get_player(cb_id, options)
 
         M.send(cb_id, NO_ERR)
     end
+end
+
+function M.player_get_personal_info()
+    assert(M._player)
+
+    return rxi_json.encode(M._player._personalInfo)
 end
 
 function M.player_get_signature()

@@ -204,6 +204,7 @@ The best way to integrate SDK into your game is to read [the official documentat
 | **Authentication + Player** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-player.html?lang=en) |  |
 | `ysdk.auth.openAuthDialog()` | `yagames.auth_open_auth_dialog(callback)` |
 | `ysdk.getPlayer(options)` | `yagames.player_init(options, callback)`<br>The argument `options` is a Lua table `{ signed = boolean, scopes = boolean }`. |
+| `player._personalInfo` | `yagames.player_get_personal_info()`<br>The result is `table` or `nil` if the `_personalInfo` object is not available. |
 | `player.signature` | `yagames.player_get_signature()`<br>The result is string if player's object is initialized with `options.signed = true`. Otherwise, `nil`. |
 | `player.setData(data, flush)` | `yagames.player_set_data(data, flush, callback)` |
 | `player.getData(keys)` | `yagames.player_get_data(keys, callback)` |

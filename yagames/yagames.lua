@@ -510,6 +510,36 @@ function M.screen_fullscreen_exit(callback)
     end))
 end
 
+---
+-- @tparam function callback
+function M.shortcut_can_show_prompt(callback)
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+
+    yagames_private.shortcut_can_show_prompt(helper.wrap_for_promise(function(self, err, result)
+        if result then
+            result = rxi_json.decode(result)
+        end
+        if type(callback) == "function" then
+            callback(self, err, result)
+        end
+    end))
+end
+
+---
+-- @tparam function callback
+function M.shortcut_show_prompt(callback)
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+
+    yagames_private.shortcut_show_prompt(helper.wrap_for_promise(function(self, err, result)
+        if result then
+            result = rxi_json.decode(result)
+        end
+        if type(callback) == "function" then
+            callback(self, err, result)
+        end
+    end))
+end
+
 --- Initialize the Safe Storage
 -- @tparam function callback
 function M.storage_init(callback)

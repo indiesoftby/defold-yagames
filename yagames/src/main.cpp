@@ -58,6 +58,8 @@ extern "C"
     const char* YaGamesPrivate_Screen_Fullscreen_Status();
     void YaGamesPrivate_Screen_Fullscreen_Request(const int cb_id);
     void YaGamesPrivate_Screen_Fullscreen_Exit(const int cb_id);
+    void YaGamesPrivate_Shortcut_CanShowPrompt(const int cb_id);
+    void YaGamesPrivate_Shortcut_ShowPrompt(const int cb_id);
     void YaGamesPrivate_GetStorage(const int cb_id);
     const char* YaGamesPrivate_Storage_GetItem(const char* key);
     void YaGamesPrivate_Storage_SetItem(const char* key, const char* value);
@@ -674,6 +676,18 @@ static int Screen_Fullscreen_Exit(lua_State* L)
     return 0;
 }
 
+static int Shortcut_CanShowPrompt(lua_State* L)
+{
+    YaGamesPrivate_Shortcut_CanShowPrompt(luaL_checkint(L, 1));
+    return 0;
+}
+
+static int Shortcut_ShowPrompt(lua_State* L)
+{
+    YaGamesPrivate_Shortcut_ShowPrompt(luaL_checkint(L, 1));
+    return 0;
+}
+
 static int GetStorage(lua_State* L)
 {
     YaGamesPrivate_GetStorage(luaL_checkint(L, 1));
@@ -830,6 +844,9 @@ static const luaL_reg Module_methods[] = {
     { "screen_fullscreen_status", Screen_Fullscreen_Status },
     { "screen_fullscreen_request", Screen_Fullscreen_Request },
     { "screen_fullscreen_exit", Screen_Fullscreen_Exit },
+    // - Shortcut
+    { "shortcut_can_show_prompt", Shortcut_CanShowPrompt },
+    { "shortcut_show_prompt", Shortcut_ShowPrompt },
     // - Safe Storage
     { "get_storage", GetStorage },
     { "storage_get_item", Storage_GetItem },

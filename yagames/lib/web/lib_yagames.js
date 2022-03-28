@@ -675,6 +675,38 @@ var LibYaGamesPrivate = {
         }
     },
 
+    YaGamesPrivate_Shortcut_CanShowPrompt: function (cb_id) {
+        var self = YaGamesPrivate;
+        try {
+            self._ysdk
+                .shortcut.canShowPrompt()
+                .then((result) => {
+                    self.send(cb_id, null, JSON.stringify(result));
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
+    YaGamesPrivate_Shortcut_ShowPrompt: function (cb_id) {
+        var self = YaGamesPrivate;
+        try {
+            self._ysdk
+                .shortcut.showPrompt()
+                .then((result) => {
+                    self.send(cb_id, null, JSON.stringify(result));
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
     YaGamesPrivate_GetStorage: function (cb_id) {
         var self = YaGamesPrivate;
         try {

@@ -66,6 +66,7 @@ nodes {
   alpha: 1.0
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -129,6 +130,7 @@ nodes {
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -169,6 +171,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -224,6 +227,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -288,6 +292,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -328,6 +333,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -383,6 +389,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -447,6 +454,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -501,6 +509,7 @@ nodes {
   alpha: 1.0
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -564,6 +573,7 @@ nodes {
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -627,6 +637,7 @@ nodes {
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -690,6 +701,7 @@ nodes {
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -753,6 +765,7 @@ nodes {
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -816,6 +829,7 @@ nodes {
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -837,7 +851,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 1210.0
+    x: 1560.0
     y: 600.0
     z: 0.0
     w: 1.0
@@ -870,6 +884,7 @@ nodes {
   alpha: 1.0
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -933,6 +948,7 @@ nodes {
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -954,7 +970,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 1728.57
+    x: 2228.57
     y: 785.71
     z: 0.0
     w: 1.0
@@ -996,6 +1012,7 @@ nodes {
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -1036,6 +1053,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -1091,6 +1109,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -1155,6 +1174,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -1195,6 +1215,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -1250,6 +1271,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -1314,6 +1336,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -1354,6 +1377,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -1409,6 +1433,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -1473,6 +1498,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -1527,6 +1553,7 @@ nodes {
   alpha: 1.0
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -1590,6 +1617,7 @@ nodes {
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -1630,6 +1658,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -1685,6 +1714,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -1749,6 +1779,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -1789,6 +1820,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -1844,6 +1876,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -1910,6 +1943,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -1950,6 +1984,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -2005,6 +2040,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -2071,6 +2107,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -2111,6 +2148,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -2166,6 +2204,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -2230,6 +2269,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -2270,6 +2310,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -2325,6 +2366,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -2389,6 +2431,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -2429,6 +2472,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -2484,6 +2528,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -2548,6 +2593,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -2588,6 +2634,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -2643,6 +2690,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -2707,6 +2755,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -2747,6 +2796,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -2802,6 +2852,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -2866,6 +2917,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -2906,6 +2958,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -2961,6 +3014,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -3025,6 +3079,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -3065,6 +3120,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -3120,6 +3176,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -3184,6 +3241,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -3224,6 +3282,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -3279,6 +3338,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -3343,6 +3403,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -3383,6 +3444,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -3438,6 +3500,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -3504,6 +3567,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -3558,6 +3622,7 @@ nodes {
   alpha: 1.0
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -3621,6 +3686,7 @@ nodes {
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -3661,6 +3727,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -3716,6 +3783,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -3780,6 +3848,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -3820,6 +3889,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -3875,6 +3945,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -3939,6 +4010,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -3979,6 +4051,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -4034,6 +4107,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -4098,6 +4172,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -4138,6 +4213,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -4193,6 +4269,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -4258,6 +4335,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -4298,6 +4376,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -4353,6 +4432,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -4418,6 +4498,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -4458,6 +4539,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -4513,6 +4595,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -4577,6 +4660,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -4631,6 +4715,7 @@ nodes {
   alpha: 1.0
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -4694,6 +4779,7 @@ nodes {
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -4734,6 +4820,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -4789,6 +4876,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -4853,6 +4941,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -4893,6 +4982,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -4948,6 +5038,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -5012,6 +5103,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -5052,6 +5144,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -5107,6 +5200,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -5171,6 +5265,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -5211,6 +5306,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -5266,6 +5362,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -5330,6 +5427,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -5351,8 +5449,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 680.0
-    y: 250.0
+    x: 490.0
+    y: 50.0
     z: 0.0
     w: 1.0
   }
@@ -5384,6 +5482,7 @@ nodes {
   alpha: 1.0
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -5447,6 +5546,7 @@ nodes {
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -5487,6 +5587,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -5542,6 +5643,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -5606,6 +5708,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -5646,6 +5749,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -5701,6 +5805,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -5765,6 +5870,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -5805,6 +5911,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -5860,6 +5967,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -5924,6 +6032,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -5964,6 +6073,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -6019,6 +6129,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -6083,6 +6194,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -6123,6 +6235,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -6178,6 +6291,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -6242,6 +6356,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -6282,6 +6397,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -6337,6 +6453,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -6401,6 +6518,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -6441,6 +6559,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -6496,6 +6615,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -6560,6 +6680,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -6600,6 +6721,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -6655,6 +6777,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -6719,6 +6842,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -6758,6 +6882,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -6813,6 +6938,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -6877,6 +7003,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -6931,6 +7058,7 @@ nodes {
   alpha: 1.0
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -6994,6 +7122,7 @@ nodes {
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -7034,6 +7163,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -7089,6 +7219,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -7153,6 +7284,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -7193,6 +7325,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -7248,6 +7381,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -7312,6 +7446,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -7333,8 +7468,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 150.0
-    y: 310.0
+    x: 490.0
+    y: 145.0
     z: 0.0
     w: 1.0
   }
@@ -7366,6 +7501,7 @@ nodes {
   alpha: 1.0
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -7429,11 +7565,12 @@ nodes {
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
-    x: 75.0
-    y: -175.0
+    x: 245.0
+    y: -85.0
     z: 0.0
     w: 1.0
   }
@@ -7469,6 +7606,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -7524,6 +7662,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -7588,11 +7727,12 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
-    x: 75.0
-    y: -265.0
+    x: 415.0
+    y: -85.0
     z: 0.0
     w: 1.0
   }
@@ -7628,6 +7768,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -7683,6 +7824,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -7747,6 +7889,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -7787,6 +7930,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -7842,6 +7986,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -7906,6 +8051,450 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 1080.0
+    y: 798.501
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 490.0
+    y: 145.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "common/empty"
+  id: "group_shortcut"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_NW
+  adjust_mode: ADJUST_MODE_FIT
+  layer: ""
+  inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: false
+  size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.85
+    y: 0.85
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 50.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 0.4
+    y: 0.6
+    z: 0.4
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "SHORTCUT"
+  font: "font2"
+  id: "title_group_shortcut"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_NW
+  outline {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  shadow {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "group_shortcut"
+  layer: "font2"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 75.0
+    y: -85.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_shortcut_can_show_prompt"
+  parent: "group_shortcut"
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  template: "/example/ysdkdebug/button_sm.gui"
+  template_node_child: false
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 150.0
+    y: 70.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "common/button"
+  id: "button_shortcut_can_show_prompt/body"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "button_shortcut_can_show_prompt"
+  layer: "common"
+  inherit_alpha: true
+  slice9 {
+    x: 24.0
+    y: 24.0
+    z: 24.0
+    w: 24.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: true
+  size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.8
+    y: 0.8
+    z: 0.7
+    w: 1.0
+  }
+  size {
+    x: 162.5
+    y: 87.5
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Can Show Prompt"
+  font: "font2"
+  id: "button_shortcut_can_show_prompt/text"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  shadow {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "button_shortcut_can_show_prompt/body"
+  layer: "font2"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  overridden_fields: 8
+  template_node_child: true
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 245.0
+    y: -85.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_shortcut_show_prompt"
+  parent: "group_shortcut"
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  template: "/example/ysdkdebug/button_sm.gui"
+  template_node_child: false
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 150.0
+    y: 70.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "common/button"
+  id: "button_shortcut_show_prompt/body"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "button_shortcut_show_prompt"
+  layer: "common"
+  inherit_alpha: true
+  slice9 {
+    x: 24.0
+    y: 24.0
+    z: 24.0
+    w: 24.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: true
+  size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.8
+    y: 0.8
+    z: 0.7
+    w: 1.0
+  }
+  size {
+    x: 162.5
+    y: 87.5
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Show Prompt"
+  font: "font2"
+  id: "button_shortcut_show_prompt/text"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  shadow {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "button_shortcut_show_prompt/body"
+  layer: "font2"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  overridden_fields: 8
+  template_node_child: true
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
 }
 nodes {
   position {
@@ -7945,6 +8534,7 @@ nodes {
   alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
+  custom_type: 0
 }
 nodes {
   position {
@@ -8000,6 +8590,7 @@ nodes {
   alpha: 1.0
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
 }
 nodes {
   position {
@@ -8064,6 +8655,7 @@ nodes {
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
+  custom_type: 0
 }
 layers {
   name: "common"

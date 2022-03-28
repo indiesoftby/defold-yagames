@@ -194,6 +194,8 @@ end
 
 function M.get_player(cb_id, options)
     assert(type(options) == "string")
+    options = rxi_json.decode(options)
+
     if not M._auth then
         M.send(cb_id, "FetchError: Unauthorized")
     else
@@ -350,6 +352,14 @@ end
 
 function M.screen_fullscreen_exit(cb_id)
     M.send(cb_id, "Not supported.")
+end
+
+function M.shortcut_can_show_prompt(cb_id)
+    M.send(cb_id, NO_ERR, rxi_json.encode({canShow = false}))
+end
+
+function M.shortcut_show_prompt(cb_id)
+    M.send(cb_id, NO_ERR, rxi_json.encode({canShow = false}))
 end
 
 function M.get_storage(cb_id)

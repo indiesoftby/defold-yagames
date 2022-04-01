@@ -25,7 +25,7 @@ function M.print(...)
         html5.run("console.log(" .. rxi_json.encode(t) .. ")")
     end
 
-    local chunks = into_chunks(t, 99)
+    local chunks = into_chunks(t, 105)
     local s = table.concat(chunks, "\n           ")
 
     M.log = "[" .. os.date("%H:%M:%S") .. "] " .. s .. "\n" .. M.log

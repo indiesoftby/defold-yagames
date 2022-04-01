@@ -255,6 +255,12 @@ function M.player_get_ids_per_game(cb_id)
     M.send(cb_id, NO_ERR, '[{"appID":100,"userID":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"}]')
 end
 
+function M.player_get_mode()
+    assert(M._player)
+
+    return M._player._personalInfo.mode
+end
+
 function M.player_get_name()
     assert(M._player)
 

@@ -25,6 +25,7 @@ local function init_handler(self, options)
             self.button_player_set_stats:set_enabled(true)
 
             print("yagames.player_get_signature():", yagames.player_get_signature() or "nil")
+            print("yagames.player_get_mode():", "'" .. yagames.player_get_mode() .. "'")
             print("yagames.player_get_personal_info():", table_util.tostring(yagames.player_get_personal_info()))
         end
     end)
@@ -39,15 +40,15 @@ function M.init2_handler(self)
 end
 
 function M.get_name_handler(self)
-    print("yagames.player_get_name:", '"' .. yagames.player_get_name() .. '"')
+    print("yagames.player_get_name():", '"' .. yagames.player_get_name() .. '"')
 end
 
 function M.get_photo_handler(self)
-    print("yagames.player_get_photo:", '"' .. yagames.player_get_photo("large") .. '"')
+    print("yagames.player_get_photo(\"large\"):", '"' .. yagames.player_get_photo("large") .. '"')
 end
 
 function M.get_unique_id_handler(self)
-    print("yagames.player_get_unique_id:", '"' .. yagames.player_get_unique_id() .. '"')
+    print("yagames.player_get_unique_id():", '"' .. yagames.player_get_unique_id() .. '"')
 end
 
 function M.get_ids_per_game_handler(self)

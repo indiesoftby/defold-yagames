@@ -214,6 +214,7 @@ The best way to integrate SDK into your game is to read [the official documentat
 | ~~`player.getID()`~~ <kbd>Deprecated</kbd> | ~~`yagames.player_get_id()`~~ <kbd>Deprecated</kbd> |
 | `player.getUniqueID()` | `yagames.player_get_unique_id()` |
 | `player.getIDsPerGame()` | `yagames.player_get_ids_per_game(callback)` |
+| `player.getMode()` | `yagames.player_get_mode()`<br>[(more info)](https://yandex.ru/blog/gamesfordevelopers/novye-vozmozhnosti-dlya-neavtorizovannykh-polzovateley) |
 | `player.getName()` | `yagames.player_get_name()` |
 | `player.getPhoto(size)` | `yagames.player_get_photo(size)` |
 | **In-Game Purchases** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-purchases.html?lang=en) |  |

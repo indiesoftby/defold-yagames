@@ -533,6 +533,12 @@ var LibYaGamesPrivate = {
         }
     },
 
+    YaGamesPrivate_Player_GetMode: function () {
+        var self = YaGamesPrivate;
+        var cmode = allocate(intArrayFromString(self._player.getMode()), "i8", ALLOC_NORMAL);
+        return cmode;
+    },
+
     YaGamesPrivate_Player_GetName: function () {
         var self = YaGamesPrivate;
         var cname = allocate(intArrayFromString(self._player.getName()), "i8", ALLOC_NORMAL);

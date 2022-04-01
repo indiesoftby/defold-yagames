@@ -388,6 +388,14 @@ function M.player_get_ids_per_game(callback)
         end))
 end
 
+--- Return the user's auth mode.
+-- @treturn string
+function M.player_get_mode()
+    assert(M.player_ready, "Player is not initialized.")
+
+    return yagames_private.player_get_mode()
+end
+
 --- Return the user's name.
 -- @treturn string
 function M.player_get_name()

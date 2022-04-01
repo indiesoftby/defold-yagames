@@ -47,6 +47,7 @@ extern "C"
     const char* YaGamesPrivate_Player_GetSignature();
     void YaGamesPrivate_Player_GetIDsPerGame(const int cb_id);
     const char* YaGamesPrivate_Player_GetID();
+    const char* YaGamesPrivate_Player_GetMode();
     const char* YaGamesPrivate_Player_GetName();
     const char* YaGamesPrivate_Player_GetPhoto(const char* size);
     const char* YaGamesPrivate_Player_GetUniqueID();
@@ -588,6 +589,14 @@ static int Player_GetIDsPerGame(lua_State* L)
     return 0;
 }
 
+static int Player_GetMode(lua_State* L)
+{
+    const char* mode = YaGamesPrivate_Player_GetMode();
+    lua_pushstring(L, mode);
+    free((void*)mode);
+    return 1;
+}
+
 static int Player_GetName(lua_State* L)
 {
     const char* name = YaGamesPrivate_Player_GetName();
@@ -832,6 +841,7 @@ static const luaL_reg Module_methods[] = {
     { "player_get_signature", Player_GetSignature },
     { "player_get_id", Player_GetID },
     { "player_get_ids_per_game", Player_GetIDsPerGame },
+    { "player_get_mode", Player_GetMode },
     { "player_get_name", Player_GetName },
     { "player_get_photo", Player_GetPhoto },
     { "player_get_unique_id", Player_GetUniqueID },

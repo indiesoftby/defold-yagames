@@ -1,0 +1,11 @@
+images {
+  image: "/example/assets/tv/tv_click.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/example/assets/tv/tv_remote.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+margin: 0
+extrude_borders: 0
+inner_padding: 2

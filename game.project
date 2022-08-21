@@ -37,7 +37,7 @@ scale_mode = stretch
 max_characters = 30000
 
 [input]
-game_binding = /example/input/game.input_bindingc
+game_binding = /builtins/input/all.input_bindingc
 
 [yagames]
 sdk_init_options = { orientation: { value: "portrait", lock: true } }

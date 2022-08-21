@@ -2,6 +2,7 @@ local app_consts = require("example.app.consts")
 local app_scenemanager = require("example.app.scenemanager")
 local app_window = require("example.app.window")
 local druid = require("druid.druid")
+local druid_const = require("druid.const")
 
 go.property("first_scene", hash("ysdkinit"))
 
@@ -36,6 +37,7 @@ function init(self)
     msg.post(".", "acquire_input_focus")
 
     druid.set_default_style({})
+    druid_const.ACTION_MULTITOUCH = hash("touch_multi")
 
     app_window.resize()
     app_window.center()

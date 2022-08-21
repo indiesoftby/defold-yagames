@@ -1,0 +1,9 @@
+local yagames = require("yagames.yagames")
+
+local function init_handler(self, err)
+    msg.post("#gui", "init_done", {err = err})
+end
+
+function init(self)
+    yagames.init(init_handler)
+end

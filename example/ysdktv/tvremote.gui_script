@@ -1,0 +1,110 @@
+local yagames = require("yagames.yagames")
+
+--
+-- TV remote buttons test
+--
+
+local remote_keys = {
+    hash("key_enter"),
+    hash("key_tv_back"),
+    hash("key_left"),
+    hash("key_right"),
+    hash("key_up"),
+    hash("key_down")
+}
+
+local function message_show(self, text)
+    local node = self.text_message
+    gui.set_text(node, text)
+    gui.cancel_animation(node, "color.w")
+    gui.set_alpha(node, 1)
+    gui.animate(node, "color.w", 0, gui.EASING_OUTQUAD, 0.3, 2)
+end
+
+local function remote_button_on(self, button_id)
+    local node = gui.get_node(button_id)
+    gui.cancel_animation(node, "color.w")
+    gui.set_alpha(node, 0.5)
+end
+
+local function remote_button_off(self, button_id)
+    local node = gui.get_node(button_id)
+    gui.animate(node, "color.w", 0, gui.EASING_OUTQUAD, 0.3)
+end
+
+local function remote_input(self, action_id, action)
+    for _, key_id in pairs(remote_keys) do
+        if action_id == key_id then
+            if action.pressed then
+                remote_button_on(self, key_id)
+            elseif action.released then
+                remote_button_off(self, key_id)
+            end
+        end
+    end
+
+    if action_id == hash("key_tv_back") and action.released then
+        self.back_hits = self.back_hits + 1
+        message_show(self, "Hit BACK again to exit")
+
+        if self.back_hits >= 2 then
+            yagames.event_dispatch("EXIT")
+        end
+    end
+end
+
+local function remote_init(self)
+    for _, key_id in pairs(remote_keys) do
+        local node = gui.get_node(key_id)
+        gui.set_alpha(node, 0)
+    end
+
+    self.back_hits = 0
+    message_show(self, "Press keys on your remote to test")
+
+    yagames.event_on("HISTORY_BACK", function (self, err)
+        if err then
+            message_show(self, "'event_on' error " .. err)
+            return
+        end
+
+        remote_input(self, hash("key_tv_back"), { pressed = true })
+        remote_input(self, hash("key_tv_back"), { released = true })
+    end)
+
+    -- Test behaviour without a real Yandex TV
+    -- timer.delay(3, true, function (self)
+    --     remote_input(self, hash("key_tv_back"), { pressed = true })
+    --     remote_input(self, hash("key_tv_back"), { released = true })
+    -- end)
+end
+
+--
+-- Script
+--
+
+function init(self)
+    msg.post(".", "acquire_input_focus")
+
+    self.text_message = gui.get_node("text_message")
+end
+
+function final(self)
+end
+
+function update(self, dt)
+end
+
+function on_message(self, message_id, message, sender)
+    if message_id == hash("init_done") then
+        if message.err then
+            message_show(self, "SDK init error " .. message.err)
+        else
+            remote_init(self)
+        end
+    end
+end
+
+function on_input(self, action_id, action)
+    remote_input(self, action_id, action)
+end

@@ -254,6 +254,9 @@ The best way to integrate SDK into your game is to read [the official documentat
 | `safeStorage.clear()` | `yagames.storage_clear()`<br>Empties all keys out of the storage. |
 | `safeStorage.key(n)` | `yagames.storage_key(n)`<br>Returns the name of the nth key in the storage or `nil`. *Note: the n index is zero-based.* |
 | `safeStorage.length` | `yagames.storage_length()`<br>Returns the number of data items stored in the storage. |
+| **Events** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-events.html?lang=en) |  |
+| `ysdk.onEvent(eventName, listener)` | `yagames.event_on(event_name, listener)` |
+| `ysdk.dispatchEvent(eventName)` | `yagames.event_dispatch(event_name)` |
 | **Banner Ads** [(docs)](#banner-ads) |  |
 |  | `yagames.banner_init(callback)` |
 |  | `yagames.banner_create(rtb_id, options, [callback])` |

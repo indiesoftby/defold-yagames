@@ -29,6 +29,14 @@ local function log_update(self)
     end
 end
 
+local function event_test(self)
+    yagames.event_on("HISTORY_BACK", function (self)
+        print("yagames.event_on(\"HISTORY_BACK\")")
+    end)
+
+    -- yagames.event_dispatch("EXIT")
+end
+
 local function environment_handler(self)
     print("yagames.environment():", table_util.tostring(yagames.environment()))
 end
@@ -89,6 +97,8 @@ function init(self)
     pg_feedback.init(self)
     pg_screen.init(self)
     pg_shortcut.init(self)
+
+    event_test(self)
 
     druid_style.make_button(self, "button_environment", environment_handler)
     druid_style.make_button(self, "button_storage_test", storage_test_handler)

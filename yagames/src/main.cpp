@@ -68,6 +68,8 @@ extern "C"
     void YaGamesPrivate_Storage_Clear();
     const char* YaGamesPrivate_Storage_Key(const int n);
     const int YaGamesPrivate_Storage_Length();
+    void YaGamesPrivate_Event_Dispatch(const char* cevent_name);
+    void YaGamesPrivate_Event_On(const char* cevent_name, const int cb_id);
     void YaGamesPrivate_Banner_Init(const int cb_id);
     void YaGamesPrivate_Banner_Create(const char* crtb_id, const char* coptions, const int cb_id);
     void YaGamesPrivate_Banner_Destroy(const char* crtb_id);
@@ -764,6 +766,22 @@ static int Storage_Length(lua_State* L)
 }
 
 //
+// Events
+//
+
+static int Event_Dispatch(lua_State* L)
+{
+    YaGamesPrivate_Event_Dispatch(luaL_checkstring(L, 1));
+    return 0;
+}
+
+static int Event_On(lua_State* L)
+{
+    YaGamesPrivate_Event_On(luaL_checkstring(L, 1), luaL_checkint(L, 2));
+    return 0;
+}
+
+//
 // Banner Ads API
 //
 
@@ -865,6 +883,9 @@ static const luaL_reg Module_methods[] = {
     { "storage_clear", Storage_Clear },
     { "storage_key", Storage_Key },
     { "storage_length", Storage_Length },
+    // - Events
+    { "event_dispatch", Event_Dispatch },
+    { "event_on", Event_On },
     // - Banner Ads
     { "banner_init", Banner_Init },
     { "banner_create", Banner_Create },

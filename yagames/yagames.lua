@@ -610,6 +610,28 @@ function M.storage_length()
     return yagames_private.storage_length()
 end
 
+---
+-- @tparam string event_name
+function M.event_dispatch(event_name)
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(type(event_name) == "string", "event_name is not a string.")
+
+    yagames_private.event_dispatch(event_name)
+end
+
+---
+-- @tparam string event_name
+-- @tparam function listener
+function M.event_on(event_name, listener)
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(type(event_name) == "string", "event_name is not a string.")
+    assert(type(listener) == "function", "listener is not a function.")
+
+    local cb_id = helper.next_cb_id()
+    yagames_private.add_listener(cb_id, listener)
+    yagames_private.event_on(event_name, cb_id)
+end
+
 -- @tparam function callback
 function M.banner_init(callback)
     assert(type(callback) == "function")

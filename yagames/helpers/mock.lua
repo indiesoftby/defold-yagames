@@ -405,6 +405,12 @@ function M.storage_length()
     return c
 end
 
+function M.event_dispatch(event_name)
+end
+
+function M.event_on(event_name, cb_id)
+end
+
 function M.banner_init(cb_id)
     M.send(cb_id, "Error loading SDK.")
 end

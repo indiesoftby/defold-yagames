@@ -785,6 +785,27 @@ var LibYaGamesPrivate = {
         return self._storage.length;
     },
 
+    YaGamesPrivate_Event_Dispatch: function (cevent_name) {
+        var self = YaGamesPrivate;
+        var event_name = UTF8ToString(cevent_name);
+        self._ysdk.dispatchEvent(self._ysdk.EVENTS[event_name]);
+    },
+
+    YaGamesPrivate_Event_On: function (cevent_name, cb_id) {
+        var self = YaGamesPrivate;
+        var event_name = UTF8ToString(cevent_name);
+        try {
+            self._ysdk.onEvent(self._ysdk.EVENTS[event_name], () => {
+                self.send(cb_id, null);
+            });
+
+            // Uncomment to test the behaviour:
+            // setInterval(function() { self.send(cb_id, null); }, 3000);
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
     YaGamesPrivate_Banner_Init: function (cb_id) {
         var self = YaGamesPrivate;
 

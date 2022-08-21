@@ -54,6 +54,8 @@ local function remote_input(self, action_id, action)
 end
 
 local function remote_init(self)
+    gui.set_text(self.text_device, "Device type is '" .. yagames.device_info_type() .. "'")
+
     for _, key_id in pairs(remote_keys) do
         local node = gui.get_node(key_id)
         gui.set_alpha(node, 0)
@@ -87,6 +89,7 @@ function init(self)
     msg.post(".", "acquire_input_focus")
 
     self.text_message = gui.get_node("text_message")
+    self.text_device = gui.get_node("text_device")
 end
 
 function final(self)

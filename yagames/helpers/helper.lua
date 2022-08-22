@@ -49,7 +49,7 @@ end
 function M.async_call(cb)
     if cb then
         timer.delay(0, false, function (self, handle)
-            cb(self)           
+            cb(self)
         end)
     end
 end

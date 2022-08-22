@@ -799,6 +799,10 @@ var LibYaGamesPrivate = {
                 self.send(cb_id, null);
             });
 
+            window.testBack = function() {
+                self.send(cb_id, null);
+            };
+
             // Uncomment to test the behaviour:
             // setInterval(function() { self.send(cb_id, null); }, 3000);
         } catch (err) {

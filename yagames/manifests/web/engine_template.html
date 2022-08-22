@@ -58,6 +58,20 @@
                     send(0, "error", "Error loading SDK. Reload the page.");
                 };
             })(document);
+
+            window.addEventListener(
+                "keydown",
+                (event) => {
+                    if (event.repeat) return;
+
+                    JsToDef.send("KeyDown", "code [" + event.code + "], key [" + event.key + "], keyCode [" + event.keyCode + "]");
+
+                    // if (event.code === "Backspace" && window.testBack) {
+                    //     window.testBack();
+                    // }
+                },
+                true
+            );
         </script>
     </head>
 </html>

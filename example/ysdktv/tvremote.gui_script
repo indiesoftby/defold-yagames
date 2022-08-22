@@ -1,4 +1,48 @@
 local yagames = require("yagames.yagames")
+local utf8 = require("example.ysdkdebug.utf8")
+
+--
+--
+--
+
+local log_node = nil
+local log_text = ""
+
+local old_print = print
+local print = function(...)
+    local arg = {...}
+    local t = ""
+    for _, v in pairs(arg) do
+        t = t .. tostring(v) .. " "
+    end
+
+    if not log_node then
+        old_print(t)
+        return
+    end
+
+    log_text = t .. "\n" .. log_text
+
+    local pos = 1
+    local lines = 0
+    repeat
+        pos = string.find(log_text, "\n", pos, true)
+        if pos == nil then
+            break
+        end
+
+        lines = lines + 1
+        if lines == 41 then
+            log_text = string.sub(log_text, 1, pos)
+        end
+
+        pos = pos + 1
+    until false
+
+    --old_print("log_text: " .. log_text)
+
+    gui.set_text(log_node, log_text)
+end
 
 --
 -- TV remote buttons test
@@ -16,9 +60,12 @@ local remote_keys = {
 local function message_show(self, text)
     local node = self.text_message
     gui.set_text(node, text)
+    gui.cancel_animation(node, "color")
     gui.cancel_animation(node, "color.w")
-    gui.set_alpha(node, 1)
-    gui.animate(node, "color.w", 0, gui.EASING_OUTQUAD, 0.3, 2)
+    gui.set_color(node, vmath.vector4(0, 0, 0.7, 1))
+    gui.animate(node, "color", vmath.vector4(0, 0, 0, 1), gui.EASING_OUTQUAD, 1, 0.2, function (self)
+        gui.animate(node, "color.w", 0, gui.EASING_OUTQUAD, 0.3, 0.7)
+    end)
 end
 
 local function remote_button_on(self, button_id)
@@ -33,6 +80,11 @@ local function remote_button_off(self, button_id)
 end
 
 local function remote_input(self, action_id, action)
+    if action_id and action.pressed then
+        -- local action_value = action.pressed and "pressed" or (action.released and "released" or "")
+        print("defold.on_input: " .. action_id) --  .. " - " .. action_value)
+    end
+
     for _, key_id in pairs(remote_keys) do
         if action_id == key_id then
             if action.pressed then
@@ -65,11 +117,17 @@ local function remote_init(self)
     message_show(self, "Press keys on your remote to test")
 
     yagames.event_on("HISTORY_BACK", function (self, err)
+        print("yagames.event_on(\"HISTORY_BACK\"): " .. (err and "error " .. err or "OK"))
+
         if err then
             message_show(self, "'event_on' error " .. err)
             return
         end
 
+        -- User pressed "BACK" on TV remote, i.e. 
+        -- do something here.
+
+        -- The following code simulates on_input, i.e. presses the button and immediately releases it.
         remote_input(self, hash("key_tv_back"), { pressed = true })
         remote_input(self, hash("key_tv_back"), { released = true })
     end)
@@ -85,11 +143,25 @@ end
 -- Script
 --
 
+local function js_listener(self, message_id, message)
+    if message_id == "KeyDown" then
+        print("window.onkeydown: " .. message)
+    end
+end
+
 function init(self)
     msg.post(".", "acquire_input_focus")
 
     self.text_message = gui.get_node("text_message")
     self.text_device = gui.get_node("text_device")
+    self.text_version = gui.get_node("text_version")
+    log_node = gui.get_node("text_log")
+
+    gui.set_text(self.text_version, "Version " .. sys.get_config("project.version", "0.0.0"))
+
+    if jstodef then
+        jstodef.add_listener(js_listener)
+    end
 end
 
 function final(self)

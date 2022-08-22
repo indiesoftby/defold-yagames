@@ -19,8 +19,8 @@ background_color {
 }
 nodes {
   position {
-    x: 800.0
-    y: 1426.0
+    x: 26.526
+    y: 1393.603
     z: 0.0
     w: 1.0
   }
@@ -55,7 +55,7 @@ nodes {
   id: "text_device"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
+  pivot: PIVOT_W
   outline {
     x: 0.0
     y: 0.0
@@ -84,8 +84,8 @@ nodes {
 }
 nodes {
   position {
-    x: 800.0
-    y: 1341.0
+    x: 26.526
+    y: 1323.002
     z: 0.0
     w: 1.0
   }
@@ -120,7 +120,7 @@ nodes {
   id: "text_message"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
+  pivot: PIVOT_W
   outline {
     x: 0.0
     y: 0.0
@@ -149,7 +149,72 @@ nodes {
 }
 nodes {
   position {
-    x: 800.0
+    x: 26.526
+    y: 1461.996
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 950.0
+    y: 60.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "<Version>"
+  font: "font2"
+  id: "text_version"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_W
+  outline {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  shadow {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  layer: "font2"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+  enabled: true
+  visible: true
+}
+nodes {
+  position {
+    x: 250.773
     y: 639.0
     z: 0.0
     w: 1.0
@@ -206,7 +271,7 @@ nodes {
 }
 nodes {
   position {
-    x: 677.0
+    x: 127.773
     y: 771.0
     z: 0.0
     w: 1.0
@@ -263,7 +328,7 @@ nodes {
 }
 nodes {
   position {
-    x: 925.0
+    x: 375.773
     y: 771.0
     z: 0.0
     w: 1.0
@@ -320,7 +385,7 @@ nodes {
 }
 nodes {
   position {
-    x: 801.0
+    x: 251.773
     y: 647.0
     z: 0.0
     w: 1.0
@@ -377,7 +442,7 @@ nodes {
 }
 nodes {
   position {
-    x: 801.0
+    x: 251.773
     y: 894.0
     z: 0.0
     w: 1.0
@@ -434,7 +499,7 @@ nodes {
 }
 nodes {
   position {
-    x: 800.0
+    x: 250.773
     y: 769.0
     z: 0.0
     w: 1.0
@@ -491,7 +556,7 @@ nodes {
 }
 nodes {
   position {
-    x: 679.0
+    x: 129.773
     y: 558.0
     z: 0.0
     w: 1.0
@@ -542,6 +607,129 @@ nodes {
   alpha: 0.5
   template_node_child: false
   size_mode: SIZE_MODE_AUTO
+  custom_type: 0
+  enabled: true
+  visible: true
+}
+nodes {
+  position {
+    x: 504.083
+    y: 1252.524
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 1070.0
+    y: 1200.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 0.8
+    y: 0.8
+    z: 0.8
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "common/white"
+  id: "log"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_NW
+  adjust_mode: ADJUST_MODE_FIT
+  layer: ""
+  inherit_alpha: true
+  slice9 {
+    x: 3.0
+    y: 3.0
+    z: 3.0
+    w: 3.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: false
+  size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
+  enabled: true
+  visible: true
+}
+nodes {
+  position {
+    x: 10.0
+    y: -10.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.75
+    y: 0.75
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 1400.0
+    y: 1573.33
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 0.101960786
+    y: 0.101960786
+    z: 0.101960786
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "<Log>"
+  font: "font2"
+  id: "text_log"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_NW
+  outline {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  shadow {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: true
+  parent: "log"
+  layer: "font2"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
   custom_type: 0
   enabled: true
   visible: true

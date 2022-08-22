@@ -61,14 +61,40 @@
 
             window.addEventListener(
                 "keydown",
-                (event) => {
-                    if (event.repeat) return;
+                function (event) {
+                    try {
+                        JsToDef.send("KeyDown", "code [" + event.code + "], key [" + event.key + "], keyCode [" + event.keyCode + "], repeat [" + event.repeat + "]");
 
-                    JsToDef.send("KeyDown", "code [" + event.code + "], key [" + event.key + "], keyCode [" + event.keyCode + "]");
+                        // if (event.code === "Backspace" && window.testBack) {
+                        //     window.testBack();
+                        // }
+                    } catch (e) {
+                        JsToDef.send("KeyDown", "error " + e.toString());
+                    }
+                },
+                true
+            );
 
-                    // if (event.code === "Backspace" && window.testBack) {
-                    //     window.testBack();
-                    // }
+            window.addEventListener(
+                "keyup",
+                function (event) {
+                    try {
+                        JsToDef.send("KeyUp", "code [" + event.code + "], key [" + event.key + "], keyCode [" + event.keyCode + "]");
+                    } catch (e) {
+                        JsToDef.send("KeyUp", "error " + e.toString());
+                    }
+                },
+                true
+            );
+
+            window.addEventListener(
+                "keypress",
+                function (event) {
+                    try {
+                        JsToDef.send("KeyPress", "code [" + event.code + "], key [" + event.key + "], keyCode [" + event.keyCode + "]");
+                    } catch (e) {
+                        JsToDef.send("KeyPress", "error " + e.toString());
+                    }
                 },
                 true
             );

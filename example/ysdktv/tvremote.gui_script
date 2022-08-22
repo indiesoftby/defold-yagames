@@ -7,6 +7,7 @@ local utf8 = require("example.ysdkdebug.utf8")
 
 local log_node = nil
 local log_text = ""
+local log_prev = ""
 
 local old_print = print
 local print = function(...)
@@ -21,6 +22,11 @@ local print = function(...)
         return
     end
 
+    if log_prev == t then
+        return
+    end
+    log_prev = t
+
     log_text = t .. "\n" .. log_text
 
     local pos = 1
@@ -32,7 +38,7 @@ local print = function(...)
         end
 
         lines = lines + 1
-        if lines == 41 then
+        if lines == 52 then
             log_text = string.sub(log_text, 1, pos)
         end
 
@@ -80,9 +86,37 @@ local function remote_button_off(self, button_id)
 end
 
 local function remote_input(self, action_id, action)
-    if action_id and action.pressed then
-        -- local action_value = action.pressed and "pressed" or (action.released and "released" or "")
-        print("defold.on_input: " .. action_id) --  .. " - " .. action_value)
+    if action_id and (action.pressed or action.released) then
+        local action_value = action.pressed and "pressed" or (action.released and "released" or "")
+        print("defold.on_input: " .. action_id  .. " - " .. action_value)
+    end
+
+    if action_id == hash("gamepad_raw") then
+        local t = ""
+        if action.gamepad_axis then
+            for i = 1, #action.gamepad_axis do
+                if math.abs(action.gamepad_axis[i]) > 0.5 then
+                    t = t .. "axis["..i.."]("..action.gamepad_axis[i]..") "
+                end
+            end
+        end
+        if action.gamepad_buttons then
+            for i = 1, #action.gamepad_buttons do
+                if action.gamepad_buttons[i] > 0.5 then
+                    t = t .. "buttons["..i.."]("..action.gamepad_buttons[i]..") "
+                end
+            end
+        end
+        if action.gamepad_hats then
+            for i = 1, #action.gamepad_hats do
+                if action.gamepad_hats[i] > 0.5 then
+                    t = t .. "hats["..i.."]("..action.gamepad_hats[i]..") "
+                end
+            end
+        end
+        if #t > 0 then
+            print("defold.on_input: " .. action_id .. " -> " .. t)
+        end
     end
 
     for _, key_id in pairs(remote_keys) do
@@ -146,12 +180,14 @@ end
 local function js_listener(self, message_id, message)
     if message_id == "KeyDown" then
         print("window.onkeydown: " .. message)
+    elseif message_id == "KeyUp" then
+        print("window.onkeyup: " .. message)
+    elseif message_id == "KeyPress" then
+        print("window.onkeypress: " .. message)
     end
 end
 
 function init(self)
-    msg.post(".", "acquire_input_focus")
-
     self.text_message = gui.get_node("text_message")
     self.text_device = gui.get_node("text_device")
     self.text_version = gui.get_node("text_version")
@@ -177,9 +213,10 @@ function on_message(self, message_id, message, sender)
         else
             remote_init(self)
         end
+    elseif message_id == hash("forwarded_input") then
+        remote_input(self, message.action_id, message.action)
     end
 end
 
 function on_input(self, action_id, action)
-    remote_input(self, action_id, action)
 end

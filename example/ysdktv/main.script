@@ -5,5 +5,14 @@ local function init_handler(self, err)
 end
 
 function init(self)
+    msg.post(".", "acquire_input_focus")
+
     yagames.init(init_handler)
+end
+
+function on_input(self, action_id, action)
+    msg.post("#gui", "forwarded_input", {
+        action_id = action_id,
+        action = action
+    })
 end

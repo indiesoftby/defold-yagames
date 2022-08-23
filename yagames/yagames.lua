@@ -628,7 +628,9 @@ function M.event_on(event_name, listener)
     assert(type(listener) == "function", "listener is not a function.")
 
     local cb_id = helper.next_cb_id()
-    yagames_private.add_listener(cb_id, listener)
+    yagames_private.add_listener(cb_id, function(self, _cb_id, err)
+        listener(self, err)
+    end)
     yagames_private.event_on(event_name, cb_id)
 end
 

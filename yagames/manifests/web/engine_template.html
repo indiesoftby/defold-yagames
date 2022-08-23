@@ -59,6 +59,26 @@
                 };
             })(document);
 
+            function getGamepadsIds() {
+                try {
+                    var t = "";
+                    var gamepads = navigator.getGamepads();
+                    for (var i = 0; i < gamepads.length; i++) {
+                        var gamepad = gamepads[i];
+                        if (gamepad) {
+                            t += "gamepad [" + gamepad.id + "] ";
+                        }
+                    }
+                    if (t.length == 0) {
+                        return "gamepads - no";
+                    } else {
+                        return t;
+                    }
+                } catch (e) {
+                    return e.toString();
+                }
+            }
+
             window.addEventListener(
                 "keydown",
                 function (event) {

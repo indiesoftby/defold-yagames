@@ -12,7 +12,7 @@ vsync = 0
 
 [project]
 title = yagames
-version = 0.7.5-B
+version = 0.7.5-C
 developer = Indiesoft LLC
 bundle_resources = example/bundle/
 dependencies#0 = https://github.com/subsoap/defos/archive/v2.5.0.zip
@@ -39,7 +39,7 @@ max_characters = 30000
 
 [input]
 game_binding = /example/ysdktv/raw.input_bindingc
-gamepads = /builtins/input/default.gamepadsc
+gamepads = /example/ysdktv/tv.gamepadsc
 
 [yagames]
 sdk_init_options = { orientation: { value: "portrait", lock: true } }

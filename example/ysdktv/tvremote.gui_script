@@ -187,6 +187,10 @@ local function js_listener(self, message_id, message)
     end
 end
 
+local function check_gamepads(self)
+    print(html5.run("getGamepadsIds()"))
+end
+
 function init(self)
     self.text_message = gui.get_node("text_message")
     self.text_device = gui.get_node("text_device")
@@ -197,6 +201,11 @@ function init(self)
 
     if jstodef then
         jstodef.add_listener(js_listener)
+    end
+
+    if html5 then
+        timer.delay(3, true, check_gamepads)
+        check_gamepads(self)
     end
 end
 

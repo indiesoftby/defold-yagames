@@ -180,7 +180,7 @@ Yandex allows to integrate Service Worker into your game to be able to run both 
 3. Edit the list of all game files inside your `sw.js`. Omit `sw.js` and `yandex-manifest.json`.
 4. You should increment the version inside `sw.js` on every update of your game on Yandex.Games.
 
-## The `game.project` Settings
+## The `game.project` Settings (Optional!)
 
 ```ini
 [yagames]
@@ -213,6 +213,10 @@ The best way to integrate SDK into your game is to read [the official documentat
 | **Advertisement** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-adv.html?lang=en) |  |
 | `ysdk.adv.showFullscreenAdv({callbacks:{}})` | `yagames.adv_show_fullscreen_adv(callbacks)` [<kbd>Example</kbd>](#2-interstitial-ad) |
 | `ysdk.adv.showRewardedVideo({callbacks:{}})` | `yagames.adv_show_rewarded_video(callbacks)` [<kbd>Example</kbd>](#3-rewarded-videos) |
+| **Advertisement - Sticky Banners** |  |
+| `ysdk.adv.getBannerAdvStatus()` | `yagames.adv_get_banner_adv_status(callback)` |
+| `ysdk.adv.showBannerAdv()` | `yagames.adv_show_banner_adv([callback])` |
+| `ysdk.adv.hideBannerAdv()` | `yagames.adv_hide_banner_adv([callback])` |
 | **Authentication + Player** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-player.html?lang=en) |  |
 | `ysdk.auth.openAuthDialog()` | `yagames.auth_open_auth_dialog(callback)` |
 | `ysdk.getPlayer(options)` | `yagames.player_init(options, callback)`<br>The argument `options` is a Lua table `{ signed = boolean, scopes = boolean }`. |

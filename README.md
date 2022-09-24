@@ -25,33 +25,26 @@ You can use it in your own project by adding this project as a [Defold library d
 ### Checklist For Releasing Game
 
 1. [Sign up as a developer](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en).
-2. Translate your game to the Russian language. English and Turkish are optional [(more info)](https://yandex.ru/dev/games/doc/dg/concepts/languages-and-domains.html?lang=en).
+2. Translate your game to the Russian language (*tip:* It's a great idea to translate your game title into Russian too.). English and Turkish are optional [(more info)](https://yandex.ru/dev/games/doc/dg/concepts/languages-and-domains.html?lang=en).
 3. Prepare assets for the catalogue:
     - Icon 512 x 512 px.
     - Cover 800 x 470 px.
     - Screenshots.
     - *(Optional)* Videos and GIF.
-4. Add [the extension](https://github.com/indiesoftby/defold-yagames/archive/master.zip) as a Defold library dependency to your project. **You can publish your game on Yandex.Games from this moment. It fully meets [the requirements](https://yandex.ru/dev/games/doc/dg/concepts/requirements.html?lang=en).**
+4. Add [the extension](https://github.com/indiesoftby/defold-yagames/archive/master.zip) as a Defold library dependency to your project. 
 5. Enable monetization and earn revenue from placing ad blocks in your game. Ad blocks are available in the following formats:
     - **Interstitial blocks**: ad blocks that completely cover the app background and show up at certain points (for example, when accessing the next game level). *Important: Mute sounds before showing the ad.*
     - **Rewarded videos**: blocks with video ads that the user can choose to view and earn a reward or in-game currency. *Important: Mute sounds before showing the ad.*
     - **RTB ad blocks (banners)**: display both contextual (content-based) ads and media ads.
+    - **Sticky banners**: the same as RTB but they're much easier to setup.
     - **In-game purchases**: earn revenue by providing paid services to your users.
-6. *(Optional)* Enable [Native Cache](https://yandex.ru/dev/games/doc/dg/concepts/native-cache-settings.html?lang=en) support.
-    1. Set the path to the file `yandex-manifest.json` in the `game.project` settings.
-    2. Copy the `yagames/manifests/web/yandex-manifest.json` file to the root directory of your release build.
-    3. Edit the list of all game files inside your `yandex-manifest.json`, and update the path to the icon. Omit `sw.js` and `yandex-manifest.json`.
-7. *(Optional)* Enable Service Worker support - browser games should run both offline and online, however unstable or slow the web connection might be. To meet these criteria, integrate Service Worker into your game.
-    1. Set the path to the file `sw.js` in the `game.project` settings.
-    2. Copy the `yagames/manifests/web/sw.js` file to the root directory of your release build.
-    3. Edit the list of all game files inside your `sw.js`. Omit `sw.js` and `yandex-manifest.json`.
-    4. You should increment the version inside `sw.js` on every update of your game on Yandex.Games.
-8. Publish your game [in the Yandex.Games catalogue](https://games.yandex.ru/console/).
+5. You can [publish your game on Yandex.Games](https://games.yandex.ru/console/) from this moment. It fully meets [the requirements](https://yandex.ru/dev/games/doc/dg/concepts/requirements.html?lang=en).
 
-### Best Practices
+### Best Practices & Tips
 
 1. The YaGames extension imitates a real API on *non-HTML5* platforms. The idea is to allow to you quickly implement API on your favourite platform (macOS, Windows, Linux) and don't spend time on slowly rebuilding/uploading the game to the Yandex.
 2. The code from `yagames/manifests/web/engine_template.html` is always added to your HTML5 template. This behaviour can't be disabled. Tip: use Git-branching for every platform and do not mix platform-specific code between them.
+3. You don't need to set up any cache-busting techniques, since Yandex.Games hosts each version of your game in separate paths.
 
 ## Code Examples
 
@@ -167,6 +160,25 @@ function on_message(self, message_id, message)
     end
 end
 ```
+
+### Misc
+
+#### Native Cache How-To
+
+Yandex's [Native Cache](https://yandex.ru/dev/games/doc/dg/concepts/native-cache-settings.html?lang=en) lets users use games offline. Currently, it's available only in Yandex Browser or the Yandex app on smartphones.
+
+1. Set the path to the file `yandex-manifest.json` in the `game.project` settings.
+2. Copy the `yagames/manifests/web/yandex-manifest.json` file to the root directory of your release build.
+3. Edit the list of all game files inside your `yandex-manifest.json`, and update the path to the icon. Omit `sw.js` and `yandex-manifest.json`.
+
+#### Service Worker How-To
+
+Yandex allows to integrate Service Worker into your game to be able to run both offline and online.
+
+1. Set the path to the file `sw.js` in the `game.project` settings.
+2. Copy the `yagames/manifests/web/sw.js` file to the root directory of your release build.
+3. Edit the list of all game files inside your `sw.js`. Omit `sw.js` and `yandex-manifest.json`.
+4. You should increment the version inside `sw.js` on every update of your game on Yandex.Games.
 
 ## The `game.project` Settings
 

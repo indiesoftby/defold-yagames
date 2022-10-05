@@ -87,6 +87,50 @@ function M.adv_show_rewarded_video(callbacks)
     yagames_private.show_rewarded_video(helper.wrap_for_callbacks(callbacks))
 end
 
+---
+-- @tparam function callback
+function M.adv_get_banner_adv_status(callback)
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(type(callback) == "function", "Callback function is required")
+
+    yagames_private.adv_get_banner_adv_status(helper.wrap_for_promise(function(self, err, result)
+        if result then
+            result = rxi_json.decode(result)
+        end
+        callback(self, err, result)
+    end))
+end
+
+---
+-- @tparam function callback
+function M.adv_show_banner_adv(callback)
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+
+    yagames_private.adv_show_banner_adv(helper.wrap_for_promise(function(self, err, result)
+        if callback then
+            if result then
+                result = rxi_json.decode(result)
+            end
+            callback(self, err, result)
+        end
+    end))
+end
+
+---
+-- @tparam function callback
+function M.adv_hide_banner_adv(callback)
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+
+    yagames_private.adv_hide_banner_adv(helper.wrap_for_promise(function(self, err, result)
+        if callback then
+            if result then
+                result = rxi_json.decode(result)
+            end
+            callback(self, err, result)
+        end
+    end))
+end
+
 --- Open the login dialog box.
 -- @tparam function callback
 function M.auth_open_auth_dialog(callback)

@@ -33,8 +33,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 490.0
-    y: 225.0
+    x: 10.0
+    y: 10.0
     z: 0.0
     w: 1.0
   }
@@ -67,6 +67,8 @@ nodes {
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -131,6 +133,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -172,6 +176,7 @@ nodes {
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -228,6 +233,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -293,11 +300,13 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
-    x: 160.0
-    y: -170.0
+    x: 500.0
+    y: -85.0
     z: 0.0
     w: 1.0
   }
@@ -334,6 +343,7 @@ nodes {
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -390,6 +400,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -455,6 +467,509 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
+}
+nodes {
+  position {
+    x: 415.0
+    y: -170.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_adv_show_banner_adv"
+  parent: "group_adv"
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  template: "/example/ysdkdebug/button_sm.gui"
+  template_node_child: false
+  custom_type: 0
+  enabled: true
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 150.0
+    y: 70.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "common/button"
+  id: "button_adv_show_banner_adv/body"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "button_adv_show_banner_adv"
+  layer: "common"
+  inherit_alpha: true
+  slice9 {
+    x: 24.0
+    y: 24.0
+    z: 24.0
+    w: 24.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: true
+  size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
+  enabled: true
+  visible: true
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.8
+    y: 0.8
+    z: 0.7
+    w: 1.0
+  }
+  size {
+    x: 162.5
+    y: 87.5
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Show Sticky"
+  font: "font2"
+  id: "button_adv_show_banner_adv/text"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  shadow {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "button_adv_show_banner_adv/body"
+  layer: "font2"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  overridden_fields: 8
+  template_node_child: true
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+  enabled: true
+  visible: true
+}
+nodes {
+  position {
+    x: 160.0
+    y: -170.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_adv_get_banner_adv_status"
+  parent: "group_adv"
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  template: "/example/ysdkdebug/button.gui"
+  template_node_child: false
+  custom_type: 0
+  enabled: true
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 320.0
+    y: 70.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "common/button"
+  id: "button_adv_get_banner_adv_status/body"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "button_adv_get_banner_adv_status"
+  layer: "common"
+  inherit_alpha: true
+  slice9 {
+    x: 24.0
+    y: 24.0
+    z: 24.0
+    w: 24.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: true
+  size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
+  enabled: true
+  visible: true
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.8
+    y: 0.8
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 375.0
+    y: 87.5
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Get Sticky Adv Status"
+  font: "font2"
+  id: "button_adv_get_banner_adv_status/text"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  shadow {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "button_adv_get_banner_adv_status/body"
+  layer: "font2"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  overridden_fields: 8
+  template_node_child: true
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+  enabled: true
+  visible: true
+}
+nodes {
+  position {
+    x: 585.0
+    y: -170.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_adv_hide_banner_adv"
+  parent: "group_adv"
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  template: "/example/ysdkdebug/button_sm.gui"
+  template_node_child: false
+  custom_type: 0
+  enabled: true
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 150.0
+    y: 70.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "common/button"
+  id: "button_adv_hide_banner_adv/body"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "button_adv_hide_banner_adv"
+  layer: "common"
+  inherit_alpha: true
+  slice9 {
+    x: 24.0
+    y: 24.0
+    z: 24.0
+    w: 24.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: true
+  size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
+  enabled: true
+  visible: true
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.8
+    y: 0.8
+    z: 0.7
+    w: 1.0
+  }
+  size {
+    x: 162.5
+    y: 87.5
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Hide Sticky"
+  font: "font2"
+  id: "button_adv_hide_banner_adv/text"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  shadow {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "button_adv_hide_banner_adv/body"
+  layer: "font2"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  overridden_fields: 8
+  template_node_child: true
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -476,8 +991,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 490.0
-    y: 100.0
+    x: 10.0
+    y: 10.0
     z: 0.0
     w: 1.0
   }
@@ -510,6 +1025,8 @@ nodes {
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -574,6 +1091,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -638,6 +1157,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -702,6 +1223,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -766,6 +1289,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -830,6 +1355,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -851,8 +1378,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 1560.0
-    y: 600.0
+    x: 10.0
+    y: 10.0
     z: 0.0
     w: 1.0
   }
@@ -885,6 +1412,8 @@ nodes {
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -949,6 +1478,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -1013,6 +1544,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -1054,6 +1587,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -1110,6 +1644,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -1175,6 +1711,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -1216,6 +1754,7 @@ nodes {
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -1272,6 +1811,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -1337,6 +1878,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -1378,6 +1921,7 @@ nodes {
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -1434,6 +1978,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -1499,6 +2045,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -1520,8 +2068,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 490.0
-    y: 400.0
+    x: 10.0
+    y: 10.0
     z: 0.0
     w: 1.0
   }
@@ -1554,6 +2102,8 @@ nodes {
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -1618,6 +2168,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -1659,6 +2211,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -1715,6 +2268,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -1780,6 +2335,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -1821,6 +2378,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -1877,6 +2435,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -1944,6 +2504,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -1985,6 +2547,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -2041,6 +2604,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -2108,6 +2673,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -2149,6 +2716,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -2205,6 +2773,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -2270,6 +2840,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -2311,6 +2883,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -2367,6 +2940,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -2432,6 +3007,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -2473,6 +3050,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -2529,6 +3107,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -2594,6 +3174,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -2635,6 +3217,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -2691,6 +3274,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -2756,6 +3341,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -2797,6 +3384,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -2853,6 +3441,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -2918,6 +3508,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -2959,6 +3551,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -3015,6 +3608,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -3080,6 +3675,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -3121,6 +3718,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -3177,6 +3775,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -3242,6 +3842,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -3283,6 +3885,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -3339,6 +3942,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -3404,6 +4009,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -3445,6 +4052,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -3501,6 +4109,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -3568,10 +4178,12 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
-    x: 550.0
+    x: 720.0
     y: 1480.0
     z: 0.0
     w: 1.0
@@ -3589,8 +4201,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 680.0
-    y: 225.0
+    x: 10.0
+    y: 10.0
     z: 0.0
     w: 1.0
   }
@@ -3623,6 +4235,8 @@ nodes {
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -3687,6 +4301,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -3728,6 +4344,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -3784,6 +4401,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -3849,6 +4468,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -3890,6 +4511,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -3946,6 +4568,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -4011,6 +4635,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -4052,6 +4678,7 @@ nodes {
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -4108,6 +4735,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -4173,6 +4802,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -4214,6 +4845,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -4270,6 +4902,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -4336,6 +4970,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -4377,6 +5013,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -4433,6 +5070,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -4499,6 +5138,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -4540,6 +5181,7 @@ nodes {
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -4596,6 +5238,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -4661,6 +5305,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -4682,8 +5328,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 680.0
-    y: 140.0
+    x: 10.0
+    y: 10.0
     z: 0.0
     w: 1.0
   }
@@ -4716,6 +5362,8 @@ nodes {
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -4780,6 +5428,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -4821,6 +5471,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -4877,6 +5528,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -4942,6 +5595,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -4983,6 +5638,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -5039,6 +5695,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -5104,6 +5762,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -5145,6 +5805,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -5201,6 +5862,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -5266,6 +5929,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -5307,6 +5972,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -5363,6 +6029,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -5428,6 +6096,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -5449,8 +6119,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 490.0
-    y: 50.0
+    x: 10.0
+    y: 10.0
     z: 0.0
     w: 1.0
   }
@@ -5483,6 +6153,8 @@ nodes {
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -5547,6 +6219,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -5588,6 +6262,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -5644,6 +6319,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -5709,6 +6386,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -5750,6 +6429,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -5806,6 +6486,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -5871,6 +6553,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -5912,6 +6596,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -5968,6 +6653,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -6033,6 +6720,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -6074,6 +6763,7 @@ nodes {
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -6130,6 +6820,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -6195,6 +6887,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -6236,6 +6930,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -6292,6 +6987,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -6357,6 +7054,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -6398,6 +7097,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -6454,6 +7154,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -6519,6 +7221,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -6560,6 +7264,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -6616,6 +7321,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -6681,6 +7388,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -6722,6 +7431,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -6778,6 +7488,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -6843,6 +7555,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -6883,6 +7597,7 @@ nodes {
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -6939,6 +7654,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -7004,6 +7721,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -7025,8 +7744,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 680.0
-    y: 140.0
+    x: 10.0
+    y: 10.0
     z: 0.0
     w: 1.0
   }
@@ -7059,6 +7778,8 @@ nodes {
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -7123,6 +7844,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -7164,6 +7887,7 @@ nodes {
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -7220,6 +7944,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -7285,6 +8011,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -7326,6 +8054,7 @@ nodes {
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -7382,6 +8111,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -7447,6 +8178,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -7468,8 +8201,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 490.0
-    y: 145.0
+    x: 10.0
+    y: 10.0
     z: 0.0
     w: 1.0
   }
@@ -7502,6 +8235,8 @@ nodes {
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -7566,6 +8301,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -7607,6 +8344,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -7663,6 +8401,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -7728,6 +8468,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -7769,6 +8511,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -7825,6 +8568,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -7890,6 +8635,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -7931,6 +8678,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -7987,6 +8735,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -8052,6 +8802,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -8073,8 +8825,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 490.0
-    y: 145.0
+    x: 10.0
+    y: 10.0
     z: 0.0
     w: 1.0
   }
@@ -8107,6 +8859,8 @@ nodes {
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -8171,10 +8925,12 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
-    x: 75.0
+    x: 160.0
     y: -85.0
     z: 0.0
     w: 1.0
@@ -8209,9 +8965,10 @@ nodes {
   layer: ""
   inherit_alpha: true
   alpha: 1.0
-  template: "/example/ysdkdebug/button_sm.gui"
+  template: "/example/ysdkdebug/button.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -8233,7 +8990,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 150.0
+    x: 320.0
     y: 70.0
     z: 0.0
     w: 1.0
@@ -8268,6 +9025,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -8285,11 +9044,11 @@ nodes {
   scale {
     x: 0.8
     y: 0.8
-    z: 0.7
+    z: 1.0
     w: 1.0
   }
   size {
-    x: 162.5
+    x: 375.0
     y: 87.5
     z: 0.0
     w: 1.0
@@ -8333,10 +9092,12 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
-    x: 245.0
+    x: 415.0
     y: -85.0
     z: 0.0
     w: 1.0
@@ -8374,6 +9135,7 @@ nodes {
   template: "/example/ysdkdebug/button_sm.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -8430,6 +9192,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -8495,6 +9259,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -8535,6 +9301,7 @@ nodes {
   template: "/example/ysdkdebug/button.gui"
   template_node_child: false
   custom_type: 0
+  enabled: true
 }
 nodes {
   position {
@@ -8591,6 +9358,8 @@ nodes {
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 nodes {
   position {
@@ -8656,6 +9425,8 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
+  enabled: true
+  visible: true
 }
 layers {
   name: "common"

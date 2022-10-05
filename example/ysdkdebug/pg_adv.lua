@@ -1,5 +1,7 @@
 local druid = require("druid.druid")
 local druid_style = require("example.ysdkdebug.druid_style")
+local table_util = require("example.ysdkdebug.table_util")
+
 local yagames = require("yagames.yagames")
 
 local log_print = require("example.ysdkdebug.log_print")
@@ -41,9 +43,30 @@ function M.show_rewarded_video(self)
     })
 end
 
+function M.adv_get_banner_adv_status(self)
+    yagames.adv_get_banner_adv_status(function(self, err, result)
+        print("yagames.adv_get_banner_adv_status:", err or table_util.tostring(result))
+    end)
+end
+
+function M.adv_show_banner_adv(self)
+    yagames.adv_show_banner_adv(function(self, err, result)
+        print("yagames.adv_show_banner_adv:", err or table_util.tostring(result))
+    end)
+end
+
+function M.adv_hide_banner_adv(self)
+    yagames.adv_hide_banner_adv(function(self, err, result)
+        print("yagames.adv_hide_banner_adv:", err or table_util.tostring(result))
+    end)
+end
+
 function M.init(self)
     druid_style.make_button(self, "button_show_fullscreen_adv", M.show_fullscreen_adv)
     druid_style.make_button(self, "button_show_rewarded_video", M.show_rewarded_video)
+    druid_style.make_button(self, "button_adv_get_banner_adv_status", M.adv_get_banner_adv_status)
+    druid_style.make_button(self, "button_adv_show_banner_adv", M.adv_show_banner_adv)
+    druid_style.make_button(self, "button_adv_hide_banner_adv", M.adv_hide_banner_adv)
 end
 
 return M

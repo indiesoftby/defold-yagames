@@ -48,6 +48,25 @@ function M.show_rewarded_video(cb_id)
     M.send(cb_id, "close")
 end
 
+function M.adv_get_banner_adv_status(cb_id)
+    M.send(cb_id, NO_ERR, rxi_json.encode({
+        stickyAdvIsShowing = false,
+        reason = "UNKNOWN"
+    }))
+end
+
+function M.adv_show_banner_adv(cb_id)
+    M.send(cb_id, NO_ERR, rxi_json.encode({
+        stickyAdvIsShowing = false
+    }))
+end
+
+function M.adv_hide_banner_adv(cb_id)
+    M.send(cb_id, NO_ERR, rxi_json.encode({
+        stickyAdvIsShowing = false
+    }))
+end
+
 function M.open_auth_dialog(cb_id)
     M._auth = true
     M.send(cb_id, NO_ERR)

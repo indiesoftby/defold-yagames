@@ -20,8 +20,11 @@ extern "C"
                                           BooleanMessage cb_bool);
     void YaGamesPrivate_RemoveCallbacks();
 
-    void YaGamesPrivate_ShowFullscreenAdv(const int cb_id);
-    void YaGamesPrivate_ShowRewardedVideo(const int cb_id);
+    void YaGamesPrivate_Adv_ShowFullscreenAdv(const int cb_id);
+    void YaGamesPrivate_Adv_ShowRewardedVideo(const int cb_id);
+    void YaGamesPrivate_Adv_GetBannerAdvStatus(const int cb_id);
+    void YaGamesPrivate_Adv_ShowBannerAdv(const int cb_id);
+    void YaGamesPrivate_Adv_HideBannerAdv(const int cb_id);
     void YaGamesPrivate_OpenAuthDialog(const int cb_id);
     void YaGamesPrivate_Clipboard_WriteText(const int cb_id, const char* text);
     const char* YaGamesPrivate_DeviceInfo_Type();
@@ -406,15 +409,33 @@ static int RemoveListener(lua_State* L)
 // Yandex Games SDK API
 //
 
-static int ShowFullscreenAdv(lua_State* L)
+static int Adv_ShowFullscreenAdv(lua_State* L)
 {
-    YaGamesPrivate_ShowFullscreenAdv(luaL_checkint(L, 1));
+    YaGamesPrivate_Adv_ShowFullscreenAdv(luaL_checkint(L, 1));
     return 0;
 }
 
-static int ShowRewardedVideo(lua_State* L)
+static int Adv_ShowRewardedVideo(lua_State* L)
 {
-    YaGamesPrivate_ShowRewardedVideo(luaL_checkint(L, 1));
+    YaGamesPrivate_Adv_ShowRewardedVideo(luaL_checkint(L, 1));
+    return 0;
+}
+
+static int Adv_GetBannerAdvStatus(lua_State* L)
+{
+    YaGamesPrivate_Adv_GetBannerAdvStatus(luaL_checkint(L, 1));
+    return 0;
+}
+
+static int Adv_ShowBannerAdv(lua_State* L)
+{
+    YaGamesPrivate_Adv_ShowBannerAdv(luaL_checkint(L, 1));
+    return 0;
+}
+
+static int Adv_HideBannerAdv(lua_State* L)
+{
+    YaGamesPrivate_Adv_HideBannerAdv(luaL_checkint(L, 1));
     return 0;
 }
 
@@ -824,8 +845,11 @@ static const luaL_reg Module_methods[] = {
     { "remove_listener", RemoveListener },
     // Yandex Games SDK API
     // - Adv
-    { "show_fullscreen_adv", ShowFullscreenAdv },
-    { "show_rewarded_video", ShowRewardedVideo },
+    { "show_fullscreen_adv", Adv_ShowFullscreenAdv },
+    { "show_rewarded_video", Adv_ShowRewardedVideo },
+    { "adv_get_banner_adv_status", Adv_GetBannerAdvStatus },
+    { "adv_show_banner_adv", Adv_ShowBannerAdv },
+    { "adv_hide_banner_adv", Adv_HideBannerAdv },
     // - Auth
     { "open_auth_dialog", OpenAuthDialog },
     // - Clipboard

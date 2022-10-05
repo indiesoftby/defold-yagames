@@ -110,7 +110,7 @@ var LibYaGamesPrivate = {
         self._callback_bool = null;
     },
 
-    YaGamesPrivate_ShowFullscreenAdv: function (cb_id) {
+    YaGamesPrivate_Adv_ShowFullscreenAdv: function (cb_id) {
         var self = YaGamesPrivate;
         try {
             self._ysdk.adv.showFullscreenAdv({
@@ -135,7 +135,7 @@ var LibYaGamesPrivate = {
         }
     },
 
-    YaGamesPrivate_ShowRewardedVideo: function (cb_id) {
+    YaGamesPrivate_Adv_ShowRewardedVideo: function (cb_id) {
         var self = YaGamesPrivate;
         try {
             self._ysdk.adv.showRewardedVideo({
@@ -157,6 +157,54 @@ var LibYaGamesPrivate = {
         } catch (err) {
             self.delaySend(cb_id, "error", self.toErrStr(err));
             self.delaySend(cb_id, "close");
+        }
+    },
+
+    YaGamesPrivate_Adv_GetBannerAdvStatus: function (cb_id) {
+        var self = YaGamesPrivate;
+        try {
+            self._ysdk
+                .adv.getBannerAdvStatus()
+                .then((result) => {
+                    self.send(cb_id, null, JSON.stringify(result));
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
+    YaGamesPrivate_Adv_ShowBannerAdv: function (cb_id) {
+        var self = YaGamesPrivate;
+        try {
+            self._ysdk
+                .adv.showBannerAdv()
+                .then((result) => {
+                    self.send(cb_id, null, JSON.stringify(result));
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
+    YaGamesPrivate_Adv_HideBannerAdv: function (cb_id) {
+        var self = YaGamesPrivate;
+        try {
+            self._ysdk
+                .adv.hideBannerAdv()
+                .then((result) => {
+                    self.send(cb_id, null, JSON.stringify(result));
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
         }
     },
 

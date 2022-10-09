@@ -32,15 +32,27 @@
                             // {{#yagames.manifest_url}}
                             isNativeCache = ysdk.yandexApp && ysdk.yandexApp.enabled;
                             // {{/yagames.manifest_url}}
-                            if ("serviceWorker" in navigator && !isNativeCache) {
-                                navigator.serviceWorker.register("{{yagames.service_worker_url}}").then(
-                                    function (registration) {
-                                        console.log("YaGames: Service Worker registration successful with scope", registration.scope);
-                                    },
-                                    function (err) {
-                                        console.log("YaGames: Service Worker registration failed", err);
-                                    }
-                                );
+                            if ("serviceWorker" in navigator) {
+                                if (isNativeCache) {
+                                    // Force unregister all Service Workers
+                                    navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                                        registrations.forEach(function (registration) {
+                                            registration.unregister().then(function (isUnregistered) {
+                                                console.info("YaGames: Service Worker unregistration result", isUnregistered);
+                                            });
+                                        });
+                                    });
+                                } else {
+                                    // Register Service Worker
+                                    navigator.serviceWorker.register("{{yagames.service_worker_url}}").then(
+                                        function (registration) {
+                                            console.info("YaGames: Service Worker registration successful with scope", registration.scope);
+                                        },
+                                        function (err) {
+                                            console.info("YaGames: Service Worker registration failed", err);
+                                        }
+                                    );
+                                }
                             }
                             // {{/yagames.service_worker_url}}
 

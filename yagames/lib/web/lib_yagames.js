@@ -44,14 +44,16 @@ var LibYaGamesPrivate = {
                         {{{ makeDynCall("viif", "YaGamesPrivate._callback_number") }}}(cb_id, cmsg_id, message);
                         break;
                     case "string":
-                        var msg = allocate(intArrayFromString(message), "i8", ALLOC_NORMAL);
-                        {{{ makeDynCall("viii", "YaGamesPrivate._callback_string") }}}(cb_id, cmsg_id, msg);
+                        var msg_arr = intArrayFromString(message, false);
+                        var msg = allocate(msg_arr, "i8", ALLOC_NORMAL);
+                        {{{ makeDynCall("viii", "YaGamesPrivate._callback_string") }}}(cb_id, cmsg_id, msg, msg_arr.length);
                         Module._free(msg);
                         break;
                     case "object":
                         var msg = JSON.stringify(message);
-                        msg = allocate(intArrayFromString(msg), "i8", ALLOC_NORMAL);
-                        {{{ makeDynCall("viii", "YaGamesPrivate._callback_object") }}}(cb_id, cmsg_id, msg);
+                        var msg_arr = intArrayFromString(msg, false);
+                        msg = allocate(msg_arr, "i8", ALLOC_NORMAL);
+                        {{{ makeDynCall("viii", "YaGamesPrivate._callback_object") }}}(cb_id, cmsg_id, msg, msg_arr.length);
                         Module._free(msg);
                         break;
                     case "boolean":

@@ -6,7 +6,7 @@
 
 #if defined(DM_PLATFORM_HTML5)
 
-typedef void (*ObjectMessage)(const int cb_id, const char* message_id, const char* message);
+typedef void (*ObjectMessage)(const int cb_id, const char* message_id, const char* message, const int length);
 typedef void (*NoMessage)(const int cb_id, const char* message_id);
 typedef void (*NumberMessage)(const int cb_id, const char* message_id, float message);
 typedef void (*BooleanMessage)(const int cb_id, const char* message_id, int message);
@@ -131,7 +131,7 @@ static bool CheckCallbackAndInstance(YaGamesPrivateListener* cbk)
     return true;
 }
 
-static void SendObjectMessage(const int cb_id, const char* message_id, const char* message)
+static void SendObjectMessage(const int cb_id, const char* message_id, const char* message, const int length)
 {
     for (int i = m_Listeners.Size() - 1; i >= 0; --i)
     {
@@ -150,37 +150,15 @@ static void SendObjectMessage(const int cb_id, const char* message_id, const cha
             {
                 lua_pushnil(L);
             }
+            dmScript::JsonToLua(L, message, length); // throws lua error if it fails
 
-            dmJson::Document doc;
-            dmJson::Result r = dmJson::Parse(message, &doc);
-            if (r == dmJson::RESULT_OK && doc.m_NodeCount > 0)
-            {
-                char error_str_out[128];
-                if (dmScript::JsonToLua(L, &doc, 0, error_str_out, sizeof(error_str_out)) < 0)
-                {
-                    dmLogError("Failed converting object JSON to Lua; %s", error_str_out);
-                    is_fail = true;
-                }
-            }
-            else
-            {
-                dmLogError("Failed to parse JS object(%d): (%s)", r, message);
-                is_fail = true;
-            }
-            dmJson::Free(&doc);
-            if (is_fail)
-            {
-                lua_pop(L, 3);
-                assert(top == lua_gettop(L));
-                return;
-            }
             dmScript::PCall(L, 4, 0);
         }
         assert(top == lua_gettop(L));
     }
 }
 
-static void SendStringMessage(const int cb_id, const char* message_id, const char* message)
+static void SendStringMessage(const int cb_id, const char* message_id, const char* message, const int length)
 {
     for (int i = m_Listeners.Size() - 1; i >= 0; --i)
     {
@@ -202,7 +180,7 @@ static void SendStringMessage(const int cb_id, const char* message_id, const cha
             {
                 lua_pushnil(L);
             }
-            lua_pushstring(L, message);
+            lua_pushlstring(L, message, length);
 
             dmScript::PCall(L, 4, 0);
         }

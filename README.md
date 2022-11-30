@@ -2,9 +2,15 @@
 
 # YaGames - Yandex.Games for Defold
 
-*This is an open-source project. It is not affiliated with Yandex LLC.*
+> ***Note***
+> 
+> This is an open-source project, and it's not affiliated with Yandex LLC. 
+> 
+> If you are looking for Yandex Mobile Ads SDK for mobile apps, then this extension isn't for you.
 
-YaGames is the Yandex.Games extension for the [Defold](https://www.defold.com/) game engine. [Yandex.Games](https://yandex.com/games/) is a collection of browser games for smartphones and computers. The games are available in Yandex Browser and the Yandex app. Games from the catalog are displayed in Yandex recommendation systems, which have a total audience of more than 50 million users per month.
+YaGames is the Yandex.Games SDK native extension for the [Defold](https://www.defold.com/) game engine. 
+
+[Yandex.Games](https://yandex.com/games/) is a collection of browser HTML5 games for smartphones, computers, tablets, and TVs. The games are available in Yandex Browser and the Yandex app. Games from the catalog are displayed in Yandex recommendation systems, which have a total audience of more than 50 million users per month.
 
 You can check [here](https://radar.yandex.ru/yandex) the size of Yandex.Games audience. The platform is constantly growing.
 
@@ -12,7 +18,7 @@ You can check [here](https://radar.yandex.ru/yandex) the size of Yandex.Games au
 
 You can use it in your own project by adding this project as a [Defold library dependency](http://www.defold.com/manuals/libraries/). Open your `game.project` file and in the dependencies field add **a link to the ZIP file of a [specific release](https://github.com/indiesoftby/defold-yagames/tags).**
 
-**Note:** Use [version 0.8.1](https://github.com/indiesoftby/defold-yagames/releases/tag/0.8.1) for Defold 1.3.7 and older.
+**Note:** Use [version 0.8.1](https://github.com/indiesoftby/defold-yagames/releases/tag/0.8.1) for Defold <=1.3.7.
 
 ## Getting Started
 

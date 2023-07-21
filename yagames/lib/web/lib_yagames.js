@@ -272,6 +272,15 @@ var LibYaGamesPrivate = {
         return cstr;
     },
 
+    YaGamesPrivate_Features_LoadingAPI_Ready: function () {
+        var self = YaGamesPrivate;
+        try {
+            self._ysdk.features.LoadingAPI.ready();
+        } catch (err) {
+            console.warn(err);
+        }
+    },
+
     YaGamesPrivate_Feedback_CanReview: function (cb_id) {
         var self = YaGamesPrivate;
         try {

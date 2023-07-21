@@ -33,6 +33,7 @@ extern "C"
     const bool YaGamesPrivate_DeviceInfo_IsTablet();
     const bool YaGamesPrivate_DeviceInfo_IsTV();
     const char* YaGamesPrivate_Environment();
+    void YaGamesPrivate_Features_LoadingAPI_Ready();
     void YaGamesPrivate_Feedback_CanReview(const int cb_id);
     void YaGamesPrivate_Feedback_RequestReview(const int cb_id);
     void YaGamesPrivate_GetLeaderboards(const int cb_id);
@@ -469,6 +470,12 @@ static int Environment(lua_State* L)
     return 1;
 }
 
+static int Features_LoadingAPI_Ready(lua_State* L)
+{
+    YaGamesPrivate_Features_LoadingAPI_Ready();
+    return 0;
+}
+
 static int Feedback_CanReview(lua_State* L)
 {
     YaGamesPrivate_Feedback_CanReview(luaL_checkint(L, 1));
@@ -840,6 +847,8 @@ static const luaL_reg Module_methods[] = {
     { "device_info_is_tv", DeviceInfo_IsTV },
     // - Environment
     { "environment", Environment },
+    // - Features
+    { "features_loadingapi_ready", Features_LoadingAPI_Ready },
     // - Feedback
     { "feedback_can_review", Feedback_CanReview },
     { "feedback_request_review", Feedback_RequestReview },

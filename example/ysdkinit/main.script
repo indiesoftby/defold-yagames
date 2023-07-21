@@ -2,6 +2,11 @@ local yagames = require("yagames.yagames")
 
 local function init_handler(self, err)
     msg.post("#gui", "init_done", {err = err})
+
+    if not err then
+        -- You should call yagames.features_loadingapi_ready immediately after the loading of your game.
+        yagames.features_loadingapi_ready()
+    end
 end
 
 function init(self)

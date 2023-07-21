@@ -100,6 +100,9 @@ function M.environment()
     return '{"app":{"id":"1"},"payload":"test","i18n":{"tld":"en","lang":"en"},"browser":{"lang":"en"}}'
 end
 
+function M.features_loadingapi_ready()
+end
+
 function M.feedback_can_review(cb_id)
     M.send(cb_id, NO_ERR, rxi_json.encode({
         value = false,

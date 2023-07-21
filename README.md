@@ -73,6 +73,11 @@ local function init_handler(self, err)
         -- SDK is ready!
         -- From this moment, you can use all available functions, i.e. invoke ads, get player data, etc.
         --
+
+        -- For example, signal that the game has loaded all resources and is ready for user interaction:
+        yagames.features_loadingapi_ready()
+
+        -- Do something else!
     end
 end
 
@@ -251,6 +256,8 @@ The best way to integrate SDK into your game is to read [the official documentat
 | `lb.getLeaderboardPlayerEntry(leaderboardName)` | `yagames.leaderboards_get_player_entry(leaderboard_name, [options], callback)`<br>If the player doesn't have any score, you get the error `FetchError: Player is not present in leaderboard`.<br>The argument `options` is an optional Lua table `{ getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` (string) can be `small`, `medium`, `large`. |
 | `lb.getLeaderboardEntries(leaderboardName, options)` | `yagames.leaderboards_get_entries(leaderboard_name, [options], callback)`<br>The argument `options` is an optional Lua table `{ includeUser = boolean, quantityAround = number, quantityTop = number, getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` (string) can be `small`, `medium`, `large`. |
 | `lb.setLeaderboardScore(leaderboardName, score, extraData)` | `yagames.leaderboards_set_score(leaderboard_name, score, [extra_data], [callback])` |
+| **Features** [(docs)](https://yandex.com/dev/games/doc/en/sdk/sdk-gameready?lang=en) |  |
+| `ysdk.features.LoadingAPI?.ready()` | `yagames.features_loadingapi_ready()` |
 | **Feedback** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-review.html?lang=en) |  |
 | `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)`<br>The result is a table `{ value = true/false, reason = "string" }` |
 | `ysdk.feedback.requestReview()` | `yagames.feedback_request_review(callback)`<br>The result is a table `{ feedbackSent = true/false }` |

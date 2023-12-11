@@ -435,9 +435,12 @@ end
 
 function M.get_flags(cb_id, options)
     local result = {}
-    if type(options) == "table" and type(options.defaultFlags) == "table" then
-        for k, v in pairs(options.defaultFlags) do
-            result[k] = v
+    if type(options) == "string" then
+        options = rxi_json.decode(options)
+        if type(options.defaultFlags) == "table" then
+            for k, v in pairs(options.defaultFlags) do
+                result[k] = v
+            end
         end
     end
     M.send(cb_id, NO_ERR, rxi_json.encode(result))

@@ -697,7 +697,7 @@ function M.flags_get(options, callback)
             result = rxi_json.decode(result)
         end
         callback(self, err, result)
-    end), options or rxi_json.encode(options))
+    end), options and rxi_json.encode(options) or nil)
 end
 
 -- @tparam function callback

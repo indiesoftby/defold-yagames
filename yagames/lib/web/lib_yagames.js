@@ -865,6 +865,23 @@ var LibYaGamesPrivate = {
         }
     },
 
+    YaGamesPrivate_GetFlags: function (cb_id, coptions) {
+        var self = YaGamesPrivate;
+        try {
+            var options = coptions === 0 ? {} : self.parseJson(UTF8ToString(coptions));
+            self._ysdk
+                .getFlags(options)
+                .then((flags) => {
+                    self.send(cb_id, null, JSON.stringify(flags));
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
     YaGamesPrivate_Banner_Init: function (cb_id) {
         var self = YaGamesPrivate;
 

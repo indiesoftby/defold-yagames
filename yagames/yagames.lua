@@ -685,6 +685,21 @@ function M.event_on(event_name, listener)
     yagames_private.event_on(event_name, cb_id)
 end
 
+--- Asynchronously get remote config data
+-- @tparam[opt] {defaultFlags={},clientFeatures={}} options
+-- @tparam function callback
+function M.flags_get(options, callback)
+    assert(type(options) == "table" or type(options) == "nil", "`options` should be a table or nil.")
+    assert(type(callback) == "function", "`callback` is required.")
+
+    yagames_private.get_flags(helper.wrap_for_promise(function(self, err, result)
+        if result then
+            result = rxi_json.decode(result)
+        end
+        callback(self, err, result)
+    end), options or rxi_json.encode(options))
+end
+
 -- @tparam function callback
 function M.banner_init(callback)
     assert(type(callback) == "function")

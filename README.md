@@ -259,8 +259,8 @@ The best way to integrate SDK into your game is to read [the official documentat
 | **Features** [(docs)](https://yandex.com/dev/games/doc/en/sdk/sdk-gameready?lang=en) |  |
 | `ysdk.features.LoadingAPI?.ready()` | `yagames.features_loadingapi_ready()` |
 | **Feedback** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-review.html?lang=en) |  |
-| `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)`<br>The result is a table `{ value = true/false, reason = "string" }` |
-| `ysdk.feedback.requestReview()` | `yagames.feedback_request_review(callback)`<br>The result is a table `{ feedbackSent = true/false }` |
+| `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)`<br>The callback result is a table `{ value = true/false, reason = "string" }` |
+| `ysdk.feedback.requestReview()` | `yagames.feedback_request_review(callback)`<br>The callback result is a table `{ feedbackSent = true/false }` |
 | **Clipboard** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html?lang=en) |  |
 | `ysdk.clipboard.writeText(text)` | `yagames.clipboard_write_text(text, [callback])` |
 | **Device Info** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-params.html?lang=en) |  |
@@ -277,15 +277,17 @@ The best way to integrate SDK into your game is to read [the official documentat
 | `ysdk.screen.fullscreen.exit()` | `yagames.screen_fullscreen_exit([callback])` |
 | **Safe Storage** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-player.html?lang=en) | *Note: `key` and `value` should be valid UTF-8 strings. Storing strings with zero bytes aren't supported.* |
 | `ysdk.getStorage()` | `yagames.storage_init(callback)` |
-| `safeStorage.getItem(key)` | `yagames.storage_get_item(key)`<br>Returns that key's value or `nil`. |
-| `safeStorage.setItem(key, value)` | `yagames.storage_set_item(key, value)`<br>Adds that key to the storage, or update that key's value if it already exists. |
-| `safeStorage.removeItem(key)` | `yagames.storage_remove_item(key)`<br>Removes that key from the storage. |
-| `safeStorage.clear()` | `yagames.storage_clear()`<br>Empties all keys out of the storage. |
-| `safeStorage.key(n)` | `yagames.storage_key(n)`<br>Returns the name of the nth key in the storage or `nil`. *Note: the n index is zero-based.* |
-| `safeStorage.length` | `yagames.storage_length()`<br>Returns the number of data items stored in the storage. |
-| **Events** [(docs)](https://yandex.ru/dev/games/doc/dg/sdk/sdk-events.html?lang=en) |  |
+| - `safeStorage.getItem(key)` | `yagames.storage_get_item(key)`<br>Returns that key's value or `nil`. |
+| - `safeStorage.setItem(key, value)` | `yagames.storage_set_item(key, value)`<br>Adds that key to the storage, or update that key's value if it already exists. |
+| - `safeStorage.removeItem(key)` | `yagames.storage_remove_item(key)`<br>Removes that key from the storage. |
+| - `safeStorage.clear()` | `yagames.storage_clear()`<br>Empties all keys out of the storage. |
+| - `safeStorage.key(n)` | `yagames.storage_key(n)`<br>Returns the name of the nth key in the storage or `nil`. *Note: the n index is zero-based.* |
+| - `safeStorage.length` | `yagames.storage_length()`<br>Returns the number of data items stored in the storage. |
+| **Events** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-events) |  |
 | `ysdk.onEvent(eventName, listener)` | `yagames.event_on(event_name, listener)` |
 | `ysdk.dispatchEvent(eventName)` | `yagames.event_dispatch(event_name)` |
+| **Events** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-config) |  |
+| `ysdk.getFlags(options)` | `yagames.flags_get(options, callback)`<br>Options is optional. The callback result is a table like `{ flagName = "value" }` |
 | **Banner Ads** [(docs)](#banner-ads) |  |
 |  | `yagames.banner_init(callback)` |
 |  | `yagames.banner_create(rtb_id, options, [callback])` |

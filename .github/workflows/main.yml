@@ -12,17 +12,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install Java ♨️
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           distribution: "temurin"
           java-version: "17"
 
       - name: Build 🔧
         env:
-          DEFOLD_BOB_SHA1: ${{ secrets.DEFOLD_BOB_SHA1 }}
+          DEFOLD_BOB_SHA1: ${{ vars.DEFOLD_BOB_SHA1 }}
         run: |
           lsb_release -a
 
@@ -42,7 +42,7 @@ jobs:
           (cd build/bundle/js-web/* && zip -r ../../public/demo_no-sw_no-native-cache.zip .)
 
       - name: Deploy to Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: build/bundle/public

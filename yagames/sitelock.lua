@@ -3,6 +3,8 @@
 
 local M = {}
 
+local IS_RELEASE_BUILD = not sys.get_engine_info().is_debug
+
 M.domains = {"yandex.net", "localhost"}
 
 local function ends_with(s, substr)
@@ -43,7 +45,7 @@ end
 --- Checks the build type
 -- @treturn boolean
 function M.is_release_build()
-    return not sys.get_engine_info().is_debug
+    return IS_RELEASE_BUILD
 end
 
 return M

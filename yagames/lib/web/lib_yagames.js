@@ -34,7 +34,7 @@ var LibYaGamesPrivate = {
 
                 var cmsg_id = 0;
                 if (typeof message_id === "string") {
-                    cmsg_id = allocate(intArrayFromString(message_id), "i8", ALLOC_NORMAL);
+                    cmsg_id = stringToNewUTF8(message_id);
                 }
                 switch (typeof message) {
                     case "undefined":
@@ -44,17 +44,15 @@ var LibYaGamesPrivate = {
                         {{{ makeDynCall("viif", "YaGamesPrivate._callback_number") }}}(cb_id, cmsg_id, message);
                         break;
                     case "string":
-                        var msg_arr = intArrayFromString(message, false);
-                        var msg = allocate(msg_arr, "i8", ALLOC_NORMAL);
-                        {{{ makeDynCall("viii", "YaGamesPrivate._callback_string") }}}(cb_id, cmsg_id, msg, msg_arr.length);
-                        Module._free(msg);
+                        var msg = stringToNewUTF8(message);
+                        {{{ makeDynCall("viii", "YaGamesPrivate._callback_string") }}}(cb_id, cmsg_id, msg, lengthBytesUTF8(message));
+                        _free(msg);
                         break;
                     case "object":
-                        var msg = JSON.stringify(message);
-                        var msg_arr = intArrayFromString(msg, false);
-                        msg = allocate(msg_arr, "i8", ALLOC_NORMAL);
-                        {{{ makeDynCall("viii", "YaGamesPrivate._callback_object") }}}(cb_id, cmsg_id, msg, msg_arr.length);
-                        Module._free(msg);
+                        var obj_str = JSON.stringify(message);
+                        var msg = stringToNewUTF8(obj_str);
+                        {{{ makeDynCall("viii", "YaGamesPrivate._callback_object") }}}(cb_id, cmsg_id, msg, lengthBytesUTF8(obj_str));
+                        _free(msg);
                         break;
                     case "boolean":
                         var msg = message ? 1 : 0;
@@ -64,7 +62,7 @@ var LibYaGamesPrivate = {
                         console.warn("Unsupported message format: " + typeof message);
                 }
                 if (cmsg_id) {
-                    Module._free(cmsg_id);
+                    _free(cmsg_id);
                 }
             } else {
                 // console.warn("You didn't set callback for YaGamesPrivate");
@@ -245,7 +243,7 @@ var LibYaGamesPrivate = {
 
     YaGamesPrivate_DeviceInfo_Type: function () {
         var self = YaGamesPrivate;
-        var ctype = allocate(intArrayFromString(self._ysdk.deviceInfo.type), "i8", ALLOC_NORMAL);
+        var ctype = stringToNewUTF8(self._ysdk.deviceInfo.type);
         return ctype;
     },
 
@@ -268,7 +266,7 @@ var LibYaGamesPrivate = {
     YaGamesPrivate_Environment: function () {
         var self = YaGamesPrivate;
         var str = JSON.stringify(self._ysdk.environment);
-        var cstr = allocate(intArrayFromString(str), "i8", ALLOC_NORMAL);
+        var cstr = stringToNewUTF8(str);
         return cstr;
     },
 
@@ -552,7 +550,7 @@ var LibYaGamesPrivate = {
         var personalInfo = self._player._personalInfo;
         if (typeof personalInfo !== "undefined") {
             var str = JSON.stringify(personalInfo);
-            var cstr = allocate(intArrayFromString(str), "i8", ALLOC_NORMAL);
+            var cstr = stringToNewUTF8(str);
             return cstr;
         } else {
             return 0;
@@ -563,7 +561,7 @@ var LibYaGamesPrivate = {
         var self = YaGamesPrivate;
         var signature = self._player.signature;
         if (typeof signature === "string") {
-            var csignature = allocate(intArrayFromString(signature), "i8", ALLOC_NORMAL);
+            var csignature = stringToNewUTF8(signature);
             return csignature;
         } else {
             return 0;
@@ -572,7 +570,7 @@ var LibYaGamesPrivate = {
 
     YaGamesPrivate_Player_GetID: function () {
         var self = YaGamesPrivate;
-        var cid = allocate(intArrayFromString("" + self._player.getID()), "i8", ALLOC_NORMAL);
+        var cid = stringToNewUTF8("" + self._player.getID());
         return cid;
     },
 
@@ -594,26 +592,26 @@ var LibYaGamesPrivate = {
 
     YaGamesPrivate_Player_GetMode: function () {
         var self = YaGamesPrivate;
-        var cmode = allocate(intArrayFromString(self._player.getMode()), "i8", ALLOC_NORMAL);
+        var cmode = stringToNewUTF8(self._player.getMode());
         return cmode;
     },
 
     YaGamesPrivate_Player_GetName: function () {
         var self = YaGamesPrivate;
-        var cname = allocate(intArrayFromString(self._player.getName()), "i8", ALLOC_NORMAL);
+        var cname = stringToNewUTF8(self._player.getName());
         return cname;
     },
 
     YaGamesPrivate_Player_GetPhoto: function (csize) {
         var self = YaGamesPrivate;
         var size = UTF8ToString(csize);
-        var cname = allocate(intArrayFromString(self._player.getPhoto(size)), "i8", ALLOC_NORMAL);
+        var cname = stringToNewUTF8(self._player.getPhoto(size));
         return cname;
     },
 
     YaGamesPrivate_Player_GetUniqueID: function () {
         var self = YaGamesPrivate;
-        var cid = allocate(intArrayFromString(self._player.getUniqueID()), "i8", ALLOC_NORMAL);
+        var cid = stringToNewUTF8(self._player.getUniqueID());
         return cid;
     },
 
@@ -704,7 +702,7 @@ var LibYaGamesPrivate = {
 
     YaGamesPrivate_Screen_Fullscreen_Status: function () {
         var status = YaGamesPrivate._ysdk.screen.fullscreen.status;
-        var cstatus = allocate(intArrayFromString(status), "i8", ALLOC_NORMAL);
+        var cstatus = stringToNewUTF8(status);
         return cstatus;
     },
 
@@ -794,7 +792,7 @@ var LibYaGamesPrivate = {
         var key = UTF8ToString(ckey);
         var value = self._storage.getItem(key);
         if (typeof value === "string") {
-            var cvalue = allocate(intArrayFromString(value), "i8", ALLOC_NORMAL);
+            var cvalue = stringToNewUTF8(value);
             return cvalue;
         } else {
             return 0;
@@ -832,7 +830,7 @@ var LibYaGamesPrivate = {
         var self = YaGamesPrivate;
         var key = self._storage.key(n);
         if (typeof key === "string") {
-            var ckey = allocate(intArrayFromString(key), "i8", ALLOC_NORMAL);
+            var ckey = stringToNewUTF8(key);
             return ckey;
         } else {
             return 0;
@@ -1019,4 +1017,4 @@ var LibYaGamesPrivate = {
 };
 
 autoAddDeps(LibYaGamesPrivate, "$YaGamesPrivate");
-mergeInto(LibraryManager.library, LibYaGamesPrivate);
+addToLibrary(LibYaGamesPrivate);

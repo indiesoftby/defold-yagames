@@ -287,12 +287,6 @@ The best way to integrate SDK into your game is to read [the official documentat
 | `ysdk.dispatchEvent(eventName)` | `yagames.event_dispatch(event_name)` |
 | **Remote Config** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-config) |  |
 | `ysdk.getFlags(options)` | `yagames.flags_get(options, callback)`<br>Options is optional. The callback result is a table like `{ flagName = "value" }` |
-| **Banner Ads** [(docs)](README_BANNERS.md) - **DEPRECATED** |  |
-|  | ~~`yagames.banner_init(callback)`~~ |
-|  | ~~`yagames.banner_create(rtb_id, options, [callback])`~~ |
-|  | ~~`yagames.banner_destroy(rtb_id)`~~ |
-|  | ~~`yagames.banner_refresh(rtb_id, [callback])`~~ |
-|  | ~~`yagames.banner_set(rtb_id, property, value)`~~ |
 | **Sitelock** [(docs)](#sitelock) |  |
 |  | `sitelock.add_domain(domain)` |
 |  | `sitelock.verify_domain()` |

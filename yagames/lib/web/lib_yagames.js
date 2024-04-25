@@ -545,6 +545,12 @@ var LibYaGamesPrivate = {
         }
     },
 
+    YaGamesPrivate_Player_GetPayingStatus: function () {
+        var self = YaGamesPrivate;
+        var cstatus = stringToNewUTF8(self._player.getPayingStatus());
+        return cstatus;
+    },
+
     YaGamesPrivate_Player_GetPersonalInfo: function () {
         var self = YaGamesPrivate;
         var personalInfo = self._player._personalInfo;

@@ -97,7 +97,7 @@ function M.device_info_is_tv()
 end
 
 function M.environment()
-    return '{"app":{"id":"1"},"payload":"test","i18n":{"tld":"en","lang":"en"},"browser":{"lang":"en"}}'
+    return '{"app":{"id":"1"},"payload":"test","i18n":{"tld":"en","lang":"en"},"browser":{"lang":"en"},"data":{"secondDomain":"yandex","baseUrl":"/games"}}'
 end
 
 function M.features_loadingapi_ready()
@@ -218,9 +218,8 @@ function M.get_player(cb_id, options)
     assert(type(options) == "string")
     options = rxi_json.decode(options)
 
-    if not M._auth then
-        M.send(cb_id, "FetchError: Unauthorized")
-    else
+    if M._auth then
+        -- Authorized player
         M._player = {
             name = "Mock",
             photo = {
@@ -228,29 +227,64 @@ function M.get_player(cb_id, options)
                 medium = "https://games.yandex.ru/api/sdk/v1/player/avatar/0/islands-retina-middle",
                 large = "https://games.yandex.ru/api/sdk/v1/player/avatar/0/islands-200"
             },
-            unique_id = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
             data = {},
             stats = {},
             _personalInfo = {
                 ["id"] = "retGif5e9hoo9zQzBUOALHQjaXJzCrjq8XEFuzmm8Z8=",
                 ["uniqueID"] = "retGif5e9hoo9zQzBUOALHQjaXJzCrjq8XEFuzmm8Z8=",
                 ["lang"] = "ru",
-                ["mode"] = "lite",
+                ["mode"] = "",
                 ["publicName"] = "Mock",
                 ["avatarIdHash"] = "BNVUVO6QNZDSUNUQJWUSFY6Z3QARAVTSZD7A5NZMA6TEXLO7DGY4B47DAZN3V35S3XYPK5L3UKCNWXSIGM4ZZAEXS4M3ZEWDQSGJ5CSE7RGUERO66XJ3RQVZ5F3ROICGEW4POAXQQ7MXL5BD2IELIYY=",
                 ["scopePermissions"] = {
                     ["avatar"] = "allow",
-                    ["public_name"] = "allow"
-                }
+                    ["public_name"] = "allow",
+                    ["purchases_info"] = "not_set",
+                },
+                ["payingStatus"] = "unknown",
+                ["hasPremium"] = false,
             }
         }
-
-        if options.signed then
-            M._player.signature = "MOCK"
-        end
-
-        M.send(cb_id, NO_ERR)
+    else
+        -- "lite" mode player
+        M._player = {
+            name = "",
+            photo = {
+                small = "https://games.yandex.ru/api/sdk/v1/player/avatar/0/islands-retina-small",
+                medium = "https://games.yandex.ru/api/sdk/v1/player/avatar/0/islands-retina-middle",
+                large = "https://games.yandex.ru/api/sdk/v1/player/avatar/0/islands-200"
+            },
+            data = {},
+            stats = {},
+            _personalInfo = {
+                ["id"] = "3cY9oOIGJUJr/C/MpwvSBXXGw8c2YfeJEkvePNNuu9w=",
+                ["uniqueID"] = "3cY9oOIGJUJr/C/MpwvSBXXGw8c2YfeJEkvePNNuu9w=",
+                ["lang"] = "ru",
+                ["mode"] = "lite",
+                ["publicName"] = "",
+                ["avatarIdHash"] = "0",
+                ["scopePermissions"] = {
+                    ["avatar"] = "not_set",
+                    ["public_name"] = "not_set",
+                    ["purchases_info"] = "not_set",
+                },
+                ["payingStatus"] = "unknown",
+                ["hasPremium"] = false,
+            }
+        }
     end
+
+    if options.signed then
+        M._player.signature = "MOCK"
+    end
+
+    M.send(cb_id, NO_ERR)
+end
+
+function M.player_get_paying_status()
+    assert(M._player)
+
+    return M._player._personalInfo.payingStatus
 end
 
 function M.player_get_personal_info()
@@ -268,13 +302,15 @@ end
 function M.player_get_id()
     assert(M._player)
 
-    return M._player.unique_id
+    return M._player._personalInfo.uniqueID
 end
 
 function M.player_get_ids_per_game(cb_id)
-    assert(M._player)
-
-    M.send(cb_id, NO_ERR, '[{"appID":100,"userID":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"}]')
+    if M.player_get_mode() == "lite" then
+        M.send(cb_id, "FetchError: Unauthorized")
+    else
+        M.send(cb_id, NO_ERR, '[{"appID":100,"userID":"9c/GxA5IUaaavN2KPdtTxTlKh/ayLzrVhNj90Ka8oPA="}]')
+    end
 end
 
 function M.player_get_mode()
@@ -299,7 +335,7 @@ end
 function M.player_get_unique_id()
     assert(M._player)
 
-    return M._player.unique_id
+    return M._player._personalInfo.uniqueID
 end
 
 function M.player_set_data(cb_id, data, flush)

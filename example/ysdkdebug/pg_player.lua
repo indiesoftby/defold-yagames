@@ -27,6 +27,7 @@ local function init_handler(self, options)
             print("yagames.player_get_signature():", yagames.player_get_signature() or "nil")
             print("yagames.player_get_mode():", "'" .. yagames.player_get_mode() .. "'")
             print("yagames.player_get_personal_info():", table_util.tostring(yagames.player_get_personal_info()))
+            print("yagames.player_get_paying_status():", "'" .. yagames.player_get_paying_status() .. "'")
         end
     end)
 end

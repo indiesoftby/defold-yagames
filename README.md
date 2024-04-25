@@ -243,6 +243,7 @@ The best way to integrate SDK into your game is to read [the official documentat
 | `player.getMode()` | `yagames.player_get_mode()`<br>[(more info)](https://yandex.ru/blog/gamesfordevelopers/novye-vozmozhnosti-dlya-neavtorizovannykh-polzovateley) |
 | `player.getName()` | `yagames.player_get_name()` |
 | `player.getPhoto(size)` | `yagames.player_get_photo(size)` |
+| `player.getPayingStatus()` | `yagames.player_get_paying_status()` |
 | **In-Game Purchases** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-purchases) |  |
 | `ysdk.getPayments(options)` | `yagames.payments_init(options, callback)` |
 | `payments.purchase(options)` | `yagames.payments_purchase(options, callback)` |

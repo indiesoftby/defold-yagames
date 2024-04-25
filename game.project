@@ -11,7 +11,7 @@ high_dpi = 1
 
 [project]
 title = yagames
-version = 0.10.0
+version = 0.11.0
 developer = Indiesoft LLC
 bundle_resources = example/bundle/
 dependencies#0 = https://github.com/subsoap/defos/archive/v2.5.0.zip

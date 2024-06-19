@@ -44,7 +44,7 @@ extern "C"
     void YaGamesPrivate_GetPayments(const int cb_id, const char* options);
     void YaGamesPrivate_Payments_Purchase(const int cb_id, const char* options);
     void YaGamesPrivate_Payments_GetPurchases(const int cb_id);
-    void YaGamesPrivate_Payments_GetCatalog(const int cb_id);
+    void YaGamesPrivate_Payments_GetCatalog(const int cb_id, const char* options);
     void YaGamesPrivate_Payments_ConsumePurchase(const int cb_id, const char* purchase_token);
     void YaGamesPrivate_GetPlayer(const int cb_id, const char* options);
     const char* YaGamesPrivate_Player_GetPayingStatus();

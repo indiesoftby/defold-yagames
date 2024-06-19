@@ -494,12 +494,18 @@ var LibYaGamesPrivate = {
         }
     },
 
-    YaGamesPrivate_Payments_GetCatalog: function (cb_id) {
+    YaGamesPrivate_Payments_GetCatalog: function (cb_id, coptions) {
         var self = YaGamesPrivate;
         try {
+            var options = coptions === 0 ? {} : self.parseJson(UTF8ToString(coptions));
             self._payments
                 .getCatalog()
                 .then((products) => {
+                    if (typeof options.getPriceCurrencyImage === "string") {
+                        for (const product of products) {
+                            product.getPriceCurrencyImage = product.getPriceCurrencyImage(options.getPriceCurrencyImage);
+                        }
+                    }
                     self.send(cb_id, null, JSON.stringify(products));
                 })
                 .catch((err) => {

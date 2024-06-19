@@ -25,7 +25,11 @@ function M.init_handler(self)
 end
 
 function M.get_catalog_handler(self)
-    yagames.payments_get_catalog(function(self, err, catalog)
+    -- `options` is optional and can be `nil` or omitted.
+    local options = {
+        getPriceCurrencyImage = "medium"
+    }
+    yagames.payments_get_catalog(options, function(self, err, catalog)
         print("yagames.payments_get_catalog:", err or table_util.tostring(catalog))
     end)
 end

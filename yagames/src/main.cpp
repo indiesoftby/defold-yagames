@@ -541,7 +541,7 @@ static int Payments_GetPurchases(lua_State* L)
 
 static int Payments_GetCatalog(lua_State* L)
 {
-    YaGamesPrivate_Payments_GetCatalog(luaL_checkint(L, 1));
+    YaGamesPrivate_Payments_GetCatalog(luaL_checkint(L, 1), lua_isstring(L, 2) ? luaL_checkstring(L, 2) : 0);
     return 0;
 }
 

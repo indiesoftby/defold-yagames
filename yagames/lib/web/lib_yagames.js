@@ -502,9 +502,13 @@ var LibYaGamesPrivate = {
                 .getCatalog()
                 .then((products) => {
                     if (typeof options.getPriceCurrencyImage === "string") {
+                        const newResults = [];
                         for (const product of products) {
-                            product.getPriceCurrencyImage = product.getPriceCurrencyImage(options.getPriceCurrencyImage);
+                            const result = JSON.parse(JSON.stringify(product));
+                            result.getPriceCurrencyImage = product.getPriceCurrencyImage(options.getPriceCurrencyImage);
+                            newResults.push(result);
                         }
+                        products = newResults;
                     }
                     self.send(cb_id, null, JSON.stringify(products));
                 })

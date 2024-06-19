@@ -188,8 +188,12 @@ function M.payments_get_purchases(cb_id)
     M.send(cb_id, NO_ERR, rxi_json.encode(tmp))
 end
 
-function M.payments_get_catalog(cb_id)
+function M.payments_get_catalog(cb_id, options)
     assert(M._payments)
+    if type(options) == "string" then
+        options = rxi_json.decode(options)
+        -- do something...
+    end
 
     M.send(cb_id, NO_ERR, rxi_json.encode(M._payments.catalog))
 end

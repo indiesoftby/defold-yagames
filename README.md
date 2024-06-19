@@ -248,7 +248,7 @@ The best way to integrate SDK into your game is to read [the official documentat
 | `ysdk.getPayments(options)` | `yagames.payments_init(options, callback)` |
 | `payments.purchase(options)` | `yagames.payments_purchase(options, callback)` |
 | `payments.getPurchases()` | `yagames.payments_get_purchases(callback)`<br>The result has the format `{ purchases = { ... }, signature = "..." }` |
-| `payments.getCatalog()` | `yagames.payments_get_catalog(callback)` |
+| `payments.getCatalog()` | `yagames.payments_get_catalog([options], callback)`<br>The argument `options` is an optional Lua table `{ getPriceCurrencyImage = "size" }`, where `size` (string) can be `medium`, `small` and `svg`, the currency image url will be injected to the `getPriceCurrencyImage` field of each product. |
 | `payments.consumePurchase(purchaseToken)` | `yagames.payments_consume_purchase(purchase_token, callback)` |
 | **Leaderboards** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-leaderboard) |  |
 | `ysdk.getLeaderboards()` | `yagames.leaderboards_init(callback)` |

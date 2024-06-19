@@ -359,9 +359,16 @@ function M.payments_get_purchases(callback)
 end
 
 --- Get a list of available purchases and their cost.
+-- @tparam[opt] {getPriceCurrencyImage=string} options
 -- @tparam function callback
-function M.payments_get_catalog(callback)
+function M.payments_get_catalog(options, callback)
     assert(M.payments_ready, "Payments subsystem is not initialized.")
+    -- Backward compatibility
+    if type(options) == "function" and not callback then
+        callback = options
+        options = nil
+    end
+    assert(type(options) == "table" or type(options) == "nil", "`options` should be a table or nil.")
     assert(type(callback) == "function")
 
     yagames_private.payments_get_catalog(helper.wrap_for_promise(function(self, err, catalog)
@@ -369,7 +376,7 @@ function M.payments_get_catalog(callback)
             catalog = rxi_json.decode(catalog)
         end
         callback(self, err, catalog)
-    end))
+    end), options and rxi_json.encode(options) or nil)
 end
 
 --- Consume an in-game purchase.
@@ -708,6 +715,7 @@ function M.flags_get(options, callback)
     end), options and rxi_json.encode(options) or nil)
 end
 
+--- DEPRECATED
 -- @tparam function callback
 function M.banner_init(callback)
     assert(type(callback) == "function")
@@ -721,6 +729,7 @@ function M.banner_init(callback)
     end))
 end
 
+--- DEPRECATED
 function M.banner_create(rtb_id, options, callback)
     assert(M.banner_ready, "Yandex Advertising Network SDK is not initialized.")
     assert(type(rtb_id) == "string")
@@ -735,6 +744,7 @@ function M.banner_create(rtb_id, options, callback)
         end) or 0)
 end
 
+--- DEPRECATED
 function M.banner_destroy(rtb_id)
     assert(M.banner_ready, "Yandex Advertising Network SDK is not initialized.")
     assert(type(rtb_id) == "string")
@@ -742,6 +752,7 @@ function M.banner_destroy(rtb_id)
     yagames_private.banner_destroy(rtb_id)
 end
 
+--- DEPRECATED
 function M.banner_refresh(rtb_id, callback)
     assert(M.banner_ready, "Yandex Advertising Network SDK is not initialized.")
     assert(type(rtb_id) == "string")
@@ -755,6 +766,7 @@ function M.banner_refresh(rtb_id, callback)
         end) or 0)
 end
 
+--- DEPRECATED
 function M.banner_set(rtb_id, property, value)
     assert(M.banner_ready, "Yandex Advertising Network SDK is not initialized.")
     assert(type(rtb_id) == "string")

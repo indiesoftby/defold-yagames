@@ -44,7 +44,7 @@ extern "C"
     void YaGamesPrivate_GetPayments(const int cb_id, const char* options);
     void YaGamesPrivate_Payments_Purchase(const int cb_id, const char* options);
     void YaGamesPrivate_Payments_GetPurchases(const int cb_id);
-    void YaGamesPrivate_Payments_GetCatalog(const int cb_id);
+    void YaGamesPrivate_Payments_GetCatalog(const int cb_id, const char* options);
     void YaGamesPrivate_Payments_ConsumePurchase(const int cb_id, const char* purchase_token);
     void YaGamesPrivate_GetPlayer(const int cb_id, const char* options);
     const char* YaGamesPrivate_Player_GetPayingStatus();
@@ -541,7 +541,7 @@ static int Payments_GetPurchases(lua_State* L)
 
 static int Payments_GetCatalog(lua_State* L)
 {
-    YaGamesPrivate_Payments_GetCatalog(luaL_checkint(L, 1));
+    YaGamesPrivate_Payments_GetCatalog(luaL_checkint(L, 1), lua_isstring(L, 2) ? luaL_checkstring(L, 2) : 0);
     return 0;
 }
 

@@ -68,6 +68,19 @@ function M.init(callback)
     yagames_private.add_listener(helper.YSDK_INIT_ID, init_listener)
 end
 
+--- Check if the method is available to call
+-- @tparam function callback
+-- @tparam string method name
+function M.is_available_method(name, callback)
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(type(name) == "string", "Name should be 'string'")
+    assert(type(callback) == "function", "Callback function is required")
+
+    yagames_private.is_available_method(helper.wrap_for_promise(function(self, err, result)
+        callback(self, err, result)
+    end), name)
+end
+
 --- Call the fullscreen ad
 -- @tparam {open=function,close=function,error=function,offline=function} callbacks Optional callback-functions.
 function M.adv_show_fullscreen_adv(callbacks)

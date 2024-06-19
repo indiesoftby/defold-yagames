@@ -40,6 +40,23 @@ end
 -- Yandex Games SDK
 --
 
+local available_methods = {
+    "isAvailableMethod",
+    "adv.showFullscreenAdv",
+    -- etc
+}
+
+function M.is_available_method(cb_id, name)
+    local result = false
+    for _, v in ipairs(available_methods) do
+        if name == v then
+            result = true
+            break
+        end
+    end
+    M.send(cb_id, NO_ERR, result)
+end
+
 function M.show_fullscreen_adv(cb_id)
     M.send(cb_id, "close", false)
 end

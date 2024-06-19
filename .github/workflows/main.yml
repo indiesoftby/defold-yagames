@@ -3,19 +3,24 @@ name: Build demo.zip
 on:
   workflow_dispatch:
   push:
+    branches:
+      - master
     tags:
       - 0.*
       - 1.*
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Java ♨️
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           java-version: "17"
@@ -41,7 +46,14 @@ jobs:
           java -jar build/bundle/bob.jar --email foo@bar.com --auth 12345 --texture-compression true --bundle-output build/bundle/js-web --platform js-web --archive --variant release resolve build bundle
           (cd build/bundle/js-web/* && zip -r ../../public/demo_no-sw_no-native-cache.zip .)
 
+      - name: Upload Result
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo.zip
+          path: build/bundle/public/demo_no-sw_no-native-cache.zip
+
       - name: Deploy to Pages 🚀
+        if: github.ref == 'refs/heads/master'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages

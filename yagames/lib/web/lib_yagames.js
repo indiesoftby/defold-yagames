@@ -110,6 +110,23 @@ var LibYaGamesPrivate = {
         self._callback_bool = null;
     },
 
+    YaGamesPrivate_IsAvailableMethod: function (cb_id, cname) {
+        var self = YaGamesPrivate;
+        try {
+            var name = UTF8ToString(cname);
+            self._ysdk
+                .isAvailableMethod(name)
+                .then((result) => {
+                    self.send(cb_id, null, result);
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
     YaGamesPrivate_Adv_ShowFullscreenAdv: function (cb_id) {
         var self = YaGamesPrivate;
         try {

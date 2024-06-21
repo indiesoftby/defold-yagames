@@ -221,7 +221,7 @@ And it's also a good idea to upload a demo build of YaGames to your game's draft
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `YaGames.init(options)` | `yagames.init(callback)`<br>The `options` is a JavaScript object `{}`, and it can be set in the `yagames.sdk_init_options` setting. |
-| `ysdk.isAvailableMethod()` | `yagames.is_available_method(name, callback)` |
+| `ysdk.isAvailableMethod(name)` | `yagames.is_available_method(name, callback)` [<kbd>Example</kbd>](https://github.com/indiesoftby/defold-yagames/blob/master/example/ysdkdebug/pg_methods.lua) |
 | **Advertisement** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv) |  |
 | `ysdk.adv.showFullscreenAdv({callbacks:{}})` | `yagames.adv_show_fullscreen_adv(callbacks)` [<kbd>Example</kbd>](#2-interstitial-ad) |
 | `ysdk.adv.showRewardedVideo({callbacks:{}})` | `yagames.adv_show_rewarded_video(callbacks)` [<kbd>Example</kbd>](#3-rewarded-videos) |

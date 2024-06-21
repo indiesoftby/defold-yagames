@@ -2077,6 +2077,175 @@ nodes {
 }
 nodes {
   position {
+    x: 805.72217
+    y: -21.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.7
+    y: 0.7
+    z: 0.7
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_not_available_methods"
+  parent: "group_debug_log"
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  template: "/example/ysdkdebug/button.gui"
+  template_node_child: false
+  custom_type: 0
+  enabled: true
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 320.0
+    y: 70.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "common/button"
+  id: "button_not_available_methods/body"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "button_not_available_methods"
+  layer: "common"
+  inherit_alpha: true
+  slice9 {
+    x: 24.0
+    y: 24.0
+    z: 24.0
+    w: 24.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: true
+  size_mode: SIZE_MODE_MANUAL
+  custom_type: 0
+  enabled: true
+  visible: true
+  material: ""
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.8
+    y: 0.8
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 375.0
+    y: 87.5
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "List Not Available Methods"
+  font: "font2"
+  id: "button_not_available_methods/text"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  shadow {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "button_not_available_methods/body"
+  layer: "font2"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  overridden_fields: 8
+  template_node_child: true
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+  enabled: true
+  visible: true
+  material: ""
+}
+nodes {
+  position {
     x: 20.0
     y: 1042.0
     z: 0.0
@@ -5378,7 +5547,7 @@ nodes {
 nodes {
   position {
     x: 550.0
-    y: 938.0
+    y: 1086.7816
     z: 0.0
     w: 1.0
   }
@@ -7023,7 +7192,7 @@ nodes {
 nodes {
   position {
     x: 550.0
-    y: 1093.0
+    y: 1241.7816
     z: 0.0
     w: 1.0
   }
@@ -7486,7 +7655,7 @@ nodes {
 nodes {
   position {
     x: 1080.0
-    y: 938.0
+    y: 1086.7816
     z: 0.0
     w: 1.0
   }
@@ -8118,7 +8287,7 @@ nodes {
 nodes {
   position {
     x: 1080.0
-    y: 798.501
+    y: 947.28253
     z: 0.0
     w: 1.0
   }
@@ -8749,7 +8918,7 @@ nodes {
 nodes {
   position {
     x: 1249.8689
-    y: 1093.0
+    y: 1241.7816
     z: 0.0
     w: 1.0
   }

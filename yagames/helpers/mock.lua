@@ -42,8 +42,71 @@ end
 
 local available_methods = {
     "isAvailableMethod",
+    -- Advertisement
     "adv.showFullscreenAdv",
-    -- etc
+    "adv.showRewardedVideo",
+    "adv.getBannerAdvStatus",
+    "adv.showBannerAdv",
+    "adv.hideBannerAdv",
+    -- Auth
+    "auth.openAuthDialog",
+    -- Clipboard
+    "clipboard.writeText",
+    -- Device Info
+    "deviceInfo.isDesktop",
+    "deviceInfo.isMobile",
+    "deviceInfo.isTablet",
+    "deviceInfo.isTV",
+    -- Features
+    "features.LoadingAPI.ready",
+    -- Feedback
+    "feedback.canReview",
+    -- "feedback.requestReview",
+    -- Leaderboards
+    "getLeaderboards",
+    "leaderboards.getLeaderboardDescription",
+    -- "leaderboards.getLeaderboardPlayerEntry",
+    "leaderboards.getLeaderboardEntries",
+    -- "leaderboards.setLeaderboardScore",
+    -- Payments
+    "getPayments",
+    "payments.purchase",
+    "payments.getPurchases",
+    "payments.getCatalog",
+    "payments.consumePurchase",
+    -- Player
+    "getPlayer",
+    "player.getID",
+    -- "player.getIDsPerGame",
+    "player.getMode",
+    "player.getName",
+    "player.getPhoto",
+    "player.getUniqueID",
+    "player.setData",
+    "player.getData",
+    "player.setStats",
+    "player.incrementStats",
+    "player.getStats",
+    -- Fullscreen
+    "screen.fullscreen.exit",
+    "screen.fullscreen.request",
+    -- Shortcut
+    "shortcut.canShowPrompt",
+    "shortcut.showPrompt",
+    -- Safe Storage
+    "getStorage",
+    -- Events
+    "dispatchEvent",
+    "onEvent",
+    -- Flags
+    "getFlags",
+}
+
+local available_methods_auth = {
+    "feedback.requestReview",
+    "leaderboards.getLeaderboardPlayerEntry",
+    "leaderboards.setLeaderboardScore",
+    "player.getIDsPerGame",
 }
 
 function M.is_available_method(cb_id, name)
@@ -52,6 +115,14 @@ function M.is_available_method(cb_id, name)
         if name == v then
             result = true
             break
+        end
+    end
+    if M._auth and not result then
+        for _, v in ipairs(available_methods_auth) do
+            if name == v then
+                result = true
+                break
+            end
         end
     end
     M.send(cb_id, NO_ERR, result)

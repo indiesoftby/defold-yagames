@@ -12,13 +12,9 @@ YaGames is the Yandex.Games SDK native extension for the [Defold](https://www.de
 
 [Yandex.Games](https://yandex.com/games/) is a collection of browser HTML5 games for smartphones, computers, tablets, and TVs. The games are available in Yandex Browser and the Yandex app. Games from the catalog are displayed in Yandex recommendation systems, which have a total audience of more than 50 million users per month.
 
-You can check [here](https://radar.yandex.ru/yandex) the size of Yandex.Games audience. The platform is constantly growing.
-
 ## Installation
 
-You can use it in your own project by adding this project as a [Defold library dependency](http://www.defold.com/manuals/libraries/). Open your `game.project` file and in the dependencies field add **a link to the ZIP file of a [specific release](https://github.com/indiesoftby/defold-yagames/tags).**
-
-**Note:** Use [version 0.8.1](https://github.com/indiesoftby/defold-yagames/releases/tag/0.8.1) for Defold <=1.3.7.
+You can use it in your own project by adding this project as a [Defold library dependency](http://www.defold.com/manuals/libraries/). Open your `game.project` file and in the dependencies field add **a link to the ZIP file of a [specific release](https://github.com/indiesoftby/defold-yagames/releases).**
 
 ## Getting Started
 
@@ -31,7 +27,7 @@ You can use it in your own project by adding this project as a [Defold library d
 ### Checklist For Releasing Game
 
 1. [Sign up as a developer](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en).
-2. Translate your game to the Russian language (*tip:* It's a great idea to translate your game title into Russian too.). English and Turkish are optional [(more info)](https://yandex.ru/dev/games/doc/dg/concepts/languages-and-domains.html?lang=en).
+2. Translate your game to the Russian language (*tip:* translate your game title into Russian too!). English and Turkish are optional [(more info)](https://yandex.ru/dev/games/doc/dg/concepts/languages-and-domains.html?lang=en).
 3. Prepare assets for the catalogue:
     - Icon 512 x 512 px.
     - Cover 800 x 470 px.
@@ -39,9 +35,9 @@ You can use it in your own project by adding this project as a [Defold library d
     - *(Optional)* Videos and GIF.
 4. Add [the extension](https://github.com/indiesoftby/defold-yagames/archive/master.zip) as a Defold library dependency to your project. 
 5. Enable monetization and earn revenue from placing ad blocks in your game. Ad blocks are available in the following formats:
-    - **Interstitial blocks**: ad blocks that completely cover the app background and show up at certain points (for example, when accessing the next game level). *Important: Mute sounds before showing the ad.*
-    - **Rewarded videos**: blocks with video ads that the user can choose to view and earn a reward or in-game currency. *Important: Mute sounds before showing the ad.*
-    - **Sticky banners**: the same as RTB but they're much easier to setup.
+    - **Interstitial blocks**: ad blocks that completely cover the app background and show up at certain points (for example, when accessing the next game level). *Important: Mute sounds before showing the ad!*
+    - **Rewarded videos**: blocks with video ads that the user can choose to view and earn a reward or in-game currency. *Important: Mute sounds before showing the ad!*
+    - **Sticky banners**: banner ads, super easy to setup.
     - **In-game purchases**: earn revenue by providing paid services to your users.
 5. You can [publish your game on Yandex.Games](https://games.yandex.ru/console/) from this moment. It fully meets [the requirements](https://yandex.ru/dev/games/doc/dg/concepts/requirements.html?lang=en).
 
@@ -173,6 +169,9 @@ end
 
 ### Misc
 
+> [!TIP]
+> We don't use thes features in our games as we don't see any improvements in our games metrics, and the complexity of its integration and support is quite high.
+
 #### Native Cache How-To
 
 Yandex's [Native Cache](https://yandex.ru/dev/games/doc/dg/concepts/native-cache-settings.html?lang=en) lets users use games offline. Currently, it's available only in Yandex Browser or the Yandex app on smartphones.
@@ -183,7 +182,7 @@ Yandex's [Native Cache](https://yandex.ru/dev/games/doc/dg/concepts/native-cache
 
 #### Service Worker How-To
 
-Yandex allows to integrate Service Worker into your game to be able to run both offline and online.
+Yandex dropped the Service Worker description page in their docs, but it still allows to integrate Service Worker into your game to be able to run both offline and online. 
 
 1. Set the path to the file `sw.js` in the `game.project` settings.
 2. Copy the `yagames/manifests/web/sw.js` file to the root directory of your release build.
@@ -215,11 +214,14 @@ Yandex.Games JavaScript SDK uses ES6 Promise for asynchronous operations. For Lu
 
 ### Lua <-> JS
 
-The best way to integrate SDK into your game is to read [the official documentation](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en) and to use corresponding Lua API functions. The table below helps to do that:
+The best way to integrate SDK into your game is to read [the official documentation](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en) and to use corresponding Lua API functions. 
+
+And it's also a good idea to upload a demo build of YaGames to your game's draft and click on the buttons to understand what the arguments are and what each function returns.
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `YaGames.init(options)` | `yagames.init(callback)`<br>The `options` is a JavaScript object `{}`, and it can be set in the `yagames.sdk_init_options` setting. |
+| `ysdk.isAvailableMethod()` | `yagames.is_available_method(name, callback)` |
 | **Advertisement** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv) |  |
 | `ysdk.adv.showFullscreenAdv({callbacks:{}})` | `yagames.adv_show_fullscreen_adv(callbacks)` [<kbd>Example</kbd>](#2-interstitial-ad) |
 | `ysdk.adv.showRewardedVideo({callbacks:{}})` | `yagames.adv_show_rewarded_video(callbacks)` [<kbd>Example</kbd>](#3-rewarded-videos) |
@@ -296,7 +298,7 @@ The best way to integrate SDK into your game is to read [the official documentat
 
 ## Sitelock
 
-It's a good idea to protect your HTML5 game from simple copy-pasting to another website. YaGames has Sitelock API for that purpose. It's simple, but it's better than nothing.
+It's a good idea to protect your HTML5 game from simple copy-pasting to another website. The YaGames extension has Sitelock API for that purpose. It's simple, but it's better than nothing.
 
 By default, it checks hostnames `yandex.net` (CDN of the Yandex.Games) and `localhost` (for local debugging).
 

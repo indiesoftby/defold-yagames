@@ -185,7 +185,7 @@ function M.device_info_is_tv()
 end
 
 function M.environment()
-    return '{"app":{"id":"1"},"payload":"test","i18n":{"tld":"en","lang":"en"},"browser":{"lang":"en"},"data":{"secondDomain":"yandex","baseUrl":"/games"}}'
+    return '{"app":{"id":"1"},"payload":"test","i18n":{"tld":"com","lang":"en"},"browser":{"lang":"en"},"data":{"secondDomain":"yandex","baseUrl":"/games"},"isTelegram":"false"}'
 end
 
 function M.features_loadingapi_ready()

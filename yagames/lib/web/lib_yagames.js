@@ -260,7 +260,7 @@ var LibYaGamesPrivate = {
 
     YaGamesPrivate_DeviceInfo_Type: function () {
         var self = YaGamesPrivate;
-        var ctype = stringToNewUTF8(self._ysdk.deviceInfo.type);
+        var ctype = stringToNewUTF8(self._ysdk.deviceInfo.type || "null");
         return ctype;
     },
 
@@ -291,6 +291,24 @@ var LibYaGamesPrivate = {
         var self = YaGamesPrivate;
         try {
             self._ysdk.features.LoadingAPI.ready();
+        } catch (err) {
+            console.warn(err);
+        }
+    },
+
+    YaGamesPrivate_Features_GameplayAPI_Start: function () {
+        var self = YaGamesPrivate;
+        try {
+            self._ysdk.features.GameplayAPI.start();
+        } catch (err) {
+            console.warn(err);
+        }
+    },
+
+    YaGamesPrivate_Features_GameplayAPI_Stop: function () {
+        var self = YaGamesPrivate;
+        try {
+            self._ysdk.features.GameplayAPI.stop();
         } catch (err) {
             console.warn(err);
         }

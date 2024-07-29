@@ -258,8 +258,10 @@ And it's also a good idea to upload a demo build of YaGames to your game's draft
 | `lb.getLeaderboardPlayerEntry(leaderboardName)` | `yagames.leaderboards_get_player_entry(leaderboard_name, [options], callback)`<br>If the player doesn't have any score, you get the error `FetchError: Player is not present in leaderboard`.<br>The argument `options` is an optional Lua table `{ getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` (string) can be `small`, `medium`, `large`. |
 | `lb.getLeaderboardEntries(leaderboardName, options)` | `yagames.leaderboards_get_entries(leaderboard_name, [options], callback)`<br>The argument `options` is an optional Lua table `{ includeUser = boolean, quantityAround = number, quantityTop = number, getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` (string) can be `small`, `medium`, `large`. |
 | `lb.setLeaderboardScore(leaderboardName, score, extraData)` | `yagames.leaderboards_set_score(leaderboard_name, score, [extra_data], [callback])` |
-| **Features** [(docs)](https://yandex.com/dev/games/doc/en/sdk/sdk-gameready) |  |
+| **Features** [(docs)](https://yandex.com/dev/games/doc/en/sdk/sdk-game-events) |  |
 | `ysdk.features.LoadingAPI?.ready()` | `yagames.features_loadingapi_ready()` |
+| `ysdk.features.GameplayAPI?.start()` | `yagames.features_gameplayapi_start()` |
+| `ysdk.features.GameplayAPI?.stop()` | `yagames.features_gameplayapi_stop()` |
 | **Feedback** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-review) |  |
 | `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)`<br>The callback result is a table `{ value = true/false, reason = "string" }` |
 | `ysdk.feedback.requestReview()` | `yagames.feedback_request_review(callback)`<br>The callback result is a table `{ feedbackSent = true/false }` |

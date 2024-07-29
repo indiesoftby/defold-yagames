@@ -213,6 +213,20 @@ function M.features_loadingapi_ready()
     yagames_private.features_loadingapi_ready()
 end
 
+--- The method should be called when the player starts or resumes gameplay
+function M.features_gameplayapi_start()
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+
+    yagames_private.features_gameplayapi_start()
+end
+
+--- The method should be called when the player stops or pauses gameplay
+function M.features_gameplayapi_stop()
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+
+    yagames_private.features_gameplayapi_stop()
+end
+
 --- Return a table with game environment variables.
 -- @treturn table
 function M.environment()

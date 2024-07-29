@@ -3,8 +3,14 @@ local druid = require("druid.druid")
 local druid_style = require("example.ysdkdebug.druid_style")
 local sitelock = require("yagames.sitelock")
 local rxi_json = require("yagames.helpers.json")
+local yagames = require("yagames.yagames")
 
 local function continue_handler(self)
+    -- In fact, you should call the “start” function from GameplayAPI when gameplay starts.
+    -- Here it is called just to check if it works.
+    yagames.features_gameplayapi_start()
+
+    -- Show the next screen!
     app_scenemanager.load_scene("ysdkdebug")
 end
 

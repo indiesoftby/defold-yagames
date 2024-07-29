@@ -191,6 +191,12 @@ end
 function M.features_loadingapi_ready()
 end
 
+function M.features_gameplayapi_start()
+end
+
+function M.features_gameplayapi_stop()
+end
+
 function M.feedback_can_review(cb_id)
     M.send(cb_id, NO_ERR, rxi_json.encode({
         value = false,

@@ -34,6 +34,8 @@ extern "C"
     const bool YaGamesPrivate_DeviceInfo_IsTV();
     const char* YaGamesPrivate_Environment();
     void YaGamesPrivate_Features_LoadingAPI_Ready();
+    void YaGamesPrivate_Features_GameplayAPI_Start();
+    void YaGamesPrivate_Features_GameplayAPI_Stop();
     void YaGamesPrivate_Feedback_CanReview(const int cb_id);
     void YaGamesPrivate_Feedback_RequestReview(const int cb_id);
     void YaGamesPrivate_GetLeaderboards(const int cb_id);
@@ -480,6 +482,18 @@ static int Features_LoadingAPI_Ready(lua_State* L)
     return 0;
 }
 
+static int Features_GameplayAPI_Start(lua_State* L)
+{
+    YaGamesPrivate_Features_GameplayAPI_Start();
+    return 0;
+}
+
+static int Features_GameplayAPI_Stop(lua_State* L)
+{
+    YaGamesPrivate_Features_GameplayAPI_Stop();
+    return 0;
+}
+
 static int Feedback_CanReview(lua_State* L)
 {
     YaGamesPrivate_Feedback_CanReview(luaL_checkint(L, 1));
@@ -874,6 +888,8 @@ static const luaL_reg Module_methods[] = {
     { "environment", Environment },
     // - Features
     { "features_loadingapi_ready", Features_LoadingAPI_Ready },
+    { "features_gameplayapi_start", Features_GameplayAPI_Start },
+    { "features_gameplayapi_stop", Features_GameplayAPI_Stop },
     // - Feedback
     { "feedback_can_review", Feedback_CanReview },
     { "feedback_request_review", Feedback_RequestReview },

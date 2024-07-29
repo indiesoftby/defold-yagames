@@ -42,6 +42,7 @@ end
 
 local available_methods = {
     "isAvailableMethod",
+    "serverTime",
     -- Advertisement
     "adv.showFullscreenAdv",
     "adv.showRewardedVideo",
@@ -128,6 +129,10 @@ function M.is_available_method(cb_id, name)
         end
     end
     M.send(cb_id, NO_ERR, result)
+end
+
+function M.server_time()
+    return math.floor(socket.gettime() * 1000)
 end
 
 function M.show_fullscreen_adv(cb_id)

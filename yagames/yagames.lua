@@ -81,6 +81,14 @@ function M.is_available_method(name, callback)
     end), name)
 end
 
+--- Get server time in UNIX format
+-- @treturn number
+function M.server_time()
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+
+    return yagames_private.server_time()
+end
+
 --- Call the fullscreen ad
 -- @tparam {open=function,close=function,error=function,offline=function} callbacks Optional callback-functions.
 function M.adv_show_fullscreen_adv(callbacks)

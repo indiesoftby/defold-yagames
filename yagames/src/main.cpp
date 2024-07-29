@@ -20,6 +20,7 @@ extern "C"
                                           BooleanMessage cb_bool);
     void YaGamesPrivate_RemoveCallbacks();
     void YaGamesPrivate_IsAvailableMethod(const int cb_id, const char* name);
+    const double YaGamesPrivate_ServerTime();
     void YaGamesPrivate_Adv_ShowFullscreenAdv(const int cb_id);
     void YaGamesPrivate_Adv_ShowRewardedVideo(const int cb_id);
     void YaGamesPrivate_Adv_GetBannerAdvStatus(const int cb_id);
@@ -392,6 +393,12 @@ static int IsAvailableMethod(lua_State* L)
 {
     YaGamesPrivate_IsAvailableMethod(luaL_checkint(L, 1), luaL_checkstring(L, 2));
     return 0;
+}
+
+static int ServerTime(lua_State* L)
+{
+    lua_pushnumber(L, YaGamesPrivate_ServerTime());
+    return 1;
 }
 
 static int Adv_ShowFullscreenAdv(lua_State* L)
@@ -868,6 +875,7 @@ static const luaL_reg Module_methods[] = {
     { "remove_listener", RemoveListener },
     // Yandex Games SDK API
     { "is_available_method", IsAvailableMethod },
+    { "server_time", ServerTime },
     // - Adv
     { "show_fullscreen_adv", Adv_ShowFullscreenAdv },
     { "show_rewarded_video", Adv_ShowRewardedVideo },

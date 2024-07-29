@@ -6,6 +6,7 @@ const cacheName = cachePrefix + "-v1";
 
 const cacheList = [
     "https://yandex.ru/games/sdk/v2",
+    "https://sdk.games.s3.yandex.net/sdk.js",
 
     // 3. Add ALL your game files to the list:
     "index.html",

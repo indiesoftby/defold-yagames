@@ -59,6 +59,8 @@ local available_methods = {
     "deviceInfo.isTV",
     -- Features
     "features.LoadingAPI.ready",
+    "features.GameplayAPI.start",
+    "features.GameplayAPI.stop",
     -- Feedback
     "feedback.canReview",
     -- "feedback.requestReview",

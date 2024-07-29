@@ -127,6 +127,10 @@ var LibYaGamesPrivate = {
         }
     },
 
+    YaGamesPrivate_ServerTime: function () {
+        return YaGamesPrivate._ysdk.serverTime() || 0; // the return value can be null?..
+    },
+
     YaGamesPrivate_Adv_ShowFullscreenAdv: function (cb_id) {
         var self = YaGamesPrivate;
         try {
@@ -260,7 +264,7 @@ var LibYaGamesPrivate = {
 
     YaGamesPrivate_DeviceInfo_Type: function () {
         var self = YaGamesPrivate;
-        var ctype = stringToNewUTF8(self._ysdk.deviceInfo.type || "null");
+        var ctype = stringToNewUTF8(self._ysdk.deviceInfo.type || "null"); // the return value can be undefined/null if you run the game outside of the YSDK system.
         return ctype;
     },
 

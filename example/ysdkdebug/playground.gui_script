@@ -100,6 +100,8 @@ function init(self)
     pg_screen.init(self)
     pg_shortcut.init(self)
 
+    print("yagames.server_time():", yagames.server_time())
+
     event_test(self)
 
     druid_style.make_button(self, "button_environment", environment_handler)

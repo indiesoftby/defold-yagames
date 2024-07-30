@@ -11,7 +11,7 @@ high_dpi = 1
 
 [project]
 title = yagames
-version = 0.13.0
+version = 0.14.0
 developer = Indiesoft LLC
 bundle_resources = example/bundle/
 dependencies#0 = https://github.com/subsoap/defos/archive/v2.5.0.zip
@@ -39,8 +39,5 @@ max_characters = 30000
 game_binding = /example/input/game.input_bindingc
 
 [yagames]
-sdk_init_options = { orientation: { value: "portrait", lock: true } }
-sdk_init_snippet = console.log("Yandex Games SDK is ready!");
-service_worker_url = sw.js
-manifest_url = yandex-manifest.json
+sdk_init_snippet = console.log("Yandex Games SDK is ready! (this message is to test the option `yagames.sdk_init_snippet`)");
 

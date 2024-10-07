@@ -318,6 +318,38 @@ var LibYaGamesPrivate = {
         }
     },
 
+    YaGamesPrivate_Features_GamesAPI_GetAllGames: function (cb_id) {
+        var self = YaGamesPrivate;
+        try {
+            self._ysdk
+                .features.GamesAPI.getAllGames()
+                .then((result) => {
+                    self.send(cb_id, null, JSON.stringify(result));
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
+    YaGamesPrivate_Features_GamesAPI_GetGameByID: function (cb_id, game_id) {
+        var self = YaGamesPrivate;
+        try {
+            self._ysdk
+                .features.GamesAPI.getGameByID(game_id)
+                .then((result) => {
+                    self.send(cb_id, null, JSON.stringify(result));
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
     YaGamesPrivate_Feedback_CanReview: function (cb_id) {
         var self = YaGamesPrivate;
         try {

@@ -235,6 +235,36 @@ function M.features_gameplayapi_stop()
     yagames_private.features_gameplayapi_stop()
 end
 
+--- Get all games
+-- @tparam function callback
+function M.features_gamesapi_get_all_games(callback)
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(type(callback) == "function", "`callback` should be a function.")
+
+    yagames_private.features_gamesapi_get_all_games(helper.wrap_for_promise(function(self, err, result)
+        if result then
+            result = rxi_json.decode(result)
+        end
+        callback(self, err, result)
+    end))
+end
+
+--- Get a game by ID
+-- @tparam number app_id
+-- @tparam function callback
+function M.features_gamesapi_get_game_by_id(app_id, callback)
+    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(type(app_id) == "number", "`app_id` should be a number.")
+    assert(type(callback) == "function", "`callback` should be a function.")
+
+    yagames_private.features_gamesapi_get_game_by_id(helper.wrap_for_promise(function(self, err, result)
+        if result then
+            result = rxi_json.decode(result)
+        end
+        callback(self, err, result)
+    end), app_id)
+end
+
 --- Return a table with game environment variables.
 -- @treturn table
 function M.environment()

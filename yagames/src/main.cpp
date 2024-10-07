@@ -37,6 +37,8 @@ extern "C"
     void YaGamesPrivate_Features_LoadingAPI_Ready();
     void YaGamesPrivate_Features_GameplayAPI_Start();
     void YaGamesPrivate_Features_GameplayAPI_Stop();
+    void YaGamesPrivate_Features_GamesAPI_GetAllGames(const int cb_id);
+    void YaGamesPrivate_Features_GamesAPI_GetGameByID(const int cb_id, const int game_id);
     void YaGamesPrivate_Feedback_CanReview(const int cb_id);
     void YaGamesPrivate_Feedback_RequestReview(const int cb_id);
     void YaGamesPrivate_GetLeaderboards(const int cb_id);
@@ -501,6 +503,18 @@ static int Features_GameplayAPI_Stop(lua_State* L)
     return 0;
 }
 
+static int Features_GamesAPI_GetAllGames(lua_State* L)
+{
+    YaGamesPrivate_Features_GamesAPI_GetAllGames(luaL_checkint(L, 1));
+    return 0;
+}
+
+static int Features_GamesAPI_GetGameByID(lua_State* L)
+{
+    YaGamesPrivate_Features_GamesAPI_GetGameByID(luaL_checkint(L, 1), luaL_checkint(L, 2));
+    return 0;
+}
+
 static int Feedback_CanReview(lua_State* L)
 {
     YaGamesPrivate_Feedback_CanReview(luaL_checkint(L, 1));
@@ -898,6 +912,8 @@ static const luaL_reg Module_methods[] = {
     { "features_loadingapi_ready", Features_LoadingAPI_Ready },
     { "features_gameplayapi_start", Features_GameplayAPI_Start },
     { "features_gameplayapi_stop", Features_GameplayAPI_Stop },
+    { "features_gamesapi_get_all_games", Features_GamesAPI_GetAllGames },
+    { "features_gamesapi_get_game_by_id", Features_GamesAPI_GetGameByID },
     // - Feedback
     { "feedback_can_review", Feedback_CanReview },
     { "feedback_request_review", Feedback_RequestReview },

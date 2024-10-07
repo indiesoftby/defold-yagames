@@ -62,6 +62,8 @@ local available_methods = {
     "features.LoadingAPI.ready",
     "features.GameplayAPI.start",
     "features.GameplayAPI.stop",
+    "features.GamesAPI.getAllGames",
+    "features.GamesAPI.getGameByID",
     -- Feedback
     "feedback.canReview",
     -- "feedback.requestReview",
@@ -202,6 +204,34 @@ function M.features_gameplayapi_start()
 end
 
 function M.features_gameplayapi_stop()
+end
+
+function M.features_gamesapi_get_all_games(cb_id)
+    M.send(cb_id, NO_ERR, rxi_json.encode({
+        games = {
+            -- {
+            --     appID = "123456",
+            --     title = "Название игры",
+            --     coverURL = "https://url-to-cover-image",
+            --     iconURL = "https://url-to-icon-image",
+            --     url = "https://yandex.ru/games/app/123456"
+            -- }
+        },
+        developerURL = "https://yandex.ru/games/developer/123456"
+    }))
+end
+
+function M.features_gamesapi_get_game_by_id(cb_id, app_id)
+    M.send(cb_id, NO_ERR, rxi_json.encode({
+        isAvailable = false,
+        game = {
+            -- appID = "123456",
+            -- title = "Название игры",
+            -- coverURL = "https://url-to-cover-image",
+            -- iconURL = "https://url-to-icon-image",
+            -- url = "https://yandex.ru/games/app/123456"
+        }
+    }))
 end
 
 function M.feedback_can_review(cb_id)

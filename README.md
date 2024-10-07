@@ -264,6 +264,8 @@ And it's also a good idea to upload a demo build of YaGames to your game's draft
 | `ysdk.features.LoadingAPI?.ready()` | `yagames.features_loadingapi_ready()` |
 | `ysdk.features.GameplayAPI?.start()` | `yagames.features_gameplayapi_start()` |
 | `ysdk.features.GameplayAPI?.stop()` | `yagames.features_gameplayapi_stop()` |
+| `ysdk.features.GamesAPI?.getAllGames()` | `yagames.features_gamesapi_get_all_games(callback)`<br>The callback result is a table `{ games = { ... }, developerURL = "string" }` |
+| `ysdk.features.GamesAPI?.getGameByID(appID)` | `yagames.features_gamesapi_get_game_by_id(app_id, callback)`<br>The callback result is a table `{ isAvailable = true/false, game = { appID = "string", title = "string", url = "string", coverURL = "string", iconURL = "string" } }` |
 | **Feedback** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-review) |  |
 | `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)`<br>The callback result is a table `{ value = true/false, reason = "string" }` |
 | `ysdk.feedback.requestReview()` | `yagames.feedback_request_review(callback)`<br>The callback result is a table `{ feedbackSent = true/false }` |

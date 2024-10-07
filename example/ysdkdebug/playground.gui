@@ -7,9207 +7,1740 @@ textures {
   name: "common"
   texture: "/example/assets/common.atlas"
 }
-background_color {
-  x: 0.0
-  y: 0.0
-  z: 0.0
-  w: 0.0
-}
 nodes {
   position {
     x: 20.0
     y: 1480.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   size {
     x: 10.0
     y: 10.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
   texture: "common/empty"
   id: "group_adv"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  adjust_mode: ADJUST_MODE_FIT
-  layer: ""
   inherit_alpha: true
-  slice9 {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 0.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
-  template_node_child: false
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   size {
     x: 480.0
     y: 50.0
-    z: 0.0
-    w: 1.0
   }
   color {
     x: 0.4
     y: 0.6
     z: 0.4
-    w: 1.0
   }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "ADVERTISEMENT"
   font: "font2"
   id: "title_group_adv"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "group_adv"
   layer: "font2"
   inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 160.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_show_fullscreen_adv"
   parent: "group_adv"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 320.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_show_fullscreen_adv/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_show_fullscreen_adv"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 375.0
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Show Fullscreen Adv"
-  font: "font2"
   id: "button_show_fullscreen_adv/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_show_fullscreen_adv/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 500.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_show_rewarded_video"
   parent: "group_adv"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 320.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_show_rewarded_video/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_show_rewarded_video"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 375.0
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Show Rewarded Video"
-  font: "font2"
   id: "button_show_rewarded_video/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_show_rewarded_video/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 415.0
     y: -170.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_adv_show_banner_adv"
   parent: "group_adv"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_adv_show_banner_adv/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_adv_show_banner_adv"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Show Sticky"
-  font: "font2"
   id: "button_adv_show_banner_adv/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_adv_show_banner_adv/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 160.0
     y: -170.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_adv_get_banner_adv_status"
   parent: "group_adv"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 320.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_adv_get_banner_adv_status/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_adv_get_banner_adv_status"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 375.0
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Get Sticky Adv Status"
-  font: "font2"
   id: "button_adv_get_banner_adv_status/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_adv_get_banner_adv_status/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 585.0
     y: -170.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_adv_hide_banner_adv"
   parent: "group_adv"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_adv_hide_banner_adv/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_adv_hide_banner_adv"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Hide Sticky"
-  font: "font2"
   id: "button_adv_hide_banner_adv/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_adv_hide_banner_adv/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 20.0
     y: 1242.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   size {
     x: 10.0
     y: 10.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
   texture: "common/empty"
   id: "group_device_info"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  adjust_mode: ADJUST_MODE_FIT
   layer: "common"
   inherit_alpha: true
-  slice9 {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 0.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
-  template_node_child: false
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   size {
     x: 480.0
     y: 50.0
-    z: 0.0
-    w: 1.0
   }
   color {
     x: 0.4
     y: 0.6
     z: 0.4
-    w: 1.0
   }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "DEVICE INFO"
   font: "font2"
   id: "title_group_device_info"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "group_device_info"
   layer: "font2"
   inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
-    x: 0.0
     y: -50.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
   }
   scale {
     x: 0.7
     y: 0.7
-    z: 1.0
-    w: 1.0
   }
   size {
     x: 165.0
     y: 50.0
-    z: 0.0
-    w: 1.0
   }
   color {
     x: 0.0
     y: 0.0
     z: 0.0
-    w: 1.0
   }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Desktop"
   font: "font2"
   id: "text_is_desktop"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "group_device_info"
   layer: "font2"
   inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 115.0
     y: -50.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
   }
   scale {
     x: 0.7
     y: 0.7
-    z: 1.0
-    w: 1.0
   }
   size {
     x: 165.0
     y: 50.0
-    z: 0.0
-    w: 1.0
   }
   color {
     x: 0.0
     y: 0.0
     z: 0.0
-    w: 1.0
   }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Mobile"
   font: "font2"
   id: "text_is_mobile"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "group_device_info"
   layer: "font2"
   inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 231.0
     y: -50.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
   }
   scale {
     x: 0.7
     y: 0.7
-    z: 1.0
-    w: 1.0
   }
   size {
     x: 165.0
     y: 50.0
-    z: 0.0
-    w: 1.0
   }
   color {
     x: 0.0
     y: 0.0
     z: 0.0
-    w: 1.0
   }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Tablet"
   font: "font2"
   id: "text_is_tablet"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "group_device_info"
   layer: "font2"
   inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 346.0
     y: -50.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
   }
   scale {
     x: 0.7
     y: 0.7
-    z: 1.0
-    w: 1.0
   }
   size {
     x: 165.0
     y: 50.0
-    z: 0.0
-    w: 1.0
   }
   color {
     x: 0.0
     y: 0.0
     z: 0.0
-    w: 1.0
   }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "TV"
   font: "font2"
   id: "text_is_tv"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "group_device_info"
   layer: "font2"
   inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 20.0
     y: 620.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   size {
     x: 10.0
     y: 10.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
   texture: "common/empty"
   id: "group_debug_log"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  adjust_mode: ADJUST_MODE_FIT
   layer: "common"
   inherit_alpha: true
-  slice9 {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 0.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
-  template_node_child: false
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   size {
     x: 480.0
     y: 50.0
-    z: 0.0
-    w: 1.0
   }
   color {
     x: 0.4
     y: 0.6
     z: 0.4
-    w: 1.0
   }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "LOG"
   font: "font2"
   id: "title_group_debug_log"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "group_debug_log"
   layer: "font2"
   inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
-    x: 0.0
     y: -50.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
   }
   scale {
     x: 0.7
     y: 0.7
     z: 0.7
-    w: 1.0
   }
   size {
     x: 2228.57
     y: 785.71
-    z: 0.0
-    w: 1.0
   }
   color {
     x: 0.0
     y: 0.0
     z: 0.0
-    w: 1.0
   }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "..."
   font: "font2"
   id: "text_log"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
   line_break: true
   parent: "group_debug_log"
   layer: "font2"
   inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 138.0
     y: -21.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
   }
   scale {
     x: 0.7
     y: 0.7
     z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_debug_log_clear"
   parent: "group_debug_log"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_debug_log_clear/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_debug_log_clear"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Clear"
-  font: "font2"
   id: "button_debug_log_clear/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_debug_log_clear/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 322.0
     y: -21.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
   }
   scale {
     x: 0.7
     y: 0.7
     z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_clipboard_write_text"
   parent: "group_debug_log"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 320.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_clipboard_write_text/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_clipboard_write_text"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 375.0
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Copy to Clipboard"
-  font: "font2"
   id: "button_clipboard_write_text/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_clipboard_write_text/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 564.0
     y: -21.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
   }
   scale {
     x: 0.7
     y: 0.7
     z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_test_error_handling"
   parent: "group_debug_log"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 320.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_test_error_handling/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_test_error_handling"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 375.0
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Test Error Handling"
-  font: "font2"
   id: "button_test_error_handling/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_test_error_handling/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 805.72217
     y: -21.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
   }
   scale {
     x: 0.7
     y: 0.7
     z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_not_available_methods"
   parent: "group_debug_log"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 320.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_not_available_methods/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_not_available_methods"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 375.0
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "List Not Available Methods"
-  font: "font2"
   id: "button_not_available_methods/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_not_available_methods/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 20.0
     y: 1042.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   size {
     x: 10.0
     y: 10.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
   texture: "common/empty"
   id: "group_player"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  adjust_mode: ADJUST_MODE_FIT
   layer: "common"
   inherit_alpha: true
-  slice9 {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 0.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
-  template_node_child: false
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   size {
     x: 480.0
     y: 50.0
-    z: 0.0
-    w: 1.0
   }
   color {
     x: 0.4
     y: 0.6
     z: 0.4
-    w: 1.0
   }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "PLAYER"
   font: "font2"
   id: "title_group_player"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "group_player"
   layer: "font2"
   inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 75.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_auth_open"
   parent: "group_player"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_auth_open/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_auth_open"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Auth"
-  font: "font2"
   id: "button_auth_open/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_auth_open/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 245.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_player_init"
   parent: "group_player"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_player_init/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_player_init"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Init\n"
   "(scopes=true)"
-  font: "font2"
   id: "button_player_init/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
   line_break: true
   parent: "button_player_init/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   overridden_fields: 18
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 415.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_player_init2"
   parent: "group_player"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_player_init2/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_player_init2"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Init\n"
   "(scopes=false)"
-  font: "font2"
   id: "button_player_init2/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
   line_break: true
   parent: "button_player_init2/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   overridden_fields: 18
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 75.0
     y: -170.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_player_get_name"
   parent: "group_player"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_player_get_name/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_player_get_name"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Get Name"
-  font: "font2"
   id: "button_player_get_name/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_player_get_name/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 245.0
     y: -170.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_player_get_photo"
   parent: "group_player"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_player_get_photo/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_player_get_photo"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Get Photo"
-  font: "font2"
   id: "button_player_get_photo/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_player_get_photo/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 415.0
     y: -170.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_player_get_unique_id"
   parent: "group_player"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_player_get_unique_id/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_player_get_unique_id"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Get Unique ID"
-  font: "font2"
   id: "button_player_get_unique_id/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_player_get_unique_id/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 75.0
     y: -260.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_player_set_data"
   parent: "group_player"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_player_set_data/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_player_set_data"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Set Data"
-  font: "font2"
   id: "button_player_set_data/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_player_set_data/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 245.0
     y: -260.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_player_get_data"
   parent: "group_player"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_player_get_data/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_player_get_data"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Get Data"
-  font: "font2"
   id: "button_player_get_data/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_player_get_data/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 415.0
     y: -260.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_player_get_ids_per_game"
   parent: "group_player"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_player_get_ids_per_game/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_player_get_ids_per_game"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Get IDs Per Game"
-  font: "font2"
   id: "button_player_get_ids_per_game/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_player_get_ids_per_game/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 75.0
     y: -350.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_player_set_stats"
   parent: "group_player"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_player_set_stats/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_player_set_stats"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Set Stats"
-  font: "font2"
   id: "button_player_set_stats/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_player_set_stats/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 245.0
     y: -350.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_player_get_stats"
   parent: "group_player"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_player_get_stats/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_player_get_stats"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Get Stats"
-  font: "font2"
   id: "button_player_get_stats/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_player_get_stats/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 415.0
     y: -350.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_player_increment_stats"
   parent: "group_player"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_player_increment_stats/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_player_increment_stats"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Increment\n"
   "Stats"
-  font: "font2"
   id: "button_player_increment_stats/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
   line_break: true
   parent: "button_player_increment_stats/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   overridden_fields: 18
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 720.0
     y: 1480.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   size {
     x: 10.0
     y: 10.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
   texture: "common/empty"
   id: "group_payments"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  adjust_mode: ADJUST_MODE_FIT
   layer: "common"
   inherit_alpha: true
-  slice9 {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 0.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
-  template_node_child: false
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   size {
     x: 480.0
     y: 50.0
-    z: 0.0
-    w: 1.0
   }
   color {
     x: 0.4
     y: 0.6
     z: 0.4
-    w: 1.0
   }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "PAYMENTS"
   font: "font2"
   id: "title_payments"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "group_payments"
   layer: "font2"
   inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 75.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_payments_init"
   parent: "group_payments"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_payments_init/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_payments_init"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Init"
-  font: "font2"
   id: "button_payments_init/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_payments_init/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 245.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_payments_get_catalog"
   parent: "group_payments"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_payments_get_catalog/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_payments_get_catalog"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Get Catalog"
-  font: "font2"
   id: "button_payments_get_catalog/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_payments_get_catalog/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 500.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_payments_get_purchases"
   parent: "group_payments"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 320.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_payments_get_purchases/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_payments_get_purchases"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 375.0
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Get Purchases"
-  font: "font2"
   id: "button_payments_get_purchases/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_payments_get_purchases/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 75.0
     y: -170.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_payments_purchase1"
   parent: "group_payments"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_payments_purchase1/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_payments_purchase1"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Buy\n"
   "\"Item 1\""
-  font: "font2"
   id: "button_payments_purchase1/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_payments_purchase1/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 245.0
     y: -170.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_payments_purchase2"
   parent: "group_payments"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_payments_purchase2/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_payments_purchase2"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Buy\n"
   "\"Item 2\""
-  font: "font2"
   id: "button_payments_purchase2/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_payments_purchase2/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 500.0
     y: -170.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_payments_consume_purchase"
   parent: "group_payments"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 320.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_payments_consume_purchase/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_payments_consume_purchase"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 375.0
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Consume Last Purchase"
-  font: "font2"
   id: "button_payments_consume_purchase/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_payments_consume_purchase/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 550.0
     y: 1086.7816
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   size {
     x: 10.0
     y: 10.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
   texture: "common/empty"
   id: "group_leaderboards"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  adjust_mode: ADJUST_MODE_FIT
-  layer: ""
   inherit_alpha: true
-  slice9 {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 0.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
-  template_node_child: false
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   size {
     x: 480.0
     y: 50.0
-    z: 0.0
-    w: 1.0
   }
   color {
     x: 0.4
     y: 0.6
     z: 0.4
-    w: 1.0
   }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "LEADERBOARDS"
   font: "font2"
   id: "title_group_leaderboards"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "group_leaderboards"
   layer: "font2"
   inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 75.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_leaderboards_init"
   parent: "group_leaderboards"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_leaderboards_init/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_leaderboards_init"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Init"
-  font: "font2"
   id: "button_leaderboards_init/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_leaderboards_init/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 245.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_leaderboards_get_description"
   parent: "group_leaderboards"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_leaderboards_get_description/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_leaderboards_get_description"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Get Desc."
-  font: "font2"
   id: "button_leaderboards_get_description/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_leaderboards_get_description/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 415.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_leaderboards_get_entries"
   parent: "group_leaderboards"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_leaderboards_get_entries/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_leaderboards_get_entries"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Get Entries"
-  font: "font2"
   id: "button_leaderboards_get_entries/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_leaderboards_get_entries/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 160.0
     y: -175.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_leaderboards_get_player_entry"
   parent: "group_leaderboards"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 320.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_leaderboards_get_player_entry/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_leaderboards_get_player_entry"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 375.0
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Get Player Entry"
-  font: "font2"
   id: "button_leaderboards_get_player_entry/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_leaderboards_get_player_entry/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 75.0
     y: -265.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_leaderboards_set_score1"
   parent: "group_leaderboards"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_leaderboards_set_score1/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_leaderboards_set_score1"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Set Score #1"
-  font: "font2"
   id: "button_leaderboards_set_score1/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_leaderboards_set_score1/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 245.0
     y: -265.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_leaderboards_set_score2"
   parent: "group_leaderboards"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_leaderboards_set_score2/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_leaderboards_set_score2"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Set Score #2"
-  font: "font2"
   id: "button_leaderboards_set_score2/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_leaderboards_set_score2/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 415.0
     y: -265.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_leaderboards_set_score3"
   parent: "group_leaderboards"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_leaderboards_set_score3/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_leaderboards_set_score3"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Set Score #3"
-  font: "font2"
   id: "button_leaderboards_set_score3/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_leaderboards_set_score3/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 415.0
     y: -175.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_leaderboards_get_player_entry_with_avatar"
   parent: "group_leaderboards"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_leaderboards_get_player_entry_with_avatar/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_leaderboards_get_player_entry_with_avatar"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "+Avatar"
-  font: "font2"
   id: "button_leaderboards_get_player_entry_with_avatar/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_leaderboards_get_player_entry_with_avatar/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 132.0
     y: 1102.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
   }
   scale {
     x: 0.7
     y: 0.7
     z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_environment"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 320.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_environment/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_environment"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 375.0
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Get Environment"
-  font: "font2"
   id: "button_environment/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_environment/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 550.0
     y: 1241.7816
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   size {
     x: 10.0
     y: 10.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
   texture: "common/empty"
   id: "group_feedback"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  adjust_mode: ADJUST_MODE_FIT
-  layer: ""
   inherit_alpha: true
-  slice9 {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 0.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
-  template_node_child: false
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   size {
     x: 480.0
     y: 50.0
-    z: 0.0
-    w: 1.0
   }
   color {
     x: 0.4
     y: 0.6
     z: 0.4
-    w: 1.0
   }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "FEEDBACK"
   font: "font2"
   id: "title_group_feedback"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "group_feedback"
   layer: "font2"
   inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 160.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_feedback_can_review"
   parent: "group_feedback"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 320.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_feedback_can_review/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_feedback_can_review"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 375.0
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Can Review"
-  font: "font2"
   id: "button_feedback_can_review/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_feedback_can_review/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 500.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_feedback_request_review"
   parent: "group_feedback"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 320.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_feedback_request_review/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_feedback_request_review"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 375.0
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Request Review"
-  font: "font2"
   id: "button_feedback_request_review/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_feedback_request_review/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 1080.0
     y: 1086.7816
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   size {
     x: 10.0
     y: 10.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
   texture: "common/empty"
   id: "group_screen"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  adjust_mode: ADJUST_MODE_FIT
-  layer: ""
   inherit_alpha: true
-  slice9 {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 0.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
-  template_node_child: false
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
   scale {
     x: 0.85
     y: 0.85
-    z: 1.0
-    w: 1.0
   }
   size {
     x: 200.0
     y: 50.0
-    z: 0.0
-    w: 1.0
   }
   color {
     x: 0.4
     y: 0.6
     z: 0.4
-    w: 1.0
   }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "FULLSCREEN"
   font: "font2"
   id: "title_group_screen"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "group_screen"
   layer: "font2"
   inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 245.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_screen_fullscreen_request"
   parent: "group_screen"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_screen_fullscreen_request/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_screen_fullscreen_request"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Request"
-  font: "font2"
   id: "button_screen_fullscreen_request/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_screen_fullscreen_request/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 415.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_screen_fullscreen_exit"
   parent: "group_screen"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_screen_fullscreen_exit/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_screen_fullscreen_exit"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Exit"
-  font: "font2"
   id: "button_screen_fullscreen_exit/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_screen_fullscreen_exit/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 75.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_screen_fullscreen_status"
   parent: "group_screen"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_screen_fullscreen_status/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_screen_fullscreen_status"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Status"
-  font: "font2"
   id: "button_screen_fullscreen_status/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_screen_fullscreen_status/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 1080.0
     y: 947.28253
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   size {
     x: 10.0
     y: 10.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
   texture: "common/empty"
   id: "group_shortcut"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  adjust_mode: ADJUST_MODE_FIT
-  layer: ""
   inherit_alpha: true
-  slice9 {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 0.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
-  template_node_child: false
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
   scale {
     x: 0.85
     y: 0.85
-    z: 1.0
-    w: 1.0
   }
   size {
     x: 200.0
     y: 50.0
-    z: 0.0
-    w: 1.0
   }
   color {
     x: 0.4
     y: 0.6
     z: 0.4
-    w: 1.0
   }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "SHORTCUT"
   font: "font2"
   id: "title_group_shortcut"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "group_shortcut"
   layer: "font2"
   inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 160.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_shortcut_can_show_prompt"
   parent: "group_shortcut"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 320.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_shortcut_can_show_prompt/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_shortcut_can_show_prompt"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 375.0
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Can Show Prompt"
-  font: "font2"
   id: "button_shortcut_can_show_prompt/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_shortcut_can_show_prompt/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 415.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_shortcut_show_prompt"
   parent: "group_shortcut"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button_sm.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 150.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_shortcut_show_prompt/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_shortcut_show_prompt"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 162.5
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Show Prompt"
-  font: "font2"
   id: "button_shortcut_show_prompt/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_shortcut_show_prompt/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 375.0
     y: 1102.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
   }
   scale {
     x: 0.7
     y: 0.7
     z: 0.7
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_storage_test"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 320.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_storage_test/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_storage_test"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 375.0
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Test Safe Storage"
-  font: "font2"
   id: "button_storage_test/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_storage_test/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 1249.8689
     y: 1241.7816
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   size {
     x: 10.0
     y: 10.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
   texture: "common/empty"
   id: "group_flags"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  adjust_mode: ADJUST_MODE_FIT
-  layer: ""
   inherit_alpha: true
-  slice9 {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 0.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
-  template_node_child: false
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   size {
     x: 320.0
     y: 50.0
-    z: 0.0
-    w: 1.0
   }
   color {
     x: 0.4
     y: 0.6
     z: 0.4
-    w: 1.0
   }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "CONFIG"
   font: "font2"
   id: "title_group_config"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
   pivot: PIVOT_NW
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "group_flags"
   layer: "font2"
   inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
   position {
     x: 160.0
     y: -85.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
   }
   type: TYPE_TEMPLATE
   id: "button_config_flags_get"
   parent: "group_flags"
-  layer: ""
   inherit_alpha: true
-  alpha: 1.0
   template: "/example/ysdkdebug/button.gui"
-  template_node_child: false
-  custom_type: 0
-  enabled: true
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 320.0
-    y: 70.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "common/button"
   id: "button_config_flags_get/body"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
   parent: "button_config_flags_get"
-  layer: "common"
-  inherit_alpha: true
-  slice9 {
-    x: 24.0
-    y: 24.0
-    z: 24.0
-    w: 24.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
   template_node_child: true
-  size_mode: SIZE_MODE_MANUAL
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
 }
 nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 375.0
-    y: 87.5
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
   text: "Get Flags"
-  font: "font2"
   id: "button_config_flags_get/text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  shadow {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "button_config_flags_get/body"
-  layer: "font2"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   overridden_fields: 8
   template_node_child: true
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
+}
+nodes {
+  position {
+    x: 550.0
+    y: 761.3225
+  }
+  size {
+    x: 10.0
+    y: 10.0
+  }
+  type: TYPE_BOX
+  texture: "common/empty"
+  id: "group_games_api"
+  pivot: PIVOT_NW
+  inherit_alpha: true
+}
+nodes {
+  size {
+    x: 320.0
+    y: 50.0
+  }
+  color {
+    x: 0.4
+    y: 0.6
+    z: 0.4
+  }
+  type: TYPE_TEXT
+  text: "GAMES API"
+  font: "font2"
+  id: "title_games_api"
+  pivot: PIVOT_NW
+  parent: "group_games_api"
+  layer: "font2"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 160.0
+    y: -85.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_games_api_get_all_games"
+  parent: "group_games_api"
+  inherit_alpha: true
+  template: "/example/ysdkdebug/button.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "button_games_api_get_all_games/body"
+  parent: "button_games_api_get_all_games"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  text: "Get All Games"
+  id: "button_games_api_get_all_games/text"
+  parent: "button_games_api_get_all_games/body"
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 415.0
+    y: -85.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_games_api_get_game_by_id"
+  parent: "group_games_api"
+  inherit_alpha: true
+  template: "/example/ysdkdebug/button_sm.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "button_games_api_get_game_by_id/body"
+  parent: "button_games_api_get_game_by_id"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  text: "Get By ID"
+  id: "button_games_api_get_game_by_id/text"
+  parent: "button_games_api_get_game_by_id/body"
+  overridden_fields: 8
+  template_node_child: true
 }
 layers {
   name: "common"
@@ -9217,4 +1750,3 @@ layers {
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
-max_nodes: 512

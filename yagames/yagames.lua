@@ -53,7 +53,7 @@ end
 -- PUBLIC API
 --
 
---- Initialize YaGames extension and wait for Yandex.Games SDK initialization
+--- Initializes YaGames extension and waits for Yandex.Games SDK initialization
 -- @tparam function callback Callback arguments are (self, err). If err is not nil, something is wrong.
 function M.init(callback)
     if not yagames_private then
@@ -74,7 +74,7 @@ function M.init(callback)
     yagames_private.add_listener(helper.YSDK_INIT_ID, init_listener)
 end
 
---- Check if the method is available to call
+--- Checks if the method is available to call
 -- @tparam function callback
 -- @tparam string method name
 function M.is_available_method(name, callback)
@@ -95,8 +95,16 @@ function M.server_time()
     return yagames_private.server_time()
 end
 
---- Call the fullscreen ad
--- @tparam {open=function,close=function,error=function,offline=function} callbacks Optional callback-functions.
+--- Calls the fullscreen ad.
+-- Fullscreen ad block - advertising blocks that completely cover the game background and are shown
+-- when a player waits for something (for example, when switching to the next level of the game).
+-- @tparam {open=function,close=function,error=function,offline=function} callbacks
+--         `open` - Called when an ad is opened successfully.
+--         `close` - Called when an ad is closed, an error occurred, or on ad failed to open due to too
+--                   frequent calls. Used with the `was_shown` argument (type `boolean`), the value of
+--                   which indicates whether an ad was shown.
+--         `offline` - Called when the network connection is lost (when offline mode is enabled).
+--         `error` - Called when an error occurrs. The error object is passed to the callback function.
 function M.adv_show_fullscreen_adv(callbacks)
     assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
     assert(type(callbacks) == "table", "'callbacks' should be a table")
@@ -104,9 +112,14 @@ function M.adv_show_fullscreen_adv(callbacks)
     yagames_private.show_fullscreen_adv(helper.wrap_for_callbacks(callbacks))
 end
 
---- Call the rewarded ad.
--- Rewarded videos are video ad blocks used to monetize games. and earn a reward or in-game currency.
--- @tparam {open=function,rewarded=function,close=function,error=function} callbacks Optional callback-functions.
+--- Calls the rewarded video ad.
+-- Rewarded videos are video ad blocks used to monetize games and earn a reward or in-game currency.
+-- @tparam {open=function,rewarded=function,close=function,error=function} callbacks
+--         `open` - Called when a video ad is displayed on the screen.
+--         `rewarded` - Called when a video ad impression is counted. Use this function to specify
+--                      a reward for viewing the video ad.
+--         `close` - Called when a user closes a video ad or an error happens.
+--         `error` - Called when an error occurrs. The error object is passed to the callback function.
 function M.adv_show_rewarded_video(callbacks)
     assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
     assert(type(callbacks) == "table", "'callbacks' should be a table")
@@ -114,8 +127,8 @@ function M.adv_show_rewarded_video(callbacks)
     yagames_private.show_rewarded_video(helper.wrap_for_callbacks(callbacks))
 end
 
----
--- @tparam function callback
+--- Receives Sticky-banner ad status.
+-- @tparam function callback Callback arguments are (self, err, result), where `result` is { stickyAdvIsShowing = boolean, reason = "string" }
 function M.adv_get_banner_adv_status(callback)
     assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
     assert(type(callback) == "function", "Callback function is required")
@@ -128,8 +141,8 @@ function M.adv_get_banner_adv_status(callback)
     end))
 end
 
----
--- @tparam function callback
+--- Shows Sticky-banner.
+-- @tparam[opt] function callback
 function M.adv_show_banner_adv(callback)
     assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
@@ -143,8 +156,8 @@ function M.adv_show_banner_adv(callback)
     end))
 end
 
----
--- @tparam function callback
+--- Hides Sticky-banner.
+-- @tparam[opt] function callback
 function M.adv_hide_banner_adv(callback)
     assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
@@ -158,18 +171,18 @@ function M.adv_hide_banner_adv(callback)
     end))
 end
 
---- Open the login dialog box.
+--- Opens the login dialog box.
 -- @tparam function callback
 function M.auth_open_auth_dialog(callback)
     assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
-    assert(type(callback) == "function")
+    assert(type(callback) == "function", "Callback function is required")
 
     yagames_private.open_auth_dialog(helper.wrap_for_promise(callback))
 end
 
----
+--- Writes a string to the clipboard.
 -- @tparam string text
--- @tparam function callback
+-- @tparam[opt] function callback
 function M.clipboard_write_text(text, callback)
     assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
     assert(type(text) == "string", "Text should be 'string'")
@@ -181,8 +194,8 @@ function M.clipboard_write_text(text, callback)
     end), text)
 end
 
---- 
--- @treturn string
+--- Returns the type of the user's device.
+-- @treturn string "desktop" (computer), "mobile" (mobile device), "tablet" (tablet) or "tv" (TV)
 function M.device_info_type()
     assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
@@ -221,7 +234,7 @@ function M.device_info_is_tv()
     return yagames_private.device_info_is_tv()
 end
 
---- Informs the SDK that the game has loaded and is ready to play
+--- Informs the SDK that the game has loaded and is ready to play.
 function M.features_loadingapi_ready()
     assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 

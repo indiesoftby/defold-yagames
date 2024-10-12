@@ -90,7 +90,7 @@ end
 --- Get server time in UNIX format
 -- @treturn number
 function M.server_time()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     return yagames_private.server_time()
 end
@@ -243,14 +243,14 @@ end
 
 --- The method should be called when the player starts or resumes gameplay
 function M.features_gameplayapi_start()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     yagames_private.features_gameplayapi_start()
 end
 
 --- The method should be called when the player stops or pauses gameplay
 function M.features_gameplayapi_stop()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     yagames_private.features_gameplayapi_stop()
 end
@@ -258,7 +258,7 @@ end
 --- Get all games
 -- @tparam function callback
 function M.features_gamesapi_get_all_games(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
     assert(type(callback) == "function", "`callback` should be a function.")
 
     yagames_private.features_gamesapi_get_all_games(helper.wrap_for_promise(function(self, err, result)
@@ -273,7 +273,7 @@ end
 -- @tparam number app_id
 -- @tparam function callback
 function M.features_gamesapi_get_game_by_id(app_id, callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
     assert(type(app_id) == "number", "`app_id` should be a number.")
     assert(type(callback) == "function", "`callback` should be a function.")
 
@@ -285,7 +285,7 @@ function M.features_gamesapi_get_game_by_id(app_id, callback)
     end), app_id)
 end
 
---- Return a table with game environment variables.
+--- Returns a table with game environment variables.
 -- @treturn table
 function M.environment()
     assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)

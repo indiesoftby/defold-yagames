@@ -283,6 +283,9 @@ And it's also a good idea to upload a demo build of YaGames to your game's draft
 | `ysdk.screen.fullscreen.status` | `yagames.screen_fullscreen_status()`<br>Returns `"on"` or `"off"` |
 | `ysdk.screen.fullscreen.request()` | `yagames.screen_fullscreen_request([callback])` |
 | `ysdk.screen.fullscreen.exit()` | `yagames.screen_fullscreen_exit([callback])` |
+| **Shortcuts** [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-shortcut) |  |
+| `ysdk.shortcut.canShowPrompt()` | `yagames.shortcut_can_show_prompt(callback)`<br>The callback result is a table `{ canShow = boolean }` |
+| `ysdk.shortcut.showPrompt()` | `yagames.shortcut_show_prompt(callback)`<br>The callback result is a table `{ outcome = "string" }` |
 | **Safe Storage** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player#progress-loss) | *Note: `key` and `value` should be valid UTF-8 strings. Storing strings with zero bytes aren't supported.* |
 | `ysdk.getStorage()` | `yagames.storage_init(callback)` |
 | - `safeStorage.getItem(key)` | `yagames.storage_get_item(key)`<br>Returns that key's value or `nil`. |

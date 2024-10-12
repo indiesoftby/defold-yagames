@@ -5,6 +5,12 @@ local mock = require("yagames.helpers.mock")
 local helper = require("yagames.helpers.helper")
 
 --
+-- CONSTANTS
+--
+
+local YSDK_NOT_READY_MESSAGE = "YaGames is not initialized. Call `yagames.init(callback)` and wait for the result before calling the function."
+
+--
 -- HELPERS
 --
 
@@ -36,7 +42,7 @@ local function init_listener(self, cb_id, message_id, message)
         M.ysdk_ready = true
         call_init_callback(self)
     elseif message_id == "error" then
-        print("YaGames couldn't be initialized.")
+        print("<!> YaGames couldn't be initialized.")
         call_init_callback(self, message)
     end
 
@@ -47,19 +53,19 @@ end
 -- PUBLIC API
 --
 
---- Initialize the Yandex.Games SDK
--- @tparam function callback
+--- Initialize YaGames extension and wait for Yandex.Games SDK initialization
+-- @tparam function callback Callback arguments are (self, err). If err is not nil, something is wrong.
 function M.init(callback)
     if not yagames_private then
         print(
-            "YaGames is only available on the HTML5 platform. You will use the mocked version that is suitable only for testing.")
+            "Yandex.Games SDK is only available on the HTML5 platform. You're running the mocked local SDK that is suitable only for testing.")
         mock.enable()
     end
 
     assert(type(callback) == "function")
 
     if M.ysdk_ready then
-        print("YaGames is already initialized.")
+        print("<!> YaGames is already initialized.")
         helper.async_call(callback)
         return
     end
@@ -72,7 +78,7 @@ end
 -- @tparam function callback
 -- @tparam string method name
 function M.is_available_method(name, callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
     assert(type(name) == "string", "Name should be 'string'")
     assert(type(callback) == "function", "Callback function is required")
 
@@ -84,7 +90,7 @@ end
 --- Call the fullscreen ad
 -- @tparam {open=function,close=function,error=function,offline=function} callbacks Optional callback-functions.
 function M.adv_show_fullscreen_adv(callbacks)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
     assert(type(callbacks) == "table", "'callbacks' should be a table")
 
     yagames_private.show_fullscreen_adv(helper.wrap_for_callbacks(callbacks))
@@ -94,7 +100,7 @@ end
 -- Rewarded videos are video ad blocks used to monetize games. and earn a reward or in-game currency.
 -- @tparam {open=function,rewarded=function,close=function,error=function} callbacks Optional callback-functions.
 function M.adv_show_rewarded_video(callbacks)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
     assert(type(callbacks) == "table", "'callbacks' should be a table")
 
     yagames_private.show_rewarded_video(helper.wrap_for_callbacks(callbacks))
@@ -103,7 +109,7 @@ end
 ---
 -- @tparam function callback
 function M.adv_get_banner_adv_status(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
     assert(type(callback) == "function", "Callback function is required")
 
     yagames_private.adv_get_banner_adv_status(helper.wrap_for_promise(function(self, err, result)
@@ -117,7 +123,7 @@ end
 ---
 -- @tparam function callback
 function M.adv_show_banner_adv(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     yagames_private.adv_show_banner_adv(helper.wrap_for_promise(function(self, err, result)
         if callback then
@@ -132,7 +138,7 @@ end
 ---
 -- @tparam function callback
 function M.adv_hide_banner_adv(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     yagames_private.adv_hide_banner_adv(helper.wrap_for_promise(function(self, err, result)
         if callback then
@@ -147,6 +153,7 @@ end
 --- Open the login dialog box.
 -- @tparam function callback
 function M.auth_open_auth_dialog(callback)
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
     assert(type(callback) == "function")
 
     yagames_private.open_auth_dialog(helper.wrap_for_promise(callback))
@@ -156,7 +163,7 @@ end
 -- @tparam string text
 -- @tparam function callback
 function M.clipboard_write_text(text, callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
     assert(type(text) == "string", "Text should be 'string'")
 
     yagames_private.clipboard_write_text(helper.wrap_for_promise(function(self, err)
@@ -169,7 +176,7 @@ end
 --- 
 -- @treturn string
 function M.device_info_type()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     return yagames_private.device_info_type()
 end
@@ -177,7 +184,7 @@ end
 --- Checks the user's device and returns "true" if it's a desktop.
 -- @treturn boolean
 function M.device_info_is_desktop()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     return yagames_private.device_info_is_desktop()
 end
@@ -185,7 +192,7 @@ end
 --- Checks the user's device and returns "true" if it's a mobile.
 -- @treturn boolean
 function M.device_info_is_mobile()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     return yagames_private.device_info_is_mobile()
 end
@@ -193,7 +200,7 @@ end
 --- Checks the user's device and returns "true" if it's a tablet.
 -- @treturn boolean
 function M.device_info_is_tablet()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     return yagames_private.device_info_is_tablet()
 end
@@ -201,14 +208,14 @@ end
 --- Checks the user's device and returns "true" if it's a TV.
 -- @treturn boolean
 function M.device_info_is_tv()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     return yagames_private.device_info_is_tv()
 end
 
 --- Informs the SDK that the game has loaded and is ready to play
 function M.features_loadingapi_ready()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     yagames_private.features_loadingapi_ready()
 end
@@ -216,7 +223,7 @@ end
 --- Return a table with game environment variables.
 -- @treturn table
 function M.environment()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     return rxi_json.decode(yagames_private.environment())
 end
@@ -224,7 +231,7 @@ end
 --- Find out if it is possible to request a feedback window for the game.
 -- @tparam function callback
 function M.feedback_can_review(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
     assert(type(callback) == "function", "Callback function is required")
 
     yagames_private.feedback_can_review(helper.wrap_for_promise(function(self, err, result)
@@ -238,7 +245,7 @@ end
 --- Find out if it is possible to request a feedback window for the game.
 -- @tparam function callback
 function M.feedback_request_review(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
     assert(type(callback) == "function", "Callback function is required")
 
     yagames_private.feedback_request_review(helper.wrap_for_promise(function(self, err, result)
@@ -530,6 +537,8 @@ function M.player_get_data(keys, callback)
 end
 
 --- Save the user's numeric data. The maximum data size must not exceed 10 KB.
+-- @tparam table keys Key-values to be set (example { "a" = 1, "b" = 2 }).
+-- @tparam function callback Callback arguments are (self, err, result), where `result` are changed pairs as key-values, i.e. { "a" = 1, "b" = 2 }.
 function M.player_set_stats(stats, callback)
     assert(M.player_ready, "Player is not initialized.")
     assert(type(stats) == "table")
@@ -539,6 +548,8 @@ function M.player_set_stats(stats, callback)
 end
 
 --- Change in-game user data. The maximum data size must not exceed 10 KB.
+-- @tparam table keys Key-values to be changed (example { "a" = 1, "b" = 2 }).
+-- @tparam function callback Callback arguments are (self, err, result), where `result` are changed pairs as key-values, i.e. { "a" = 10, "b" = 5 }.
 function M.player_increment_stats(increments, callback)
     assert(M.player_ready, "Player is not initialized.")
     assert(type(increments) == "table")
@@ -553,6 +564,8 @@ function M.player_increment_stats(increments, callback)
 end
 
 --- Asynchronously return the user's numeric data.
+-- @tparam[opt] table keys List of keys to be returned (example { "a", "b", "key1", "key2" }). If the keys parameter is nil, the method returns all in-game user data.
+-- @tparam function callback Callback arguments are (self, err, result), where `result` are pairs as key-values, i.e. { "a" = 1, "b" = 2 }.
 function M.player_get_stats(keys, callback)
     assert(M.player_ready, "Player is not initialized.")
     assert(type(callback) == "function")
@@ -565,18 +578,18 @@ function M.player_get_stats(keys, callback)
     end), keys and rxi_json.encode(keys) or nil)
 end
 
----
+--- Get the current fullscreen state: "on" or "off".
 -- @treturn string
 function M.screen_fullscreen_status()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     return yagames_private.screen_fullscreen_status()
 end
 
----
--- @tparam function callback
+--- Request entering fullscreen mode.
+-- @tparam[opt] function callback Callback arguments are (self, err)
 function M.screen_fullscreen_request(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     yagames_private.screen_fullscreen_request(helper.wrap_for_promise(function(self, err)
         if type(callback) == "function" then
@@ -585,10 +598,10 @@ function M.screen_fullscreen_request(callback)
     end))
 end
 
----
--- @tparam function callback
+--- Request exit from fullscreen mode.
+-- @tparam[opt] function callback Callback arguments are (self, err)
 function M.screen_fullscreen_exit(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     yagames_private.screen_fullscreen_exit(helper.wrap_for_promise(function(self, err)
         if type(callback) == "function" then
@@ -597,10 +610,10 @@ function M.screen_fullscreen_exit(callback)
     end))
 end
 
----
--- @tparam function callback
+--- Check if a shortcut can be added.
+-- @tparam function callback Callback arguments are (self, err, result), where `result` is { canShow = boolean }
 function M.shortcut_can_show_prompt(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     yagames_private.shortcut_can_show_prompt(helper.wrap_for_promise(function(self, err, result)
         if result then
@@ -612,10 +625,10 @@ function M.shortcut_can_show_prompt(callback)
     end))
 end
 
----
--- @tparam function callback
+--- Show a prompt to the user to add a shortcut to the game.
+-- @tparam[opt] function callback Callback arguments are (self, err, result), where `result` is { outcome = string }
 function M.shortcut_show_prompt(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
 
     yagames_private.shortcut_show_prompt(helper.wrap_for_promise(function(self, err, result)
         if result then
@@ -689,20 +702,20 @@ function M.storage_length()
     return yagames_private.storage_length()
 end
 
----
+--- Dispatch an event.
 -- @tparam string event_name
 function M.event_dispatch(event_name)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
     assert(type(event_name) == "string", "event_name is not a string.")
 
     yagames_private.event_dispatch(event_name)
 end
 
----
+--- Add an event listener.
 -- @tparam string event_name
 -- @tparam function listener
 function M.event_on(event_name, listener)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert(M.ysdk_ready, YSDK_NOT_READY_MESSAGE)
     assert(type(event_name) == "string", "event_name is not a string.")
     assert(type(listener) == "function", "listener is not a function.")
 

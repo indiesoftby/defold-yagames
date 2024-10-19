@@ -2,19 +2,16 @@
 
 # YaGames - Yandex.Games for Defold
 
-> ***Note***
-> 
-> This is an open-source project, and it's not affiliated with Yandex LLC. 
-> 
-> If you are looking for Yandex Mobile Ads SDK for mobile apps, then this extension isn't for you.
+*This is an open-source project, and it's not affiliated with Yandex LLC.*
 
-YaGames is the Yandex.Games SDK native extension for the [Defold](https://www.defold.com/) game engine. 
-
-[Yandex.Games](https://yandex.com/games/) is a collection of browser HTML5 games for smartphones, computers, tablets, and TVs. The games are available in Yandex Browser and the Yandex app. Games from the catalog are displayed in Yandex recommendation systems, which have a total audience of more than 50 million users per month.
+YaGames is the Yandex.Games SDK native extension for the [Defold](https://www.defold.com/) game engine. [Yandex.Games](https://yandex.com/games/) is a collection of browser HTML5 games for smartphones, computers, tablets, and TVs. The games are available in Yandex Browser and the Yandex app. Games from the catalog are displayed in Yandex recommendation systems, which have a total audience of more than 50 million users per month.
 
 ## Installation
 
 You can use it in your own project by adding this project as a [Defold library dependency](http://www.defold.com/manuals/libraries/). Open your `game.project` file and in the dependencies field add **a link to the ZIP file of a [specific release](https://github.com/indiesoftby/defold-yagames/releases).**
+
+> [!CAUTION]
+> For Yandex.Games use only WASM variant when creating HTML5 build of your game. Asm.js variant won't work at all because of [polyfills](https://github.com/emscripten-core/emscripten/blob/10cb9d46cdd17e7a96de68137c9649d9a630fbc7/src/shell.js#L45), which are necessary to support older browsers and which break the Yandex.Games SDK.
 
 ## Getting Started
 

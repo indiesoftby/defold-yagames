@@ -617,27 +617,6 @@ function M.get_flags(cb_id, options)
     M.send(cb_id, NO_ERR, rxi_json.encode(result))
 end
 
---- DEPRECATED
-function M.banner_init(cb_id)
-    M.send(cb_id, "Error loading SDK.")
-end
-
---- DEPRECATED
-function M.banner_create(rtb_id, options, cb_id)
-end
-
---- DEPRECATED
-function M.banner_refresh(rtb_id, cb_id)
-end
-
---- DEPRECATED
-function M.banner_destroy(rtb_id)
-end
-
---- DEPRECATED
-function M.banner_set(rtb_id, property, value)
-end
-
 return {
     enable = function()
         if not yagames_private then

@@ -965,12 +965,7 @@ var LibYaGamesPrivate = {
         } catch (err) {
             
         }
-    },
-
-    YaGamesPrivate_Banner_Init: function (cb_id) {
-        var self = YaGamesPrivate;
-        self.delaySend(cb_id, "DEPRECATED.");
-    },
+    }
 };
 
 autoAddDeps(LibYaGamesPrivate, "$YaGamesPrivate");

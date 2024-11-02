@@ -81,7 +81,6 @@ extern "C"
     void YaGamesPrivate_Event_Dispatch(const char* cevent_name);
     void YaGamesPrivate_Event_On(const char* cevent_name, const int cb_id);
     void YaGamesPrivate_GetFlags(const int cb_id, const char* coptions);
-    void YaGamesPrivate_Banner_Init(const int cb_id);
 }
 
 struct YaGamesPrivateListener
@@ -849,37 +848,6 @@ static int GetFlags(lua_State* L)
 }
 
 //
-// DEPRECATED
-// Banner Ads API
-//
-
-static int Banner_Init(lua_State* L)
-{
-    YaGamesPrivate_Banner_Init(luaL_checkint(L, 1));
-    return 0;
-}
-
-static int Banner_Create(lua_State* L)
-{
-    return 0;
-}
-
-static int Banner_Destroy(lua_State* L)
-{
-    return 0;
-}
-
-static int Banner_Refresh(lua_State* L)
-{
-    return 0;
-}
-
-static int Banner_Set(lua_State* L)
-{
-    return 0;
-}
-
-//
 //
 //
 
@@ -965,13 +933,6 @@ static const luaL_reg Module_methods[] = {
     { "event_on", Event_On },
     // - Config
     { "get_flags", GetFlags },
-    // DEPRECATED
-    // - Banner Ads
-    { "banner_init", Banner_Init },
-    { "banner_create", Banner_Create },
-    { "banner_destroy", Banner_Destroy },
-    { "banner_refresh", Banner_Refresh },
-    { "banner_set", Banner_Set },
     { 0, 0 }
 };
 

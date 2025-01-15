@@ -4,13 +4,11 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - master
+      - '*'
     tags:
       - 0.*
       - 1.*
   pull_request:
-    branches:
-      - master
 
 jobs:
   build-and-deploy:
@@ -23,7 +21,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: "temurin"
-          java-version: "17"
+          java-version: "21"
 
       - name: Build 🔧
         env:
@@ -43,7 +41,7 @@ jobs:
           if [ "${BOB_LOCAL_SHA1}" != "${BOB_SHA1}" ]; then wget --progress=dot:mega -O build/bundle/bob.jar "https://d.defold.com/archive/${BOB_SHA1}/bob/bob.jar"; fi
           java -jar build/bundle/bob.jar --version
 
-          java -jar build/bundle/bob.jar --email foo@bar.com --auth 12345 --texture-compression true --bundle-output build/bundle/js-web --platform js-web --archive --variant release resolve build bundle
+          java -jar build/bundle/bob.jar --email foo@bar.com --auth 12345 --texture-compression true --bundle-output build/bundle/js-web --platform js-web --architectures wasm-web --archive --variant release resolve build bundle
           (cd build/bundle/js-web/* && zip -r ../../public/demo_no-sw_no-native-cache.zip .)
 
       - name: Upload Result

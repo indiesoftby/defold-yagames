@@ -36,30 +36,49 @@ local function init_listener(self, cb_id, message_id, message)
         M.ysdk_ready = true
         call_init_callback(self)
     elseif message_id == "error" then
-        print("YaGames couldn't be initialized.")
+        print("<!> YaGames couldn't be initialized.")
         call_init_callback(self, message)
     end
 
     yagames_private.remove_listener(init_listener)
 end
 
+local function assert_ysdk_ready()
+    assert(M.ysdk_ready, "YaGames is not initialized. Call `yagames.init(callback)` and wait for the result before calling the function.")
+end
+
+local function assert_payments_ready()
+    assert_ysdk_ready()
+    assert(M.payments_ready, "Payments subsystem is not initialized. Call `yagames.payments_init(callback)` first and wait for the result before calling the function.")
+end
+
+local function assert_player_ready()
+    assert_ysdk_ready()
+    assert(M.player_ready, "Player subsystem is not initialized. Call `yagames.player_init(callback)` first and wait for the result before calling the function.")
+end
+
+local function assert_leaderboards_ready()
+    assert_ysdk_ready()
+    assert(M.leaderboards_ready, "Leaderboards subsystem is not initialized. Call `yagames.leaderboards_init(callback)` first and wait for the result before calling the function.")
+end
+
 --
 -- PUBLIC API
 --
 
---- Initialize the Yandex.Games SDK
--- @tparam function callback
+--- Initializes YaGames extension and waits for Yandex.Games SDK initialization
+-- @tparam function callback Callback arguments are (self, err). If err is not nil, something is wrong.
 function M.init(callback)
     if not yagames_private then
         print(
-            "YaGames is only available on the HTML5 platform. You will use the mocked version that is suitable only for testing.")
+            "Yandex.Games SDK is only available on the HTML5 platform. You're running the mocked local SDK that is suitable only for testing.")
         mock.enable()
     end
 
     assert(type(callback) == "function")
 
     if M.ysdk_ready then
-        print("YaGames is already initialized.")
+        print("<!> YaGames is already initialized.")
         helper.async_call(callback)
         return
     end
@@ -68,11 +87,11 @@ function M.init(callback)
     yagames_private.add_listener(helper.YSDK_INIT_ID, init_listener)
 end
 
---- Check if the method is available to call
+--- Checks if the method is available to call
 -- @tparam function callback
 -- @tparam string method name
 function M.is_available_method(name, callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
     assert(type(name) == "string", "Name should be 'string'")
     assert(type(callback) == "function", "Callback function is required")
 
@@ -81,37 +100,50 @@ function M.is_available_method(name, callback)
     end), name)
 end
 
---- Get server time in UNIX format
+--- Get server time in UNIX format.
 -- @treturn number
 function M.server_time()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     return yagames_private.server_time()
 end
 
---- Call the fullscreen ad
--- @tparam {open=function,close=function,error=function,offline=function} callbacks Optional callback-functions.
+--- Calls the fullscreen ad.
+-- Fullscreen ad block - advertising blocks that completely cover the game background and are shown
+-- when a player waits for something (for example, when switching to the next level of the game).
+-- @tparam {open=function,close=function,error=function,offline=function} callbacks
+--         `open` - Called when an ad is opened successfully.
+--         `close` - Called when an ad is closed, an error occurred, or on ad failed to open due to too
+--                   frequent calls. Used with the `was_shown` argument (type `boolean`), the value of
+--                   which indicates whether an ad was shown.
+--         `offline` - Called when the network connection is lost (when offline mode is enabled).
+--         `error` - Called when an error occurrs. The error object is passed to the callback function.
 function M.adv_show_fullscreen_adv(callbacks)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
     assert(type(callbacks) == "table", "'callbacks' should be a table")
 
     yagames_private.show_fullscreen_adv(helper.wrap_for_callbacks(callbacks))
 end
 
---- Call the rewarded ad.
--- Rewarded videos are video ad blocks used to monetize games. and earn a reward or in-game currency.
--- @tparam {open=function,rewarded=function,close=function,error=function} callbacks Optional callback-functions.
+--- Calls the rewarded video ad.
+-- Rewarded videos are video ad blocks used to monetize games and earn a reward or in-game currency.
+-- @tparam {open=function,rewarded=function,close=function,error=function} callbacks
+--         `open` - Called when a video ad is displayed on the screen.
+--         `rewarded` - Called when a video ad impression is counted. Use this function to specify
+--                      a reward for viewing the video ad.
+--         `close` - Called when a user closes a video ad or an error happens.
+--         `error` - Called when an error occurrs. The error object is passed to the callback function.
 function M.adv_show_rewarded_video(callbacks)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
     assert(type(callbacks) == "table", "'callbacks' should be a table")
 
     yagames_private.show_rewarded_video(helper.wrap_for_callbacks(callbacks))
 end
 
----
--- @tparam function callback
+--- Receives Sticky-banner ad status.
+-- @tparam function callback Callback arguments are (self, err, result), where `result` is { stickyAdvIsShowing = boolean, reason = "string" }
 function M.adv_get_banner_adv_status(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
     assert(type(callback) == "function", "Callback function is required")
 
     yagames_private.adv_get_banner_adv_status(helper.wrap_for_promise(function(self, err, result)
@@ -122,10 +154,10 @@ function M.adv_get_banner_adv_status(callback)
     end))
 end
 
----
--- @tparam function callback
+--- Shows Sticky-banner.
+-- @tparam[opt] function callback
 function M.adv_show_banner_adv(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     yagames_private.adv_show_banner_adv(helper.wrap_for_promise(function(self, err, result)
         if callback then
@@ -137,10 +169,10 @@ function M.adv_show_banner_adv(callback)
     end))
 end
 
----
--- @tparam function callback
+--- Hides Sticky-banner.
+-- @tparam[opt] function callback
 function M.adv_hide_banner_adv(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     yagames_private.adv_hide_banner_adv(helper.wrap_for_promise(function(self, err, result)
         if callback then
@@ -152,19 +184,20 @@ function M.adv_hide_banner_adv(callback)
     end))
 end
 
---- Open the login dialog box.
+--- Opens the login dialog box.
 -- @tparam function callback
 function M.auth_open_auth_dialog(callback)
-    assert(type(callback) == "function")
+    assert_ysdk_ready()
+    assert(type(callback) == "function", "Callback function is required")
 
     yagames_private.open_auth_dialog(helper.wrap_for_promise(callback))
 end
 
----
+--- Writes a string to the clipboard.
 -- @tparam string text
--- @tparam function callback
+-- @tparam[opt] function callback
 function M.clipboard_write_text(text, callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
     assert(type(text) == "string", "Text should be 'string'")
 
     yagames_private.clipboard_write_text(helper.wrap_for_promise(function(self, err)
@@ -174,10 +207,10 @@ function M.clipboard_write_text(text, callback)
     end), text)
 end
 
---- 
--- @treturn string
+--- Returns the type of the user's device.
+-- @treturn string "desktop" (computer), "mobile" (mobile device), "tablet" (tablet) or "tv" (TV)
 function M.device_info_type()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     return yagames_private.device_info_type()
 end
@@ -185,7 +218,7 @@ end
 --- Checks the user's device and returns "true" if it's a desktop.
 -- @treturn boolean
 function M.device_info_is_desktop()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     return yagames_private.device_info_is_desktop()
 end
@@ -193,7 +226,7 @@ end
 --- Checks the user's device and returns "true" if it's a mobile.
 -- @treturn boolean
 function M.device_info_is_mobile()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     return yagames_private.device_info_is_mobile()
 end
@@ -201,7 +234,7 @@ end
 --- Checks the user's device and returns "true" if it's a tablet.
 -- @treturn boolean
 function M.device_info_is_tablet()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     return yagames_private.device_info_is_tablet()
 end
@@ -209,36 +242,36 @@ end
 --- Checks the user's device and returns "true" if it's a TV.
 -- @treturn boolean
 function M.device_info_is_tv()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     return yagames_private.device_info_is_tv()
 end
 
---- Informs the SDK that the game has loaded and is ready to play
+--- Informs the SDK that the game has loaded and is ready to play.
 function M.features_loadingapi_ready()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     yagames_private.features_loadingapi_ready()
 end
 
---- The method should be called when the player starts or resumes gameplay
+--- The method should be called when the player starts or resumes gameplay.
 function M.features_gameplayapi_start()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     yagames_private.features_gameplayapi_start()
 end
 
---- The method should be called when the player stops or pauses gameplay
+--- The method should be called when the player stops or pauses gameplay.
 function M.features_gameplayapi_stop()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     yagames_private.features_gameplayapi_stop()
 end
 
---- Get all games
+--- Get information about all your games available on the current platform and domain.
 -- @tparam function callback
 function M.features_gamesapi_get_all_games(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
     assert(type(callback) == "function", "`callback` should be a function.")
 
     yagames_private.features_gamesapi_get_all_games(helper.wrap_for_promise(function(self, err, result)
@@ -249,11 +282,11 @@ function M.features_gamesapi_get_all_games(callback)
     end))
 end
 
---- Get a game by ID
+--- Get a game by ID.
 -- @tparam number app_id
 -- @tparam function callback
 function M.features_gamesapi_get_game_by_id(app_id, callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
     assert(type(app_id) == "number", "`app_id` should be a number.")
     assert(type(callback) == "function", "`callback` should be a function.")
 
@@ -265,18 +298,18 @@ function M.features_gamesapi_get_game_by_id(app_id, callback)
     end), app_id)
 end
 
---- Return a table with game environment variables.
+--- Returns a table with game environment variables.
 -- @treturn table
 function M.environment()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     return rxi_json.decode(yagames_private.environment())
 end
 
---- Find out if it is possible to request a feedback window for the game.
--- @tparam function callback
+--- Finds out if it is possible to request a feedback window for the game.
+-- @tparam function callback Callback arguments are (self, err, result), where `result` is { value = boolean, [reason] = "string" }
 function M.feedback_can_review(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
     assert(type(callback) == "function", "Callback function is required")
 
     yagames_private.feedback_can_review(helper.wrap_for_promise(function(self, err, result)
@@ -287,10 +320,10 @@ function M.feedback_can_review(callback)
     end))
 end
 
---- Find out if it is possible to request a feedback window for the game.
--- @tparam function callback
+--- Offers the user to rate the game.
+-- @tparam function callback Callback arguments are (self, err, result), where `result` is { feedbackSent = boolean }
 function M.feedback_request_review(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
     assert(type(callback) == "function", "Callback function is required")
 
     yagames_private.feedback_request_review(helper.wrap_for_promise(function(self, err, result)
@@ -301,8 +334,8 @@ function M.feedback_request_review(callback)
     end))
 end
 
---- Initialize the leaderboards subsystem
--- @tparam function callback
+--- Initializes the leaderboards subsystem.
+-- @tparam function callback Callback arguments are (self, err)
 function M.leaderboards_init(callback)
     assert(type(callback) == "function", "Callback function is required")
 
@@ -313,11 +346,11 @@ function M.leaderboards_init(callback)
     end))
 end
 
---- Get a description of a competition table by name.
+--- Get a description of a leaderboard by name.
 -- @tparam string leaderboard_name
--- @tparam function callback
+-- @tparam function callback Callback arguments are (self, err, result), where `result` is a table with leaderboard description.
 function M.leaderboards_get_description(leaderboard_name, callback)
-    assert(M.leaderboards_ready, "Leaderboards subsystem is not initialized.")
+    assert_leaderboards_ready()
     assert(type(leaderboard_name) == "string", "Leaderboard name should be 'string'")
     assert(type(callback) == "function", "Callback function is required")
 
@@ -329,12 +362,12 @@ function M.leaderboards_get_description(leaderboard_name, callback)
     end), leaderboard_name)
 end
 
---- Get a user's ranking.
+--- Get a player's ranking.
 -- @tparam string leaderboard_name
 -- @tparam {getAvatarSrc=string,getAvatarSrcSet=string} options
--- @tparam function callback
+-- @tparam function callback Callback arguments are (self, err, result), where `result` is a table with player's ranking.
 function M.leaderboards_get_player_entry(leaderboard_name, options, callback)
-    assert(M.leaderboards_ready, "Leaderboards subsystem is not initialized.")
+    assert_leaderboards_ready()
     assert(type(leaderboard_name) == "string", "Leaderboard name should be 'string'")
     assert(type(options) == "nil" or type(options) == "table", "Options should be 'table'")
     assert(type(callback) == "function", "Callback function is required")
@@ -347,12 +380,12 @@ function M.leaderboards_get_player_entry(leaderboard_name, options, callback)
     end), leaderboard_name, rxi_json.encode(options or {}))
 end
 
---- Get user rankings.
+--- Gets player's rankings.
 -- @tparam string leaderboard_name
 -- @tparam {includeUser=boolean,quantityAround=integer,quantityTop=integer,getAvatarSrc=string,getAvatarSrcSet=string} options
--- @tparam function callback
+-- @tparam function callback Callback arguments are (self, err, result), where `result` is a table with data about leaderboard entries.
 function M.leaderboards_get_entries(leaderboard_name, options, callback)
-    assert(M.leaderboards_ready, "Leaderboards subsystem is not initialized.")
+    assert_leaderboards_ready()
     assert(type(leaderboard_name) == "string", "Leaderboard name should be 'string'")
     assert(type(options) == "nil" or type(options) == "table", "Options should be 'table'")
     assert(type(callback) == "function", "Callback function is required")
@@ -365,25 +398,26 @@ function M.leaderboards_get_entries(leaderboard_name, options, callback)
     end), leaderboard_name, rxi_json.encode(options or {}))
 end
 
---- Set a new score for a player.
+--- Sets a new score for a player.
 -- @tparam string leaderboard_name
 -- @tparam number score
--- @tparam string extra_data
--- @tparam function callback
+-- @tparam[opt] string extra_data
+-- @tparam[opt] function callback Callback arguments are (self, err)
 function M.leaderboards_set_score(leaderboard_name, score, extra_data, callback)
-    assert(M.leaderboards_ready, "Leaderboards subsystem is not initialized.")
+    assert_leaderboards_ready()
     assert(type(leaderboard_name) == "string", "Leaderboard name should be 'string'")
     assert(type(score) == "number", "Score should be 'number'")
-    assert(type(extra_data) == "nil" or type(extra_data) == "string", "Extra data should be 'string'")
+    assert(type(extra_data) == "nil" or type(extra_data) == "string", "Extra data should be 'string' or nil")
 
     yagames_private.leaderboards_set_score(callback and helper.wrap_for_promise(callback) or 0, leaderboard_name, score, extra_data)
 end
 
---- Initialize the in-game purchases system.
--- @tparam {signed=boolean} options
--- @tparam function callback
+--- Initializes the in-game purchases system.
+-- @tparam[opt] {signed=boolean} options
+-- @tparam function callback Callback arguments are (self, err)
 function M.payments_init(options, callback)
-    assert(type(callback) == "function")
+    assert_ysdk_ready()
+    assert(type(callback) == "function", "`callback` function is required")
 
     yagames_private.get_payments(helper.wrap_for_promise(function(self, err)
         M.payments_ready = not err
@@ -396,10 +430,10 @@ end
 -- @tparam {id=string,developerPayload=string} options
 -- @tparam function callback
 function M.payments_purchase(options, callback)
-    assert(M.payments_ready, "Payments subsystem is not initialized.")
-    assert(type(options) == "table")
-    assert(type(callback) == "function")
-    assert(type(options.id) == "string")
+    assert_payments_ready()
+    assert(type(options) == "table", "`options` should be a table")
+    assert(type(options.id) == "string", "`options.id` should be a string")
+    assert(type(callback) == "function", "`callback` function is required")
 
     yagames_private.payments_purchase(helper.wrap_for_promise(function(self, err, purchase)
         if purchase then
@@ -412,8 +446,8 @@ end
 --- Find out what purchases a player already made.
 -- @tparam function callback
 function M.payments_get_purchases(callback)
-    assert(M.payments_ready, "Payments subsystem is not initialized.")
-    assert(type(callback) == "function")
+    assert_payments_ready()
+    assert(type(callback) == "function", "`callback` function is required")
 
     yagames_private.payments_get_purchases(helper.wrap_for_promise(function(self, err, purchases)
         if purchases then
@@ -427,14 +461,14 @@ end
 -- @tparam[opt] {getPriceCurrencyImage=string} options
 -- @tparam function callback
 function M.payments_get_catalog(options, callback)
-    assert(M.payments_ready, "Payments subsystem is not initialized.")
+    assert_payments_ready()
     -- Backward compatibility
     if type(options) == "function" and not callback then
         callback = options
         options = nil
     end
     assert(type(options) == "table" or type(options) == "nil", "`options` should be a table or nil.")
-    assert(type(callback) == "function")
+    assert(type(callback) == "function", "`callback` function is required")
 
     yagames_private.payments_get_catalog(helper.wrap_for_promise(function(self, err, catalog)
         if catalog then
@@ -450,18 +484,19 @@ end
 -- @tparam string purchase_token
 -- @tparam function callback
 function M.payments_consume_purchase(purchase_token, callback)
-    assert(M.payments_ready, "Payments subsystem is not initialized.")
-    assert(type(purchase_token) == "string")
-    assert(type(callback) == "function")
+    assert_payments_ready()
+    assert(type(purchase_token) == "string", "`purchase_token` should be a string")
+    assert(type(callback) == "function", "`callback` function is required")
 
     yagames_private.payments_consume_purchase(helper.wrap_for_promise(callback), purchase_token)
 end
 
---- Initialize the "player" system.
--- @tparam {scopes=boolean,signed=boolean} options
--- @tparam function callback
+--- Initializes the "player" system.
+-- @tparam[opt] {scopes=boolean,signed=boolean} options
+-- @tparam function callback Callback arguments are (self, err)
 function M.player_init(options, callback)
-    assert(type(callback) == "function")
+    assert_ysdk_ready()
+    assert(type(callback) == "function", "`callback` function is required")
 
     yagames_private.get_player(helper.wrap_for_promise(function(self, err)
         -- Possible errors: "FetchError: Unauthorized"
@@ -475,7 +510,7 @@ end
 --- Returns four possible values (type: string) depending on the frequency and volume of the user's purchases.
 -- @treturn string
 function M.player_get_paying_status()
-    assert(M.player_ready, "Player is not initialized.")
+    assert_player_ready()
 
     return yagames_private.player_get_paying_status()
 end
@@ -483,7 +518,7 @@ end
 --- Returns a table with player data
 -- @treturn table or nil
 function M.player_get_personal_info()
-    assert(M.player_ready, "Player is not initialized.")
+    assert_player_ready()
 
     local json_info = yagames_private.player_get_personal_info()
     return json_info and rxi_json.decode(json_info) or nil
@@ -493,14 +528,16 @@ end
 -- It consists of two Base64-encoded strings.
 -- @treturn string
 function M.player_get_signature()
-    assert(M.player_ready, "Player is not initialized.")
+    assert_player_ready()
+
     return yagames_private.player_get_signature()
 end
 
 --- DEPRECATED: Use player_get_unique_id()
 -- @treturn string
 function M.player_get_id()
-    assert(M.player_ready, "Player is not initialized.")
+    assert_player_ready()
+
     return yagames_private.player_get_id()
 end
 
@@ -508,7 +545,7 @@ end
 -- the user has explicitly consented to the transfer of their personal data.
 -- @tparam function callback
 function M.player_get_ids_per_game(callback)
-    assert(type(callback) == "function")
+    assert(type(callback) == "function", "`callback` function is required")
 
     yagames_private.player_get_ids_per_game(helper.wrap_for_promise(
                                                 function(self, err, arr)
@@ -522,7 +559,7 @@ end
 --- Return the user's auth mode.
 -- @treturn string
 function M.player_get_mode()
-    assert(M.player_ready, "Player is not initialized.")
+    assert_player_ready()
 
     return yagames_private.player_get_mode()
 end
@@ -530,7 +567,7 @@ end
 --- Return the user's name.
 -- @treturn string
 function M.player_get_name()
-    assert(M.player_ready, "Player is not initialized.")
+    assert_player_ready()
 
     return yagames_private.player_get_name()
 end
@@ -539,39 +576,41 @@ end
 -- @tparam string size
 -- @treturn string
 function M.player_get_photo(size)
-    assert(M.player_ready, "Player is not initialized.")
-    assert(type(size) == "string")
+    assert_player_ready()
+    assert(type(size) == "string", "`size` should be a string")
 
     return yagames_private.player_get_photo(size)
 end
 
---- Return the user's unique permanent ID.
+--- Returns the user's unique permanent ID.
 -- @treturn string
 function M.player_get_unique_id()
-    assert(M.player_ready, "Player is not initialized.")
+    assert_player_ready()
     return yagames_private.player_get_unique_id()
 end
 
---- Save user data. The maximum data size should not exceed 200 KB.
--- @tparam table data A table containing key-value pairs.
+--- Saves user data. The maximum data size should not exceed 200 KB.
+-- @tparam table data A table containing key-value pairs. Example: { "a" = "value", "b" = 2 }.
 -- @tparam boolean flush Specifies the order data is sent. 
 --                       If the value is “true”, the data is immediately
 --                       sent to the server. If it's “false” (default),
 --                       the request to send data is queued.
--- @tparam function callback
+-- @tparam function callback Callback arguments are (self, err)
 function M.player_set_data(data, flush, callback)
-    assert(M.player_ready, "Player is not initialized.")
-    assert(type(data) == "table")
-    assert(type(flush) == "boolean")
-    assert(type(callback) == "function")
+    assert_player_ready()
+    assert(type(data) == "table", "`data` should be a table")
+    assert(type(flush) == "boolean", "`flush` should be a boolean")
+    assert(type(callback) == "function", "`callback` function is required")
 
     yagames_private.player_set_data(helper.wrap_for_promise(callback), rxi_json.encode(data), flush)
 end
 
---- Asynchronously return the in-game user data stored in the Yandex database.
+--- Asynchronously returns the in-game user data stored in the Yandex database.
+-- @tparam[opt] table keys
+-- @tparam function callback Callback arguments are (self, err, result), where `result` are pairs as key-values, i.e. { "a" = "value", "b" = 2 }.
 function M.player_get_data(keys, callback)
-    assert(M.player_ready, "Player is not initialized.")
-    assert(type(callback) == "function")
+    assert_player_ready()
+    assert(type(callback) == "function", "`callback` function is required")
 
     yagames_private.player_get_data(helper.wrap_for_promise(function(self, err, result)
         if result then
@@ -582,19 +621,23 @@ function M.player_get_data(keys, callback)
 end
 
 --- Save the user's numeric data. The maximum data size must not exceed 10 KB.
+-- @tparam table keys Key-values to be set (example { "a" = 1, "b" = 2 }).
+-- @tparam function callback Callback arguments are (self, err, result), where `result` are changed pairs as key-values, i.e. { "a" = 1, "b" = 2 }.
 function M.player_set_stats(stats, callback)
-    assert(M.player_ready, "Player is not initialized.")
-    assert(type(stats) == "table")
-    assert(type(callback) == "function")
+    assert_player_ready()
+    assert(type(stats) == "table", "`stats` should be a table")
+    assert(type(callback) == "function", "`callback` function is required")
 
     yagames_private.player_set_stats(helper.wrap_for_promise(callback), rxi_json.encode(stats))
 end
 
 --- Change in-game user data. The maximum data size must not exceed 10 KB.
+-- @tparam table increments Key-values to be changed (example { "a" = 1, "b" = 2 }).
+-- @tparam function callback Callback arguments are (self, err, result), where `result` are changed pairs as key-values, i.e. { "a" = 10, "b" = 5 }.
 function M.player_increment_stats(increments, callback)
-    assert(M.player_ready, "Player is not initialized.")
-    assert(type(increments) == "table")
-    assert(type(callback) == "function")
+    assert_player_ready()
+    assert(type(increments) == "table", "`increments` should be a table")
+    assert(type(callback) == "function", "`callback` function is required")
 
     yagames_private.player_increment_stats(helper.wrap_for_promise(function(self, err, result)
         if result then
@@ -604,10 +647,12 @@ function M.player_increment_stats(increments, callback)
     end), rxi_json.encode(increments))
 end
 
---- Asynchronously return the user's numeric data.
+--- Asynchronously returns the user's numeric data.
+-- @tparam[opt] table keys List of keys to be returned (example { "a", "b", "key1", "key2" }). If the keys parameter is nil, the method returns all in-game user data.
+-- @tparam function callback Callback arguments are (self, err, result), where `result` are pairs as key-values, i.e. { "a" = 1, "b" = 2 }.
 function M.player_get_stats(keys, callback)
-    assert(M.player_ready, "Player is not initialized.")
-    assert(type(callback) == "function")
+    assert_player_ready()
+    assert(type(callback) == "function", "`callback` function is required")
 
     yagames_private.player_get_stats(helper.wrap_for_promise(function(self, err, result)
         if result then
@@ -617,18 +662,18 @@ function M.player_get_stats(keys, callback)
     end), keys and rxi_json.encode(keys) or nil)
 end
 
----
+--- Gets the current fullscreen state: "on" or "off".
 -- @treturn string
 function M.screen_fullscreen_status()
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     return yagames_private.screen_fullscreen_status()
 end
 
----
--- @tparam function callback
+--- Requests entering fullscreen mode.
+-- @tparam[opt] function callback Callback arguments are (self, err)
 function M.screen_fullscreen_request(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     yagames_private.screen_fullscreen_request(helper.wrap_for_promise(function(self, err)
         if type(callback) == "function" then
@@ -637,10 +682,10 @@ function M.screen_fullscreen_request(callback)
     end))
 end
 
----
--- @tparam function callback
+--- Request exit from fullscreen mode.
+-- @tparam[opt] function callback Callback arguments are (self, err)
 function M.screen_fullscreen_exit(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     yagames_private.screen_fullscreen_exit(helper.wrap_for_promise(function(self, err)
         if type(callback) == "function" then
@@ -649,10 +694,10 @@ function M.screen_fullscreen_exit(callback)
     end))
 end
 
----
--- @tparam function callback
+--- Check if a shortcut can be added.
+-- @tparam function callback Callback arguments are (self, err, result), where `result` is { canShow = boolean }
 function M.shortcut_can_show_prompt(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     yagames_private.shortcut_can_show_prompt(helper.wrap_for_promise(function(self, err, result)
         if result then
@@ -664,10 +709,10 @@ function M.shortcut_can_show_prompt(callback)
     end))
 end
 
----
--- @tparam function callback
+--- Show a prompt to the user to add a shortcut to the game.
+-- @tparam[opt] function callback Callback arguments are (self, err, result), where `result` is { outcome = string }
 function M.shortcut_show_prompt(callback)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
 
     yagames_private.shortcut_show_prompt(helper.wrap_for_promise(function(self, err, result)
         if result then
@@ -741,20 +786,20 @@ function M.storage_length()
     return yagames_private.storage_length()
 end
 
----
+--- Dispatch an event.
 -- @tparam string event_name
 function M.event_dispatch(event_name)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
     assert(type(event_name) == "string", "event_name is not a string.")
 
     yagames_private.event_dispatch(event_name)
 end
 
----
+--- Add an event listener.
 -- @tparam string event_name
 -- @tparam function listener
 function M.event_on(event_name, listener)
-    assert(M.ysdk_ready, "YaGames is not initialized.")
+    assert_ysdk_ready()
     assert(type(event_name) == "string", "event_name is not a string.")
     assert(type(listener) == "function", "listener is not a function.")
 
@@ -778,67 +823,6 @@ function M.flags_get(options, callback)
         end
         callback(self, err, result)
     end), options and rxi_json.encode(options) or nil)
-end
-
---- DEPRECATED
--- @tparam function callback
-function M.banner_init(callback)
-    assert(type(callback) == "function")
-
-    yagames_private.banner_init(helper.wrap_for_promise(function(self, err)
-        if not err then
-            M.banner_ready = true
-        end
-
-        callback(self, err)
-    end))
-end
-
---- DEPRECATED
-function M.banner_create(rtb_id, options, callback)
-    assert(M.banner_ready, "Yandex Advertising Network SDK is not initialized.")
-    assert(type(rtb_id) == "string")
-    assert(type(options) == "table")
-
-    yagames_private.banner_create(rtb_id, rxi_json.encode(options),
-        callback and helper.wrap_for_promise(function(self, err, data)
-            if not err then
-                data = rxi_json.decode(data)
-            end
-            callback(self, err, data)
-        end) or 0)
-end
-
---- DEPRECATED
-function M.banner_destroy(rtb_id)
-    assert(M.banner_ready, "Yandex Advertising Network SDK is not initialized.")
-    assert(type(rtb_id) == "string")
-
-    yagames_private.banner_destroy(rtb_id)
-end
-
---- DEPRECATED
-function M.banner_refresh(rtb_id, callback)
-    assert(M.banner_ready, "Yandex Advertising Network SDK is not initialized.")
-    assert(type(rtb_id) == "string")
-
-    yagames_private.banner_refresh(rtb_id, 
-        callback and helper.wrap_for_promise(function(self, err, data)
-            if not err then
-                data = rxi_json.decode(data)
-            end
-            callback(self, err, data)
-        end) or 0)
-end
-
---- DEPRECATED
-function M.banner_set(rtb_id, property, value)
-    assert(M.banner_ready, "Yandex Advertising Network SDK is not initialized.")
-    assert(type(rtb_id) == "string")
-    assert(type(property) == "string")
-    assert(type(value) == "string")
-
-    yagames_private.banner_set(rtb_id, property, value)
 end
 
 return M

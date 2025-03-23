@@ -284,10 +284,45 @@ var LibYaGamesPrivate = {
         return YaGamesPrivate._ysdk.deviceInfo.isTV();
     },
 
+    // Environment object interface:
+    // {
+    //   app: {
+    //     id: string;
+    //   };
+    //   i18n: {
+    //     lang: string;
+    //     tld: string;
+    //   };
+    //   payload?: string;
+    // }
+    // Example:
+    // {
+    //   app: { id: "114818" },
+    //   i18n: { lang: "ru", tld: "ru" },
+    //   payload: "test",
+    //   domain: "yandex",
+    //   browser: { lang: "ru" },
+    //   data: { baseUrl: "/games" },
+    //   isTelegram: false
+    // }
     YaGamesPrivate_Environment: function () {
-        var self = YaGamesPrivate;
-        var str = JSON.stringify(self._ysdk.environment);
-        var cstr = stringToNewUTF8(str);
+        const self = YaGamesPrivate;
+        const env = self._ysdk.environment;
+
+        // Assemble the environment object.
+        // In the debug mode, all fields are getters, so we need to call them to get the values.
+        let obj = {};
+        obj.app = { id: env.app.id };
+        obj.i18n = { lang: env.i18n.lang, tld: env.i18n.tld };
+        obj.payload = env.payload;
+
+        // For backwards compatibility.
+        obj.domain = env.domain;
+        obj.browser = { lang: env.browser.lang };
+        obj.data = { baseUrl: env.data.baseUrl };
+        obj.isTelegram = env.isTelegram;
+
+        const cstr = stringToNewUTF8(JSON.stringify(obj));
         return cstr;
     },
 

@@ -49,12 +49,17 @@ end
 
 local function assert_payments_ready()
     assert_ysdk_ready()
-    assert(M.payments_ready, "Payments subsystem is not initialized. Call `payments_init()` first and wait for the result before calling this method.")
+    assert(M.payments_ready, "Payments subsystem is not initialized. Call `yagames.payments_init(callback)` first and wait for the result before calling the function.")
 end
 
 local function assert_player_ready()
     assert_ysdk_ready()
-    assert(M.player_ready, "Player subsystem is not initialized. Call `player_init()` first and wait for the result before calling this method.")
+    assert(M.player_ready, "Player subsystem is not initialized. Call `yagames.player_init(callback)` first and wait for the result before calling the function.")
+end
+
+local function assert_leaderboards_ready()
+    assert_ysdk_ready()
+    assert(M.leaderboards_ready, "Leaderboards subsystem is not initialized. Call `yagames.leaderboards_init(callback)` first and wait for the result before calling the function.")
 end
 
 --
@@ -345,7 +350,7 @@ end
 -- @tparam string leaderboard_name
 -- @tparam function callback Callback arguments are (self, err, result), where `result` is a table with leaderboard description.
 function M.leaderboards_get_description(leaderboard_name, callback)
-    assert(M.leaderboards_ready, "Leaderboards subsystem is not initialized.")
+    assert_leaderboards_ready()
     assert(type(leaderboard_name) == "string", "Leaderboard name should be 'string'")
     assert(type(callback) == "function", "Callback function is required")
 
@@ -362,7 +367,7 @@ end
 -- @tparam {getAvatarSrc=string,getAvatarSrcSet=string} options
 -- @tparam function callback Callback arguments are (self, err, result), where `result` is a table with player's ranking.
 function M.leaderboards_get_player_entry(leaderboard_name, options, callback)
-    assert(M.leaderboards_ready, "Leaderboards subsystem is not initialized.")
+    assert_leaderboards_ready()
     assert(type(leaderboard_name) == "string", "Leaderboard name should be 'string'")
     assert(type(options) == "nil" or type(options) == "table", "Options should be 'table'")
     assert(type(callback) == "function", "Callback function is required")
@@ -380,7 +385,7 @@ end
 -- @tparam {includeUser=boolean,quantityAround=integer,quantityTop=integer,getAvatarSrc=string,getAvatarSrcSet=string} options
 -- @tparam function callback Callback arguments are (self, err, result), where `result` is a table with data about leaderboard entries.
 function M.leaderboards_get_entries(leaderboard_name, options, callback)
-    assert(M.leaderboards_ready, "Leaderboards subsystem is not initialized.")
+    assert_leaderboards_ready()
     assert(type(leaderboard_name) == "string", "Leaderboard name should be 'string'")
     assert(type(options) == "nil" or type(options) == "table", "Options should be 'table'")
     assert(type(callback) == "function", "Callback function is required")
@@ -399,7 +404,7 @@ end
 -- @tparam[opt] string extra_data
 -- @tparam[opt] function callback Callback arguments are (self, err)
 function M.leaderboards_set_score(leaderboard_name, score, extra_data, callback)
-    assert(M.leaderboards_ready, "Leaderboards subsystem is not initialized.")
+    assert_leaderboards_ready()
     assert(type(leaderboard_name) == "string", "Leaderboard name should be 'string'")
     assert(type(score) == "number", "Score should be 'number'")
     assert(type(extra_data) == "nil" or type(extra_data) == "string", "Extra data should be 'string' or nil")

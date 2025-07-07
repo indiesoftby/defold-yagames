@@ -38,7 +38,6 @@ function init(self)
     druid.set_default_style({})
 
     app_window.resize()
-    app_window.center()
 
     app_scenemanager.receiver = msg.url("#")
     app_scenemanager.transition = msg.url("#transition")

@@ -984,8 +984,16 @@ var LibYaGamesPrivate = {
         const self = YaGamesPrivate;
         const event_name = UTF8ToString(cevent_name);
         try {
-            const cb = () => {
-                self.send(cb_id, null);
+            const cb = (data) => {
+                try {
+                    if (typeof data !== "undefined") {
+                        self.send(cb_id, null, JSON.stringify(data));
+                    } else {
+                        self.send(cb_id, null);
+                    }
+                } catch (err) {
+                    self.send(cb_id, self.toErrStr(err));
+                }
             };
             self._listeners[cb_id] = cb;
             self._ysdk.on(event_name, cb);
@@ -1022,6 +1030,35 @@ var LibYaGamesPrivate = {
         } catch (err) {
             self.delaySend(cb_id, self.toErrStr(err));
         }
+    },
+
+    YaGamesPrivate_Multiplayer_Sessions_Init: function (cb_id, coptions) {
+        const self = YaGamesPrivate;
+        try {
+            const options = coptions === 0 ? {} : self.parseJson(UTF8ToString(coptions));
+            self._ysdk.multiplayer.sessions
+                .init(options)
+                .then((opponents) => {
+                    self.send(cb_id, null, JSON.stringify(opponents));
+                })
+                .catch((err) => {
+                    self.send(cb_id, self.toErrStr(err));
+                });
+        } catch (err) {
+            self.delaySend(cb_id, self.toErrStr(err));
+        }
+    },
+
+    YaGamesPrivate_Multiplayer_Sessions_Commit: function (cdata) {
+        const self = YaGamesPrivate;
+        const data = cdata === 0 ? {} : self.parseJson(UTF8ToString(cdata));
+        self._ysdk.multiplayer.sessions.commit(data);
+    },
+
+    YaGamesPrivate_Multiplayer_Sessions_Push: function (cdata) {
+        const self = YaGamesPrivate;
+        const data = cdata === 0 ? {} : self.parseJson(UTF8ToString(cdata));
+        self._ysdk.multiplayer.sessions.push(data);
     }
 };
 

@@ -815,9 +815,9 @@ function M.event_on(event_name, listener)
     assert(type(listener) == "function", "`listener` is not a function.")
 
     local cb_id = helper.next_cb_id()
-    yagames_private.add_listener(cb_id, function(self, _cb_id, err_or_message_id, message)
-        -- print("*** _CB_ID", _cb_id, " = CB_ID", cb_id, "MESSAGE_ID", err_or_message_id, "MESSAGE", message)
-        listener(self, err_or_message_id)
+    yagames_private.add_listener(cb_id, function(self, _cb_id, err, data)
+        -- print("*** _CB_ID", _cb_id, " = CB_ID", cb_id, "MESSAGE_ID", err, "MESSAGE", data)
+        listener(self, err, data)
     end)
     yagames_private.event_on(event_name, cb_id)
 end
@@ -841,6 +841,7 @@ end
 -- @tparam[opt] {defaultFlags={},clientFeatures={}} options
 -- @tparam function callback
 function M.flags_get(options, callback)
+    assert_ysdk_ready()
     assert(type(options) == "table" or type(options) == "nil", "`options` should be a table or nil.")
     assert(type(callback) == "function", "`callback` is required.")
 
@@ -850,6 +851,58 @@ function M.flags_get(options, callback)
         end
         callback(self, err, result)
     end), options and rxi_json.encode(options) or nil)
+end
+
+--- Initialize the multiplayer sessions. If `isEventBased` is true, you must subscribe to the events `multiplayer-sessions-transaction` and `multiplayer-sessions-finish` through `yagames.event_on(event_name, listener)`, and the SDK itself will load the session and events at the specified timestamps.
+-- Note: To load sessions, you must set at least one of the 3 `meta`-parameters, and the `count` parameter must be greater than zero. Otherwise, the multiplayer will be initialized only for **writing** data.
+-- @tparam {count=number,isEventBased=boolean,maxOpponentTurnTime=number,meta={meta1={min=number,max=number},...}} options
+-- @tparam function callback Callback arguments are (self, err, result), where `result` is table (array)
+-- @usage
+-- yagames.multiplayer_sessions_init({
+--     count = 2,
+--     isEventBased = true,
+--     maxOpponentTurnTime = 200,
+--     meta = {
+--         meta1 = { min = 0, max = 6000 },
+--         meta2 = { min = 2, max = 10 },
+--     },
+-- }, function(self, err, result)
+--     if err then
+--         error(err)
+--     end
+--     pprint(result)
+-- end)
+function M.multiplayer_sessions_init(options, callback)
+    assert_ysdk_ready()
+    assert(type(options) == "table", "`options` should be a table.")
+    assert(type(callback) == "function", "Callback function is required")
+
+    yagames_private.multiplayer_sessions_init(helper.wrap_for_promise(function(self, err, result)
+        if result then
+            result = rxi_json.decode(result)
+        end
+        callback(self, err, result)
+    end), rxi_json.encode(options))
+end
+
+--- Commit the multiplayer session
+-- @tparam table data
+-- @usage yagames.multiplayer_sessions_commit({ x = 1, y = 2, z = 3, health = 67 })
+function M.multiplayer_sessions_commit(data)
+    assert_ysdk_ready()
+    assert(type(data) == "table", "`data` should be a table")
+
+    yagames_private.multiplayer_sessions_commit(rxi_json.encode(data))
+end
+
+--- Push the multiplayer session
+-- @tparam table data
+-- @usage yagames.multiplayer_sessions_push({ meta1 = 12, meta2 = -2 })
+function M.multiplayer_sessions_push(data)
+    assert_ysdk_ready()
+    assert(type(data) == "table", "`data` should be a table")
+
+    yagames_private.multiplayer_sessions_push(rxi_json.encode(data))
 end
 
 return M

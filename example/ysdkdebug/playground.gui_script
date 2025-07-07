@@ -13,6 +13,7 @@ local pg_payments = require("example.ysdkdebug.pg_payments")
 local pg_player = require("example.ysdkdebug.pg_player")
 local pg_screen = require("example.ysdkdebug.pg_screen")
 local pg_shortcut = require("example.ysdkdebug.pg_shortcut")
+local pg_multiplayer = require("example.ysdkdebug.pg_multiplayer")
 local table_util = require("example.ysdkdebug.table_util")
 
 local log_print = require("example.ysdkdebug.log_print")
@@ -34,12 +35,12 @@ end
 local function event_test(self)
     -- Example of adding an event listener for "game_api_pause" event:
     yagames.event_on("game_api_pause", function (self)
-        print("yagames.event_on(\"game_api_pause\")")
+        print("event - `game_api_pause`")
     end)
 
     -- Example of adding an event listener for "game_api_resume" event:
     local cb = function (self)
-        print("yagames.event_on(\"game_api_resume\")")
+        print("event - `game_api_resume`")
     end
     yagames.event_on("game_api_resume", cb)
 
@@ -117,6 +118,7 @@ function init(self)
     pg_feedback.init(self)
     pg_screen.init(self)
     pg_shortcut.init(self)
+    pg_multiplayer.init(self)
 
     print("yagames.server_time():", yagames.server_time())
 

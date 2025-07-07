@@ -292,12 +292,16 @@ And it's also a good idea to upload a demo build of YaGames to your game's draft
 | - `safeStorage.clear()` | `yagames.storage_clear()`<br>Empties all keys out of the storage. |
 | - `safeStorage.key(n)` | `yagames.storage_key(n)`<br>Returns the name of the nth key in the storage or `nil`. *Note: the n index is zero-based.* |
 | - `safeStorage.length` | `yagames.storage_length()`<br>Returns the number of data items stored in the storage. |
-| **Events** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-events) |  |
-| `ysdk.on(eventName, listener)` | `yagames.event_on(event_name, listener)`<br>`event_name` is a string: `game_api_pause`, `game_api_resume`, `HISTORY_BACK` etc. |
-| `ysdk.off(eventName, listener)` | `yagames.event_off(event_name, listener)`<br>`event_name` is a string: `game_api_pause`, `game_api_resume`, `HISTORY_BACK` etc. |
-| `ysdk.dispatchEvent(eventName)` | `yagames.event_dispatch(event_name)`<br>`event_name` is a string: `EXIT` etc. |
 | **Remote Config** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-config) |  |
 | `ysdk.getFlags(options)` | `yagames.flags_get(options, callback)`<br>Options is optional. The callback result is a table like `{ flagName = "value" }` |
+| **Events** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-events) |  |
+| `ysdk.on(eventName, listener)` | `yagames.event_on(event_name, listener)`<br>`event_name` is a string: `game_api_pause`, `game_api_resume`, `HISTORY_BACK`, `multiplayer-sessions-transaction`, `multiplayer-sessions-finish` etc. |
+| `ysdk.off(eventName, listener)` | `yagames.event_off(event_name, listener)`<br>`event_name` is a string: `game_api_pause`, etc. |
+| `ysdk.dispatchEvent(eventName)` | `yagames.event_dispatch(event_name)`<br>`event_name` is a string: `EXIT` etc. |
+| **Multiplayer Sessions** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-multiplayer-sessions) |  |
+| `ysdk.multiplayer.sessions.init(options)` | `yagames.multiplayer_sessions_init(options, callback)`<br>The argument `options` is a Lua table `{ count = number, isEventBased = boolean, maxOpponentTurnTime = number, meta = { key = { min = number, max = number } } }`. See [the example](https://github.com/indiesoftby/defold-yagames/blob/master/example/ysdkdebug/pg_multiplayer.lua). |
+| `ysdk.multiplayer.sessions.commit(data)` | `yagames.multiplayer_sessions_commit(data)`<br>The argument `data` is a Lua table, i.e. `{ key = value }`. |
+| `ysdk.multiplayer.sessions.push(data)` | `yagames.multiplayer_sessions_push(data)`<br>The argument `data` is a Lua table, i.e. `{ key = value }`. |
 | **Sitelock** [(docs)](#sitelock) |  |
 |  | `sitelock.add_domain(domain)` |
 |  | `sitelock.verify_domain()` |

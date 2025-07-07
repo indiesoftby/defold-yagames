@@ -80,6 +80,7 @@ extern "C"
     const int YaGamesPrivate_Storage_Length();
     void YaGamesPrivate_Event_Dispatch(const char* cevent_name);
     void YaGamesPrivate_Event_On(const char* cevent_name, const int cb_id);
+    void YaGamesPrivate_Event_Off(const char* cevent_name, const int cb_id);
     void YaGamesPrivate_GetFlags(const int cb_id, const char* coptions);
 }
 
@@ -97,7 +98,7 @@ struct YaGamesPrivateListener
     int m_OnlyId;
 };
 
-static void UnregisterCallback(lua_State* L, YaGamesPrivateListener* cbk);
+static int UnregisterCallback(lua_State* L, YaGamesPrivateListener* cbk);
 static int GetEqualIndexOfListener(lua_State* L, YaGamesPrivateListener* cbk);
 
 static dmArray<YaGamesPrivateListener> m_Listeners;
@@ -276,6 +277,7 @@ static void SendBoolMessage(const int cb_id, const char* message_id, int message
     }
 }
 
+// WARNING: Sets m_OnlyId of `cbk` if the callback is found.
 static int GetEqualIndexOfListener(lua_State* L, YaGamesPrivateListener* cbk)
 {
     lua_rawgeti(L, LUA_REGISTRYINDEX, cbk->m_Callback);
@@ -293,6 +295,7 @@ static int GetEqualIndexOfListener(lua_State* L, YaGamesPrivateListener* cbk)
             if (lua_equal(L, second, second + 1))
             {
                 lua_pop(L, 3);
+                cbk->m_OnlyId = cb->m_OnlyId;
                 return i;
             }
             lua_pop(L, 2);
@@ -306,7 +309,7 @@ static int GetEqualIndexOfListener(lua_State* L, YaGamesPrivateListener* cbk)
     return -1;
 }
 
-static void UnregisterCallback(lua_State* L, YaGamesPrivateListener* cbk)
+static int UnregisterCallback(lua_State* L, YaGamesPrivateListener* cbk)
 {
     int index = GetEqualIndexOfListener(L, cbk);
     if (index >= 0)
@@ -322,11 +325,13 @@ static void UnregisterCallback(lua_State* L, YaGamesPrivateListener* cbk)
         {
             YaGamesPrivate_RemoveCallbacks();
         }
+        return cbk->m_OnlyId;
     }
     else
     {
         dmLogError("Can't remove a callback that didn't not register.");
     }
+    return -1;
 }
 
 static int AddListener(lua_State* L)
@@ -382,8 +387,16 @@ static int RemoveListener(lua_State* L)
     dmScript::GetInstance(L);
     cbk.m_Self = dmScript::Ref(L, LUA_REGISTRYINDEX);
 
-    UnregisterCallback(L, &cbk);
-    return 0;
+    int only_id = UnregisterCallback(L, &cbk);
+    if (only_id != -1)
+    {
+        lua_pushinteger(L, only_id);
+    }
+    else
+    {
+        lua_pushnil(L);
+    }
+    return 1;
 }
 
 //
@@ -837,6 +850,12 @@ static int Event_On(lua_State* L)
     return 0;
 }
 
+static int Event_Off(lua_State* L)
+{
+    YaGamesPrivate_Event_Off(luaL_checkstring(L, 1), luaL_checkint(L, 2));
+    return 0;
+}
+
 //
 // Flags
 //
@@ -931,6 +950,7 @@ static const luaL_reg Module_methods[] = {
     // - Events
     { "event_dispatch", Event_Dispatch },
     { "event_on", Event_On },
+    { "event_off", Event_Off },
     // - Config
     { "get_flags", GetFlags },
     { 0, 0 }

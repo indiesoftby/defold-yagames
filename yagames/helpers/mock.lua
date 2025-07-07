@@ -9,13 +9,13 @@ local NO_ERR = nil
 --
 --
 
-function M.send(cb_id, message_id, message)
-    timer.delay(0.001, false, function(self)
+function M.send(cb_id, arg1, arg2)
+    timer.delay(0, false, function(self)
         local count = #M.listeners
         for i = count, 1, -1 do
             local listener = M.listeners[i]
             if listener.only_id == cb_id then
-                listener.func(self, cb_id, message_id, message)
+                listener.func(self, cb_id, arg1, arg2)
             end
         end
     end)
@@ -25,15 +25,40 @@ function M.add_listener(cb_id, listener)
     table.insert(M.listeners, {only_id = cb_id, func = listener})
 end
 
-function M.remove_listener(listener)
+function M.remove_listener(listener_fn)
     local count = #M.listeners
     for i = count, 1, -1 do
         local listener = M.listeners[i]
-        if listener.func == listener then
+        if listener.func == listener_fn then
             table.remove(M.listeners, i)
+            return listener.only_id
+        end
+    end
+    return nil
+end
+
+local function dispatch_event(event_name, arg1, arg2)
+    local count = #M.listeners
+    for i = count, 1, -1 do
+        local listener = M.listeners[i]
+        if listener.event_name == event_name then
+            M.send(listener.only_id, arg1, arg2)
             break
         end
     end
+end
+
+local function sequence_calls(...)
+    local args = {...}
+    local handle
+    handle = timer.delay(0, true, function(self)
+        if #args > 0 then
+            local func = table.remove(args, 1)
+            func(self)
+        else
+            timer.cancel(handle)
+        end
+    end)
 end
 
 --
@@ -142,7 +167,15 @@ function M.show_fullscreen_adv(cb_id)
 end
 
 function M.show_rewarded_video(cb_id)
-    M.send(cb_id, "close")
+    sequence_calls(function(self)
+        dispatch_event("game_api_pause", NO_ERR)
+    end, function(self)
+        -- Uncomment this to receive "rewarded" event.
+        -- M.send(cb_id, "rewarded")
+    end, function(self)
+        M.send(cb_id, "close")
+        dispatch_event("game_api_resume", NO_ERR)
+    end)
 end
 
 function M.adv_get_banner_adv_status(cb_id)
@@ -599,9 +632,22 @@ function M.storage_length()
 end
 
 function M.event_dispatch(event_name)
+    -- No need to do anything here.
 end
 
 function M.event_on(event_name, cb_id)
+    -- Add event name to the listener to be able to find it later.
+    local count = #M.listeners
+    for i = count, 1, -1 do
+        local listener = M.listeners[i]
+        if listener.only_id == cb_id then
+            listener.event_name = event_name
+        end
+    end
+end
+
+function M.event_off(event_name, cb_id)
+    -- No need to do anything here.
 end
 
 function M.get_flags(cb_id, options)

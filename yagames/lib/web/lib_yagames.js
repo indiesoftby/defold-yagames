@@ -12,6 +12,8 @@ var LibYaGamesPrivate = {
         _callback_number: null,
         _callback_bool: null,
 
+        _listeners: {},
+
         toErrStr: function (err) {
             return err + "";
         },
@@ -93,6 +95,7 @@ var LibYaGamesPrivate = {
         self._callback_empty = callback_empty;
         self._callback_number = callback_number;
         self._callback_bool = callback_bool;
+        self._listeners = {};
 
         while (typeof YaGamesPrivate_MsgQueue !== "undefined" && YaGamesPrivate_MsgQueue.length) {
             var m = YaGamesPrivate_MsgQueue.shift();
@@ -108,6 +111,7 @@ var LibYaGamesPrivate = {
         self._callback_empty = null;
         self._callback_number = null;
         self._callback_bool = null;
+        self._listeners = {};
     },
 
     YaGamesPrivate_IsAvailableMethod: function (cb_id, cname) {
@@ -965,18 +969,20 @@ var LibYaGamesPrivate = {
     },
 
     YaGamesPrivate_Event_Dispatch: function (cevent_name) {
-        var self = YaGamesPrivate;
-        var event_name = UTF8ToString(cevent_name);
+        const self = YaGamesPrivate;
+        const event_name = UTF8ToString(cevent_name);
         self._ysdk.dispatchEvent(self._ysdk.EVENTS[event_name]);
     },
 
     YaGamesPrivate_Event_On: function (cevent_name, cb_id) {
-        var self = YaGamesPrivate;
-        var event_name = UTF8ToString(cevent_name);
+        const self = YaGamesPrivate;
+        const event_name = UTF8ToString(cevent_name);
         try {
-            self._ysdk.onEvent(self._ysdk.EVENTS[event_name], () => {
+            const cb = () => {
                 self.send(cb_id, null);
-            });
+            };
+            self._listeners[cb_id] = cb;
+            self._ysdk.on(event_name, cb);
 
             // Uncomment to test the behaviour:
             // setInterval(function() { self.send(cb_id, null); }, 3000);
@@ -985,10 +991,20 @@ var LibYaGamesPrivate = {
         }
     },
 
+    YaGamesPrivate_Event_Off: function (cevent_name, cb_id) {
+        const self = YaGamesPrivate;
+        const event_name = UTF8ToString(cevent_name);
+        if (!self._listeners[cb_id]) {
+            return;
+        }
+        self._ysdk.off(event_name, self._listeners[cb_id]);
+        delete self._listeners[cb_id];
+    },
+
     YaGamesPrivate_GetFlags: function (cb_id, coptions) {
-        var self = YaGamesPrivate;
+        const self = YaGamesPrivate;
         try {
-            var options = coptions === 0 ? {} : self.parseJson(UTF8ToString(coptions));
+            const options = coptions === 0 ? {} : self.parseJson(UTF8ToString(coptions));
             self._ysdk
                 .getFlags(options)
                 .then((flags) => {
@@ -998,7 +1014,7 @@ var LibYaGamesPrivate = {
                     self.send(cb_id, self.toErrStr(err));
                 });
         } catch (err) {
-            
+            self.delaySend(cb_id, self.toErrStr(err));
         }
     }
 };

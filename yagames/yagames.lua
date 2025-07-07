@@ -727,6 +727,7 @@ end
 --- Initialize the Safe Storage
 -- @tparam function callback
 function M.storage_init(callback)
+    assert_ysdk_ready()
     assert(type(callback) == "function", "Callback function is required")
 
     yagames_private.get_storage(helper.wrap_for_promise(function(self, err)
@@ -790,7 +791,7 @@ end
 -- @tparam string event_name
 function M.event_dispatch(event_name)
     assert_ysdk_ready()
-    assert(type(event_name) == "string", "event_name is not a string.")
+    assert(type(event_name) == "string", "`event_name` is not a string.")
 
     yagames_private.event_dispatch(event_name)
 end
@@ -800,14 +801,30 @@ end
 -- @tparam function listener
 function M.event_on(event_name, listener)
     assert_ysdk_ready()
-    assert(type(event_name) == "string", "event_name is not a string.")
-    assert(type(listener) == "function", "listener is not a function.")
+    assert(type(event_name) == "string", "`event_name` is not a string.")
+    assert(type(listener) == "function", "`listener` is not a function.")
 
     local cb_id = helper.next_cb_id()
-    yagames_private.add_listener(cb_id, function(self, _cb_id, err)
-        listener(self, err)
+    yagames_private.add_listener(cb_id, function(self, _cb_id, err_or_message_id, message)
+        -- print("*** _CB_ID", _cb_id, " = CB_ID", cb_id, "MESSAGE_ID", err_or_message_id, "MESSAGE", message)
+        listener(self, err_or_message_id)
     end)
     yagames_private.event_on(event_name, cb_id)
+end
+
+--- Remove an event listener.
+-- @tparam string event_name
+-- @tparam function listener
+function M.event_off(event_name, listener)
+    assert_ysdk_ready()
+    assert(type(event_name) == "string", "`event_name` is not a string.")
+    assert(type(listener) == "function", "`listener` is not a function.")
+
+    local cb_id = yagames_private.remove_listener(listener)
+    if not cb_id then
+        error("The listener is not found.")
+    end
+    yagames_private.event_off(event_name, cb_id)
 end
 
 --- Asynchronously get remote config data

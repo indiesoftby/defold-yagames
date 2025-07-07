@@ -32,10 +32,26 @@ local function log_update(self)
 end
 
 local function event_test(self)
-    yagames.event_on("HISTORY_BACK", function (self)
-        print("yagames.event_on(\"HISTORY_BACK\")")
+    -- Example of adding an event listener for "game_api_pause" event:
+    yagames.event_on("game_api_pause", function (self)
+        print("yagames.event_on(\"game_api_pause\")")
     end)
 
+    -- Example of adding an event listener for "game_api_resume" event:
+    local cb = function (self)
+        print("yagames.event_on(\"game_api_resume\")")
+    end
+    yagames.event_on("game_api_resume", cb)
+
+    -- Example of removing an event listener:
+    -- yagames.event_off("game_api_resume", cb)
+
+    -- Example of adding an event listener for "HISTORY_BACK" event (used on the TV platform only):
+    -- yagames.event_on("HISTORY_BACK", function (self)
+    --     print("yagames.event_on(\"HISTORY_BACK\")")
+    -- end)
+
+    -- Example of dispatching an event:
     -- yagames.event_dispatch("EXIT")
 end
 

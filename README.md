@@ -292,8 +292,9 @@ And it's also a good idea to upload a demo build of YaGames to your game's draft
 | - `safeStorage.key(n)` | `yagames.storage_key(n)`<br>Returns the name of the nth key in the storage or `nil`. *Note: the n index is zero-based.* |
 | - `safeStorage.length` | `yagames.storage_length()`<br>Returns the number of data items stored in the storage. |
 | **Events** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-events) |  |
-| `ysdk.onEvent(eventName, listener)` | `yagames.event_on(event_name, listener)` |
-| `ysdk.dispatchEvent(eventName)` | `yagames.event_dispatch(event_name)` |
+| `ysdk.on(eventName, listener)` | `yagames.event_on(event_name, listener)`<br>`event_name` is a string: `game_api_pause`, `game_api_resume`, `HISTORY_BACK` etc. |
+| `ysdk.off(eventName, listener)` | `yagames.event_off(event_name, listener)`<br>`event_name` is a string: `game_api_pause`, `game_api_resume`, `HISTORY_BACK` etc. |
+| `ysdk.dispatchEvent(eventName)` | `yagames.event_dispatch(event_name)`<br>`event_name` is a string: `EXIT` etc. |
 | **Remote Config** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-config) |  |
 | `ysdk.getFlags(options)` | `yagames.flags_get(options, callback)`<br>Options is optional. The callback result is a table like `{ flagName = "value" }` |
 | **Sitelock** [(docs)](#sitelock) |  |

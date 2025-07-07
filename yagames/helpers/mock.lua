@@ -1,6 +1,9 @@
 local rxi_json = require("yagames.helpers.json")
 
-local M = {listeners = {}}
+local M = {
+    listeners = {},
+    _warned = {}
+}
 
 local GLOBAL_CALLBACK_ID = 0
 local NO_ERR = nil
@@ -59,6 +62,13 @@ local function sequence_calls(...)
             timer.cancel(handle)
         end
     end)
+end
+
+local function warn_once(message)
+    if not M._warned[message] then
+        M._warned[message] = true
+        print("<!>", message)
+    end
 end
 
 --
@@ -469,12 +479,13 @@ end
 
 function M.player_get_id()
     assert(M._player)
+    warn_once("yagames.player_get_id() is deprecated and will be removed from the interface in the future.")
 
     return M._player._personalInfo.uniqueID
 end
 
 function M.player_get_ids_per_game(cb_id)
-    if M.player_get_mode() == "lite" then
+    if not M.player_is_authorized() then
         M.send(cb_id, "FetchError: Unauthorized")
     else
         M.send(cb_id, NO_ERR, '[{"appID":100,"userID":"9c/GxA5IUaaavN2KPdtTxTlKh/ayLzrVhNj90Ka8oPA="}]')
@@ -483,8 +494,15 @@ end
 
 function M.player_get_mode()
     assert(M._player)
+    warn_once("yagames.player_get_mode() is deprecated and will be removed from the interface in the future.")
 
     return M._player._personalInfo.mode
+end
+
+function M.player_is_authorized()
+    assert(M._player)
+
+    return M._player._personalInfo.mode ~= "lite"
 end
 
 function M.player_get_name()

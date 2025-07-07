@@ -242,6 +242,7 @@ And it's also a good idea to upload a demo build of YaGames to your game's draft
 | `player.getUniqueID()` | `yagames.player_get_unique_id()` |
 | `player.getIDsPerGame()` | `yagames.player_get_ids_per_game(callback)` |
 | `player.getMode()` | `yagames.player_get_mode()`<br>[(more info)](https://yandex.ru/blog/gamesfordevelopers/novye-vozmozhnosti-dlya-neavtorizovannykh-polzovateley) |
+| `player.isAuthorized()` | `yagames.player_is_authorized()` |
 | `player.getName()` | `yagames.player_get_name()` |
 | `player.getPhoto(size)` | `yagames.player_get_photo(size)` |
 | `player.getPayingStatus()` | `yagames.player_get_paying_status()` |

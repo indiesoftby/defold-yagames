@@ -722,6 +722,12 @@ var LibYaGamesPrivate = {
         return cmode;
     },
 
+    YaGamesPrivate_Player_IsAuthorized: function () {
+        var self = YaGamesPrivate;
+        var isAuthorized = self._player.isAuthorized();
+        return isAuthorized;
+    },
+
     YaGamesPrivate_Player_GetName: function () {
         var self = YaGamesPrivate;
         var cname = stringToNewUTF8(self._player.getName());

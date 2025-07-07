@@ -533,7 +533,8 @@ function M.player_get_signature()
     return yagames_private.player_get_signature()
 end
 
---- DEPRECATED: Use player_get_unique_id()
+--- Return the user's ID.
+-- @deprecated Use player_get_unique_id() instead.
 -- @treturn string
 function M.player_get_id()
     assert_player_ready()
@@ -548,7 +549,7 @@ function M.player_get_ids_per_game(callback)
     assert(type(callback) == "function", "`callback` function is required")
 
     yagames_private.player_get_ids_per_game(helper.wrap_for_promise(
-                                                function(self, err, arr)
+        function(self, err, arr)
             if arr then
                 arr = rxi_json.decode(arr)
             end
@@ -557,11 +558,20 @@ function M.player_get_ids_per_game(callback)
 end
 
 --- Return the user's auth mode.
+-- @deprecated Use player_is_authorized() instead.
 -- @treturn string
 function M.player_get_mode()
     assert_player_ready()
 
     return yagames_private.player_get_mode()
+end
+
+--- Return the user's auth mode.
+-- @treturn boolean
+function M.player_is_authorized()
+    assert_player_ready()
+
+    return yagames_private.player_is_authorized()
 end
 
 --- Return the user's name.

@@ -681,6 +681,61 @@ function M.get_flags(cb_id, options)
     M.send(cb_id, NO_ERR, rxi_json.encode(result))
 end
 
+function M.multiplayer_sessions_init(cb_id, options)
+    -- Example for developer who wants to see how the data looks like.
+    -- When there is no data, the result is just {}
+    local result = {
+        -- {
+        --     meta = {
+        --         meta1 = 999,
+        --         meta2 = 0,
+        --         meta3 = 0
+        --     },
+        --     player = {
+        --         name = "Андрей К.",
+        --         avatar = "https://games-sdk.yandex.ru/games/api/sdk/v1/player/avatar/url/BW7LK65TVWJ64ZK5MEJ5Z36ZVSEQTJEEWGVWFN5AZOV7G2YIA4IYDYQLCKEINCYGBYBG2GQKXUY4ZCO64CWFJAFMG7P7J2363OZAHKZPB3IIAZSL4ZVNU5MSQZ2USCCJBJQT2KH4DMYUYUGWSUUBNHQF4COMXW4IGWRTYDBYNJOPU2NK5ZNNUGJYO5DUEHZL2CDSLHBYZAWPKLDRLFLHPG4CZ25HCVR7M3HSPXNP5DZ6Z4CP3LSFT4LVKOOFELJMFOLRC==="
+        --     },
+        --     id = "8yf3e3ff6zp",
+        --     timeline = {
+        --         {
+        --             id = "hsh70ltj5po",
+        --             time = 127361,
+        --             payload = {
+        --                 y = 4,
+        --                 x = 10,
+        --                 health = 95
+        --             }
+        --         },
+        --         {
+        --             id = "8cbnkh87b78",
+        --             time = 131578,
+        --             payload = {
+        --                 y = 9,
+        --                 x = 2,
+        --                 health = 13
+        --             }
+        --         },
+        --         {
+        --             id = "hoaqvvoukt9",
+        --             time = 135012,
+        --             payload = {
+        --                 y = 7,
+        --                 x = 1,
+        --                 health = 54
+        --             }
+        --         }
+        --     }
+        -- }
+    }
+    M.send(cb_id, NO_ERR, rxi_json.encode(result))
+end
+
+function M.multiplayer_sessions_commit(data)
+end
+
+function M.multiplayer_sessions_push(data)
+end
+
 return {
     enable = function()
         if not yagames_private then

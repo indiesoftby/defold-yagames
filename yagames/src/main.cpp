@@ -83,6 +83,9 @@ extern "C"
     void YaGamesPrivate_Event_On(const char* cevent_name, const int cb_id);
     void YaGamesPrivate_Event_Off(const char* cevent_name, const int cb_id);
     void YaGamesPrivate_GetFlags(const int cb_id, const char* coptions);
+    void YaGamesPrivate_Multiplayer_Sessions_Init(const int cb_id, const char* coptions);
+    void YaGamesPrivate_Multiplayer_Sessions_Commit(const char* cdata);
+    void YaGamesPrivate_Multiplayer_Sessions_Push(const char* cdata);
 }
 
 struct YaGamesPrivateListener
@@ -874,6 +877,27 @@ static int GetFlags(lua_State* L)
 }
 
 //
+// Multiplayer Sessions
+//
+
+static int Multiplayer_Sessions_Init(lua_State* L)
+{
+    YaGamesPrivate_Multiplayer_Sessions_Init(luaL_checkint(L, 1), luaL_checkstring(L, 2));
+    return 0;
+}
+
+static int Multiplayer_Sessions_Commit(lua_State* L)
+{
+    YaGamesPrivate_Multiplayer_Sessions_Commit(luaL_checkstring(L, 1));
+    return 0;
+}
+
+static int Multiplayer_Sessions_Push(lua_State* L)
+{
+    YaGamesPrivate_Multiplayer_Sessions_Push(luaL_checkstring(L, 1));
+    return 0;
+}
+
 //
 //
 
@@ -961,6 +985,10 @@ static const luaL_reg Module_methods[] = {
     { "event_off", Event_Off },
     // - Config
     { "get_flags", GetFlags },
+    // - Multiplayer Sessions
+    { "multiplayer_sessions_init", Multiplayer_Sessions_Init },
+    { "multiplayer_sessions_commit", Multiplayer_Sessions_Commit },
+    { "multiplayer_sessions_push", Multiplayer_Sessions_Push },
     { 0, 0 }
 };
 

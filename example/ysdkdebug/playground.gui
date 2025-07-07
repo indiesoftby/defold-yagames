@@ -1742,6 +1742,119 @@ nodes {
   overridden_fields: 8
   template_node_child: true
 }
+nodes {
+  position {
+    x: 1080.0
+    y: 761.0
+  }
+  size {
+    x: 10.0
+    y: 10.0
+  }
+  type: TYPE_BOX
+  texture: "common/empty"
+  id: "group_multiplayer"
+  pivot: PIVOT_NW
+  inherit_alpha: true
+}
+nodes {
+  scale {
+    x: 0.85
+    y: 0.85
+  }
+  size {
+    x: 200.0
+    y: 50.0
+  }
+  color {
+    x: 0.4
+    y: 0.6
+    z: 0.4
+  }
+  type: TYPE_TEXT
+  text: "MULTIPLAYER"
+  font: "font2"
+  id: "title_group_multiplayer"
+  pivot: PIVOT_NW
+  parent: "group_multiplayer"
+  layer: "font2"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 75.0
+    y: -85.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_multiplayer_sessions_init"
+  parent: "group_multiplayer"
+  inherit_alpha: true
+  template: "/example/ysdkdebug/button_sm.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "button_multiplayer_sessions_init/body"
+  parent: "button_multiplayer_sessions_init"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  text: "Init"
+  id: "button_multiplayer_sessions_init/text"
+  parent: "button_multiplayer_sessions_init/body"
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 245.0
+    y: -85.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_multiplayer_sessions_commit"
+  parent: "group_multiplayer"
+  inherit_alpha: true
+  template: "/example/ysdkdebug/button_sm.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "button_multiplayer_sessions_commit/body"
+  parent: "button_multiplayer_sessions_commit"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  text: "Commit"
+  id: "button_multiplayer_sessions_commit/text"
+  parent: "button_multiplayer_sessions_commit/body"
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 415.0
+    y: -85.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_multiplayer_sessions_push"
+  parent: "group_multiplayer"
+  inherit_alpha: true
+  template: "/example/ysdkdebug/button_sm.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "button_multiplayer_sessions_push/body"
+  parent: "button_multiplayer_sessions_push"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  text: "Push"
+  id: "button_multiplayer_sessions_push/text"
+  parent: "button_multiplayer_sessions_push/body"
+  overridden_fields: 8
+  template_node_child: true
+}
 layers {
   name: "common"
 }

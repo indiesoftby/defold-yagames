@@ -2631,7 +2631,95 @@ print("Storage contains", count, "items")  -- Output: Storage contains 2 items
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
-| `ysdk.getFlags(options)` | `yagames.flags_get(options, callback)`<br>Options is optional. The callback result is a table like `{ flagName = "value" }` |
+| `ysdk.getFlags(options)` | `yagames.flags_get(options, callback)` |
+
+#### `yagames.flags_get([options], callback)`
+
+Gets remote configuration flags (Remote Config). It's recommended to request flags once at game startup.
+
+> [!TIP]
+> Always embed local configuration flags in your game code as a fallback in case remote configuration cannot be retrieved (e.g., due to network issues). This improves game reliability.
+
+**Parameters:**
+- `options` <kbd>table</kbd> (optional) - Table with options:
+  - `defaultFlags` <kbd>table</kbd> (optional) - Local configuration flags (flat table with string values). These flags are used as fallback if remote configuration cannot be retrieved. Remote flags have priority over local flags when merging.
+  - `clientFeatures` <kbd>table</kbd> (optional) - Array of client feature objects, each containing:
+    - `name` <kbd>string</kbd> - Feature name (e.g., `"levels"`, `"payingStatus"`, `"inAppPurchaseUsed"`)
+    - `value` <kbd>string</kbd> - Feature value (e.g., `"10"`, `"yes"`, `"no"`)
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, flags)`, where `flags` is a table with flag names as keys and string values (e.g., `{ difficult = "hard", showFullscreenAdOnStart = "yes" }`)
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Basic usage: get remote flags
+yagames.flags_get(nil, function(self, err, flags)
+    if err then
+        print("Failed to get flags:", err)
+        -- Use default game configuration
+    else
+        print("Flags received:", flags)
+        
+        -- Use flags in game logic
+        if flags.difficult == "hard" then
+            -- Enable high difficulty
+            set_difficulty("hard")
+        elseif flags.difficult == "easy" then
+            -- Enable easy difficulty
+            set_difficulty("easy")
+        end
+        
+        if flags.showFullscreenAdOnStart == "yes" then
+            -- Show ad on start
+            show_ad_on_start()
+        end
+    end
+end)
+
+-- With local fallback configuration
+local options = {
+    defaultFlags = {
+        difficult = "easy",
+        showFullscreenAdOnStart = "no"
+    }
+}
+
+yagames.flags_get(options, function(self, err, flags)
+    if err then
+        print("Failed to get remote flags, using defaults")
+        -- flags will contain defaultFlags values
+    end
+    
+    -- flags contains merged configuration (remote has priority)
+    print("Difficulty:", flags.difficult)
+    print("Show ad on start:", flags.showFullscreenAdOnStart)
+end)
+
+-- With client features (player state)
+local player = yagames.player_get_personal_info()
+local paying_status = yagames.player_get_paying_status()
+
+local options_with_features = {
+    defaultFlags = {
+        difficult = "easy"
+    },
+    clientFeatures = {
+        { name = "payingStatus", value = paying_status },
+        { name = "levels", value = tostring(get_player_level()) }
+    }
+}
+
+yagames.flags_get(options_with_features, function(self, err, flags)
+    if err then
+        print("Failed to get flags:", err)
+    else
+        -- Flags may vary based on client features
+        -- For example, if levels >= 10, showFullscreenAdOnStart might be "yes"
+        print("Flags based on player state:", flags)
+    end
+end)
+```
 
 ### 🌒 EVENTS [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-events)
 

@@ -2364,8 +2364,87 @@ end
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
-| `ysdk.shortcut.canShowPrompt()` | `yagames.shortcut_can_show_prompt(callback)`<br>The callback result is a table `{ canShow = boolean }` |
-| `ysdk.shortcut.showPrompt()` | `yagames.shortcut_show_prompt(callback)`<br>The callback result is a table `{ outcome = "string" }` |
+| `ysdk.shortcut.canShowPrompt()` | `yagames.shortcut_can_show_prompt(callback)` |
+| `ysdk.shortcut.showPrompt()` | `yagames.shortcut_show_prompt(callback)` |
+
+#### `yagames.shortcut_can_show_prompt(callback)`
+
+Checks if it's possible to show a prompt to add a shortcut to the desktop. Availability depends on the platform, browser internal rules, and Yandex.Games platform restrictions.
+
+> [!IMPORTANT]
+> Always check availability before showing the shortcut prompt dialog to the user.
+
+**Parameters:**
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` is a table containing:
+  - `canShow` <kbd>boolean</kbd> - `true` if shortcut can be added, `false` otherwise
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Check if shortcut can be added
+yagames.shortcut_can_show_prompt(function(self, err, result)
+    if err then
+        print("Failed to check shortcut availability:", err)
+    else
+        if result.canShow then
+            print("Shortcut can be added")
+            -- Show button to add shortcut
+            show_add_shortcut_button()
+        else
+            print("Shortcut cannot be added on this platform/browser")
+            -- Hide button or show alternative
+        end
+    end
+end)
+```
+
+#### `yagames.shortcut_show_prompt(callback)`
+
+Shows a native dialog prompting the user to add a shortcut to the desktop. The shortcut is a link to the game.
+
+> [!NOTE]
+> On the first call, a shortcut to the Yandex.Games catalog is created. If it already exists, a shortcut with a link to the game itself will be created.
+
+**Parameters:**
+- `callback` <kbd>function</kbd> (optional) - Callback function with arguments `(self, err, result)`, where `result` is a table containing:
+  - `outcome` <kbd>string</kbd> - Result of the operation. Possible values:
+    - `"accepted"` - User accepted and added the shortcut
+    - Other values indicate the user dismissed the dialog or an error occurred
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- First check availability
+yagames.shortcut_can_show_prompt(function(self, err, result)
+    if err then
+        print("Failed to check shortcut availability:", err)
+        return
+    end
+    
+    if result.canShow then
+        -- Show the shortcut prompt dialog
+        yagames.shortcut_show_prompt(function(self, err, result)
+            if err then
+                print("Failed to show shortcut prompt:", err)
+            else
+                if result.outcome == "accepted" then
+                    print("User added shortcut to desktop!")
+                    -- Grant reward for adding shortcut
+                    grant_reward_for_shortcut()
+                else
+                    print("User dismissed shortcut dialog")
+                end
+            end
+        end)
+    else
+        print("Shortcut cannot be added on this platform")
+    end
+end)
+```
 
 ### 🌒 SAFE STORAGE [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player#progress-loss)
 

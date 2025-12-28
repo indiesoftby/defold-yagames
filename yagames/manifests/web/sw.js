@@ -1,3 +1,8 @@
+// Service Worker was officially supported and recommended for implementation
+// on Yandex Games until 2024, but then became optional and was even removed
+// from the documentation. This example and connection options are left for
+// legacy projects.
+
 // 1. Put here the name of your game:
 const cachePrefix = "your-game-name";
 

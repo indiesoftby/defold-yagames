@@ -6,10 +6,6 @@
 # Immediately exit if any command has a non-zero exit status:
 set -e
 
-# This demo doesn't implement Service Worker and Native Cache, so remove them from the settings:
-sed -i 's/service_worker_url = .*//' game.project
-sed -i 's/manifest_url = .*//' game.project
-
 mkdir -p build/bundle
 
 BOB_SHA1=${BOB_SHA1:-$(curl -s 'https://d.defold.com/stable/info.json' | jq -r .sha1)}
@@ -20,7 +16,6 @@ SETTINGS="--build-server https://build.defold.com --variant debug --email foo@ba
 PLATFORM=js-web
 ARCHITECTURES=wasm-web
 java -jar build/bob.jar ${SETTINGS} --bundle-output build/bundle/${PLATFORM} --platform ${PLATFORM} --architectures ${ARCHITECTURES} --archive resolve build bundle
-perl -pi -e "s/cachePrefix \+ \"-v1\"/cachePrefix + \"-v$(date +%s)\"/g" "build/bundle/${PLATFORM}/${TITLE}/sw.js"
 
 if [ $# -eq 1 ]; then
     PORT=$1

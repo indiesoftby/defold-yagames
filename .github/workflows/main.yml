@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: "temurin"
-          java-version: "21"
+          java-version: "25"
 
       - name: Build 🔧
         env:
@@ -31,11 +31,6 @@ jobs:
 
           mkdir -p build/bundle/public
 
-          # This demo doesn't implement Service Worker and Native Cache, so remove them from the settings:
-          sed -i 's/service_worker_url = .*//' game.project
-          sed -i 's/manifest_url = .*//' game.project
-          rm -rf example/bundle/web
-
           BOB_SHA1=${DEFOLD_BOB_SHA1:-$(curl -s 'https://d.defold.com/stable/info.json' | jq -r .sha1)}
           BOB_LOCAL_SHA1=$((java -jar build/bundle/bob.jar --version | cut -d' ' -f6) || true)
           if [ "${BOB_LOCAL_SHA1}" != "${BOB_SHA1}" ]; then wget --progress=dot:mega -O build/bundle/bob.jar "https://d.defold.com/archive/${BOB_SHA1}/bob/bob.jar"; fi
@@ -44,13 +39,13 @@ jobs:
           TITLE=$(awk -F "=" '/^title/ {gsub(/[ \r\n\t]/, "", $2); print $2}' game.project)
 
           java -jar build/bundle/bob.jar --email foo@bar.com --auth 12345 --texture-compression true --bundle-output build/bundle/js-web --platform js-web --architectures wasm-web --archive --variant release resolve build bundle
-          (cd build/bundle/js-web/${TITLE} && zip -r ../../public/demo_no-sw_no-native-cache.zip .)
+          (cd build/bundle/js-web/${TITLE} && zip -r ../../public/demo.zip .)
 
       - name: Upload Result
         uses: actions/upload-artifact@v4
         with:
           name: bundle
-          path: build/bundle/public/demo_no-sw_no-native-cache.zip
+          path: build/bundle/public/demo.zip
 
       - name: Deploy to Pages 🚀
         if: github.ref == 'refs/heads/master'

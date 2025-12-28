@@ -1777,8 +1777,206 @@ end)
 | `ysdk.features.LoadingAPI?.ready()` | `yagames.features_loadingapi_ready()` |
 | `ysdk.features.GameplayAPI?.start()` | `yagames.features_gameplayapi_start()` |
 | `ysdk.features.GameplayAPI?.stop()` | `yagames.features_gameplayapi_stop()` |
-| `ysdk.features.GamesAPI?.getAllGames()` | `yagames.features_gamesapi_get_all_games(callback)`<br>The callback result is a table `{ games = { ... }, developerURL = "string" }` |
-| `ysdk.features.GamesAPI?.getGameByID(appID)` | `yagames.features_gamesapi_get_game_by_id(app_id, callback)`<br>The callback result is a table `{ isAvailable = true/false, game = { appID = "string", title = "string", url = "string", coverURL = "string", iconURL = "string" } }` |
+| `ysdk.features.GamesAPI?.getAllGames()` | `yagames.features_gamesapi_get_all_games(callback)` |
+| `ysdk.features.GamesAPI?.getGameByID(appID)` | `yagames.features_gamesapi_get_game_by_id(app_id, callback)` |
+
+#### `yagames.features_loadingapi_ready()`
+
+Informs the SDK that the game has loaded all resources and is ready for user interaction. This method should be called when:
+
+- All game elements are ready for player interaction
+- There are no loading screens visible
+- The game is ready to start playing
+
+> [!NOTE]
+> This method helps Yandex.Games track loading metrics and improve game loading speed and availability worldwide. The Game Ready metric can be tracked in the Performance tab in DevTools.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+local function init_handler(self, err)
+    if err then
+        print("YaGames initialization failed:", err)
+    else
+        print("YaGames initialized successfully!")
+        
+        -- Signal that the game has loaded all resources and is ready for user interaction
+        yagames.features_loadingapi_ready()
+        
+        -- Continue with your game initialization...
+    end
+end
+
+function init(self)
+    yagames.init(init_handler)
+end
+```
+
+#### `yagames.features_gameplayapi_start()`
+
+Signals that the player has started or resumed gameplay. Call this method when:
+
+- Starting a level
+- Closing a menu
+- Resuming from pause
+- Resuming after showing an ad
+- Returning to the current browser tab
+
+> [!IMPORTANT]
+> Make sure that after calling `features_gameplayapi_start()`, the gameplay is immediately active. This is especially important for multiplayer sessions - without calling this method, multiplayer events will not be sent.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+local function start_level(self)
+    -- Start the level logic
+    start_level_logic()
+    
+    -- Signal that gameplay has started
+    yagames.features_gameplayapi_start()
+end
+
+function on_message(self, message_id, message)
+    if message_id == hash("resume_from_pause") then
+        -- Resume gameplay
+        resume_gameplay()
+        yagames.features_gameplayapi_start()
+    elseif message_id == hash("show_ad_complete") then
+        -- Resume after ad
+        yagames.features_gameplayapi_start()
+    end
+end
+```
+
+#### `yagames.features_gameplayapi_stop()`
+
+Signals that the player has paused or stopped gameplay. Call this method when:
+
+- Completing a level or losing
+- Opening a menu
+- Pausing the game
+- Showing fullscreen or rewarded video ads
+- Switching to another browser tab
+
+> [!IMPORTANT]
+> Make sure that after calling `features_gameplayapi_stop()`, the gameplay is stopped. When resuming gameplay, call `features_gameplayapi_start()` again.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+local function pause_game(self)
+    -- Pause gameplay logic
+    pause_gameplay_logic()
+    
+    -- Signal that gameplay has stopped
+    yagames.features_gameplayapi_stop()
+end
+
+local function show_ad_before_level(self)
+    -- Stop gameplay before showing ad
+    yagames.features_gameplayapi_stop()
+    
+    -- Show ad
+    yagames.adv_show_fullscreen_adv({
+        close = function(self, was_shown)
+            -- Resume gameplay after ad closes
+            yagames.features_gameplayapi_start()
+        end
+    })
+end
+
+local function complete_level(self)
+    -- Complete level logic
+    complete_level_logic()
+    
+    -- Signal that gameplay has stopped
+    yagames.features_gameplayapi_stop()
+end
+```
+
+#### `yagames.features_gamesapi_get_all_games(callback)`
+
+Gets information about all your games available on the current platform and domain.
+
+**Parameters:**
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` is a table containing:
+  - `games` <kbd>table</kbd> - Array of game objects, each containing:
+    - `appID` <kbd>string</kbd> - Application identifier (as string)
+    - `title` <kbd>string</kbd> - Game title
+    - `url` <kbd>string</kbd> - Game URL
+    - `coverURL` <kbd>string</kbd> - Cover image URL
+    - `iconURL` <kbd>string</kbd> - Icon image URL
+  - `developerURL` <kbd>string</kbd> - Developer's URL
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+yagames.features_gamesapi_get_all_games(function(self, err, result)
+    if err then
+        print("Failed to get games:", err)
+    else
+        print("Developer URL:", result.developerURL)
+        print("Total games:", #result.games)
+        
+        for i, game in ipairs(result.games) do
+            print(string.format("%d. %s (ID: %s)", i, game.title, game.appID))
+            print("  URL:", game.url)
+            print("  Cover:", game.coverURL)
+            print("  Icon:", game.iconURL)
+        end
+    end
+end)
+```
+
+#### `yagames.features_gamesapi_get_game_by_id(app_id, callback)`
+
+Gets information about a specific game by its application ID.
+
+**Parameters:**
+- `app_id` <kbd>number</kbd> - Application identifier (as number)
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` is a table containing:
+  - `isAvailable` <kbd>boolean</kbd> - Whether the game is available on the current platform and domain
+  - `game` <kbd>table</kbd> - Game object (present only when `isAvailable` is `true`), containing:
+    - `appID` <kbd>string</kbd> - Application identifier (as string)
+    - `title` <kbd>string</kbd> - Game title
+    - `url` <kbd>string</kbd> - Game URL
+    - `coverURL` <kbd>string</kbd> - Cover image URL
+    - `iconURL` <kbd>string</kbd> - Icon image URL
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Get appID from features_gamesapi_get_all_games() and convert to number
+local game_id = 290493  -- Number, not string
+
+yagames.features_gamesapi_get_game_by_id(game_id, function(self, err, result)
+    if err then
+        print("Failed to get game:", err)
+    else
+        if result.isAvailable then
+            print("Game is available!")
+            print("App ID:", result.game.appID)
+            print("Title:", result.game.title)
+            print("URL:", result.game.url)
+            print("Cover:", result.game.coverURL)
+            print("Icon:", result.game.iconURL)
+            -- Show game link or navigate to it
+        else
+            print("Game is not available on this platform/domain")
+        end
+    end
+end)
+```
 
 ### 🌒 FEEDBACK [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-review)
 

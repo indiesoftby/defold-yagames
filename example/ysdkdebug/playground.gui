@@ -1058,39 +1058,14 @@ nodes {
 }
 nodes {
   position {
-    x: 75.0
-    y: -85.0
-  }
-  type: TYPE_TEMPLATE
-  id: "button_leaderboards_init"
-  parent: "group_leaderboards"
-  inherit_alpha: true
-  template: "/example/ysdkdebug/button_sm.gui"
-}
-nodes {
-  type: TYPE_BOX
-  id: "button_leaderboards_init/body"
-  parent: "button_leaderboards_init"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  text: "Init"
-  id: "button_leaderboards_init/text"
-  parent: "button_leaderboards_init/body"
-  overridden_fields: 8
-  template_node_child: true
-}
-nodes {
-  position {
-    x: 245.0
+    x: 160.0
     y: -85.0
   }
   type: TYPE_TEMPLATE
   id: "button_leaderboards_get_description"
   parent: "group_leaderboards"
   inherit_alpha: true
-  template: "/example/ysdkdebug/button_sm.gui"
+  template: "/example/ysdkdebug/button.gui"
 }
 nodes {
   type: TYPE_BOX
@@ -1100,7 +1075,7 @@ nodes {
 }
 nodes {
   type: TYPE_TEXT
-  text: "Get Desc."
+  text: "Get Description"
   id: "button_leaderboards_get_description/text"
   parent: "button_leaderboards_get_description/body"
   overridden_fields: 8

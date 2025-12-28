@@ -41,7 +41,6 @@ extern "C"
     void YaGamesPrivate_Features_GamesAPI_GetGameByID(const int cb_id, const int game_id);
     void YaGamesPrivate_Feedback_CanReview(const int cb_id);
     void YaGamesPrivate_Feedback_RequestReview(const int cb_id);
-    void YaGamesPrivate_GetLeaderboards(const int cb_id);
     void YaGamesPrivate_Leaderboards_GetDescription(const int cb_id, const char* leaderboard_name);
     void YaGamesPrivate_Leaderboards_GetPlayerEntry(const int cb_id, const char* leaderboard_name, const char* options);
     void YaGamesPrivate_Leaderboards_GetEntries(const int cb_id, const char* leaderboard_name, const char* options);
@@ -543,12 +542,6 @@ static int Feedback_RequestReview(lua_State* L)
     return 0;
 }
 
-static int GetLeaderboards(lua_State* L)
-{
-    YaGamesPrivate_GetLeaderboards(luaL_checkint(L, 1));
-    return 0;
-}
-
 static int Leaderboards_GetDescription(lua_State* L)
 {
     YaGamesPrivate_Leaderboards_GetDescription(luaL_checkint(L, 1), luaL_checkstring(L, 2));
@@ -936,7 +929,6 @@ static const luaL_reg Module_methods[] = {
     { "feedback_can_review", Feedback_CanReview },
     { "feedback_request_review", Feedback_RequestReview },
     // - Leaderboards
-    { "get_leaderboards", GetLeaderboards },
     { "leaderboards_get_description", Leaderboards_GetDescription },
     { "leaderboards_get_player_entry", Leaderboards_GetPlayerEntry },
     { "leaderboards_get_entries", Leaderboards_GetEntries },

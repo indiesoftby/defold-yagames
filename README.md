@@ -1241,15 +1241,10 @@ end)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
-| `ysdk.getLeaderboards()` | `yagames.leaderboards_init(callback)` |
-| `lb.getLeaderboardDescription(leaderboardName)` | `yagames.leaderboards_get_description(leaderboard_name, callback)` |
-| `lb.getLeaderboardPlayerEntry(leaderboardName)` | `yagames.leaderboards_get_player_entry(leaderboard_name, [options], callback)` |
-| `lb.getLeaderboardEntries(leaderboardName, options)` | `yagames.leaderboards_get_entries(leaderboard_name, [options], callback)` |
-| `lb.setLeaderboardScore(leaderboardName, score, extraData)` | `yagames.leaderboards_set_score(leaderboard_name, score, [extra_data], [callback])` |
-
-#### `yagames.leaderboards_init(callback)`
-
-Initializes the leaderboards subsystem. This method must be called **once** before using any other leaderboard-related functions. After initialization, you can use all `leaderboards_*` functions.
+| `ysdk.leaderboards.getDescription(leaderboardName)` | `yagames.leaderboards_get_description(leaderboard_name, callback)` |
+| `ysdk.leaderboards.getPlayerEntry(leaderboardName, options)` | `yagames.leaderboards_get_player_entry(leaderboard_name, [options], callback)` |
+| `ysdk.leaderboards.getEntries(leaderboardName, options)` | `yagames.leaderboards_get_entries(leaderboard_name, [options], callback)` |
+| `ysdk.leaderboards.setScore(leaderboardName, score, extraData)` | `yagames.leaderboards_set_score(leaderboard_name, score, [extra_data], [callback])` |
 
 > [!IMPORTANT]
 > Before using leaderboards, ensure that:
@@ -1258,28 +1253,9 @@ Initializes the leaderboards subsystem. This method must be called **once** befo
 >
 > If a leaderboard with the specified name doesn't exist in the console, you'll get a 404 error.
 
-**Parameters:**
-- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err)`. If `err` is not `nil`, initialization failed.
 
 > [!NOTE]
 > Rate limit: **20 requests per 5 minutes** for most methods. See individual method descriptions for specific limits.
-
-**Example:**
-
-```lua
-local yagames = require("yagames.yagames")
-
--- Note: Call leaderboards_init() only once, then use all leaderboards_* functions
-yagames.leaderboards_init(function(self, err)
-    if err then
-        print("Leaderboards initialization failed:", err)
-        -- Leaderboards are not available
-    else
-        print("Leaderboards initialized successfully!")
-        -- Now you can use leaderboards_get_description(), leaderboards_set_score(), etc.
-    end
-end)
-```
 
 #### `yagames.leaderboards_get_description(leaderboard_name, callback)`
 
@@ -1304,8 +1280,6 @@ Gets the description and configuration of a leaderboard by its name. Use this to
 local yagames = require("yagames.yagames")
 
 local LEADERBOARD_NAME = "RatingTable1"
-
--- Note: call leaderboards_init() only once, then use all leaderboards_* functions
 
 yagames.leaderboards_get_description(LEADERBOARD_NAME, function(self, err, result)
     if err then
@@ -1352,8 +1326,6 @@ Sets a new score for the player in the leaderboard. Use this to submit player sc
 local yagames = require("yagames.yagames")
 
 local LEADERBOARD_NAME = "RatingTable1"
-
--- Note: call leaderboards_init() only once, then use all leaderboards_* functions
 
 -- Set score without extra data
 yagames.leaderboards_set_score(LEADERBOARD_NAME, 1000, nil, function(self, err)
@@ -1424,8 +1396,6 @@ Gets the player's ranking entry in the leaderboard. Use this to show the player 
 local yagames = require("yagames.yagames")
 
 local LEADERBOARD_NAME = "RatingTable1"
-
--- Note: Call leaderboards_init() only once, then use all leaderboards_* functions
 
 -- Get player entry without avatar
 yagames.leaderboards_get_player_entry(LEADERBOARD_NAME, nil, function(self, err, result)
@@ -1521,8 +1491,6 @@ Gets multiple leaderboard entries. Use this to display top players and entries a
 local yagames = require("yagames.yagames")
 
 local LEADERBOARD_NAME = "RatingTable1"
-
--- Note: call leaderboards_init() only once, then use all leaderboards_* functions
 
 -- Get top 10 players
 yagames.leaderboards_get_entries(LEADERBOARD_NAME, {

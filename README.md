@@ -4,22 +4,22 @@
 
 *This is an open-source project, and it's not affiliated with Yandex LLC.*
 
-YaGames is the Yandex.Games SDK native extension for the [Defold](https://www.defold.com/) game engine. [Yandex.Games](https://yandex.com/games/) is a collection of browser HTML5 games for smartphones, computers, tablets, and TVs. The games are available in Yandex Browser and the Yandex app. Games from the catalog are displayed in Yandex recommendation systems, which have a total audience of more than 50 million users per month.
+YaGames is the Yandex.Games SDK native extension for the [Defold](https://www.defold.com/) game engine. [Yandex.Games](https://yandex.com/games/) is a collection of browser HTML5 games for smartphones, computers, tablets, and TVs.
+
+> [!WARNING]
+> This extension was created before the "official" Yandex.Games extension for Defold appeared. Therefore, its API differs from the documentation at https://yandex.ru/dev/games/doc/ru/sdk/defold/install
+> 
+> **Please refer to the HTML5 documentation at https://yandex.ru/dev/games/doc/en/sdk/sdk-about and see below for the corresponding Lua API calls.**
 
 ## Installation
 
 You can use it in your own project by adding this project as a [Defold library dependency](http://www.defold.com/manuals/libraries/). Open your `game.project` file and in the dependencies field add **a link to the ZIP file of a [specific release](https://github.com/indiesoftby/defold-yagames/releases).**
 
-> [!CAUTION]
-> For Yandex.Games use only WASM variant when creating HTML5 build of your game. Asm.js variant won't work at all because of [polyfills](https://github.com/emscripten-core/emscripten/blob/10cb9d46cdd17e7a96de68137c9649d9a630fbc7/src/shell.js#L45), which are necessary to support older browsers and which break the Yandex.Games SDK.
-
 ## Getting Started
 
-* **[🎓 Tutorial: "Releasing HTML5 games on Yandex.Games"](https://defold.com/2021/04/21/Releasing-games-on-Yandex/) - How to add the Yandex.Games SDK to a Defold game and how to submit your game to the Yandex.Games catalog.**
-* [📚 The official documentation](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en).
-* [💬 The official Telegram chat](https://t.me/yagamedev) where you can talk with representatives from Yandex. Feel free to ask questions in English!
+* [📚 The official documentation](https://yandex.com/dev/games/doc/en/?lang=en).
 * [💬 The Telegram chat about Defold](https://t.me/DefoldEngine) for Russian-speaking users.
-* [💬 The Defold forum topic](https://forum.defold.com/t/yagames-yandex-games-sdk-for-defold/66810) about the YaGames extension.
+* [💬 The Defold forum topic](https://forum.defold.com/t/yagames-yandex-games-sdk-for-defold/66810) about the this extension.
 
 ### Checklist For Releasing Game
 
@@ -29,19 +29,18 @@ You can use it in your own project by adding this project as a [Defold library d
     - Icon 512 x 512 px.
     - Cover 800 x 470 px.
     - Screenshots.
-    - *(Optional)* Videos and GIF.
 4. Add [the extension](https://github.com/indiesoftby/defold-yagames/archive/master.zip) as a Defold library dependency to your project. 
 5. Enable monetization and earn revenue from placing ad blocks in your game. Ad blocks are available in the following formats:
     - **Interstitial blocks**: ad blocks that completely cover the app background and show up at certain points (for example, when accessing the next game level). *Important: Mute sounds before showing the ad!*
     - **Rewarded videos**: blocks with video ads that the user can choose to view and earn a reward or in-game currency. *Important: Mute sounds before showing the ad!*
     - **Sticky banners**: banner ads, super easy to setup.
     - **In-game purchases**: earn revenue by providing paid services to your users.
-5. You can [publish your game on Yandex.Games](https://games.yandex.ru/console/) from this moment. It fully meets [the requirements](https://yandex.ru/dev/games/doc/dg/concepts/requirements.html?lang=en).
+5. You can [publish your game on Yandex.Games](https://games.yandex.ru/console/) from this moment.
 
 ### Best Practices & Tips
 
 1. The YaGames extension imitates a real API on *non-HTML5* platforms. The idea is to allow to you quickly implement API on your favourite platform (macOS, Windows, Linux) and don't spend time on slowly rebuilding/uploading the game to the Yandex.
-2. The code from `yagames/manifests/web/engine_template.html` is always added to your HTML5 template. This behaviour can't be disabled. Tip: use Git-branching for every platform and do not mix platform-specific code between them.
+2. The code from `yagames/manifests/web/engine_template.html` is always added to your HTML5 template. This behaviour can't be disabled. Tip: use Git-branching for every HTML5 platform and do not mix platform-specific code between them.
 3. You don't need to set up any cache-busting techniques, since Yandex.Games hosts each version of your game in separate paths.
 
 ## Code Examples
@@ -221,8 +220,106 @@ And it's also a good idea to upload a demo build of YaGames to your game's draft
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
-| `YaGames.init(options)` | `yagames.init(callback)`<br>The `options` is a JavaScript object `{}`, and it can be set in the `yagames.sdk_init_options` setting. |
-| `ysdk.isAvailableMethod(name)` | `yagames.is_available_method(name, callback)` [<kbd>Example</kbd>](https://github.com/indiesoftby/defold-yagames/blob/master/example/ysdkdebug/pg_methods.lua) |
+| `YaGames.init(options)` | `yagames.init(callback)` |
+| `ysdk.isAvailableMethod(name)` | `yagames.is_available_method(name, callback)` |
+
+##### `yagames.init(callback)`
+
+Initializes the YaGames extension and waits for Yandex.Games SDK initialization. This method must be called before using any other YaGames functions.
+
+**Parameters:**
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err)`. If `err` is not `nil`, initialization failed.
+
+**Note:** The `options` parameter from JavaScript SDK (a JavaScript object `{}`) can be set in the `yagames.sdk_init_options` setting in your `game.project` file. See [The `game.project` Settings](#the-gameproject-settings-optional) section for details.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+local function init_handler(self, err)
+    if err then
+        print("YaGames initialization failed:", err)
+        -- Handle error (show error message to user, etc.)
+    else
+        print("YaGames initialized successfully!")
+        -- SDK is ready! You can now use all available functions.
+        
+        -- Signal that the game has loaded all resources and is ready for user interaction:
+        yagames.features_loadingapi_ready()
+        
+        -- Continue with your game initialization...
+    end
+end
+
+function init(self)
+    yagames.init(init_handler)
+end
+```
+
+**JavaScript equivalent:**
+
+```javascript
+YaGames
+    .init()
+    .then(ysdk => {
+        console.log('Yandex SDK initialized');
+        window.ysdk = ysdk;
+    });
+```
+
+##### `yagames.is_available_method(name, callback)`
+
+Checks if a specific SDK method is available to call. This is useful for checking feature availability before attempting to use them.
+
+**Parameters:**
+- `name` <kbd>string</kbd> - The name of the method to check (e.g., `"adv.showFullscreenAdv"`, `"payments.purchase"`).
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` is a boolean indicating if the method is available.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Check if fullscreen ads are available
+yagames.is_available_method("adv.showFullscreenAdv", function(self, err, result)
+    if err then
+        print("Error checking method availability:", err)
+    elseif result then
+        print("Fullscreen ads are available!")
+        -- You can safely call yagames.adv_show_fullscreen_adv()
+    else
+        print("Fullscreen ads are not available on this platform")
+        -- Use alternative monetization method
+    end
+end)
+
+-- Check multiple methods
+local methods_to_check = {
+    "adv.showFullscreenAdv",
+    "payments.purchase",
+    "leaderboards.setLeaderboardScore"
+}
+
+for _, method_name in ipairs(methods_to_check) do
+    yagames.is_available_method(method_name, function(self, err, result)
+        if not err and result then
+            print("Method '" .. method_name .. "' is available")
+        end
+    end)
+end
+```
+
+**JavaScript equivalent:**
+
+```javascript
+ysdk.isAvailableMethod("adv.showFullscreenAdv")
+    .then(result => {
+        if (result) {
+            console.log("Fullscreen ads are available!");
+        }
+    });
+```
 
 #### Advertisement [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv)
 

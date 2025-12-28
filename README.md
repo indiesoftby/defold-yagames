@@ -3224,6 +3224,9 @@ end)
 
 ### 🌒 SITELOCK [(docs)](#sitelock)
 
+> [!NOTE]
+> Sitelock is **not part of the official Yandex.Games SDK**. It's a helper module included with this extension to help protect your HTML5 game from simple copy-pasting to another website.
+
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 |  | `sitelock.add_domain(domain)` |
@@ -3231,22 +3234,127 @@ end)
 |  | `sitelock.get_current_domain()` |
 |  | `sitelock.is_release_build()` |
 
-## Sitelock
+Sitelock API helps protect your HTML5 game from simple copy-pasting to another website. It's a simple protection mechanism, but it's better than nothing.
 
-It's a good idea to protect your HTML5 game from simple copy-pasting to another website. The YaGames extension has Sitelock API for that purpose. It's simple, but it's better than nothing.
+By default, it checks hostnames `yandex.net` (CDN of Yandex.Games) and `localhost` (for local debugging).
 
-By default, it checks hostnames `yandex.net` (CDN of the Yandex.Games) and `localhost` (for local debugging).
+#### `sitelock.add_domain(domain)`
+
+Adds a domain to the list of allowed domains. Use this to allow your game to run on additional domains (e.g., your own domain).
+
+**Parameters:**
+- `domain` <kbd>string</kbd> - Domain name to add (e.g., `"yourdomainname.com"`)
+
+**Example:**
 
 ```lua
 local sitelock = require("yagames.sitelock")
 
--- Also you can add your domains:
--- sitelock.add_domain("yourdomainname.com")
+-- Add your custom domain
+sitelock.add_domain("yourdomainname.com")
+sitelock.add_domain("anotherdomain.com")
+```
+
+#### `sitelock.verify_domain()`
+
+Compares the current hostname to the list of allowed domains. Returns `true` if the current domain is allowed, `false` otherwise.
+
+> [!NOTE]
+> On non-HTML5 platforms, this function always returns `true`.
+
+**Returns:**
+- <kbd>boolean</kbd> - `true` if the current domain is in the allowed list, `false` otherwise
+
+**Example:**
+
+```lua
+local sitelock = require("yagames.sitelock")
+
+if html5 and sitelock.is_release_build() then
+    if not sitelock.verify_domain() then
+        print("Game is running on unauthorized domain!")
+        -- Show warning and pause the game
+        show_warning_message("This game can only be played on authorized websites.")
+        pause_game()
+    else
+        print("Domain verified, game can run")
+    end
+end
+```
+
+#### `sitelock.get_current_domain()`
+
+Returns the current domain name (hostname) where the game is running.
+
+> [!NOTE]
+> On non-HTML5 platforms, this function returns an empty string.
+
+**Returns:**
+- <kbd>string</kbd> - Current domain name (hostname), or empty string on non-HTML5 platforms
+
+**Example:**
+
+```lua
+local sitelock = require("yagames.sitelock")
+
+local current_domain = sitelock.get_current_domain()
+print("Current domain:", current_domain)  -- e.g., "yandex.net" or "localhost"
+
+-- Display domain information to user
+if html5 then
+    print("Game is running on:", current_domain)
+end
+```
+
+#### `sitelock.is_release_build()`
+
+Checks if the current build is a release build (not a debug build).
+
+**Returns:**
+- <kbd>boolean</kbd> - `true` if it's a release build, `false` if it's a debug build
+
+**Example:**
+
+```lua
+local sitelock = require("yagames.sitelock")
 
 function init(self)
+    -- Only check domain in release builds
+    -- In debug builds, allow running on any domain for testing
     if html5 and sitelock.is_release_build() then
         if not sitelock.verify_domain() then
+            print("Unauthorized domain detected!")
             -- Show warning and pause the game
+            show_warning_message("This game can only be played on authorized websites.")
+            pause_game()
+        end
+    else
+        print("Debug build - domain check skipped")
+    end
+end
+```
+
+**Complete example:**
+
+```lua
+local sitelock = require("yagames.sitelock")
+
+-- Add your custom domains (optional)
+sitelock.add_domain("yourdomainname.com")
+
+function init(self)
+    -- Check domain only in release builds
+    if html5 and sitelock.is_release_build() then
+        local current_domain = sitelock.get_current_domain()
+        print("Current domain:", current_domain)
+        
+        if not sitelock.verify_domain() then
+            print("NOT ALLOWED to run on:", current_domain)
+            -- Show warning and pause the game
+            show_warning_message("This game can only be played on authorized websites.")
+            pause_game()
+        else
+            print("Allowed to run on:", current_domain)
         end
     end
 end

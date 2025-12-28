@@ -1982,8 +1982,95 @@ end)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
-| `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)`<br>The callback result is a table `{ value = true/false, reason = "string" }` |
-| `ysdk.feedback.requestReview()` | `yagames.feedback_request_review(callback)`<br>The callback result is a table `{ feedbackSent = true/false }` |
+| `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)` |
+| `ysdk.feedback.requestReview()` | `yagames.feedback_request_review(callback)` |
+
+#### `yagames.feedback_can_review(callback)`
+
+Checks if it's possible to request a review/rating from the user. The review dialog will not be shown if the user is not authorized or has already rated the game.
+
+> [!IMPORTANT]
+> Always call `feedback_can_review()` before `feedback_request_review()` to check if requesting a review is possible.
+
+**Parameters:**
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` is a table containing:
+  - `value` <kbd>boolean</kbd> - `true` if review can be requested, `false` otherwise
+  - `reason` <kbd>string</kbd> (optional) - Reason why review cannot be requested (only present when `value` is `false`). Possible values:
+    - `"NO_AUTH"` - User is not authorized
+    - `"GAME_RATED"` - User has already rated the game
+    - `"REVIEW_ALREADY_REQUESTED"` - Review request has already been sent, waiting for user action
+    - `"REVIEW_WAS_REQUESTED"` - Review request was already sent, user has taken action (rated or closed dialog)
+    - `"UNKNOWN"` - Request was not sent, error on Yandex side
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+yagames.feedback_can_review(function(self, err, result)
+    if err then
+        print("Failed to check review availability:", err)
+    else
+        if result.value then
+            print("Review can be requested")
+            -- Proceed to request review
+        else
+            print("Review cannot be requested. Reason:", result.reason or "unknown")
+            -- Handle the reason:
+            -- if result.reason == "NO_AUTH" then
+            --     -- User needs to authorize first
+            -- elseif result.reason == "GAME_RATED" then
+            --     -- User already rated the game
+            -- end
+        end
+    end
+end)
+```
+
+#### `yagames.feedback_request_review(callback)`
+
+Shows a popup dialog asking the user to rate the game and write a comment. The dialog appears at the moment of the request, covering the app background.
+
+> [!WARNING]
+> You can request a review only **once per session**. Always use `feedback_can_review()` before calling this method. If you ignore `feedback_can_review()`, the result may include an error: `"use canReview before requestReview"`.
+
+**Parameters:**
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` is a table containing:
+  - `feedbackSent` <kbd>boolean</kbd> - `true` if the user rated the game, `false` if the user closed the dialog
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- First, check if review can be requested
+yagames.feedback_can_review(function(self, err, result)
+    if err then
+        print("Failed to check review availability:", err)
+        return
+    end
+    
+    if result.value then
+        -- Review can be requested, proceed
+        yagames.feedback_request_review(function(self, err, result)
+            if err then
+                print("Failed to request review:", err)
+                -- Error might be: "use canReview before requestReview"
+            else
+                if result.feedbackSent then
+                    print("User rated the game!")
+                    -- Thank the user, grant bonus, etc.
+                else
+                    print("User closed the review dialog")
+                    -- User didn't rate, maybe ask later
+                end
+            end
+        end)
+    else
+        print("Cannot request review. Reason:", result.reason or "unknown")
+    end
+end)
+```
 
 ### 🌒 CLIPBOARD [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
 

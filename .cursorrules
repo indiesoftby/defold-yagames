@@ -16,3 +16,5 @@ end
 The structure of the project is the following:
 - folder "yagames" contains the Lua and C/C++ part of the extension. C/C++ code is compiled to WebAssembly via Emscripten or to the native code for other platforms.
 - folder "example" contains the example project written in Lua for the extension.
+
+Always git commit in English.

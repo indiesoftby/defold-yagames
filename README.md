@@ -202,7 +202,7 @@ manifest_url = yandex-manifest.json
 * `service_worker_url` - Relative URL to the Service Worker file. Usually it's `sw.js`. Set the URL to enable Service Worker.
 * `manifest_url` - URL to the Web App Manifest file. Set the URL to enable support of Yandex Native Cache.
 
-## Lua API
+## 🌒 Lua API
 
 Yandex.Games JavaScript SDK uses ES6 Promise for asynchronous operations. For Lua API promises were replaced with callback functions with arguments `(self, err, result)`, where
 
@@ -214,7 +214,7 @@ The best way to integrate SDK into your game is to read [the official documentat
 
 And it's also a good idea to upload a demo build of YaGames to your game's draft and click on the buttons to understand what the arguments are and what each function returns.
 
-### INITIALIZATION [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-about)
+### 🌒 INITIALIZATION [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-about)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -297,8 +297,7 @@ for _, method_name in ipairs(methods_to_check) do
 end
 ```
 
-
-### ADVERTISEMENT [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv)
+### 🌒 ADVERTISEMENT [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -429,7 +428,7 @@ function on_message(self, message_id, message)
 end
 ```
 
-### ADVERTISEMENT - STICKY BANNERS [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv#sticky-banner)
+### 🌒 ADVERTISEMENT - STICKY BANNERS [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv#sticky-banner)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -522,7 +521,7 @@ end)
 > 2. In the **Sticky Banners** section, configure banner display for mobile devices (portrait/landscape) and desktop
 > 3. Enable **"Use API for showing sticky banner"** option if you want to control banner display programmatically
 
-### AUTHENTICATION + PLAYER [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player)
+### 🌒 AUTHENTICATION + PLAYER [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -1125,7 +1124,7 @@ yagames.player_init({}, function(self, err)
 end)
 ```
 
-### In-Game Purchases [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-purchases)
+### 🌒 IN-GAME PURCHASES [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-purchases)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -1410,7 +1409,7 @@ end)
 > [!NOTE]
 > **Server-side verification**: If you initialized payments with `signed: true`, the `signature` parameter in purchase responses contains encrypted purchase data. Verify this signature on your server using HMAC-SHA256 with your secret key from the Developer Console to prevent fraud. See the [official documentation](https://yandex.ru/dev/games/doc/ru/sdk/sdk-purchases#protection) for signature verification examples.
 
-### Leaderboards [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-leaderboard)
+### 🌒 LEADERBOARDS [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-leaderboard)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -1420,7 +1419,7 @@ end)
 | `lb.getLeaderboardEntries(leaderboardName, options)` | `yagames.leaderboards_get_entries(leaderboard_name, [options], callback)`<br>The argument `options` is an optional Lua table `{ includeUser = boolean, quantityAround = number, quantityTop = number, getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` (string) can be `small`, `medium`, `large`. |
 | `lb.setLeaderboardScore(leaderboardName, score, extraData)` | `yagames.leaderboards_set_score(leaderboard_name, score, [extra_data], [callback])` |
 
-### Features [(docs)](https://yandex.com/dev/games/doc/en/sdk/sdk-game-events)
+### 🌒 FEATURES [(docs)](https://yandex.com/dev/games/doc/en/sdk/sdk-game-events)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -1430,20 +1429,20 @@ end)
 | `ysdk.features.GamesAPI?.getAllGames()` | `yagames.features_gamesapi_get_all_games(callback)`<br>The callback result is a table `{ games = { ... }, developerURL = "string" }` |
 | `ysdk.features.GamesAPI?.getGameByID(appID)` | `yagames.features_gamesapi_get_game_by_id(app_id, callback)`<br>The callback result is a table `{ isAvailable = true/false, game = { appID = "string", title = "string", url = "string", coverURL = "string", iconURL = "string" } }` |
 
-### Feedback [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-review)
+### 🌒 FEEDBACK [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-review)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)`<br>The callback result is a table `{ value = true/false, reason = "string" }` |
 | `ysdk.feedback.requestReview()` | `yagames.feedback_request_review(callback)`<br>The callback result is a table `{ feedbackSent = true/false }` |
 
-### Clipboard [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
+### 🌒 CLIPBOARD [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `ysdk.clipboard.writeText(text)` | `yagames.clipboard_write_text(text, [callback])` |
 
-### Device Info [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
+### 🌒 DEVICE INFO [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -1453,13 +1452,13 @@ end)
 | `ysdk.deviceInfo.isTablet()` | `yagames.device_info_is_tablet()` |
 | `ysdk.deviceInfo.isTV()` | `yagames.device_info_is_tv()` |
 
-### Environment [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-environment)
+### 🌒 ENVIRONMENT [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-environment)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `ysdk.environment` | `yagames.environment()`<br>Returns Lua table `{ app = { id = ... }, ... }` |
 
-### Screen [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
+### 🌒 SCREEN [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -1467,14 +1466,14 @@ end)
 | `ysdk.screen.fullscreen.request()` | `yagames.screen_fullscreen_request([callback])` |
 | `ysdk.screen.fullscreen.exit()` | `yagames.screen_fullscreen_exit([callback])` |
 
-### Shortcuts [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-shortcut)
+### 🌒 SHORTCUTS [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-shortcut)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `ysdk.shortcut.canShowPrompt()` | `yagames.shortcut_can_show_prompt(callback)`<br>The callback result is a table `{ canShow = boolean }` |
 | `ysdk.shortcut.showPrompt()` | `yagames.shortcut_show_prompt(callback)`<br>The callback result is a table `{ outcome = "string" }` |
 
-### Safe Storage [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player#progress-loss)
+### 🌒 SAFE STORAGE [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player#progress-loss)
 
 *Note: `key` and `value` should be valid UTF-8 strings. Storing strings with zero bytes aren't supported.*
 
@@ -1488,13 +1487,13 @@ end)
 | `safeStorage.key(n)` | `yagames.storage_key(n)`<br>Returns the name of the nth key in the storage or `nil`. *Note: the n index is zero-based.* |
 | `safeStorage.length` | `yagames.storage_length()`<br>Returns the number of data items stored in the storage. |
 
-### Remote Config [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-config)
+### 🌒 REMOTE CONFIG [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-config)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `ysdk.getFlags(options)` | `yagames.flags_get(options, callback)`<br>Options is optional. The callback result is a table like `{ flagName = "value" }` |
 
-### Events [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-events)
+### 🌒 EVENTS [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-events)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -1502,7 +1501,7 @@ end)
 | `ysdk.off(eventName, listener)` | `yagames.event_off(event_name, listener)`<br>`event_name` is a string: `game_api_pause`, etc. |
 | `ysdk.dispatchEvent(eventName)` | `yagames.event_dispatch(event_name)`<br>`event_name` is a string: `EXIT` etc. |
 
-### Multiplayer Sessions [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-multiplayer-sessions)
+### 🌒 MULTIPLAYER SESSIONS [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-multiplayer-sessions)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -1510,7 +1509,7 @@ end)
 | `ysdk.multiplayer.sessions.commit(data)` | `yagames.multiplayer_sessions_commit(data)`<br>The argument `data` is a Lua table, i.e. `{ key = value }`. |
 | `ysdk.multiplayer.sessions.push(data)` | `yagames.multiplayer_sessions_push(data)`<br>The argument `data` is a Lua table, i.e. `{ key = value }`. |
 
-### Sitelock [(docs)](#sitelock)
+### 🌒 SITELOCK [(docs)](#sitelock)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |

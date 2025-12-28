@@ -29,18 +29,20 @@ You can use it in your own project by adding this project as a [Defold library d
     - Icon 512 x 512 px.
     - Cover 800 x 470 px.
     - Screenshots.
-4. Add [the extension](https://github.com/indiesoftby/defold-yagames/archive/master.zip) as a Defold library dependency to your project. 
-5. Enable monetization and earn revenue from placing ad blocks in your game. Ad blocks are available in the following formats:
+4. Add [the extension](https://github.com/indiesoftby/defold-yagames/archive/master.zip) as a Defold library dependency to your project.
+5. Initialize the SDK in your game - see [Initialization](#-initialization-docs) section below for the API details.
+6. Implement advertisement in your game - see [Advertisement](#-advertisement-docs) section below for the API details.
+7. Enable monetization and earn revenue from placing ad blocks in your game. Ad blocks are available in the following formats:
     - **Interstitial blocks**: ad blocks that completely cover the app background and show up at certain points (for example, when accessing the next game level). *Important: Mute sounds before showing the ad!*
     - **Rewarded videos**: blocks with video ads that the user can choose to view and earn a reward or in-game currency. *Important: Mute sounds before showing the ad!*
     - **Sticky banners**: banner ads, super easy to setup.
     - **In-game purchases**: earn revenue by providing paid services to your users.
-5. You can [publish your game on Yandex.Games](https://games.yandex.ru/console/) from this moment.
+8. You can [publish your game on Yandex.Games](https://games.yandex.ru/console/) from this moment.
 
 ### Best Practices & Tips
 
 1. The YaGames extension imitates a real API on *non-HTML5* platforms. The idea is to allow to you quickly implement API on your favourite platform (macOS, Windows, Linux) and don't spend time on slowly rebuilding/uploading the game to the Yandex.
-2. The code from `yagames/manifests/web/engine_template.html` is always added to your HTML5 template. This behaviour can't be disabled. Tip: use Git-branching for every HTML5 platform and do not mix platform-specific code between them.
+2. The code from `yagames/manifests/web/engine_template.html` is always added to your HTML5 template. **This behaviour can't be disabled.** Tip: use Git-branching for every HTML5 platform and do not mix platform-specific code between them.
 3. You don't need to set up any cache-busting techniques, since Yandex.Games hosts each version of your game in separate paths.
 
 ## Code Examples

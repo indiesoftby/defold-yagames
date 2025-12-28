@@ -49,149 +49,6 @@ Take a look at the demo project inside `example` directory. It has quite a few b
 
 ![YaGames Demo](screenshot.png)
 
-### 1. Initialization
-
-To get started, you need to initialize the SDK using the `init` method.
-
-```lua
-local yagames = require("yagames.yagames")
-
-local function init_handler(self, err)
-    if err then
-        print("Something bad happened :(", err)
-    else
-        --
-        -- SDK is ready!
-        -- From this moment, you can use all available functions, i.e. invoke ads, get player data, etc.
-        --
-
-        -- For example, signal that the game has loaded all resources and is ready for user interaction:
-        yagames.features_loadingapi_ready()
-
-        -- Do something else!
-    end
-end
-
-function init(self)
-    yagames.init(init_handler)
-end
-```
-
-### 2. Interstitial Ad
-
-Interstitial ads are ad blocks that completely cover the app background and show up before a user gets the data requested (for example, accessing the next game level).
-
-***Note:** Yandex.Games [recommends that developers call the display of full-screen ads in the game as often as possible](https://yandex.ru/blog/gamesfordevelopers/obnovlenie-algoritmov-pokaza-fulskrinov) but in suitable places in the game — so that the user understands that this is not a part of the game, but an ad unit. Do this in logical pauses in the game, for example: before starting the game, when moving to the next level, after losing.For example, inserting an ad unit is appropriate after going to the next level by pressing a button, and not appropriate in the middle of a level, when an ad suddenly appears under the playerʼs finger.*
-
-* `open` - Called when an ad is opened successfully.
-* `close` - Called when an ad is closed, an error occurred, or on ad failed to open due to too frequent calls. Used with the `was_shown` argument (type `boolean`), the value of which indicates whether an ad was shown.
-* `offline` - Called when the network connection is lost (when offline mode is enabled).
-* `error` - Called when an error occurrs. The error object is passed to the callback function.
-
-**The `close` callback is called in any situation, even if there was an error.**
-
-```lua
-local yagames = require("yagames.yagames")
-
-local function adv_open(self)
-    -- You should switch off all sounds!
-end
-
-local function adv_close(self, was_shown)
-    -- You can switch sounds back!
-end
-
-local function adv_offline(self)
-    -- Internet is offline
-end
-
-local function adv_error(self, err)
-    -- Something wrong happened :(
-end
-
-function on_message(self, message_id, message)
-    if message_id == hash("show_fullscreen_adv") then
-        yagames.adv_show_fullscreen_adv({
-            open = adv_open,
-            close = adv_close,
-            offline = adv_offline,
-            error = adv_error
-        })
-    end
-end
-```
-
-### 3. Rewarded Videos
-
-Rewarded videos are video ad blocks used to monetize games and earn a reward or in-game currency.
-
-* `open` - Called when a video ad is displayed on the screen.
-* `rewarded` - Called when a video ad impression is counted. Use this function to specify a reward for viewing the video ad. 
-* `close` - Called when a user closes a video ad or an error happens.
-* `error` - Called when an error occurrs. The error object is passed to the callback function.
-
-**The `close` callback is called in any situation, even if there was an error.** The `rewarded` callback is called before `close`, and you should update your in-game UI only after `close`.
-
-```lua
-local yagames = require("yagames.yagames")
-
-local function rewarded_open(self)
-    -- You should switch off all sounds!
-end
-
-local function rewarded_rewarded(self)
-    -- Add coins!
-end
-
-local function rewarded_close(self)
-    -- You can switch sounds back!
-end
-
-local function rewarded_error(self, err)
-    -- Something wrong happened :(
-end
-
-function on_message(self, message_id, message)
-    if message_id == hash("show_rewarded_video") then
-        yagames.adv_show_rewarded_video({
-            open = rewarded_open,
-            rewarded = rewarded_rewarded,
-            close = rewarded_close,
-            error = rewarded_error
-        })
-    end
-end
-```
-
-### Misc
-
-> [!TIP]
-> We don't use thes features in our games as we don't see any improvements in our games metrics, and the complexity of its integration and support is quite high.
-
-#### Service Worker How-To
-
-Yandex dropped the Service Worker description page in their docs, but it still allows to integrate Service Worker into your game to be able to run both offline and online. 
-
-1. Set the path to the file `sw.js` in the `game.project` settings.
-2. Copy the `yagames/manifests/web/sw.js` file to the root directory of your release build.
-3. Edit the list of all game files inside your `sw.js`. Omit `sw.js` and `yandex-manifest.json`.
-4. You should increment the version inside `sw.js` on every update of your game on Yandex.Games.
-
-## The `game.project` Settings (Optional!)
-
-```ini
-[yagames]
-sdk_url = /sdk.js
-sdk_init_options = {}
-sdk_init_snippet = console.log("Yandex Games SDK is ready!");
-service_worker_url = sw.js
-```
-
-* `sdk_url` - Sets the URL of the Yandex.Games SDK. In July 2024 the platform changed the URL of its SDK and now it can be of two kinds. First is the local `/sdk.js` for games you upload as an archive (default, **suitable for 99% of games**). The second is for iFrame games - `https://sdk.games.s3.yandex.net/sdk.js`.
-* `sdk_init_options` - JavaScript Object that is passed as-is into the Yandex Games SDK initialization options for [the JS `YaGames.init` function](https://yandex.ru/dev/games/doc/dg/sdk/sdk-about.html?lang=en). Example: `{ orientation: { value: "landscape", lock: true } }`.
-* `sdk_init_snippet` - JavaScript code that is passed as-is and called when the `ysdk` variable becomes available. Example: `console.log(ysdk);`. **Use with care, and don't forget to put a semicolon `;` at the end.**
-* `service_worker_url` - Relative URL to the Service Worker file. Usually it's `sw.js`. Set the URL to enable Service Worker.
-
 ## 🌒 Lua API
 
 Yandex.Games JavaScript SDK uses ES6 Promise for asynchronous operations. For Lua API promises were replaced with callback functions with arguments `(self, err, result)`, where
@@ -3350,6 +3207,34 @@ function init(self)
 end
 ```
 
+## The `game.project` Settings (Optional!)
+
+```ini
+[yagames]
+sdk_url = /sdk.js
+sdk_init_options = {}
+sdk_init_snippet = console.log("Yandex Games SDK is ready!");
+service_worker_url = sw.js
+```
+
+* `sdk_url` - Sets the URL of the Yandex.Games SDK. In July 2024 the platform changed the URL of its SDK and now it can be of two kinds. First is the local `/sdk.js` for games you upload as an archive (default, **suitable for 99% of games**). The second is for iFrame games - `https://sdk.games.s3.yandex.net/sdk.js`.
+* `sdk_init_options` - JavaScript Object that is passed as-is into the Yandex Games SDK initialization options for [the JS `YaGames.init` function](https://yandex.ru/dev/games/doc/dg/sdk/sdk-about.html?lang=en). Example: `{ orientation: { value: "landscape", lock: true } }`.
+* `sdk_init_snippet` - JavaScript code that is passed as-is and called when the `ysdk` variable becomes available. Example: `console.log(ysdk);`. **Use with care, and don't forget to put a semicolon `;` at the end.**
+* `service_worker_url` - Relative URL to the Service Worker file. Usually it's `sw.js`. Set the URL to enable Service Worker.
+
+### Misc
+
+> [!TIP]
+> We don't use these features in our games as we don't see any improvements in our games metrics, and the complexity of its integration and support is quite high.
+
+#### Service Worker How-To
+
+Yandex dropped the Service Worker description page in their docs, but it still allows to integrate Service Worker into your game to be able to run both offline and online. 
+
+1. Set the path to the file `sw.js` in the `game.project` settings.
+2. Copy the `yagames/manifests/web/sw.js` file to the root directory of your release build.
+3. Edit the list of all game files inside your `sw.js`. Omit `sw.js` and `yandex-manifest.json`.
+4. You should increment the version inside `sw.js` on every update of your game on Yandex.Games.
 
 ## Credits
 

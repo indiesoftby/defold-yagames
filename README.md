@@ -214,7 +214,7 @@ The best way to integrate SDK into your game is to read [the official documentat
 
 And it's also a good idea to upload a demo build of YaGames to your game's draft and click on the buttons to understand what the arguments are and what each function returns.
 
-### Initialization [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-about)
+### INITIALIZATION [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-about)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -298,7 +298,7 @@ end
 ```
 
 
-### Advertisement [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv)
+### ADVERTISEMENT [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -429,7 +429,7 @@ function on_message(self, message_id, message)
 end
 ```
 
-### Advertisement - Sticky Banners [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv#sticky-banner)
+### ADVERTISEMENT - STICKY BANNERS [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv#sticky-banner)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -522,14 +522,14 @@ end)
 > 2. In the **Sticky Banners** section, configure banner display for mobile devices (portrait/landscape) and desktop
 > 3. Enable **"Use API for showing sticky banner"** option if you want to control banner display programmatically
 
-### Authentication + Player [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player)
+### AUTHENTICATION + PLAYER [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `ysdk.auth.openAuthDialog()` | `yagames.auth_open_auth_dialog(callback)` |
-| `ysdk.getPlayer(options)` | `yagames.player_init(options, callback)`<br>The argument `options` is a Lua table `{ signed = boolean, scopes = boolean }`. |
-| `player._personalInfo` | `yagames.player_get_personal_info()`<br>The result is `table` or `nil` if the `_personalInfo` object is not available. |
-| `player.signature` | `yagames.player_get_signature()`<br>The result is string if player's object is initialized with `options.signed = true`. Otherwise, `nil`. |
+| `ysdk.getPlayer(options)` | `yagames.player_init(options, callback)` |
+| `player._personalInfo` | `yagames.player_get_personal_info()` |
+| `player.signature` | `yagames.player_get_signature()` |
 | `player.setData(data, flush)` | `yagames.player_set_data(data, flush, callback)` |
 | `player.getData(keys)` | `yagames.player_get_data(keys, callback)` |
 | `player.setStats(stats)` | `yagames.player_set_stats(stats, callback)` |
@@ -538,11 +538,592 @@ end)
 | ~~`player.getID()`~~ <kbd>Deprecated</kbd> | ~~`yagames.player_get_id()`~~ <kbd>Deprecated</kbd> |
 | `player.getUniqueID()` | `yagames.player_get_unique_id()` |
 | `player.getIDsPerGame()` | `yagames.player_get_ids_per_game(callback)` |
-| `player.getMode()` | `yagames.player_get_mode()`<br>[(more info)](https://yandex.ru/blog/gamesfordevelopers/novye-vozmozhnosti-dlya-neavtorizovannykh-polzovateley) |
+| `player.getMode()` | `yagames.player_get_mode()` |
 | `player.isAuthorized()` | `yagames.player_is_authorized()` |
 | `player.getName()` | `yagames.player_get_name()` |
 | `player.getPhoto(size)` | `yagames.player_get_photo(size)` |
 | `player.getPayingStatus()` | `yagames.player_get_paying_status()` |
+
+#### `yagames.auth_open_auth_dialog(callback)`
+
+Opens the authorization dialog box. Use this method if the player is not authorized and you want to prompt them to authorize.
+
+> [!TIP]
+> Inform the user about the benefits of authorization. If the user doesn't understand why they need to authorize, they will likely refuse and exit the game.
+
+**Parameters:**
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err)`. If `err` is `nil`, authorization was successful.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Note: Call player_init() only once, then use all player_* functions
+-- This example shows the general idea
+yagames.player_init({}, function(self, err)
+    if err then
+        print("Error initializing player:", err)
+        return
+    end
+    
+    if not yagames.player_is_authorized() then
+        -- Player is not authorized, show auth dialog
+        yagames.auth_open_auth_dialog(function(self, err)
+            if err then
+                print("Authorization cancelled or failed:", err)
+            else
+                print("Authorization successful!")
+                -- Note: In real code, call player_init() only once at startup
+                -- Re-initialize player to get authorized data (for demonstration only)
+                yagames.player_init({}, function(self, err)
+                    if not err then
+                        print("Player name:", yagames.player_get_name())
+                    end
+                end)
+            end
+        end)
+    else
+        print("Player is already authorized")
+        print("Player name:", yagames.player_get_name())
+    end
+end)
+```
+
+#### `yagames.player_init(options, callback)`
+
+Initializes the Player system. This method must be called **once** before using any other player-related functions. After initialization, you can use all `player_*` functions. The Player object provides access to user data, game progress, and profile information.
+
+> [!NOTE]
+> Rate limit: **20 requests per 5 minutes**.
+
+**Parameters:**
+- `options` <kbd>table</kbd> (optional) - Table with initialization options:
+  - `signed` <kbd>boolean</kbd> (optional) - If `true`, enables signature generation for server-side authentication. Use this when processing payments on your server to prevent fraud. Default: `false`.
+  - `scopes` <kbd>boolean</kbd> (optional) - If `true`, requests access to user's personal data (name, avatar, etc.). Default: `false`.
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err)`. If `err` is not `nil`, initialization failed.
+
+**Possible errors:**
+- `"FetchError: Unauthorized"` - Authorization required
+- `"TypeError: Failed to fetch"` - Network error
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Note: Call player_init() only once, then use all player_* functions
+-- Initialize player with default options (no signature, no scopes)
+yagames.player_init({}, function(self, err)
+    if err then
+        print("Player initialization failed:", err)
+        return
+    end
+    
+    print("Player initialized successfully!")
+    print("Unique ID:", yagames.player_get_unique_id())
+    print("Is authorized:", yagames.player_is_authorized())
+end)
+
+-- Note: Call player_init() only once, then use all player_* functions
+-- Initialize player with signature for server-side authentication
+yagames.player_init({signed = true}, function(self, err)
+    if err then
+        print("Player initialization failed:", err)
+        return
+    end
+    
+    local signature = yagames.player_get_signature()
+    if signature then
+        -- Send signature to your server for authentication
+        -- signature contains two Base64-encoded strings: <signature>.<profile_data>
+        print("Signature available for server authentication")
+    end
+end)
+
+-- Note: Call player_init() only once, then use all player_* functions
+-- Initialize player with scopes to access personal data
+yagames.player_init({scopes = true}, function(self, err)
+    if err then
+        print("Player initialization failed:", err)
+        return
+    end
+    
+    if yagames.player_is_authorized() then
+        print("Player name:", yagames.player_get_name())
+        print("Player photo:", yagames.player_get_photo("large"))
+    end
+end)
+```
+
+#### `yagames.player_get_personal_info()`
+
+Returns a table with player's personal information from their Yandex profile. Available only for authorized players who granted access to personal data.
+
+**Returns:**
+- <kbd>table</kbd> or <kbd>nil</kbd> - Table with personal info if available, or `nil` if the `_personalInfo` object is not available.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+local personal_info = yagames.player_get_personal_info()
+if personal_info then
+    print("Personal info available:", personal_info)
+    -- Access specific fields if needed
+else
+    print("Personal info not available (player not authorized or scopes not requested)")
+end
+```
+
+#### `yagames.player_get_signature()`
+
+Returns a string containing the user's data from their Yandex profile and a signature. Available only when player is initialized with `options.signed = true`. Used for server-side authentication to prevent fraud.
+
+**Returns:**
+- <kbd>string</kbd> or <kbd>nil</kbd> - Signature string if available, or `nil` if player was not initialized with `signed = true`.
+
+The signature consists of two Base64-encoded strings separated by a dot:
+```
+<signature>.<profile_data>
+```
+
+> [!NOTE]
+> The signature can be sent to your server no more than **20 times per 5 minutes**, otherwise the request will be rejected with an error.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Note: Call player_init() only once, then use all player_* functions
+-- Initialize with signed = true
+yagames.player_init({signed = true}, function(self, err)
+    if err then
+        print("Initialization failed:", err)
+        return
+    end
+    
+    local signature = yagames.player_get_signature()
+    if signature then
+        -- Send to your server for authentication
+        -- Example: http.request("https://your-server.com/auth", "POST", signature)
+        print("Signature:", signature)
+    end
+end)
+```
+
+#### `yagames.player_set_data(data, flush, callback)`
+
+Saves user's game data to Yandex servers. Use this to store game progress, levels completed, settings, etc.
+
+> [!WARNING]
+> Maximum data size: **200 KB**. Exceeding this limit will result in an error.
+
+> [!NOTE]
+> Request rate limit: **100 requests per 5 minutes**.
+
+**Parameters:**
+- `data` <kbd>table</kbd> - Table containing key-value pairs. Example: `{ level = 5, coins = 100, settings = { sound = true } }`.
+- `flush` <kbd>boolean</kbd> - Specifies when data is sent:
+  - `true` - Data is sent immediately to the server
+  - `false` (default) - Request is queued and sent later
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err)`. If `err` is `nil`, data was saved successfully.
+
+**Note:** When `flush = false`, the callback only indicates data validity. The actual send is queued and happens later. However, `player_get_data()` will return the data set by the last `player_set_data()` call, even if it hasn't been sent yet.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Save game progress immediately
+yagames.player_set_data({
+    level = 5,
+    coins = 100,
+    unlocked_levels = {1, 2, 3, 4, 5},
+    settings = {
+        sound_enabled = true,
+        music_enabled = false
+    }
+}, true, function(self, err)
+    if err then
+        print("Failed to save data:", err)
+    else
+        print("Game progress saved successfully!")
+    end
+end)
+
+-- Queue data save (non-blocking)
+yagames.player_set_data({
+    last_play_time = os.time(),
+    achievements = {"first_win", "level_5_complete"}
+}, false, function(self, err)
+    if err then
+        print("Data validation failed:", err)
+    else
+        print("Data queued for saving")
+    end
+end)
+```
+
+#### `yagames.player_get_data(keys, callback)`
+
+Asynchronously retrieves user's game data stored on Yandex servers.
+
+> [!NOTE]
+> Request rate is limited. Exceeding limits will result in errors.
+
+**Parameters:**
+- `keys` <kbd>table</kbd> (optional) - List of keys to retrieve (e.g., `{"level", "coins"}`). If `nil`, returns all game data.
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` is a table with key-value pairs.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Get all player data
+yagames.player_get_data(nil, function(self, err, data)
+    if err then
+        print("Failed to get data:", err)
+    else
+        print("All player data:", data)
+        if data.level then
+            print("Current level:", data.level)
+        end
+        if data.coins then
+            print("Coins:", data.coins)
+        end
+    end
+end)
+
+-- Get specific keys only
+yagames.player_get_data({"level", "coins", "settings"}, function(self, err, data)
+    if err then
+        print("Failed to get data:", err)
+    else
+        print("Level:", data.level or "not set")
+        print("Coins:", data.coins or 0)
+        print("Settings:", data.settings or {})
+    end
+end)
+```
+
+#### `yagames.player_set_stats(stats, callback)`
+
+Saves user's numeric statistics. Use this for tracking scores, achievements, counters, etc.
+
+> [!WARNING]
+> Maximum data size: **10 KB**. Only numeric values are supported.
+
+> [!NOTE]
+> Request rate limit: **60 requests per 1 minute**.
+
+**Parameters:**
+- `stats` <kbd>table</kbd> - Table with numeric key-value pairs. Example: `{ kills = 100, deaths = 5, score = 5000 }`.
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` contains the changed key-value pairs.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Save player statistics
+yagames.player_set_stats({
+    total_kills = 150,
+    total_deaths = 10,
+    high_score = 5000,
+    games_played = 25
+}, function(self, err, result)
+    if err then
+        print("Failed to save stats:", err)
+    else
+        print("Stats saved:", result)
+    end
+end)
+```
+
+#### `yagames.player_increment_stats(increments, callback)`
+
+Increments (adds to) user's numeric statistics. Use this to update counters without reading current values first.
+
+> [!WARNING]
+> Maximum data size: **10 KB**. Only numeric values are supported.
+
+**Parameters:**
+- `increments` <kbd>table</kbd> - Table with numeric increments. Example: `{ kills = 5, score = 100 }` (adds 5 to kills, 100 to score).
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` contains the updated key-value pairs after increment.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Increment statistics after a game session
+yagames.player_increment_stats({
+    kills = 10,      -- Add 10 kills
+    score = 500,     -- Add 500 to score
+    games_played = 1 -- Increment games played by 1
+}, function(self, err, result)
+    if err then
+        print("Failed to increment stats:", err)
+    else
+        print("Updated stats:", result)
+        print("New kill count:", result.kills)
+        print("New score:", result.score)
+    end
+end)
+
+-- Can also use negative values to decrement
+yagames.player_increment_stats({
+    lives = -1  -- Decrease lives by 1
+}, function(self, err, result)
+    if not err then
+        print("Lives remaining:", result.lives)
+    end
+end)
+```
+
+#### `yagames.player_get_stats(keys, callback)`
+
+Asynchronously retrieves user's numeric statistics.
+
+**Parameters:**
+- `keys` <kbd>table</kbd> (optional) - List of keys to retrieve (e.g., `{"kills", "score"}`). If `nil`, returns all statistics.
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` is a table with numeric key-value pairs.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Get all statistics
+yagames.player_get_stats(nil, function(self, err, stats)
+    if err then
+        print("Failed to get stats:", err)
+    else
+        print("All stats:", stats)
+        print("Total kills:", stats.kills or 0)
+        print("High score:", stats.high_score or 0)
+    end
+end)
+
+-- Get specific statistics
+yagames.player_get_stats({"kills", "deaths", "score"}, function(self, err, stats)
+    if err then
+        print("Failed to get stats:", err)
+    else
+        local kd_ratio = (stats.kills or 0) / math.max(stats.deaths or 1, 1)
+        print("K/D ratio:", kd_ratio)
+        print("Score:", stats.score or 0)
+    end
+end)
+```
+
+#### `yagames.player_get_unique_id()`
+
+Returns the user's unique permanent identifier. This ID remains constant across sessions and games.
+
+> [!IMPORTANT]
+> The previously used `player_get_id()` method is deprecated. Use `player_get_unique_id()` instead. If your game previously used `player_get_id()` and stored data associated with it, you need to migrate that data to use `player_get_unique_id()`.
+
+**Returns:**
+- <kbd>string</kbd> - The user's unique ID.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Note: Call player_init() only once, then use all player_* functions
+yagames.player_init({}, function(self, err)
+    if not err then
+        local user_id = yagames.player_get_unique_id()
+        print("User ID:", user_id)
+        -- Store this ID on your server for user identification
+    end
+end)
+```
+
+#### `yagames.player_get_ids_per_game(callback)`
+
+Returns a table (array) with user IDs in all developer games where the user has explicitly consented to transfer their personal data.
+
+> [!WARNING]
+> This request is only available for authorized users. Use `yagames.auth_open_auth_dialog()` if needed.
+
+**Parameters:**
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` is an array of tables with `appID` and `userID` fields.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+yagames.player_get_ids_per_game(function(self, err, ids)
+    if err then
+        print("Failed to get IDs:", err)
+        -- User might not be authorized
+    else
+        print("User IDs across games:", ids)
+        -- Example result:
+        -- {
+        --     { appID = 103915, userID = "tOpLpSh7i8QG8Voh/SuPbeS4NKTj1OxATCTKQF92H4c=" },
+        --     { appID = 103993, userID = "bviQCIAAuVmNMP66bZzC4x+4oSFzRKpteZ/euP/Jwv4=" }
+        -- }
+        for _, game_id in ipairs(ids) do
+            print("Game", game_id.appID, "User ID:", game_id.userID)
+        end
+    end
+end)
+```
+
+#### `yagames.player_get_mode()`
+
+Returns the user's authorization mode.
+
+> [!WARNING]
+> This method is deprecated. Use `yagames.player_is_authorized()` instead.
+
+**Returns:**
+- <kbd>string</kbd> - Authorization mode: `"lite"` or `""` (empty string).
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+local mode = yagames.player_get_mode()
+if mode == "lite" then
+    print("User is in lite mode")
+else
+    print("User is authorized")
+end
+```
+
+#### `yagames.player_is_authorized()`
+
+Checks if the player is authorized on Yandex.
+
+**Returns:**
+- <kbd>boolean</kbd> - `true` if authorized, `false` otherwise.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Note: Call player_init() only once, then use all player_* functions
+yagames.player_init({scopes = true}, function(self, err)
+    if not err then
+        if yagames.player_is_authorized() then
+            print("Player is authorized")
+            print("Name:", yagames.player_get_name())
+            print("Photo:", yagames.player_get_photo("large"))
+        else
+            print("Player is not authorized")
+            -- Show auth dialog
+            yagames.auth_open_auth_dialog(function(self, err)
+                if not err then
+                    print("Authorization successful!")
+                end
+            end)
+        end
+    end
+end)
+```
+
+#### `yagames.player_get_name()`
+
+Returns the user's name from their Yandex profile.
+
+**Returns:**
+- <kbd>string</kbd> - User's name, or empty string if not available.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Note: Call player_init() only once, then use all player_* functions
+yagames.player_init({scopes = true}, function(self, err)
+    if not err then
+        local name = yagames.player_get_name()
+        if name and name ~= "" then
+            print("Welcome,", name .. "!")
+        else
+            print("Welcome, Player!")
+        end
+    end
+end)
+```
+
+#### `yagames.player_get_photo(size)`
+
+Returns the URL of the user's avatar from their Yandex profile.
+
+**Parameters:**
+- `size` <kbd>string</kbd> - Required avatar size. Possible values: `"small"`, `"medium"`, `"large"`.
+
+**Returns:**
+- <kbd>string</kbd> - Avatar URL, or empty string if not available.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Note: Call player_init() only once, then use all player_* functions
+yagames.player_init({scopes = true}, function(self, err)
+    if not err then
+        local photo_url = yagames.player_get_photo("large")
+        if photo_url and photo_url ~= "" then
+            print("Avatar URL:", photo_url)
+            -- Load avatar image using the URL
+            -- gui.load_texture("avatar", photo_url)
+        end
+    end
+end)
+```
+
+#### `yagames.player_get_paying_status()`
+
+Returns the user's payment status based on their purchase history on the Yandex platform. Useful for offering premium content or alternative monetization to paying users.
+
+**Returns:**
+- <kbd>string</kbd> - One of four possible values:
+  - `"paying"` - User purchased portal currency for more than 500 rubles in the last month
+  - `"partially_paying"` - User had at least one purchase of portal currency with real money in the last year
+  - `"not_paying"` - User hasn't made any purchases of portal currency with real money in the last year
+  - `"unknown"` - User is not from Russia or hasn't allowed sharing this information
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Note: Call player_init() only once, then use all player_* functions
+yagames.player_init({}, function(self, err)
+    if not err then
+        local paying_status = yagames.player_get_paying_status()
+        
+        if paying_status == "paying" or paying_status == "partially_paying" then
+            -- Offer premium content or skip ads for paying users
+            print("Paying user detected - offering premium features")
+            -- show_premium_content()
+        elseif paying_status == "not_paying" then
+            -- Show ads or free content
+            print("Non-paying user - showing ads")
+            -- show_ads()
+        else
+            -- Unknown status (user not from Russia)
+            print("Payment status unknown")
+        end
+    end
+end)
+```
 
 ### In-Game Purchases [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-purchases)
 

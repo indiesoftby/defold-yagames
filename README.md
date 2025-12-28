@@ -2725,9 +2725,170 @@ end)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
-| `ysdk.on(eventName, listener)` | `yagames.event_on(event_name, listener)`<br>`event_name` is a string: `game_api_pause`, `game_api_resume`, `HISTORY_BACK`, `multiplayer-sessions-transaction`, `multiplayer-sessions-finish` etc. |
-| `ysdk.off(eventName, listener)` | `yagames.event_off(event_name, listener)`<br>`event_name` is a string: `game_api_pause`, etc. |
-| `ysdk.dispatchEvent(eventName)` | `yagames.event_dispatch(event_name)`<br>`event_name` is a string: `EXIT` etc. |
+| `ysdk.on(eventName, listener)` | `yagames.event_on(event_name, listener)` |
+| `ysdk.off(eventName, listener)` | `yagames.event_off(event_name, listener)` |
+| `ysdk.dispatchEvent(eventName)` | `yagames.event_dispatch(event_name)` |
+
+#### `yagames.event_on(event_name, listener)`
+
+Subscribes to an SDK event. Use this to listen for platform events like game pause/resume, ad display, account selection, etc.
+
+**Parameters:**
+- `event_name` <kbd>string</kbd> - Event name. Available events:
+  - `"game_api_pause"` - Game should be paused (ad shown, purchase dialog opened, browser tab switched, etc.)
+  - `"game_api_resume"` - Game should be resumed
+  - `"HISTORY_BACK"` - Back button pressed (TV platform only)
+  - `"ACCOUNT_SELECTION_DIALOG_OPENED"` - Account selection dialog opened
+  - `"ACCOUNT_SELECTION_DIALOG_CLOSED"` - Account selection dialog closed
+  - `"multiplayer-sessions-transaction"` - Multiplayer session transaction received
+  - `"multiplayer-sessions-finish"` - Multiplayer session finished
+- `listener` <kbd>function</kbd> - Listener function with arguments `(self, err, data)`. Called when the event occurs.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Subscribe to game pause event
+yagames.event_on("game_api_pause", function(self, err, data)
+    print("Game paused")
+    -- Stop game loop and music
+    pause_game()
+    mute_sounds()
+end)
+
+-- Subscribe to game resume event
+local resume_listener = function(self, err, data)
+    print("Game resumed")
+    -- Resume game loop and music
+    resume_game()
+    unmute_sounds()
+end
+yagames.event_on("game_api_resume", resume_listener)
+
+-- Handle fullscreen ad on game start
+-- Note: Platform automatically shows fullscreen ad on startup
+local game_started = false
+local is_paused = false
+
+yagames.event_on("game_api_pause", function(self, err, data)
+    is_paused = true
+    pause_game()
+    mute_sounds()
+    print("GAME PAUSED - waiting for resume")
+end)
+
+yagames.event_on("game_api_resume", function(self, err, data)
+    is_paused = false
+    
+    if not game_started then
+        start_game()
+        game_started = true
+    else
+        resume_game()
+        unmute_sounds()
+    end
+    
+    print("GAME RESUMED")
+end)
+
+-- Subscribe to account selection dialog events
+yagames.event_on("ACCOUNT_SELECTION_DIALOG_OPENED", function(self, err, data)
+    print("Account selection dialog opened")
+    -- Pause player data synchronization
+    pause_data_sync()
+end)
+
+yagames.event_on("ACCOUNT_SELECTION_DIALOG_CLOSED", function(self, err, data)
+    print("Account selection dialog closed")
+    -- Return to main menu or reload game
+    -- Re-request player data
+    yagames.player_init(nil, function(self, err)
+        if not err then
+            yagames.player_get_data(nil, function(self, err, data)
+                -- Update game with new player data
+            end)
+        end
+    end)
+end)
+```
+
+#### `yagames.event_off(event_name, listener)`
+
+Unsubscribes from an SDK event. Removes the event listener.
+
+**Parameters:**
+- `event_name` <kbd>string</kbd> - Event name (same as in `event_on()`)
+- `listener` <kbd>function</kbd> - The listener function that was previously registered with `event_on()`
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Define listener
+local pause_listener = function(self, err, data)
+    pause_game()
+end
+
+-- Subscribe
+yagames.event_on("game_api_pause", pause_listener)
+
+-- Later, unsubscribe
+yagames.event_off("game_api_pause", pause_listener)
+```
+
+#### `yagames.event_dispatch(event_name)`
+
+Dispatches a custom event to the platform. Currently, only `"EXIT"` event is supported.
+
+> [!WARNING]
+> `EXIT` event should be dispatched only after the user confirms exit in a custom dialog shown after `HISTORY_BACK` event (TV platform).
+
+**Parameters:**
+- `event_name` <kbd>string</kbd> - Event name. Currently supported:
+  - `"EXIT"` - User confirmed exit from the game
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Subscribe to HISTORY_BACK event (TV platform only)
+yagames.event_on("HISTORY_BACK", function(self, err, data)
+    print("Back button pressed")
+    -- Show custom dialog with exit confirmation
+    show_exit_dialog(function(confirmed)
+        if confirmed then
+            -- User confirmed exit
+            yagames.event_dispatch("EXIT")
+        else
+            -- User cancelled, stay in game
+        end
+    end)
+end)
+```
+
+#### Game Pause and Resume Events
+
+The platform uses `game_api_pause` and `game_api_resume` events to notify your game when it should pause or resume gameplay. These events help simplify integration with the platform and meet moderation requirements.
+
+Events are triggered when:
+- Fullscreen or rewarded video ads are shown/closed
+- Purchase dialogs are opened/closed
+- Browser tabs are switched
+- Browser window is minimized/maximized
+
+> [!IMPORTANT]
+> The platform automatically shows a fullscreen ad on game startup. Unlike ads called via `adv_show_fullscreen_adv()`, startup ads don't have direct callbacks. Track `game_api_pause` and `game_api_resume` events to handle them properly:
+> 1. On `game_api_pause`: mute game sounds and pause gameplay
+> 2. Wait for `game_api_resume` and resume the game
+
+These events are coordinated with gameplay marking methods:
+- When `game_api_pause` fires, `yagames.features_gameplayapi_stop()` is called automatically by the platform.
+- When `game_api_resume` fires, `yagames.features_gameplayapi_start()` is called automatically by the platform.
+
+If the game was already stopped using `yagames.features_gameplayapi_stop()` (e.g., when player opened menu), and then `game_api_pause` fires, `yagames.features_gameplayapi_start()` won't be called on subsequent `game_api_resume`. This preserves the current game state without breaking gameplay marking logic.
 
 ### 🌒 MULTIPLAYER SESSIONS [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-multiplayer-sessions)
 

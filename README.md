@@ -233,6 +233,7 @@ And it's also a good idea to upload a demo build of YaGames to your game's draft
 - [Remote Config](#-remote-config-docs)
 - [Events](#-events-docs)
 - [Multiplayer Sessions](#-multiplayer-sessions-docs)
+- [Miscellaneous](#-miscellaneous-docs)
 - [Sitelock](#-sitelock-docs)
 
 ### 🌒 INITIALIZATION [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-about)
@@ -240,7 +241,6 @@ And it's also a good idea to upload a demo build of YaGames to your game's draft
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `YaGames.init(options)` | `yagames.init(callback)` |
-| `ysdk.isAvailableMethod(name)` | `yagames.is_available_method(name, callback)` |
 
 #### `yagames.init(callback)`
 
@@ -273,48 +273,6 @@ end
 
 function init(self)
     yagames.init(init_handler)
-end
-```
-
-#### `yagames.is_available_method(name, callback)`
-
-Checks if a specific SDK method is available to call. This is useful for checking feature availability before attempting to use them.
-
-**Parameters:**
-- `name` <kbd>string</kbd> - The name of the method to check (e.g., `"adv.showFullscreenAdv"`, `"payments.purchase"`).
-- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` is a boolean indicating if the method is available.
-
-**Example:**
-
-```lua
-local yagames = require("yagames.yagames")
-
--- Check if fullscreen ads are available
-yagames.is_available_method("adv.showFullscreenAdv", function(self, err, result)
-    if err then
-        print("Error checking method availability:", err)
-    elseif result then
-        print("Fullscreen ads are available!")
-        -- You can safely call yagames.adv_show_fullscreen_adv()
-    else
-        print("Fullscreen ads are not available on this platform")
-        -- Use alternative monetization method
-    end
-end)
-
--- Check multiple methods
-local methods_to_check = {
-    "adv.showFullscreenAdv",
-    "payments.purchase",
-    "leaderboards.setLeaderboardScore"
-}
-
-for _, method_name in ipairs(methods_to_check) do
-    yagames.is_available_method(method_name, function(self, err, result)
-        if not err and result then
-            print("Method '" .. method_name .. "' is available")
-        end
-    end)
 end
 ```
 
@@ -2894,9 +2852,375 @@ If the game was already stopped using `yagames.features_gameplayapi_stop()` (e.g
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
-| `ysdk.multiplayer.sessions.init(options)` | `yagames.multiplayer_sessions_init(options, callback)`<br>The argument `options` is a Lua table `{ count = number, isEventBased = boolean, maxOpponentTurnTime = number, meta = { key = { min = number, max = number } } }`. See [the example](https://github.com/indiesoftby/defold-yagames/blob/master/example/ysdkdebug/pg_multiplayer.lua). |
-| `ysdk.multiplayer.sessions.commit(data)` | `yagames.multiplayer_sessions_commit(data)`<br>The argument `data` is a Lua table, i.e. `{ key = value }`. |
-| `ysdk.multiplayer.sessions.push(data)` | `yagames.multiplayer_sessions_push(data)`<br>The argument `data` is a Lua table, i.e. `{ key = value }`. |
+| `ysdk.multiplayer.sessions.init(options)` | `yagames.multiplayer_sessions_init(options, callback)` |
+| `ysdk.multiplayer.sessions.commit(data)` | `yagames.multiplayer_sessions_commit(data)` |
+| `ysdk.multiplayer.sessions.push(data)` | `yagames.multiplayer_sessions_push(data)` |
+
+Asynchronous multiplayer allows you to create competitive gameplay similar to online multiplayer without writing server-side code or requiring a critical mass of players. The SDK records key events (key presses, state changes) with timestamps, saves them as timelines, and replays opponent actions in real-time when other players start the game.
+
+**Supported game genres:**
+- **Puzzles:** Asynchronous sessions can be replayed on adjacent game fields, add competition by time or score
+- **Runners and Racing:** Opponent sessions can be rendered as "ghosts" moving alongside the player (ghost driver mechanic)
+- **Strategy and Auto-battlers:** Implement battles against other players' tactics
+
+#### `yagames.multiplayer_sessions_init(options, callback)`
+
+Initializes the multiplayer subsystem and loads opponent game sessions. Performs startup initialization and loads opponent sessions based on meta parameters.
+
+> [!IMPORTANT]
+> To load sessions, you must set at least one of the three `meta` parameters (`meta1`, `meta2`, `meta3`), and the `count` parameter must be greater than zero. Otherwise, multiplayer will be initialized only for **writing** data.
+
+> [!IMPORTANT]
+> If `isEventBased` is `true`, you must subscribe to events `multiplayer-sessions-transaction` and `multiplayer-sessions-finish` through `yagames.event_on()` before calling this method. Also, use `yagames.features_gameplayapi_start()` to start multiplayer after initialization, otherwise events won't be sent.
+
+**Parameters:**
+- `options` <kbd>table</kbd> - Table with initialization options:
+  - `count` <kbd>number</kbd> - Number of opponent sessions to load (max 10)
+  - `isEventBased` <kbd>boolean</kbd> - If `true`, work through events (SDK loads sessions and emits events at specified timestamps). If `false`, return loaded sessions for manual processing
+  - `maxOpponentTurnTime` <kbd>number</kbd> (optional) - Maximum interval between `multiplayer-sessions-transaction` events in milliseconds. Limits opponent turn time. If an opponent's turn lasted longer than this value, it will be shortened to the specified time. Default: unlimited
+  - `meta` <kbd>table</kbd> - Meta parameters for session selection. Each parameter (`meta1`, `meta2`, `meta3`) is an object with `min` and `max` values. Used to load sessions close to the current user by these parameters (e.g., score, player level). At least one meta parameter must be set to load sessions
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` is an array of opponent session objects (if `isEventBased` is `false`) or empty array (if `isEventBased` is `true`). Each session object contains:
+  - `id` <kbd>string</kbd> - Session identifier
+  - `meta1`, `meta2`, `meta3` <kbd>number</kbd> - User-defined parameters set when saving the session
+  - `player` <kbd>table</kbd> - Opponent player information:
+    - `avatar` <kbd>string</kbd> - Player avatar URL
+    - `name` <kbd>string</kbd> - Player name
+  - `timeline` <kbd>table</kbd> - Array of events describing the game session:
+    - `id` <kbd>string</kbd> - Unique event identifier
+    - `payload` <kbd>table</kbd> - Event data (e.g., character coordinates, button press)
+    - `time` <kbd>number</kbd> - Time from game start with pause adjustments (ms)
+
+**Example (Event-based):**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Subscribe to multiplayer events BEFORE initialization
+yagames.event_on("multiplayer-sessions-transaction", function(self, err, data)
+    if err then
+        print("Transaction error:", err)
+        return
+    end
+    
+    -- data contains: { opponentId = "session_id", transactions = {...} }
+    local opponent_id = data.opponentId
+    local transactions = data.transactions
+    
+    -- Apply opponent actions to game field
+    for i, transaction in ipairs(transactions) do
+        print(string.format("Opponent %s: time=%d, payload=%s", 
+            opponent_id, transaction.time, table_util.tostring(transaction.payload)))
+        -- Apply transaction.payload to game state
+        apply_opponent_action(opponent_id, transaction.payload)
+    end
+end)
+
+yagames.event_on("multiplayer-sessions-finish", function(self, err, data)
+    if err then
+        print("Finish error:", err)
+        return
+    end
+    
+    -- data contains: { opponentId = "session_id" }
+    local opponent_id = data.opponentId
+    print("Opponent finished:", opponent_id)
+    -- Remove opponent from game field
+    remove_opponent(opponent_id)
+end)
+
+-- Initialize multiplayer
+local options = {
+    count = 2,  -- Load 2 opponent sessions
+    isEventBased = true,  -- Work through events
+    maxOpponentTurnTime = 200,  -- Limit opponent turn time to 200ms
+    meta = {
+        meta1 = { min = 0, max = 6000 },  -- Score range
+        meta2 = { min = 2, max = 10 },    -- Level range
+    }
+}
+
+yagames.multiplayer_sessions_init(options, function(self, err, result)
+    if err then
+        print("Failed to initialize multiplayer:", err)
+    else
+        print("Multiplayer initialized")
+        -- IMPORTANT: Start gameplay to receive events
+        yagames.features_gameplayapi_start()
+    end
+end)
+```
+
+**Example (Manual processing):**
+
+```lua
+local yagames = require("yagames.yagames")
+
+local options = {
+    count = 2,
+    isEventBased = false,  -- Manual processing
+    maxOpponentTurnTime = 200,
+    meta = {
+        meta1 = { min = 0, max = 6000 },
+    }
+}
+
+yagames.multiplayer_sessions_init(options, function(self, err, opponents)
+    if err then
+        print("Failed to initialize multiplayer:", err)
+        return
+    end
+    
+    print("Loaded", #opponents, "opponent sessions")
+    
+    -- Process each opponent session manually
+    for i, opponent in ipairs(opponents) do
+        print("Opponent", i, ":", opponent.player.name)
+        print("  Avatar:", opponent.player.avatar)
+        print("  Meta1:", opponent.meta1)
+        print("  Timeline events:", #opponent.timeline)
+        
+        -- Implement your own mechanism to use timeline data
+        process_opponent_timeline(opponent)
+    end
+end)
+```
+
+#### `yagames.multiplayer_sessions_commit(data)`
+
+Commits a transaction for the current game session. Records key events (key presses, state changes) with timestamps.
+
+> [!IMPORTANT]
+> Other transaction parameters (`id` and `time` from game start) are calculated by the SDK, so it's important to send `payload` data in a timely manner.
+
+**Parameters:**
+- `data` <kbd>table</kbd> - Event payload data (e.g., `{ x = 1, y = 2, health = 67 }`). This data reflects the essence and reason for changes in the game world (e.g., new character coordinates or button press)
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Commit first transaction
+yagames.multiplayer_sessions_commit({
+    x = 1,
+    y = 2,
+    z = 3,
+    health = 67
+})
+
+-- ... game continues ...
+
+-- Commit next transaction
+yagames.multiplayer_sessions_commit({
+    x = 4,
+    y = -2,
+    z = 19,
+    health = 15
+})
+```
+
+#### `yagames.multiplayer_sessions_push(data)`
+
+Saves the timeline to the remote server. Called when the game session ends. The saved session can be loaded and replayed in the next game.
+
+> [!IMPORTANT]
+> At least one of the meta parameters (`meta1`, `meta2`, `meta3`) must be defined when saving the session.
+
+**Parameters:**
+- `data` <kbd>table</kbd> - Meta parameters for session selection. Must contain at least one of:
+  - `meta1` <kbd>number</kbd> (optional) - User-defined parameter (e.g., game score)
+  - `meta2` <kbd>number</kbd> (optional) - User-defined parameter (e.g., player level)
+  - `meta3` <kbd>number</kbd> (optional) - User-defined parameter
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Game session ended, save it
+local current_score = get_player_score()
+local current_level = get_player_level()
+
+yagames.multiplayer_sessions_push({
+    meta1 = current_score,  -- Score for matching similar players
+    meta2 = current_level   -- Level for matching similar players
+})
+
+-- After push, you can stop gameplay
+yagames.features_gameplayapi_stop()
+```
+
+### 🌒 MISCELLANEOUS [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-about)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
+| `ysdk.isAvailableMethod(name)` | `yagames.is_available_method(name, callback)` |
+| `ysdk.serverTime()` | `yagames.server_time()` |
+
+#### `yagames.is_available_method(name, callback)`
+
+Checks if a specific SDK method is available to call. This is useful for checking feature availability before attempting to use them.
+
+**Parameters:**
+- `name` <kbd>string</kbd> - The name of the method to check (e.g., `"adv.showFullscreenAdv"`, `"payments.purchase"`, `"leaderboards.setScore"`).
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` is a boolean indicating if the method is available.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Check if fullscreen ads are available
+yagames.is_available_method("adv.showFullscreenAdv", function(self, err, result)
+    if err then
+        print("Error checking method availability:", err)
+    elseif result then
+        print("Fullscreen ads are available!")
+        -- You can safely call yagames.adv_show_fullscreen_adv()
+    else
+        print("Fullscreen ads are not available on this platform")
+        -- Use alternative monetization method
+    end
+end)
+
+-- Check multiple methods
+local methods_to_check = {
+    "adv.showFullscreenAdv",
+    "payments.purchase",
+    "leaderboards.setScore"
+}
+for _, method_name in ipairs(methods_to_check) do
+    yagames.is_available_method(method_name, function(self, err, result)
+        if not err then
+            print(method_name, "is", result and "available" or "not available")
+        end
+    end)
+end
+```
+
+#### `yagames.server_time()`
+
+Returns server time synchronized with Yandex.Games servers as a timestamp in milliseconds (UNIX format). This method is useful for:
+
+- **Cheat protection**: Users cannot influence game processes by changing device time
+- **Game events**: Daily/weekly bonuses, seasonal events, quests that require a trusted time source
+
+> [!IMPORTANT]
+> Unlike `os.time()` or device time, `server_time()` is resistant to system time manipulation on the device, making it more reliable. Call it each time you need to get the current time.
+
+**Returns:**
+- <kbd>number</kbd> - Server time in milliseconds (UNIX timestamp), same on all devices
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Get current server time
+local current_time = yagames.server_time()
+print("Server time:", current_time)  -- e.g., 1720613073778
+
+-- Use later to get updated time
+local updated_time = yagames.server_time()
+print("Updated time:", updated_time)  -- e.g., 1720613132635
+```
+
+**Example: Daily reward (24 hours after last visit):**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Initialize player first
+yagames.player_init(nil, function(self, err)
+    if err then
+        print("Player initialization failed:", err)
+        return
+    end
+    
+    -- Get saved player data
+    yagames.player_get_data(nil, function(self, err, data)
+        if err then
+            print("Failed to get player data:", err)
+            return
+        end
+        
+        -- Current server time
+        local current_time = yagames.server_time()
+        
+        -- Last reward time (or 0 if never received)
+        local last_reward_time = (data and data.lastRewardTime) and tonumber(data.lastRewardTime) or 0
+        
+        -- 24 hours in milliseconds
+        local DAY_IN_MS = 24 * 60 * 60 * 1000
+        
+        if current_time - last_reward_time >= DAY_IN_MS then
+            -- More than 24 hours passed - give reward
+            give_daily_reward()  -- Your reward function
+            
+            -- Save new reward time
+            yagames.player_set_data({
+                lastRewardTime = tostring(current_time)
+            }, false, function(self, err)
+                if err then
+                    print("Failed to save reward time:", err)
+                end
+            end)
+        else
+            local hours_left = math.floor((DAY_IN_MS - (current_time - last_reward_time)) / (60 * 60 * 1000))
+            print("Daily reward available in", hours_left, "hours")
+        end
+    end)
+end)
+```
+
+**Example: Daily reward (once per calendar day, resets at midnight UTC):**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Initialize player first
+yagames.player_init(nil, function(self, err)
+    if err then
+        print("Player initialization failed:", err)
+        return
+    end
+    
+    -- Get saved player data
+    yagames.player_get_data(nil, function(self, err, data)
+        if err then
+            print("Failed to get player data:", err)
+            return
+        end
+        
+        -- Current server time
+        local current_time = yagames.server_time()
+        
+        -- Get last reward date (format: "YYYY-MM-DD")
+        local last_reward_date = (data and data.lastRewardDate) or ""
+        
+        -- Get current date in UTC (format: "YYYY-MM-DD")
+        -- Note: In Lua, you'll need to convert timestamp to date string
+        -- This is a simplified example - you may need a date library
+        local current_date = os.date("!%Y-%m-%d", math.floor(current_time / 1000))
+        
+        if current_date ~= last_reward_date then
+            -- Reward not received today - give reward
+            give_daily_reward()  -- Your reward function
+            
+            -- Save current date
+            yagames.player_set_data({
+                lastRewardDate = current_date
+            }, false, function(self, err)
+                if err then
+                    print("Failed to save reward date:", err)
+                end
+            end)
+        else
+            print("Daily reward already received today")
+        end
+    end)
+end)
+```
 
 ### 🌒 SITELOCK [(docs)](#sitelock)
 

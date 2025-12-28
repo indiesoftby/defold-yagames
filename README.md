@@ -217,18 +217,32 @@ The best way to integrate SDK into your game is to read [the official documentat
 
 And it's also a good idea to upload a demo build of YaGames to your game's draft and click on the buttons to understand what the arguments are and what each function returns.
 
+#### Initialization [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-about)
+
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `YaGames.init(options)` | `yagames.init(callback)`<br>The `options` is a JavaScript object `{}`, and it can be set in the `yagames.sdk_init_options` setting. |
 | `ysdk.isAvailableMethod(name)` | `yagames.is_available_method(name, callback)` [<kbd>Example</kbd>](https://github.com/indiesoftby/defold-yagames/blob/master/example/ysdkdebug/pg_methods.lua) |
-| **Advertisement** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv) |  |
+
+#### Advertisement [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 | `ysdk.adv.showFullscreenAdv({callbacks:{}})` | `yagames.adv_show_fullscreen_adv(callbacks)` [<kbd>Example</kbd>](#2-interstitial-ad) |
 | `ysdk.adv.showRewardedVideo({callbacks:{}})` | `yagames.adv_show_rewarded_video(callbacks)` [<kbd>Example</kbd>](#3-rewarded-videos) |
-| **Advertisement - Sticky Banners** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv#sticky-banner) |  |
+
+#### Advertisement - Sticky Banners [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv#sticky-banner)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 | `ysdk.adv.getBannerAdvStatus()` | `yagames.adv_get_banner_adv_status(callback)` |
 | `ysdk.adv.showBannerAdv()` | `yagames.adv_show_banner_adv([callback])` |
 | `ysdk.adv.hideBannerAdv()` | `yagames.adv_hide_banner_adv([callback])` |
-| **Authentication + Player** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player) |  |
+
+#### Authentication + Player [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 | `ysdk.auth.openAuthDialog()` | `yagames.auth_open_auth_dialog(callback)` |
 | `ysdk.getPlayer(options)` | `yagames.player_init(options, callback)`<br>The argument `options` is a Lua table `{ signed = boolean, scopes = boolean }`. |
 | `player._personalInfo` | `yagames.player_get_personal_info()`<br>The result is `table` or `nil` if the `_personalInfo` object is not available. |
@@ -246,63 +260,121 @@ And it's also a good idea to upload a demo build of YaGames to your game's draft
 | `player.getName()` | `yagames.player_get_name()` |
 | `player.getPhoto(size)` | `yagames.player_get_photo(size)` |
 | `player.getPayingStatus()` | `yagames.player_get_paying_status()` |
-| **In-Game Purchases** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-purchases) |  |
+
+#### In-Game Purchases [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-purchases)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 | `ysdk.getPayments(options)` | `yagames.payments_init(options, callback)` |
 | `payments.purchase(options)` | `yagames.payments_purchase(options, callback)` |
 | `payments.getPurchases()` | `yagames.payments_get_purchases(callback)`<br>The result has the format `{ purchases = { ... }, signature = "..." }` |
 | `payments.getCatalog()` | `yagames.payments_get_catalog([options], callback)`<br>The argument `options` is an optional Lua table `{ getPriceCurrencyImage = "size" }`, where `size` (string) can be `medium`, `small` and `svg`, the currency image url will be injected to the `getPriceCurrencyImage` field of each product. |
 | `payments.consumePurchase(purchaseToken)` | `yagames.payments_consume_purchase(purchase_token, callback)` |
-| **Leaderboards** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-leaderboard) |  |
+
+#### Leaderboards [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-leaderboard)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 | `ysdk.getLeaderboards()` | `yagames.leaderboards_init(callback)` |
 | `lb.getLeaderboardDescription(leaderboardName)` | `yagames.leaderboards_get_description(leaderboard_name, callback)` |
 | `lb.getLeaderboardPlayerEntry(leaderboardName)` | `yagames.leaderboards_get_player_entry(leaderboard_name, [options], callback)`<br>If the player doesn't have any score, you get the error `FetchError: Player is not present in leaderboard`.<br>The argument `options` is an optional Lua table `{ getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` (string) can be `small`, `medium`, `large`. |
 | `lb.getLeaderboardEntries(leaderboardName, options)` | `yagames.leaderboards_get_entries(leaderboard_name, [options], callback)`<br>The argument `options` is an optional Lua table `{ includeUser = boolean, quantityAround = number, quantityTop = number, getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` (string) can be `small`, `medium`, `large`. |
 | `lb.setLeaderboardScore(leaderboardName, score, extraData)` | `yagames.leaderboards_set_score(leaderboard_name, score, [extra_data], [callback])` |
-| **Features** [(docs)](https://yandex.com/dev/games/doc/en/sdk/sdk-game-events) |  |
+
+#### Features [(docs)](https://yandex.com/dev/games/doc/en/sdk/sdk-game-events)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 | `ysdk.features.LoadingAPI?.ready()` | `yagames.features_loadingapi_ready()` |
 | `ysdk.features.GameplayAPI?.start()` | `yagames.features_gameplayapi_start()` |
 | `ysdk.features.GameplayAPI?.stop()` | `yagames.features_gameplayapi_stop()` |
 | `ysdk.features.GamesAPI?.getAllGames()` | `yagames.features_gamesapi_get_all_games(callback)`<br>The callback result is a table `{ games = { ... }, developerURL = "string" }` |
 | `ysdk.features.GamesAPI?.getGameByID(appID)` | `yagames.features_gamesapi_get_game_by_id(app_id, callback)`<br>The callback result is a table `{ isAvailable = true/false, game = { appID = "string", title = "string", url = "string", coverURL = "string", iconURL = "string" } }` |
-| **Feedback** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-review) |  |
+
+#### Feedback [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-review)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 | `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)`<br>The callback result is a table `{ value = true/false, reason = "string" }` |
 | `ysdk.feedback.requestReview()` | `yagames.feedback_request_review(callback)`<br>The callback result is a table `{ feedbackSent = true/false }` |
-| **Clipboard** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params) |  |
+
+#### Clipboard [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 | `ysdk.clipboard.writeText(text)` | `yagames.clipboard_write_text(text, [callback])` |
-| **Device Info** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params) |  |
+
+#### Device Info [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 | `ysdk.deviceInfo.type` | `yagames.device_info_type()`<br>Returns `"desktop"`, `"mobile"`, `"tablet"` or `"tv"` |
 | `ysdk.deviceInfo.isDesktop()` | `yagames.device_info_is_desktop()` |
 | `ysdk.deviceInfo.isMobile()` | `yagames.device_info_is_mobile()` |
 | `ysdk.deviceInfo.isTablet()` | `yagames.device_info_is_tablet()` |
 | `ysdk.deviceInfo.isTV()` | `yagames.device_info_is_tv()` |
-| **Environment** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-environment) |  |
+
+#### Environment [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-environment)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 | `ysdk.environment` | `yagames.environment()`<br>Returns Lua table `{ app = { id = ... }, ... }` |
-| **Screen** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params) |  |
+
+#### Screen [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 | `ysdk.screen.fullscreen.status` | `yagames.screen_fullscreen_status()`<br>Returns `"on"` or `"off"` |
 | `ysdk.screen.fullscreen.request()` | `yagames.screen_fullscreen_request([callback])` |
 | `ysdk.screen.fullscreen.exit()` | `yagames.screen_fullscreen_exit([callback])` |
-| **Shortcuts** [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-shortcut) |  |
+
+#### Shortcuts [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-shortcut)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 | `ysdk.shortcut.canShowPrompt()` | `yagames.shortcut_can_show_prompt(callback)`<br>The callback result is a table `{ canShow = boolean }` |
 | `ysdk.shortcut.showPrompt()` | `yagames.shortcut_show_prompt(callback)`<br>The callback result is a table `{ outcome = "string" }` |
-| **Safe Storage** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player#progress-loss) | *Note: `key` and `value` should be valid UTF-8 strings. Storing strings with zero bytes aren't supported.* |
+
+#### Safe Storage [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player#progress-loss)
+
+*Note: `key` and `value` should be valid UTF-8 strings. Storing strings with zero bytes aren't supported.*
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 | `ysdk.getStorage()` | `yagames.storage_init(callback)` |
-| - `safeStorage.getItem(key)` | `yagames.storage_get_item(key)`<br>Returns that key's value or `nil`. |
-| - `safeStorage.setItem(key, value)` | `yagames.storage_set_item(key, value)`<br>Adds that key to the storage, or update that key's value if it already exists. |
-| - `safeStorage.removeItem(key)` | `yagames.storage_remove_item(key)`<br>Removes that key from the storage. |
-| - `safeStorage.clear()` | `yagames.storage_clear()`<br>Empties all keys out of the storage. |
-| - `safeStorage.key(n)` | `yagames.storage_key(n)`<br>Returns the name of the nth key in the storage or `nil`. *Note: the n index is zero-based.* |
-| - `safeStorage.length` | `yagames.storage_length()`<br>Returns the number of data items stored in the storage. |
-| **Remote Config** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-config) |  |
+| `safeStorage.getItem(key)` | `yagames.storage_get_item(key)`<br>Returns that key's value or `nil`. |
+| `safeStorage.setItem(key, value)` | `yagames.storage_set_item(key, value)`<br>Adds that key to the storage, or update that key's value if it already exists. |
+| `safeStorage.removeItem(key)` | `yagames.storage_remove_item(key)`<br>Removes that key from the storage. |
+| `safeStorage.clear()` | `yagames.storage_clear()`<br>Empties all keys out of the storage. |
+| `safeStorage.key(n)` | `yagames.storage_key(n)`<br>Returns the name of the nth key in the storage or `nil`. *Note: the n index is zero-based.* |
+| `safeStorage.length` | `yagames.storage_length()`<br>Returns the number of data items stored in the storage. |
+
+#### Remote Config [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-config)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 | `ysdk.getFlags(options)` | `yagames.flags_get(options, callback)`<br>Options is optional. The callback result is a table like `{ flagName = "value" }` |
-| **Events** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-events) |  |
+
+#### Events [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-events)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 | `ysdk.on(eventName, listener)` | `yagames.event_on(event_name, listener)`<br>`event_name` is a string: `game_api_pause`, `game_api_resume`, `HISTORY_BACK`, `multiplayer-sessions-transaction`, `multiplayer-sessions-finish` etc. |
 | `ysdk.off(eventName, listener)` | `yagames.event_off(event_name, listener)`<br>`event_name` is a string: `game_api_pause`, etc. |
 | `ysdk.dispatchEvent(eventName)` | `yagames.event_dispatch(event_name)`<br>`event_name` is a string: `EXIT` etc. |
-| **Multiplayer Sessions** [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-multiplayer-sessions) |  |
+
+#### Multiplayer Sessions [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-multiplayer-sessions)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 | `ysdk.multiplayer.sessions.init(options)` | `yagames.multiplayer_sessions_init(options, callback)`<br>The argument `options` is a Lua table `{ count = number, isEventBased = boolean, maxOpponentTurnTime = number, meta = { key = { min = number, max = number } } }`. See [the example](https://github.com/indiesoftby/defold-yagames/blob/master/example/ysdkdebug/pg_multiplayer.lua). |
 | `ysdk.multiplayer.sessions.commit(data)` | `yagames.multiplayer_sessions_commit(data)`<br>The argument `data` is a Lua table, i.e. `{ key = value }`. |
 | `ysdk.multiplayer.sessions.push(data)` | `yagames.multiplayer_sessions_push(data)`<br>The argument `data` is a Lua table, i.e. `{ key = value }`. |
-| **Sitelock** [(docs)](#sitelock) |  |
+
+#### Sitelock [(docs)](#sitelock)
+
+| Yandex.Games JS SDK | YaGames Lua API |
+| ------------------- | --------------- |
 |  | `sitelock.add_domain(domain)` |
 |  | `sitelock.verify_domain()` |
 |  | `sitelock.get_current_domain()` |

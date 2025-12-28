@@ -1436,9 +1436,339 @@ end)
 | ------------------- | --------------- |
 | `ysdk.getLeaderboards()` | `yagames.leaderboards_init(callback)` |
 | `lb.getLeaderboardDescription(leaderboardName)` | `yagames.leaderboards_get_description(leaderboard_name, callback)` |
-| `lb.getLeaderboardPlayerEntry(leaderboardName)` | `yagames.leaderboards_get_player_entry(leaderboard_name, [options], callback)`<br>If the player doesn't have any score, you get the error `FetchError: Player is not present in leaderboard`.<br>The argument `options` is an optional Lua table `{ getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` (string) can be `small`, `medium`, `large`. |
-| `lb.getLeaderboardEntries(leaderboardName, options)` | `yagames.leaderboards_get_entries(leaderboard_name, [options], callback)`<br>The argument `options` is an optional Lua table `{ includeUser = boolean, quantityAround = number, quantityTop = number, getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` (string) can be `small`, `medium`, `large`. |
+| `lb.getLeaderboardPlayerEntry(leaderboardName)` | `yagames.leaderboards_get_player_entry(leaderboard_name, [options], callback)` |
+| `lb.getLeaderboardEntries(leaderboardName, options)` | `yagames.leaderboards_get_entries(leaderboard_name, [options], callback)` |
 | `lb.setLeaderboardScore(leaderboardName, score, extraData)` | `yagames.leaderboards_set_score(leaderboard_name, score, [extra_data], [callback])` |
+
+#### `yagames.leaderboards_init(callback)`
+
+Initializes the leaderboards subsystem. This method must be called **once** before using any other leaderboard-related functions. After initialization, you can use all `leaderboards_*` functions.
+
+> [!IMPORTANT]
+> Before using leaderboards, ensure that:
+> 1. SDK is initialized (`yagames.init()`)
+> 2. A leaderboard is created in the [Developer Console](https://games.yandex.ru/console/) with the correct **Technical Name** (this name will be used in API calls)
+>
+> If a leaderboard with the specified name doesn't exist in the console, you'll get a 404 error.
+
+**Parameters:**
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err)`. If `err` is not `nil`, initialization failed.
+
+> [!NOTE]
+> Rate limit: **20 requests per 5 minutes** for most methods. See individual method descriptions for specific limits.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Note: Call leaderboards_init() only once, then use all leaderboards_* functions
+yagames.leaderboards_init(function(self, err)
+    if err then
+        print("Leaderboards initialization failed:", err)
+        -- Leaderboards are not available
+    else
+        print("Leaderboards initialized successfully!")
+        -- Now you can use leaderboards_get_description(), leaderboards_set_score(), etc.
+    end
+end)
+```
+
+#### `yagames.leaderboards_get_description(leaderboard_name, callback)`
+
+Gets the description and configuration of a leaderboard by its name. Use this to retrieve leaderboard settings like sort order, score format, and localized titles.
+
+**Parameters:**
+- `leaderboard_name` <kbd>string</kbd> - The technical name of the leaderboard as set in the Developer Console.
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` is a table containing:
+  - `appID` <kbd>string</kbd> - Application identifier
+  - `default` <kbd>boolean</kbd> - `true` if this is the default leaderboard
+  - `description` <kbd>table</kbd> - Leaderboard configuration:
+    - `invert_sort_order` <kbd>boolean</kbd> - Sort direction: `false` = descending (higher is better), `true` = ascending (lower is better)
+    - `score_format` <kbd>table</kbd> - Score format configuration:
+      - `type` <kbd>string</kbd> - Score type: `"numeric"` (number) or `"time"` (seconds)
+      - `options.decimal_offset` <kbd>number</kbd> - Decimal part size (e.g., `2` means 1234 displays as 12.34)
+  - `name` <kbd>string</kbd> - Leaderboard name
+  - `title` <kbd>table</kbd> - Localized titles (e.g., `{ ru = "Рейтинг", en = "Rating" }`)
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+local LEADERBOARD_NAME = "RatingTable1"
+
+-- Note: call leaderboards_init() only once, then use all leaderboards_* functions
+
+yagames.leaderboards_get_description(LEADERBOARD_NAME, function(self, err, result)
+    if err then
+        print("Failed to get leaderboard description:", err)
+        -- Check if leaderboard exists in Developer Console
+    else
+        print("Leaderboard name:", result.name)
+        print("Is default:", result.default)
+        print("Sort order:", result.description.invert_sort_order and "ascending" or "descending")
+        print("Score type:", result.description.score_format.type)
+        
+        if result.title.ru then
+            print("Title (RU):", result.title.ru)
+        end
+        if result.title.en then
+            print("Title (EN):", result.title.en)
+        end
+    end
+end)
+```
+
+#### `yagames.leaderboards_set_score(leaderboard_name, score, [extra_data], [callback])`
+
+Sets a new score for the player in the leaderboard. Use this to submit player scores after completing levels, achieving milestones, etc.
+
+> [!WARNING]
+> This method is **only available for authorized users**. Use `yagames.auth_open_auth_dialog()` if needed. You can check availability using `yagames.is_available_method("leaderboards.setScore", callback)`.
+
+> [!NOTE]
+> Rate limit: **1 request per 1 second**. Exceeding this limit will result in errors.
+
+> [!TIP]
+> To save scores for all users regardless of authorization, consider implementing a custom leaderboard in your application code.
+
+**Parameters:**
+- `leaderboard_name` <kbd>string</kbd> - The technical name of the leaderboard as set in the Developer Console.
+- `score` <kbd>number</kbd> - Score value. Must be a non-negative integer. If the leaderboard type is `"time"`, values must be in milliseconds.
+- `extra_data` <kbd>string</kbd> (optional) - Additional user description or metadata to store with the score.
+- `callback` <kbd>function</kbd> (optional) - Callback function with arguments `(self, err)`. If `err` is `nil`, score was set successfully.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+local LEADERBOARD_NAME = "RatingTable1"
+
+-- Note: call leaderboards_init() only once, then use all leaderboards_* functions
+
+-- Set score without extra data
+yagames.leaderboards_set_score(LEADERBOARD_NAME, 1000, nil, function(self, err)
+    if err then
+        print("Failed to set score:", err)
+        -- Possible errors:
+        -- "FetchError: Unauthorized" - User not authorized
+        -- Rate limit exceeded
+    else
+        print("Score set successfully!")
+    end
+end)
+
+-- Set score with extra data (e.g., level completed, time taken, etc.)
+yagames.leaderboards_set_score(LEADERBOARD_NAME, 2500, "Level 5 completed in 2:30", function(self, err)
+    if err then
+        print("Failed to set score:", err)
+    else
+        print("Score with extra data set successfully!")
+    end
+end)
+
+-- For time-based leaderboards, score must be in milliseconds
+local time_in_milliseconds = 125000  -- 2 minutes 5 seconds
+yagames.leaderboards_set_score("TimeLeaderboard", time_in_milliseconds, nil, function(self, err)
+    if not err then
+        print("Time score set!")
+    end
+end)
+```
+
+#### `yagames.leaderboards_get_player_entry(leaderboard_name, [options], callback)`
+
+Gets the player's ranking entry in the leaderboard. Use this to show the player their current position and score.
+
+> [!WARNING]
+> This method requires **authorization**. Use `yagames.auth_open_auth_dialog()` if needed.
+
+> [!NOTE]
+> Rate limit: **60 requests per 5 minutes**.
+
+**Parameters:**
+- `leaderboard_name` <kbd>string</kbd> - The technical name of the leaderboard as set in the Developer Console.
+- `options` <kbd>table</kbd> (optional) - Table with options:
+  - `getAvatarSrc` <kbd>string</kbd> (optional) - Avatar size to include. Possible values: `"small"`, `"medium"`, `"large"`.
+  - `getAvatarSrcSet` <kbd>string</kbd> (optional) - Avatar srcset size for Retina displays. Possible values: `"small"`, `"medium"`, `"large"`.
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` is a table containing:
+  - `rank` <kbd>number</kbd> - Player's rank (0-based, so rank 0 = 1st place)
+  - `score` <kbd>number</kbd> - Player's score
+  - `formattedScore` <kbd>string</kbd> - Formatted score string
+  - `extraData` <kbd>string</kbd> - Extra data associated with the score
+  - `player` <kbd>table</kbd> - Player information:
+    - `uniqueID` <kbd>string</kbd> - Player's unique ID
+    - `publicName` <kbd>string</kbd> - Player's public name
+    - `lang` <kbd>string</kbd> - Player's language code
+    - `scopePermissions` <kbd>table</kbd> - Player's scope permissions:
+      - `public_name` <kbd>string</kbd> - Permission for public name (e.g., `"allow"`)
+      - `avatar` <kbd>string</kbd> - Permission for avatar (e.g., `"allow"`)
+    - `getAvatarSrc` <kbd>string</kbd> - Avatar URL (only present if requested in options)
+    - `getAvatarSrcSet` <kbd>string</kbd> - Avatar srcset URL (only present if requested in options)
+
+**Possible errors:**
+- `"FetchError: Player is not present in leaderboard"` - Player hasn't set a score yet
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+local LEADERBOARD_NAME = "RatingTable1"
+
+-- Note: Call leaderboards_init() only once, then use all leaderboards_* functions
+
+-- Get player entry without avatar
+yagames.leaderboards_get_player_entry(LEADERBOARD_NAME, nil, function(self, err, result)
+    if err then
+        if err == "FetchError: Player is not present in leaderboard" then
+            print("Player hasn't set a score yet")
+        else
+            print("Failed to get player entry:", err)
+        end
+    else
+        local rank_display = result.rank + 1  -- Convert 0-based to 1-based
+        print("Player rank:", rank_display)
+        print("Player score:", result.score)
+        print("Formatted score:", result.formattedScore)
+        if result.extraData and result.extraData ~= "" then
+            print("Extra data:", result.extraData)
+        end
+        
+        if result.player then
+            print("Player name:", result.player.publicName)
+            print("Player language:", result.player.lang)
+        end
+    end
+end)
+
+-- Get player entry with avatar URLs
+yagames.leaderboards_get_player_entry(LEADERBOARD_NAME, {
+    getAvatarSrc = "medium",
+    getAvatarSrcSet = "large"
+}, function(self, err, result)
+    if not err then
+        local rank_display = result.rank + 1  -- Convert 0-based to 1-based
+        print("Rank:", rank_display)
+        print("Score:", result.score)
+        print("Formatted score:", result.formattedScore)
+        
+        if result.player then
+            print("Player name:", result.player.publicName)
+            if result.player.getAvatarSrc then
+                print("Avatar URL:", result.player.getAvatarSrc)
+                -- Load and display avatar
+            end
+            if result.player.getAvatarSrcSet then
+                print("Avatar srcset:", result.player.getAvatarSrcSet)
+            end
+        end
+    end
+end)
+```
+
+#### `yagames.leaderboards_get_entries(leaderboard_name, [options], callback)`
+
+Gets multiple leaderboard entries. Use this to display top players and entries around the current player's position.
+
+> [!NOTE]
+> Rate limit: **20 requests per 5 minutes**. Authorization is optional (unauthorized users can still view leaderboards).
+
+**Parameters:**
+- `leaderboard_name` <kbd>string</kbd> - The technical name of the leaderboard as set in the Developer Console.
+- `options` <kbd>table</kbd> (optional) - Table with options:
+  - `includeUser` <kbd>boolean</kbd> (optional) - Include the authorized user in the response. Default: `false`.
+  - `quantityAround` <kbd>number</kbd> (optional) - Number of entries below and above the user. Min: 1, Max: 10. Default: 5.
+  - `quantityTop` <kbd>number</kbd> (optional) - Number of entries from the top. Min: 1, Max: 20. Default: 5.
+  - `getAvatarSrc` <kbd>string</kbd> (optional) - Avatar size to include. Possible values: `"small"`, `"medium"`, `"large"`.
+  - `getAvatarSrcSet` <kbd>string</kbd> (optional) - Avatar srcset size for Retina displays. Possible values: `"small"`, `"medium"`, `"large"`.
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` is a table containing:
+  - `leaderboard` <kbd>table</kbd> - Leaderboard information:
+    - `appID` <kbd>string</kbd> - Application identifier
+    - `name` <kbd>string</kbd> - Leaderboard technical name
+    - `title` <kbd>table</kbd> - Localized titles (e.g., `{ ru = "Рейтинг", en = "Rating" }`)
+    - `default` <kbd>boolean</kbd> - `true` if this is the default leaderboard
+    - `description` <kbd>table</kbd> - Leaderboard configuration (sort order, score format, etc.)
+  - `entries` <kbd>table</kbd> - Array of leaderboard entry objects, each containing:
+    - `rank` <kbd>number</kbd> - Entry rank (0-based, so rank 0 = 1st place)
+    - `score` <kbd>number</kbd> - Score value
+    - `formattedScore` <kbd>string</kbd> - Formatted score string
+    - `extraData` <kbd>string</kbd> - Extra data associated with the score
+    - `player` <kbd>table</kbd> - Player information:
+      - `uniqueID` <kbd>string</kbd> - Player's unique ID
+      - `publicName` <kbd>string</kbd> - Player's public name
+      - `lang` <kbd>string</kbd> - Player's language code
+      - `scopePermissions` <kbd>table</kbd> - Player's scope permissions:
+        - `public_name` <kbd>string</kbd> - Permission for public name (e.g., `"allow"`)
+        - `avatar` <kbd>string</kbd> - Permission for avatar (e.g., `"allow"`)
+      - `getAvatarSrc` <kbd>string</kbd> - Avatar URL (only present if requested in options)
+      - `getAvatarSrcSet` <kbd>string</kbd> - Avatar srcset URL for Retina displays (only present if requested in options)
+  - `userRank` <kbd>number</kbd> - Current player's rank (0 if not included or not present)
+  - `ranges` <kbd>table</kbd> - Array of range objects with `start` and `size` fields
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+local LEADERBOARD_NAME = "RatingTable1"
+
+-- Note: call leaderboards_init() only once, then use all leaderboards_* functions
+
+-- Get top 10 players
+yagames.leaderboards_get_entries(LEADERBOARD_NAME, {
+    quantityTop = 10,
+    getAvatarSrc = "small"
+}, function(self, err, result)
+    if err then
+        print("Failed to get entries:", err)
+    else
+        print("Top players:")
+        for i, entry in ipairs(result.entries) do
+            local rank_display = entry.rank + 1  -- Convert 0-based to 1-based
+            local player_name = entry.player and entry.player.publicName or "Anonymous"
+            print(string.format("%d. Rank %d: %s - Score %d", i, rank_display, player_name, entry.score))
+            if entry.player and entry.player.getAvatarSrc then
+                print("  Avatar:", entry.player.getAvatarSrc)
+            end
+        end
+    end
+end)
+
+-- Get entries around the current player (include player + 5 above + 5 below)
+yagames.leaderboards_get_entries(LEADERBOARD_NAME, {
+    includeUser = true,
+    quantityAround = 5,
+    quantityTop = 10,
+    getAvatarSrc = "medium",
+    getAvatarSrcSet = "large"
+}, function(self, err, result)
+    if err then
+        print("Failed to get entries:", err)
+    else
+        print("Player rank:", result.userRank)
+        print("Total entries:", #result.entries)
+        
+        for i, entry in ipairs(result.entries) do
+            local rank_display = entry.rank + 1  -- Convert 0-based to 1-based
+            local player_name = entry.player and entry.player.publicName or "Anonymous"
+            print(string.format("%d. Rank %d: %s - Score %d", i, rank_display, player_name, entry.score))
+            
+            if entry.extraData and entry.extraData ~= "" then
+                print("  Extra data:", entry.extraData)
+            end
+            
+            -- Display avatar if available
+            if entry.player and entry.player.getAvatarSrc then
+                print("  Avatar:", entry.player.getAvatarSrc)
+                -- Load avatar image: gui.load_texture("avatar_" .. i, entry.player.getAvatarSrc)
+            end
+        end
+    end
+end)
+```
 
 ### 🌒 FEATURES [(docs)](https://yandex.com/dev/games/doc/en/sdk/sdk-game-events)
 

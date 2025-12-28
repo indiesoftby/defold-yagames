@@ -2078,15 +2078,143 @@ end)
 | ------------------- | --------------- |
 | `ysdk.clipboard.writeText(text)` | `yagames.clipboard_write_text(text, [callback])` |
 
+#### `yagames.clipboard_write_text(text, [callback])`
+
+Writes a string to the clipboard. Allows users to copy game data (e.g., share codes, save data) to the clipboard.
+
+**Parameters:**
+- `text` <kbd>string</kbd> - Text to write to the clipboard
+- `callback` <kbd>function</kbd> (optional) - Callback function with arguments `(self, err)`. Called when the operation completes.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Copy share code to clipboard
+local share_code = "ABC123XYZ"
+yagames.clipboard_write_text(share_code, function(self, err)
+    if err then
+        print("Failed to copy to clipboard:", err)
+    else
+        print("Copied to clipboard:", share_code)
+        -- Show message to user: "Share code copied!"
+    end
+end)
+
+-- Copy without callback
+yagames.clipboard_write_text("Game data: " .. game_data_string)
+```
+
 ### 🌒 DEVICE INFO [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
-| `ysdk.deviceInfo.type` | `yagames.device_info_type()`<br>Returns `"desktop"`, `"mobile"`, `"tablet"` or `"tv"` |
+| `ysdk.deviceInfo.type` | `yagames.device_info_type()` |
 | `ysdk.deviceInfo.isDesktop()` | `yagames.device_info_is_desktop()` |
 | `ysdk.deviceInfo.isMobile()` | `yagames.device_info_is_mobile()` |
 | `ysdk.deviceInfo.isTablet()` | `yagames.device_info_is_tablet()` |
 | `ysdk.deviceInfo.isTV()` | `yagames.device_info_is_tv()` |
+
+#### `yagames.device_info_type()`
+
+Returns the type of the user's device as a string.
+
+**Returns:**
+- <kbd>string</kbd> - Device type: `"desktop"` (computer), `"mobile"` (mobile device), `"tablet"` (tablet), or `"tv"` (TV)
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+local device_type = yagames.device_info_type()
+print("Device type:", device_type)
+
+if device_type == "mobile" then
+    -- Adjust UI for mobile devices
+    adjust_ui_for_mobile()
+elseif device_type == "desktop" then
+    -- Adjust UI for desktop
+    adjust_ui_for_desktop()
+end
+```
+
+#### `yagames.device_info_is_desktop()`
+
+Checks if the user's device is a desktop computer.
+
+**Returns:**
+- <kbd>boolean</kbd> - `true` if desktop, `false` otherwise
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+if yagames.device_info_is_desktop() then
+    -- Enable keyboard controls
+    enable_keyboard_controls()
+end
+```
+
+#### `yagames.device_info_is_mobile()`
+
+Checks if the user's device is a mobile device.
+
+**Returns:**
+- <kbd>boolean</kbd> - `true` if mobile, `false` otherwise
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+if yagames.device_info_is_mobile() then
+    -- Use touch controls
+    enable_touch_controls()
+    -- Adjust UI scale for smaller screens
+    adjust_ui_scale(0.8)
+end
+```
+
+#### `yagames.device_info_is_tablet()`
+
+Checks if the user's device is a tablet.
+
+**Returns:**
+- <kbd>boolean</kbd> - `true` if tablet, `false` otherwise
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+if yagames.device_info_is_tablet() then
+    -- Use tablet-optimized controls
+    enable_tablet_controls()
+end
+```
+
+#### `yagames.device_info_is_tv()`
+
+Checks if the user's device is a TV.
+
+**Returns:**
+- <kbd>boolean</kbd> - `true` if TV, `false` otherwise
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+if yagames.device_info_is_tv() then
+    -- Use TV remote controls
+    enable_tv_controls()
+    -- Increase UI size for TV viewing distance
+    adjust_ui_scale(1.5)
+end
+```
 
 ### 🌒 ENVIRONMENT [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-environment)
 
@@ -2098,9 +2226,91 @@ end)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
-| `ysdk.screen.fullscreen.status` | `yagames.screen_fullscreen_status()`<br>Returns `"on"` or `"off"` |
+| `ysdk.screen.fullscreen.status` | `yagames.screen_fullscreen_status()` |
 | `ysdk.screen.fullscreen.request()` | `yagames.screen_fullscreen_request([callback])` |
 | `ysdk.screen.fullscreen.exit()` | `yagames.screen_fullscreen_exit([callback])` |
+
+> [!WARNING]
+> Yandex.Games may automatically launch in fullscreen mode, but many browsers prohibit switching modes without a user command. Yandex.Games already has a fullscreen button in the top-right corner of the screen, so use these methods to handle fullscreen buttons directly in your game.
+
+#### `yagames.screen_fullscreen_status()`
+
+Gets the current fullscreen state.
+
+**Returns:**
+- <kbd>string</kbd> - Current fullscreen state: `"on"` or `"off"`
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+local status = yagames.screen_fullscreen_status()
+if status == "on" then
+    print("Game is in fullscreen mode")
+else
+    print("Game is in windowed mode")
+end
+```
+
+#### `yagames.screen_fullscreen_request([callback])`
+
+Requests entering fullscreen mode. The browser may require user interaction (e.g., button click) to allow fullscreen.
+
+**Parameters:**
+- `callback` <kbd>function</kbd> (optional) - Callback function with arguments `(self, err)`. Called when the operation completes.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+function on_message(self, message_id, message)
+    if message_id == hash("toggle_fullscreen") then
+        local current_status = yagames.screen_fullscreen_status()
+        if current_status == "off" then
+            -- Request fullscreen
+            yagames.screen_fullscreen_request(function(self, err)
+                if err then
+                    print("Failed to enter fullscreen:", err)
+                    -- Browser may have blocked fullscreen (requires user gesture)
+                else
+                    print("Entered fullscreen mode")
+                end
+            end)
+        end
+    end
+end
+```
+
+#### `yagames.screen_fullscreen_exit([callback])`
+
+Requests exit from fullscreen mode.
+
+**Parameters:**
+- `callback` <kbd>function</kbd> (optional) - Callback function with arguments `(self, err)`. Called when the operation completes.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+function on_message(self, message_id, message)
+    if message_id == hash("toggle_fullscreen") then
+        local current_status = yagames.screen_fullscreen_status()
+        if current_status == "on" then
+            -- Exit fullscreen
+            yagames.screen_fullscreen_exit(function(self, err)
+                if err then
+                    print("Failed to exit fullscreen:", err)
+                else
+                    print("Exited fullscreen mode")
+                end
+            end)
+        end
+    end
+end
+```
 
 ### 🌒 SHORTCUTS [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-shortcut)
 

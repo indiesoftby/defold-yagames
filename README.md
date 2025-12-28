@@ -2220,7 +2220,55 @@ end
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
-| `ysdk.environment` | `yagames.environment()`<br>Returns Lua table `{ app = { id = ... }, ... }` |
+| `ysdk.environment` | `yagames.environment()` |
+
+#### `yagames.environment()`
+
+Returns a table with game environment variables. Use this to get information about the environment in which the game is running, including app ID, language, domain, and optional payload parameter from the URL.
+
+**Returns:**
+- <kbd>table</kbd> - Table containing environment variables:
+  - `app` <kbd>table</kbd> - Game data:
+    - `id` <kbd>string</kbd> - Application identifier
+  - `i18n` <kbd>table</kbd> - Internationalization data:
+    - `lang` <kbd>string</kbd> - Interface language in ISO 639-1 format (e.g., `"ru"`, `"en"`, `"tr"`). Use this to determine the user's language in your game.
+    - `tld` <kbd>string</kbd> - Top-level domain (e.g., `"com"` for international Yandex.Games domain, `"ru"` for Russian domain)
+  - `payload` <kbd>string</kbd> (optional) - Value of the `payload` parameter from the game URL. For example, for `https://yandex.ru/games/app/123?payload=test`, the value `"test"` can be obtained via `environment.payload`.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Note: call yagames.init() before using yagames.environment() and any other yagames.* functions!
+
+-- Get environment variables
+local env = yagames.environment()
+
+print("App ID:", env.app.id)
+print("Language:", env.i18n.lang)
+print("Domain:", env.i18n.tld)
+
+-- Use language to set game localization
+local user_lang = env.i18n.lang
+if user_lang == "ru" then
+    set_game_language("russian")
+elseif user_lang == "en" then
+    set_game_language("english")
+elseif user_lang == "tr" then
+    set_game_language("turkish")
+else
+    -- Default to English
+    set_game_language("english")
+end
+
+-- Check for payload parameter (e.g., from deep link)
+if env.payload and env.payload ~= "" then
+    print("Payload:", env.payload)
+    -- Process payload (e.g., load specific level, share code, etc.)
+    process_payload(env.payload)
+end
+```
 
 ### 🌒 SCREEN [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
 

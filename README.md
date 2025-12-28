@@ -210,27 +210,25 @@ Yandex.Games JavaScript SDK uses ES6 Promise for asynchronous operations. For Lu
 - `err` <kbd>string</kbd> - Error code if something went wrong.
 - `result` - Data if the operation should return something.
 
-### Lua <-> JS
-
 The best way to integrate SDK into your game is to read [the official documentation](https://yandex.ru/dev/games/doc/dg/concepts/about.html?lang=en) and to use corresponding Lua API functions. 
 
 And it's also a good idea to upload a demo build of YaGames to your game's draft and click on the buttons to understand what the arguments are and what each function returns.
 
-#### Initialization [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-about)
+### Initialization [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-about)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `YaGames.init(options)` | `yagames.init(callback)` |
 | `ysdk.isAvailableMethod(name)` | `yagames.is_available_method(name, callback)` |
 
-##### `yagames.init(callback)`
+#### `yagames.init(callback)`
 
 Initializes the YaGames extension and waits for Yandex.Games SDK initialization. This method must be called before using any other YaGames functions.
 
 **Parameters:**
 - `callback` <kbd>function</kbd> - Callback function with arguments `(self, err)`. If `err` is not `nil`, initialization failed.
 
-**Note:** The `options` parameter from JavaScript SDK (a JavaScript object `{}`) can be set in the `yagames.sdk_init_options` setting in your `game.project` file. See [The `game.project` Settings](#the-gameproject-settings-optional) section for details.
+**Note:** The `options` parameter from JavaScript SDK (a JavaScript object `{}`) can be set in the `yagames.sdk_init_options` setting in your `game.project` file. See [The `game.project` Settings](#the-gameproject-settings-optional) section for details. This approach is used because the SDK initialization happens asynchronously during the game loading process, not at the moment when the Lua API is called.
 
 **Example:**
 
@@ -257,18 +255,7 @@ function init(self)
 end
 ```
 
-**JavaScript equivalent:**
-
-```javascript
-YaGames
-    .init()
-    .then(ysdk => {
-        console.log('Yandex SDK initialized');
-        window.ysdk = ysdk;
-    });
-```
-
-##### `yagames.is_available_method(name, callback)`
+#### `yagames.is_available_method(name, callback)`
 
 Checks if a specific SDK method is available to call. This is useful for checking feature availability before attempting to use them.
 
@@ -310,25 +297,139 @@ for _, method_name in ipairs(methods_to_check) do
 end
 ```
 
-**JavaScript equivalent:**
 
-```javascript
-ysdk.isAvailableMethod("adv.showFullscreenAdv")
-    .then(result => {
-        if (result) {
-            console.log("Fullscreen ads are available!");
-        }
-    });
-```
-
-#### Advertisement [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv)
+### Advertisement [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
-| `ysdk.adv.showFullscreenAdv({callbacks:{}})` | `yagames.adv_show_fullscreen_adv(callbacks)` [<kbd>Example</kbd>](#2-interstitial-ad) |
-| `ysdk.adv.showRewardedVideo({callbacks:{}})` | `yagames.adv_show_rewarded_video(callbacks)` [<kbd>Example</kbd>](#3-rewarded-videos) |
+| `ysdk.adv.showFullscreenAdv({callbacks:{}})` | `yagames.adv_show_fullscreen_adv(callbacks)` |
+| `ysdk.adv.showRewardedVideo({callbacks:{}})` | `yagames.adv_show_rewarded_video(callbacks)` |
 
-#### Advertisement - Sticky Banners [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv#sticky-banner)
+#### `yagames.adv_show_fullscreen_adv(callbacks)`
+
+Calls the fullscreen (interstitial) ad. Fullscreen ad blocks completely cover the game background and are shown when a player waits for something (for example, when switching to the next level of the game).
+
+> [!IMPORTANT]
+> **Mute all sounds before showing the ad!** You should switch off all sounds in the `open` callback and switch them back in the `close` callback.
+
+> [!NOTE]
+> Yandex.Games [recommends that developers call the display of full-screen ads in the game as often as possible](https://yandex.ru/blog/gamesfordevelopers/obnovlenie-algoritmov-pokaza-fulskrinov) but in suitable places in the game — so that the user understands that this is not a part of the game, but an ad unit. Do this in logical pauses in the game, for example: before starting the game, when moving to the next level, after losing. For example, inserting an ad unit is appropriate after going to the next level by pressing a button, and not appropriate in the middle of a level, when an ad suddenly appears under the player's finger.
+
+**Parameters:**
+- `callbacks` <kbd>table</kbd> - Table with callback functions:
+  - `open` <kbd>function</kbd> - Called when an ad is opened successfully. **Mute sounds here!**
+  - `close` <kbd>function</kbd> - Called when an ad is closed, an error occurred, or if ad failed to open due to too frequent calls. Receives `was_shown` argument (type `boolean`) indicating whether an ad was actually shown. **The `close` callback is called in any situation, even if there was an error.** **Unmute sounds here!**
+  - `offline` <kbd>function</kbd> - Called when the network connection is lost (when offline mode is enabled).
+  - `error` <kbd>function</kbd> - Called when an error occurs. The error object is passed to the callback function.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+local function adv_open(self)
+    -- Mute all game sounds!
+    sound.set_group_gain("master", 0)
+    print("Fullscreen ad opened")
+end
+
+local function adv_close(self, was_shown)
+    -- Unmute all game sounds!
+    sound.set_group_gain("master", 1)
+    
+    if was_shown then
+        print("Fullscreen ad was shown and closed")
+        -- Continue to the next level, etc.
+    else
+        print("Fullscreen ad was not shown (too frequent calls or error)")
+        -- Handle the case when ad wasn't shown
+    end
+end
+
+local function adv_offline(self)
+    print("Network connection lost")
+    -- Handle offline mode
+end
+
+local function adv_error(self, err)
+    print("Error showing fullscreen ad:", err)
+    -- Handle error
+end
+
+function on_message(self, message_id, message)
+    if message_id == hash("show_fullscreen_adv") then
+        yagames.adv_show_fullscreen_adv({
+            open = adv_open,
+            close = adv_close,
+            offline = adv_offline,
+            error = adv_error
+        })
+    end
+end
+```
+
+#### `yagames.adv_show_rewarded_video(callbacks)`
+
+Calls the rewarded video ad. Rewarded videos are video ad blocks used to monetize games and earn a reward or in-game currency. The user can choose to view the video ad to earn a reward.
+
+> [!IMPORTANT]
+> **Mute all sounds before showing the ad!** You should switch off all sounds in the `open` callback and switch them back in the `close` callback.
+
+> [!NOTE]
+> The frequency of calling rewarded video ads is not limited by the platform.
+
+**Parameters:**
+- `callbacks` <kbd>table</kbd> - Table with callback functions:
+  - `open` <kbd>function</kbd> - Called when a video ad is displayed on the screen. **Mute sounds here!**
+  - `rewarded` <kbd>function</kbd> - Called when a video ad impression is counted. Use this function to specify a reward for viewing the video ad (e.g., add coins, unlock features). **The `rewarded` callback is called before `close`, and you should update your in-game UI only after `close`.**
+  - `close` <kbd>function</kbd> - Called when a user closes a video ad or an error happens. **The `close` callback is called in any situation, even if there was an error.** **Unmute sounds here!**
+  - `error` <kbd>function</kbd> - Called when an error occurs. The error object is passed to the callback function.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+local function rewarded_open(self)
+    -- Mute all game sounds!
+    sound.set_group_gain("master", 0)
+    print("Rewarded video ad opened")
+end
+
+local function rewarded_rewarded(self)
+    -- Add reward here (coins, lives, etc.)
+    -- But don't update UI yet - wait for 'close' callback
+    print("User watched the video! Reward will be given after ad closes.")
+    -- Store reward flag, update actual values in 'close' callback
+end
+
+local function rewarded_close(self)
+    -- Unmute all game sounds!
+    sound.set_group_gain("master", 1)
+    
+    -- Now update UI and give the reward
+    print("Rewarded video ad closed")
+    -- Give coins, unlock features, update UI, etc.
+end
+
+local function rewarded_error(self, err)
+    print("Error showing rewarded video ad:", err)
+    -- Handle error (maybe show alternative reward method)
+end
+
+function on_message(self, message_id, message)
+    if message_id == hash("show_rewarded_video") then
+        yagames.adv_show_rewarded_video({
+            open = rewarded_open,
+            rewarded = rewarded_rewarded,
+            close = rewarded_close,
+            error = rewarded_error
+        })
+    end
+end
+```
+
+### Advertisement - Sticky Banners [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-adv#sticky-banner)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -336,7 +437,92 @@ ysdk.isAvailableMethod("adv.showFullscreenAdv")
 | `ysdk.adv.showBannerAdv()` | `yagames.adv_show_banner_adv([callback])` |
 | `ysdk.adv.hideBannerAdv()` | `yagames.adv_hide_banner_adv([callback])` |
 
-#### Authentication + Player [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player)
+#### `yagames.adv_get_banner_adv_status(callback)`
+
+Gets the current status of the sticky banner ad. Use this to check if a banner is currently showing before attempting to show or hide it.
+
+**Parameters:**
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, result)`, where `result` is a table `{ stickyAdvIsShowing = boolean, [reason] = "string" }`. If `stickyAdvIsShowing = false`, the optional `reason` field may contain: `"ADV_IS_NOT_CONNECTED"` (banners are not connected) or `"UNKNOWN"` (error on Yandex side).
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+yagames.adv_get_banner_adv_status(function(self, err, result)
+    if err then
+        print("Error getting banner status:", err)
+    elseif result.stickyAdvIsShowing then
+        print("Banner is currently showing")
+    elseif result.reason then
+        print("Banner is not showing. Reason:", result.reason)
+    else
+        print("Banner is not showing. You can call showBannerAdv()")
+        -- Show banner if needed
+        yagames.adv_show_banner_adv()
+    end
+end)
+```
+
+#### `yagames.adv_show_banner_adv([callback])`
+
+Shows the sticky banner ad. By default, sticky banners appear when the game starts and display for the entire session. To control when banners appear, enable "Use API for showing sticky banner" in the Developer Console and use this method.
+
+**Parameters:**
+- `callback` <kbd>function</kbd> (optional) - Callback function with arguments `(self, err, result)`, where `result` is a table `{ stickyAdvIsShowing = boolean, [reason] = "string" }`.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Show banner without callback
+yagames.adv_show_banner_adv()
+
+-- Show banner with callback
+yagames.adv_show_banner_adv(function(self, err, result)
+    if err then
+        print("Error showing banner:", err)
+    elseif result.stickyAdvIsShowing then
+        print("Banner is now showing")
+    elseif result.reason then
+        print("Banner failed to show. Reason:", result.reason)
+    end
+end)
+```
+
+#### `yagames.adv_hide_banner_adv([callback])`
+
+Hides the sticky banner ad.
+
+**Parameters:**
+- `callback` <kbd>function</kbd> (optional) - Callback function with arguments `(self, err, result)`, where `result` is a table `{ stickyAdvIsShowing = boolean }`.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Hide banner without callback
+yagames.adv_hide_banner_adv()
+
+-- Hide banner with callback
+yagames.adv_hide_banner_adv(function(self, err, result)
+    if err then
+        print("Error hiding banner:", err)
+    else
+        print("Banner hidden. stickyAdvIsShowing:", result.stickyAdvIsShowing)
+    end
+end)
+```
+
+> [!NOTE]
+> To use sticky banners, you need to configure them in the [Developer Console](https://games.yandex.ru/console/):
+> 1. Go to the **Advertising** tab
+> 2. In the **Sticky Banners** section, configure banner display for mobile devices (portrait/landscape) and desktop
+> 3. Enable **"Use API for showing sticky banner"** option if you want to control banner display programmatically
+
+### Authentication + Player [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -358,7 +544,7 @@ ysdk.isAvailableMethod("adv.showFullscreenAdv")
 | `player.getPhoto(size)` | `yagames.player_get_photo(size)` |
 | `player.getPayingStatus()` | `yagames.player_get_paying_status()` |
 
-#### In-Game Purchases [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-purchases)
+### In-Game Purchases [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-purchases)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -368,7 +554,7 @@ ysdk.isAvailableMethod("adv.showFullscreenAdv")
 | `payments.getCatalog()` | `yagames.payments_get_catalog([options], callback)`<br>The argument `options` is an optional Lua table `{ getPriceCurrencyImage = "size" }`, where `size` (string) can be `medium`, `small` and `svg`, the currency image url will be injected to the `getPriceCurrencyImage` field of each product. |
 | `payments.consumePurchase(purchaseToken)` | `yagames.payments_consume_purchase(purchase_token, callback)` |
 
-#### Leaderboards [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-leaderboard)
+### Leaderboards [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-leaderboard)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -378,7 +564,7 @@ ysdk.isAvailableMethod("adv.showFullscreenAdv")
 | `lb.getLeaderboardEntries(leaderboardName, options)` | `yagames.leaderboards_get_entries(leaderboard_name, [options], callback)`<br>The argument `options` is an optional Lua table `{ includeUser = boolean, quantityAround = number, quantityTop = number, getAvatarSrc = "size", getAvatarSrcSet = "size" }`, where `size` (string) can be `small`, `medium`, `large`. |
 | `lb.setLeaderboardScore(leaderboardName, score, extraData)` | `yagames.leaderboards_set_score(leaderboard_name, score, [extra_data], [callback])` |
 
-#### Features [(docs)](https://yandex.com/dev/games/doc/en/sdk/sdk-game-events)
+### Features [(docs)](https://yandex.com/dev/games/doc/en/sdk/sdk-game-events)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -388,20 +574,20 @@ ysdk.isAvailableMethod("adv.showFullscreenAdv")
 | `ysdk.features.GamesAPI?.getAllGames()` | `yagames.features_gamesapi_get_all_games(callback)`<br>The callback result is a table `{ games = { ... }, developerURL = "string" }` |
 | `ysdk.features.GamesAPI?.getGameByID(appID)` | `yagames.features_gamesapi_get_game_by_id(app_id, callback)`<br>The callback result is a table `{ isAvailable = true/false, game = { appID = "string", title = "string", url = "string", coverURL = "string", iconURL = "string" } }` |
 
-#### Feedback [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-review)
+### Feedback [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-review)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `ysdk.feedback.canReview()` | `yagames.feedback_can_review(callback)`<br>The callback result is a table `{ value = true/false, reason = "string" }` |
 | `ysdk.feedback.requestReview()` | `yagames.feedback_request_review(callback)`<br>The callback result is a table `{ feedbackSent = true/false }` |
 
-#### Clipboard [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
+### Clipboard [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `ysdk.clipboard.writeText(text)` | `yagames.clipboard_write_text(text, [callback])` |
 
-#### Device Info [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
+### Device Info [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -411,13 +597,13 @@ ysdk.isAvailableMethod("adv.showFullscreenAdv")
 | `ysdk.deviceInfo.isTablet()` | `yagames.device_info_is_tablet()` |
 | `ysdk.deviceInfo.isTV()` | `yagames.device_info_is_tv()` |
 
-#### Environment [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-environment)
+### Environment [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-environment)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `ysdk.environment` | `yagames.environment()`<br>Returns Lua table `{ app = { id = ... }, ... }` |
 
-#### Screen [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
+### Screen [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-params)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -425,14 +611,14 @@ ysdk.isAvailableMethod("adv.showFullscreenAdv")
 | `ysdk.screen.fullscreen.request()` | `yagames.screen_fullscreen_request([callback])` |
 | `ysdk.screen.fullscreen.exit()` | `yagames.screen_fullscreen_exit([callback])` |
 
-#### Shortcuts [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-shortcut)
+### Shortcuts [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-shortcut)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `ysdk.shortcut.canShowPrompt()` | `yagames.shortcut_can_show_prompt(callback)`<br>The callback result is a table `{ canShow = boolean }` |
 | `ysdk.shortcut.showPrompt()` | `yagames.shortcut_show_prompt(callback)`<br>The callback result is a table `{ outcome = "string" }` |
 
-#### Safe Storage [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player#progress-loss)
+### Safe Storage [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player#progress-loss)
 
 *Note: `key` and `value` should be valid UTF-8 strings. Storing strings with zero bytes aren't supported.*
 
@@ -446,13 +632,13 @@ ysdk.isAvailableMethod("adv.showFullscreenAdv")
 | `safeStorage.key(n)` | `yagames.storage_key(n)`<br>Returns the name of the nth key in the storage or `nil`. *Note: the n index is zero-based.* |
 | `safeStorage.length` | `yagames.storage_length()`<br>Returns the number of data items stored in the storage. |
 
-#### Remote Config [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-config)
+### Remote Config [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-config)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `ysdk.getFlags(options)` | `yagames.flags_get(options, callback)`<br>Options is optional. The callback result is a table like `{ flagName = "value" }` |
 
-#### Events [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-events)
+### Events [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-events)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -460,7 +646,7 @@ ysdk.isAvailableMethod("adv.showFullscreenAdv")
 | `ysdk.off(eventName, listener)` | `yagames.event_off(event_name, listener)`<br>`event_name` is a string: `game_api_pause`, etc. |
 | `ysdk.dispatchEvent(eventName)` | `yagames.event_dispatch(event_name)`<br>`event_name` is a string: `EXIT` etc. |
 
-#### Multiplayer Sessions [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-multiplayer-sessions)
+### Multiplayer Sessions [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-multiplayer-sessions)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
@@ -468,7 +654,7 @@ ysdk.isAvailableMethod("adv.showFullscreenAdv")
 | `ysdk.multiplayer.sessions.commit(data)` | `yagames.multiplayer_sessions_commit(data)`<br>The argument `data` is a Lua table, i.e. `{ key = value }`. |
 | `ysdk.multiplayer.sessions.push(data)` | `yagames.multiplayer_sessions_push(data)`<br>The argument `data` is a Lua table, i.e. `{ key = value }`. |
 
-#### Sitelock [(docs)](#sitelock)
+### Sitelock [(docs)](#sitelock)
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |

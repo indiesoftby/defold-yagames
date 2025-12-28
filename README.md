@@ -168,14 +168,6 @@ end
 > [!TIP]
 > We don't use thes features in our games as we don't see any improvements in our games metrics, and the complexity of its integration and support is quite high.
 
-#### Native Cache How-To
-
-Yandex's [Native Cache](https://yandex.ru/dev/games/doc/dg/concepts/native-cache-settings.html?lang=en) lets users use games offline. Currently, it's available only in Yandex Browser or the Yandex app on smartphones.
-
-1. Set the path to the file `yandex-manifest.json` in the `game.project` settings.
-2. Copy the `yagames/manifests/web/yandex-manifest.json` file to the root directory of your release build.
-3. Edit the list of all game files inside your `yandex-manifest.json`, and update the path to the icon. Omit `sw.js` and `yandex-manifest.json`.
-
 #### Service Worker How-To
 
 Yandex dropped the Service Worker description page in their docs, but it still allows to integrate Service Worker into your game to be able to run both offline and online. 
@@ -193,14 +185,12 @@ sdk_url = /sdk.js
 sdk_init_options = {}
 sdk_init_snippet = console.log("Yandex Games SDK is ready!");
 service_worker_url = sw.js
-manifest_url = yandex-manifest.json
 ```
 
 * `sdk_url` - Sets the URL of the Yandex.Games SDK. In July 2024 the platform changed the URL of its SDK and now it can be of two kinds. First is the local `/sdk.js` for games you upload as an archive (default, **suitable for 99% of games**). The second is for iFrame games - `https://sdk.games.s3.yandex.net/sdk.js`.
 * `sdk_init_options` - JavaScript Object that is passed as-is into the Yandex Games SDK initialization options for [the JS `YaGames.init` function](https://yandex.ru/dev/games/doc/dg/sdk/sdk-about.html?lang=en). Example: `{ orientation: { value: "landscape", lock: true } }`.
 * `sdk_init_snippet` - JavaScript code that is passed as-is and called when the `ysdk` variable becomes available. Example: `console.log(ysdk);`. **Use with care, and don't forget to put a semicolon `;` at the end.**
 * `service_worker_url` - Relative URL to the Service Worker file. Usually it's `sw.js`. Set the URL to enable Service Worker.
-* `manifest_url` - URL to the Web App Manifest file. Set the URL to enable support of Yandex Native Cache.
 
 ## 🌒 Lua API
 

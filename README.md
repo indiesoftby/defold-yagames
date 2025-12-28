@@ -1131,9 +1131,284 @@ end)
 | ------------------- | --------------- |
 | `ysdk.getPayments(options)` | `yagames.payments_init(options, callback)` |
 | `payments.purchase(options)` | `yagames.payments_purchase(options, callback)` |
-| `payments.getPurchases()` | `yagames.payments_get_purchases(callback)`<br>The result has the format `{ purchases = { ... }, signature = "..." }` |
-| `payments.getCatalog()` | `yagames.payments_get_catalog([options], callback)`<br>The argument `options` is an optional Lua table `{ getPriceCurrencyImage = "size" }`, where `size` (string) can be `medium`, `small` and `svg`, the currency image url will be injected to the `getPriceCurrencyImage` field of each product. |
+| `payments.getPurchases()` | `yagames.payments_get_purchases(callback)` |
+| `payments.getCatalog()` | `yagames.payments_get_catalog([options], callback)` |
 | `payments.consumePurchase(purchaseToken)` | `yagames.payments_consume_purchase(purchase_token, callback)` |
+
+#### `yagames.payments_init(options, callback)`
+
+Initializes the in-game purchases system. This method must be called **once** before using any other payment-related functions. After initialization, you can use all `payments_*` functions.
+
+> [!IMPORTANT]
+> To enable in-game purchases:
+> 1. Enable monetization in the [Developer Console](https://games.yandex.ru/console/)
+> 2. Go to the **In-Game Purchases** tab and ensure there's at least one product in the table
+> 3. Verify that **"Purchases connected"** message is displayed
+> 4. After adding purchases and publishing a draft, send an email to games-partners@yandex-team.ru with your game name and ID to request purchase activation
+
+> [!WARNING]
+> Test purchases only after enabling their consumption. Otherwise, unprocessed payments may appear, making moderation impossible.
+
+**Parameters:**
+- `options` <kbd>table</kbd> (optional) - Table with initialization options:
+  - `signed` <kbd>boolean</kbd> (optional) - If `true`, enables signature generation for server-side fraud prevention. Use this when processing payments on your server. Default: `false`.
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err)`. If `err` is not `nil`, initialization failed.
+
+> [!NOTE]
+> The `signed` parameter is used for fraud prevention:
+> - **Client-side processing**: Use `signed: false` or omit the parameter. Purchase data will be returned in plain format.
+> - **Server-side processing**: Use `signed: true`. Purchase data will be returned only in encrypted format in the `signature` parameter.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Note: Call payments_init() only once, then use all payments_* functions
+-- Initialize payments for client-side processing
+yagames.payments_init({}, function(self, err)
+    if err then
+        print("Payments initialization failed:", err)
+        -- Purchases are not available
+    else
+        print("Payments initialized successfully!")
+        -- Now you can use payments_get_catalog(), payments_purchase(), etc.
+    end
+end)
+
+-- Initialize payments for server-side processing (with signature)
+yagames.payments_init({signed = true}, function(self, err)
+    if err then
+        print("Payments initialization failed:", err)
+    else
+        print("Payments initialized with signature support")
+        -- Purchase data will be encrypted in signature parameter
+    end
+end)
+```
+
+#### `yagames.payments_purchase(options, callback)`
+
+Activates an in-game purchase process. Shows the purchase dialog to the user.
+
+**Parameters:**
+- `options` <kbd>table</kbd> - Table with purchase options:
+  - `id` <kbd>string</kbd> - Product ID as set in the Developer Console
+  - `developerPayload` <kbd>string</kbd> (optional) - Additional information about the purchase to send to your server (will be included in the `signature` parameter)
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, purchase)`, where `purchase` is a table with purchase data including `purchaseToken`.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Purchase an item
+yagames.payments_purchase({
+    id = "no_ads",  -- Product ID from Developer Console
+    developerPayload = "user_123"  -- Optional: additional data for your server
+}, function(self, err, purchase)
+    if err then
+        print("Purchase failed:", err)
+        -- Handle error (user cancelled, network error, etc.)
+    else
+        print("Purchase successful!")
+        print("Purchase token:", purchase.purchaseToken)
+        print("Product ID:", purchase.product.id)
+        
+        -- Grant the purchase to the user
+        if purchase.product.id == "no_ads" then
+            -- Disable ads for this user
+            disable_ads()
+        elseif purchase.product.id == "coins_100" then
+            -- Add 100 coins
+            add_coins(100)
+        end
+        
+        -- For consumable purchases, call payments_consume_purchase()
+        -- For permanent purchases (like "no_ads"), don't consume
+        -- `is_consumable` is a function that returns true if the purchase is consumable, false otherwise.
+        -- For example:
+        -- function is_consumable(product_id)
+        --     return product_id == "coins_100"
+        -- end
+        if is_consumable(purchase.product.id) then
+            yagames.payments_consume_purchase(purchase.purchaseToken, function(self, err)
+                if not err then
+                    print("Purchase consumed")
+                end
+            end)
+        end
+    end
+end)
+```
+
+#### `yagames.payments_get_purchases(callback)`
+
+Retrieves the list of purchases the player has already made. Use this to check for unprocessed purchases (e.g., when the game was closed during a purchase).
+
+> [!IMPORTANT]
+> Always check for unprocessed purchases when the game starts to ensure users receive their purchases even if the game was closed during the purchase process.
+
+**Parameters:**
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, response)`, where `response` is a table:
+  - `purchases` <kbd>table</kbd> - Array of purchase objects, each containing `purchaseToken` and `product` information
+  - `signature` <kbd>string</kbd> - Signature string (if initialized with `signed: true`), contains encrypted purchase data for server verification
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Check for unprocessed purchases on game start
+yagames.payments_get_purchases(function(self, err, response)
+    if err then
+        print("Failed to get purchases:", err)
+        return
+    end
+    
+    print("Total purchases:", #response.purchases)
+    
+    -- Process each purchase
+    for i, purchase in ipairs(response.purchases) do
+        print("Processing purchase:", purchase.product.id)
+        print("Token:", purchase.purchaseToken)
+        
+        -- Grant the purchase to the user
+        -- `grant_purchase` is a function that grants the purchase to the user.
+        -- For example:
+        -- function grant_purchase(product_id)
+        --     if product_id == "coins_100" then
+        --         add_coins(100)
+        --     elseif product_id == "lives_5" then
+        --         add_lives(5)
+        --     else
+        --         error("Unknown purchase:" .. product_id)
+        --     end
+        -- end
+        grant_purchase(purchase.product.id)
+        
+        -- For consumable purchases, consume them after granting
+        -- `is_consumable` is a function that returns true if the purchase is consumable, false otherwise.
+        -- For example:
+        -- function is_consumable(product_id)
+        --     return product_id == "coins_100"
+        -- end
+        if is_consumable(purchase.product.id) then
+            yagames.payments_consume_purchase(purchase.purchaseToken, function(self, err)
+                if err then
+                    print("Failed to consume purchase:", err)
+                else
+                    print("Purchase consumed successfully")
+                end
+            end)
+        end
+    end
+    
+    -- If using server-side verification, send signature to your server
+    if response.signature then
+        -- verify_signature_on_server(response.signature)
+    end
+end)
+```
+
+#### `yagames.payments_get_catalog([options], callback)`
+
+Gets the list of all available products and their prices from the Developer Console.
+
+**Parameters:**
+- `options` <kbd>table</kbd> (optional) - Table with options:
+  - `getPriceCurrencyImage` <kbd>string</kbd> (optional) - Size of currency image to include. Possible values: `"medium"`, `"small"`, `"svg"`. The currency image URL will be added to the `getPriceCurrencyImage` field of each product.
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err, catalog)`, where `catalog` is a table with product information.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Note: Call `payments_init()` before using `payments_get_catalog()`.
+
+-- Get catalog without currency images
+yagames.payments_get_catalog(function(self, err, catalog)
+    if err then
+        print("Failed to get catalog:", err)
+    else
+        print("Available products:")
+        for i, product in ipairs(catalog) do
+            print("  -", product.id, ":", product.title)
+            print("    Price:", product.price.value, product.price.currencyCode)
+            print("    Description:", product.description)
+        end
+    end
+end)
+
+-- Get catalog with currency images
+yagames.payments_get_catalog({
+    getPriceCurrencyImage = "medium"  -- or "small", "svg"
+}, function(self, err, catalog)
+    if err then
+        print("Failed to get catalog:", err)
+    else
+        for i, product in ipairs(catalog) do
+            print("Product:", product.id)
+            if product.getPriceCurrencyImage then
+                print("Currency image URL:", product.getPriceCurrencyImage)
+                -- Load and display currency icon
+            end
+        end
+    end
+end)
+```
+
+#### `yagames.payments_consume_purchase(purchase_token, callback)`
+
+Consumes (marks as used) a consumable purchase. Use this for purchases that can be bought multiple times (e.g., in-game currency, consumable items).
+
+> [!NOTE]
+> There are two types of purchases:
+> - **Permanent purchases** (e.g., "disable ads") - Don't consume these, they remain active forever
+> - **Consumable purchases** (e.g., coins, lives) - Consume these after granting the purchase, so they can be purchased again
+
+**Parameters:**
+- `purchase_token` <kbd>string</kbd> - Purchase token returned by `payments_purchase()` or `payments_get_purchases()`
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err)`. If `err` is `nil`, purchase was consumed successfully.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- After granting a consumable purchase, consume it
+function grant_and_consume_purchase(purchase_token, product_id)
+    -- First, grant the purchase to the user
+    if product_id == "coins_100" then
+        add_coins(100)
+    elseif product_id == "lives_5" then
+        add_lives(5)
+    end
+    
+    -- Then consume the purchase so it can be bought again
+    yagames.payments_consume_purchase(purchase_token, function(self, err)
+        if err then
+            print("Failed to consume purchase:", err)
+            -- Important: You may want to rollback the granted items
+            -- if consumption fails, or retry consumption later
+        else
+            print("Purchase consumed successfully")
+            -- Purchase can now be bought again
+        end
+    end)
+end
+
+-- Example usage
+yagames.payments_purchase({id = "coins_100"}, function(self, err, purchase)
+    if not err then
+        grant_and_consume_purchase(purchase.purchaseToken, purchase.product.id)
+    end
+end)
+```
+
+> [!NOTE]
+> **Server-side verification**: If you initialized payments with `signed: true`, the `signature` parameter in purchase responses contains encrypted purchase data. Verify this signature on your server using HMAC-SHA256 with your secret key from the Developer Console to prevent fraud. See the [official documentation](https://yandex.ru/dev/games/doc/ru/sdk/sdk-purchases#protection) for signature verification examples.
 
 ### Leaderboards [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-leaderboard)
 

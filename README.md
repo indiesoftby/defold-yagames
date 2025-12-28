@@ -214,6 +214,27 @@ The best way to integrate SDK into your game is to read [the official documentat
 
 And it's also a good idea to upload a demo build of YaGames to your game's draft and click on the buttons to understand what the arguments are and what each function returns.
 
+#### Table of Contents
+
+- [Initialization](#-initialization-docs)
+- [Advertisement](#-advertisement-docs)
+- [Advertisement - Sticky Banners](#-advertisement---sticky-banners-docs)
+- [Authentication + Player](#-authentication--player-docs)
+- [In-Game Purchases](#-in-game-purchases-docs)
+- [Leaderboards](#-leaderboards-docs)
+- [Features](#-features-docs)
+- [Feedback](#-feedback-docs)
+- [Clipboard](#-clipboard-docs)
+- [Device Info](#-device-info-docs)
+- [Environment](#-environment-docs)
+- [Screen](#-screen-docs)
+- [Shortcuts](#-shortcuts-docs)
+- [Safe Storage](#-safe-storage-docs)
+- [Remote Config](#-remote-config-docs)
+- [Events](#-events-docs)
+- [Multiplayer Sessions](#-multiplayer-sessions-docs)
+- [Sitelock](#-sitelock-docs)
+
 ### 🌒 INITIALIZATION [(docs)](https://yandex.ru/dev/games/doc/ru/sdk/sdk-about)
 
 | Yandex.Games JS SDK | YaGames Lua API |

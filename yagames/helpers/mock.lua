@@ -103,7 +103,6 @@ local available_methods = {
     "feedback.canReview",
     -- "feedback.requestReview",
     -- Leaderboards
-    "getLeaderboards",
     "leaderboards.getLeaderboardDescription",
     -- "leaderboards.getLeaderboardPlayerEntry",
     "leaderboards.getLeaderboardEntries",
@@ -290,14 +289,212 @@ function M.feedback_request_review(cb_id)
     }))
 end
 
--- TODO:
--- "get_leaderboards"
--- "leaderboards_get_description"
--- "leaderboards_get_player_entry"
--- "leaderboards_set_score"
--- "leaderboards_get_entries"
-function M.get_leaderboards(cb_id)
-    M.send(cb_id, "Leaderboards is not available yet.")
+function M.leaderboards_get_description(cb_id, leaderboard_name)
+    assert(type(leaderboard_name) == "string")
+
+    local result = {
+        appID = "1",
+        default = true,
+        description = {
+            invert_sort_order = false,
+            score_format = {
+                type = "numeric",
+                options = {
+                    decimal_offset = 0
+                }
+            }
+        },
+        name = leaderboard_name,
+        title = {
+            ru = "Рейтинг",
+            en = "Rating"
+        }
+    }
+
+    M.send(cb_id, NO_ERR, rxi_json.encode(result))
+end
+
+function M.leaderboards_get_player_entry(cb_id, leaderboard_name, options)
+    assert(type(leaderboard_name) == "string")
+
+    if not M._player then
+        M.send(cb_id, "FetchError: Player is not present in leaderboard")
+        return
+    end
+
+    local opts = {}
+    if type(options) == "string" then
+        opts = rxi_json.decode(options)
+    end
+
+    local player_info = {
+        uniqueID = M._player._personalInfo.uniqueID,
+        publicName = M._player._personalInfo.publicName or "",
+        lang = M._player._personalInfo.lang or "ru",
+        scopePermissions = M._player._personalInfo.scopePermissions or {
+            public_name = "allow",
+            avatar = "allow"
+        }
+    }
+
+    if opts.getAvatarSrc and M._player.photo then
+        player_info.getAvatarSrc = M._player.photo[opts.getAvatarSrc] or ""
+    end
+
+    if opts.getAvatarSrcSet and M._player.photo then
+        player_info.getAvatarSrcSet = M._player.photo[opts.getAvatarSrcSet] or ""
+    end
+
+    local result = {
+        rank = 0,
+        score = 1000,
+        formattedScore = "1000",
+        extraData = "",
+        player = player_info
+    }
+
+    M.send(cb_id, NO_ERR, rxi_json.encode(result))
+end
+
+function M.leaderboards_set_score(cb_id, leaderboard_name, score, extra_data)
+    assert(type(leaderboard_name) == "string")
+    assert(type(score) == "number")
+
+    if not M._player then
+        M.send(cb_id, "FetchError: Unauthorized")
+        return
+    end
+
+    -- Store score in mock storage for testing
+    if not M._leaderboards then
+        M._leaderboards = {}
+    end
+    if not M._leaderboards[leaderboard_name] then
+        M._leaderboards[leaderboard_name] = {}
+    end
+    M._leaderboards[leaderboard_name][M._player._personalInfo.uniqueID] = {
+        score = score,
+        extraData = extra_data or ""
+    }
+
+    M.send(cb_id, NO_ERR)
+end
+
+function M.leaderboards_get_entries(cb_id, leaderboard_name, options)
+    assert(type(leaderboard_name) == "string")
+
+    local opts = {
+        includeUser = false,
+        quantityAround = 5,
+        quantityTop = 5
+    }
+    if type(options) == "string" then
+        local decoded = rxi_json.decode(options)
+        if decoded.includeUser ~= nil then
+            opts.includeUser = decoded.includeUser
+        end
+        if decoded.quantityAround then
+            opts.quantityAround = decoded.quantityAround
+        end
+        if decoded.quantityTop then
+            opts.quantityTop = decoded.quantityTop
+        end
+        opts.getAvatarSrc = decoded.getAvatarSrc
+        opts.getAvatarSrcSet = decoded.getAvatarSrcSet
+    end
+
+    local entries = {}
+    local user_rank = 0
+
+    -- Generate mock entries
+    for i = 0, opts.quantityTop - 1 do
+        local entry = {
+            rank = i,
+            score = 10000 - (i * 100),
+            formattedScore = tostring(10000 - (i * 100)),
+            extraData = "",
+            player = {
+                uniqueID = "mock_player_" .. i,
+                publicName = "Player " .. (i + 1),
+                lang = "ru",
+                scopePermissions = {
+                    public_name = "allow",
+                    avatar = "allow"
+                }
+            }
+        }
+
+        if opts.getAvatarSrc then
+            entry.player.getAvatarSrc = "https://games.yandex.ru/api/sdk/v1/player/avatar/0/islands-retina-" .. opts.getAvatarSrc
+        end
+
+        if opts.getAvatarSrcSet then
+            entry.player.getAvatarSrcSet = "https://games.yandex.ru/api/sdk/v1/player/avatar/0/islands-retina-" .. opts.getAvatarSrcSet
+        end
+
+        table.insert(entries, entry)
+    end
+
+    -- Include user entry if requested
+    if opts.includeUser and M._player then
+        local player_entry = {
+            rank = opts.quantityTop,
+            score = 1000,
+            formattedScore = "1000",
+            extraData = "",
+            player = {
+                uniqueID = M._player._personalInfo.uniqueID,
+                publicName = M._player._personalInfo.publicName or "",
+                lang = M._player._personalInfo.lang or "ru",
+                scopePermissions = M._player._personalInfo.scopePermissions or {
+                    public_name = "allow",
+                    avatar = "allow"
+                }
+            }
+        }
+
+        if opts.getAvatarSrc and M._player.photo then
+            player_entry.player.getAvatarSrc = M._player.photo[opts.getAvatarSrc] or ""
+        end
+
+        if opts.getAvatarSrcSet and M._player.photo then
+            player_entry.player.getAvatarSrcSet = M._player.photo[opts.getAvatarSrcSet] or ""
+        end
+
+        table.insert(entries, player_entry)
+        user_rank = opts.quantityTop
+    end
+
+    local result = {
+        leaderboard = {
+            appID = "1",
+            name = leaderboard_name,
+            title = {
+                ru = "Рейтинг",
+                en = "Rating"
+            },
+            default = true,
+            description = {
+                invert_sort_order = false,
+                score_format = {
+                    type = "numeric",
+                    options = {
+                        decimal_offset = 0
+                    }
+                }
+            }
+        },
+        entries = entries,
+        userRank = user_rank,
+        ranges = {
+            {
+                start = 0,
+                size = #entries
+            }
+        }
+    }
+
+    M.send(cb_id, NO_ERR, rxi_json.encode(result))
 end
 
 function M.get_payments(cb_id, options)

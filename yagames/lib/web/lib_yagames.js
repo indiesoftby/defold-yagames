@@ -421,29 +421,12 @@ var LibYaGamesPrivate = {
         }
     },
 
-    YaGamesPrivate_GetLeaderboards: function (cb_id) {
-        var self = YaGamesPrivate;
-        try {
-            self._ysdk
-                .getLeaderboards()
-                .then((lb) => {
-                    self._lb = lb;
-                    self.send(cb_id);
-                })
-                .catch((err) => {
-                    self.send(cb_id, self.toErrStr(err));
-                });
-        } catch (err) {
-            self.delaySend(cb_id, self.toErrStr(err));
-        }
-    },
-
     YaGamesPrivate_Leaderboards_GetDescription: function (cb_id, cleaderboard_name) {
         var self = YaGamesPrivate;
         try {
             var leaderboard_name = UTF8ToString(cleaderboard_name);
-            self._lb
-                .getLeaderboardDescription(leaderboard_name)
+            self._ysdk.leaderboards
+                .getDescription(leaderboard_name)
                 .then((result) => {
                     self.send(cb_id, null, JSON.stringify(result));
                 })
@@ -460,8 +443,8 @@ var LibYaGamesPrivate = {
         try {
             var leaderboard_name = UTF8ToString(cleaderboard_name);
             var options = self.parseJson(UTF8ToString(coptions));
-            self._lb
-                .getLeaderboardPlayerEntry(leaderboard_name)
+            self._ysdk.leaderboards
+                .getPlayerEntry(leaderboard_name)
                 .then((result) => {
                     if (options.getAvatarSrc && result.player) {
                         result.player.getAvatarSrc = result.player.getAvatarSrc(options.getAvatarSrc);
@@ -484,16 +467,16 @@ var LibYaGamesPrivate = {
         try {
             var leaderboard_name = UTF8ToString(cleaderboard_name);
             var options = self.parseJson(UTF8ToString(coptions));
-            self._lb
-                .getLeaderboardEntries(leaderboard_name, options)
+            self._ysdk.leaderboards
+                .getEntries(leaderboard_name, options)
                 .then((result) => {
                     if (result.entries) {
                         for (var i = 0; i < result.entries.length; i++) {
                             var entry = result.entries[i];
-                            if (options.getAvatarSrc) {
+                            if (options.getAvatarSrc && entry.player) {
                                 entry.player.getAvatarSrc = entry.player.getAvatarSrc(options.getAvatarSrc);
                             }
-                            if (options.getAvatarSrcSet) {
+                            if (options.getAvatarSrcSet && entry.player) {
                                 entry.player.getAvatarSrcSet = entry.player.getAvatarSrcSet(options.getAvatarSrcSet);
                             }
                         }
@@ -514,10 +497,10 @@ var LibYaGamesPrivate = {
             var leaderboard_name = UTF8ToString(cleaderboard_name);
             var promise;
             if (cextra_data === 0) {
-                promise = self._lb.setLeaderboardScore(leaderboard_name, score);
+                promise = self._ysdk.leaderboards.setScore(leaderboard_name, score);
             } else {
                 var extra_data = UTF8ToString(cextra_data);
-                promise = self._lb.setLeaderboardScore(leaderboard_name, score, extra_data);
+                promise = self._ysdk.leaderboards.setScore(leaderboard_name, score, extra_data);
             }
 
             promise

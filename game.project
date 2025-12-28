@@ -11,7 +11,7 @@ high_dpi = 1
 
 [project]
 title = yagames
-version = 0.18.0
+version = 0.19.0
 developer = Indiesoft LLC
 dependencies#0 = https://github.com/subsoap/defos/archive/v2.8.3.zip
 dependencies#1 = https://github.com/Insality/druid/archive/0.6.0.zip

@@ -9,22 +9,6 @@ local print = log_print.print
 
 local M = {}
 
-function M.init_handler(self, err)
-    yagames.leaderboards_init(function(self, err)
-        print("yagames.leaderboards_init:", err or "OK!")
-
-        if not err then
-            self.button_leaderboards_get_description:set_enabled(true)
-            self.button_leaderboards_get_entries:set_enabled(true)
-            self.button_leaderboards_get_player_entry:set_enabled(true)
-            self.button_leaderboards_get_player_entry_with_avatar:set_enabled(true)
-            self.button_leaderboards_set_score1:set_enabled(true)
-            self.button_leaderboards_set_score2:set_enabled(true)
-            self.button_leaderboards_set_score3:set_enabled(true)
-        end
-    end)
-end
-
 local TABLE_NAME = "RatingTable1"
 
 function M.get_description_handler(self)
@@ -78,14 +62,13 @@ function M.set_score3_handler(self)
 end
 
 function M.init(self)
-    druid_style.make_button(self, "button_leaderboards_init", M.init_handler)
-    druid_style.make_button(self, "button_leaderboards_get_description", M.get_description_handler, true)
-    druid_style.make_button(self, "button_leaderboards_get_entries", M.get_entries_handler, true)
-    druid_style.make_button(self, "button_leaderboards_get_player_entry", M.get_player_entry_handler, true)
-    druid_style.make_button(self, "button_leaderboards_get_player_entry_with_avatar", M.get_player_entry_with_avatar_handler, true)
-    druid_style.make_button(self, "button_leaderboards_set_score1", M.set_score1_handler, true)
-    druid_style.make_button(self, "button_leaderboards_set_score2", M.set_score2_handler, true)
-    druid_style.make_button(self, "button_leaderboards_set_score3", M.set_score3_handler, true)
+    druid_style.make_button(self, "button_leaderboards_get_description", M.get_description_handler)
+    druid_style.make_button(self, "button_leaderboards_get_entries", M.get_entries_handler)
+    druid_style.make_button(self, "button_leaderboards_get_player_entry", M.get_player_entry_handler)
+    druid_style.make_button(self, "button_leaderboards_get_player_entry_with_avatar", M.get_player_entry_with_avatar_handler)
+    druid_style.make_button(self, "button_leaderboards_set_score1", M.set_score1_handler)
+    druid_style.make_button(self, "button_leaderboards_set_score2", M.set_score2_handler)
+    druid_style.make_button(self, "button_leaderboards_set_score3", M.set_score3_handler)
 end
 
 return M

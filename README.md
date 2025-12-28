@@ -2448,17 +2448,184 @@ end)
 
 ### 🌒 SAFE STORAGE [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-player#progress-loss)
 
-*Note: `key` and `value` should be valid UTF-8 strings. Storing strings with zero bytes aren't supported.*
+> [!NOTE]
+> `key` and `value` should be valid UTF-8 strings. Storing strings with zero bytes aren't supported.
 
 | Yandex.Games JS SDK | YaGames Lua API |
 | ------------------- | --------------- |
 | `ysdk.getStorage()` | `yagames.storage_init(callback)` |
-| `safeStorage.getItem(key)` | `yagames.storage_get_item(key)`<br>Returns that key's value or `nil`. |
-| `safeStorage.setItem(key, value)` | `yagames.storage_set_item(key, value)`<br>Adds that key to the storage, or update that key's value if it already exists. |
-| `safeStorage.removeItem(key)` | `yagames.storage_remove_item(key)`<br>Removes that key from the storage. |
-| `safeStorage.clear()` | `yagames.storage_clear()`<br>Empties all keys out of the storage. |
-| `safeStorage.key(n)` | `yagames.storage_key(n)`<br>Returns the name of the nth key in the storage or `nil`. *Note: the n index is zero-based.* |
-| `safeStorage.length` | `yagames.storage_length()`<br>Returns the number of data items stored in the storage. |
+| `safeStorage.getItem(key)` | `yagames.storage_get_item(key)` |
+| `safeStorage.setItem(key, value)` | `yagames.storage_set_item(key, value)` |
+| `safeStorage.removeItem(key)` | `yagames.storage_remove_item(key)` |
+| `safeStorage.clear()` | `yagames.storage_clear()` |
+| `safeStorage.key(n)` | `yagames.storage_key(n)` |
+| `safeStorage.length` | `yagames.storage_length()` |
+
+#### `yagames.storage_init(callback)`
+
+Initializes the Safe Storage subsystem. Safe Storage provides a secure way to store data that persists across game sessions and is protected from loss.
+
+> [!IMPORTANT]
+> You must call `storage_init()` before using any other storage methods. All other storage methods will throw an error if storage is not initialized.
+
+**Parameters:**
+- `callback` <kbd>function</kbd> - Callback function with arguments `(self, err)`. Called when initialization completes.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+yagames.storage_init(function(self, err)
+    if err then
+        print("Failed to initialize Safe Storage:", err)
+    else
+        print("Safe Storage initialized")
+        -- Now you can use all storage methods
+        yagames.storage_set_item("player_name", "Player1")
+    end
+end)
+```
+
+#### `yagames.storage_get_item(key)`
+
+Gets the value stored under the specified key.
+
+**Parameters:**
+- `key` <kbd>string</kbd> - The key to retrieve
+
+**Returns:**
+- <kbd>string</kbd> or <kbd>nil</kbd> - The value associated with the key, or `nil` if the key doesn't exist
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Get stored value
+local player_name = yagames.storage_get_item("player_name")
+if player_name then
+    print("Player name:", player_name)
+else
+    print("Player name not set")
+end
+```
+
+#### `yagames.storage_set_item(key, value)`
+
+Stores a value under the specified key. If the key already exists, its value will be updated.
+
+**Parameters:**
+- `key` <kbd>string</kbd> - The key to store the value under
+- `value` <kbd>string</kbd> - The value to store (must be valid UTF-8, no zero bytes)
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Store player data
+yagames.storage_set_item("player_name", "Player1")
+yagames.storage_set_item("high_score", "1000")
+yagames.storage_set_item("level", "5")
+
+-- Update existing value
+yagames.storage_set_item("high_score", "1500")
+```
+
+#### `yagames.storage_remove_item(key)`
+
+Removes the key-value pair from the storage.
+
+**Parameters:**
+- `key` <kbd>string</kbd> - The key to remove
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Remove a specific key
+yagames.storage_remove_item("player_name")
+
+-- Check if it was removed
+if yagames.storage_get_item("player_name") == nil then
+    print("Key removed successfully")
+end
+```
+
+#### `yagames.storage_clear()`
+
+Removes all key-value pairs from the storage.
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Clear all storage
+yagames.storage_clear()
+
+-- Verify storage is empty
+if yagames.storage_length() == 0 then
+    print("Storage cleared")
+end
+```
+
+#### `yagames.storage_key(n)`
+
+Returns the name of the nth key in the storage.
+
+> [!NOTE]
+> The index `n` is **zero-based** (0 = first key, 1 = second key, etc.).
+
+**Parameters:**
+- `n` <kbd>number</kbd> - Zero-based index of the key
+
+**Returns:**
+- <kbd>string</kbd> or <kbd>nil</kbd> - The name of the nth key, or `nil` if the index is out of bounds
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Store some data
+yagames.storage_set_item("key_1", "value_1")
+yagames.storage_set_item("key_2", "value_2")
+yagames.storage_set_item("key_3", "value_3")
+
+-- Iterate through all keys
+local length = yagames.storage_length()
+for i = 0, length - 1 do
+    local key = yagames.storage_key(i)
+    if key then
+        local value = yagames.storage_get_item(key)
+        print(string.format("Key[%d]: %s = %s", i, key, value))
+    end
+end
+```
+
+#### `yagames.storage_length()`
+
+Returns the number of key-value pairs stored in the storage.
+
+**Returns:**
+- <kbd>number</kbd> - The number of items in the storage
+
+**Example:**
+
+```lua
+local yagames = require("yagames.yagames")
+
+-- Store some data
+yagames.storage_set_item("key1", "value1")
+yagames.storage_set_item("key2", "value2")
+
+-- Get storage size
+local count = yagames.storage_length()
+print("Storage contains", count, "items")  -- Output: Storage contains 2 items
+```
 
 ### 🌒 REMOTE CONFIG [(docs)](https://yandex.ru/dev/games/doc/en/sdk/sdk-config)
 
